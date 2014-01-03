@@ -1,0 +1,187 @@
+// This container wraps all the page content
+.rez-page-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+
+  //Push the page over when the quick view is toggled
+  &.rez-quick-view-open {
+    .rez-navbar-container {
+      .translate3d(-@quick-view-container-width, 0, 0);
+    }
+
+    .rez-content-container {
+      .translate3d(-@quick-view-container-width, 0, 0);
+    }
+  }
+}
+
+//IE can't handle transforms, fall back to left/right for the quick view toggle
+.ie {
+  .rez-page-container {
+    &.rez-quick-view-open {
+      .rez-navbar-container {
+        left: -@quick-view-container-width;
+        right: @quick-view-container-width;
+      }
+
+      .rez-content-container {
+        left: -@quick-view-container-width;
+        right: @quick-view-container-width;
+      }
+    }
+  }
+}
+
+//This contains the nav bars for the main content, side nav, and quick view
+//Sibling to the content container
+.rez-navbar-container {
+  position: absolute;
+  top: 0;
+  right:0;
+  left:0;
+  .transition(~"all 0.3s ease-in-out");
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+.rez-side-nav-navbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -@side-nav-container-width;
+  width: @side-nav-container-width;
+}
+
+.rez-main-navbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.rez-quick-view-navbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -@quick-view-container-width;
+  width: @quick-view-container-width;
+}
+
+// This contains the page content (other than the nav bars)
+// Includes, side nav, content views, and quick view
+.rez-content-container {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  .transition(~"all 0.3s ease-in-out");
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+// Hidden until the rez-authenticated-user class is applied
+.rez-side-nav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -@side-nav-container-width;
+  width: @side-nav-container-width;
+
+  background-repeat: repeat;
+  background-color: lighten(@brand-primary, 70%);
+  .transition(~"left 0.3s ease-in-out");
+}
+
+// Hidden until the rez-authenticated-user class is applied
+.rez-view-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+  .transition(~"left 0.3s ease-in-out");
+}
+
+.rez-quick-view-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -@quick-view-container-width;
+  width: @quick-view-container-width;
+
+  //background-image: url('../img/fabric_plaid/fabric_plaid.png');
+  background-repeat: repeat;
+  //.box-shadow(~"inset 14px 1px 27px -13px rgba(0, 0, 0, 0.3)");
+}
+
+// Renders the sidenav for an authenticated user
+.rez-authenticated-user {
+  .rez-side-nav-container {
+    left: 0;
+  }
+  .rez-view-container {
+    left: @side-nav-container-width;
+  }
+}
+
+// A background for the login page that lives inside the content container
+.rez-login-background {
+  position: absolute;
+  top: -400px;
+  left: 0;
+  right: 0;
+  font-size: 100em;
+  text-align: center;
+  color: #fafafa;
+}
+
+
+@media (max-width: @screen-md) {
+  // Only when the user is authenticated
+  .rez-authenticated-user {
+    //This hides the side nav when the window width reaches the md threshold
+    .rez-side-nav-container {
+      left: -@side-nav-container-width;
+    }
+    .rez-view-container {
+      left: 0;
+    }
+  }
+
+  //This transforms (pushes) the page when the side nav is toggled
+  .rez-page-container {
+    &.rez-side-nav-open {
+      .rez-navbar-container {
+        .translate3d(@side-nav-container-width, 0, 0);
+      }
+
+      .rez-content-container {
+        .translate3d(@side-nav-container-width, 0, 0);
+      }
+    }
+  }
+
+  //IE can't handle transforms, fall back to left/right
+  .ie {
+    .rez-page-container {
+      &.rez-side-nav-open {
+        .rez-navbar-container {
+          left: @side-nav-container-width;
+          right: -@side-nav-container-width;
+        }
+
+        .rez-content-container {
+          left: @side-nav-container-width;
+          right: -@side-nav-container-width;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# this is so that nodemon does not restart when client code changes, etc. 
+
+/client/*
+/grunt_tasks/*
+/node_modules/*
+/dist/*
+Gruntfile.js
+karma.e2e.config.js
+karma.unit.config.js
+karma.ci.e2e.config.js
+karma.ci.unit.config.js

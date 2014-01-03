@@ -1,0 +1,51 @@
+.rez-panel-popover {
+  position: absolute;
+  top: 50px;
+  z-index: 101;
+  padding-left: 0px;
+  padding-right: 0px;
+
+  .panel {
+    .box-shadow(~"10px 10px 48px rgba(0,0,0,0.5)");
+  }
+
+  .panel-heading {
+    height: 40px;
+    padding-right: 5px;
+    padding-top: 5px;
+  }
+
+  .panel-title { 
+    padding-top: 5px;
+  }
+  .rez-panel-popover-arrow {
+    position: absolute;
+    background: #f5f5f5;
+    top: 1px;
+    left: 375px;
+  }
+  .rez-panel-popover-arrow:after, .rez-panel-popover-arrow:before {
+    bottom: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .rez-panel-popover-arrow:after {
+    border-color: rgba(245, 245, 245, 0);
+    border-bottom-color: #fff;
+    border-width: 15px;
+    left: 50%;
+    margin-left: -15px;
+  }
+  .rez-panel-popover-arrow:before {
+    border-color: rgba(221, 221, 221, 0);
+    border-bottom-color: #dddddd;
+    border-width: 16px;
+    left: 50%;
+    margin-left: -16px;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="row" ng-cloak ng-show="hasPages()">
+  <div class="col-xs-12 text-center">
+    <ul class="pagination">
+
+      <li class="pagination-fast-backward" ng-class="{disabled : pagination.page.number === 0}">
+        <a ng-click="pager.firstPage()">
+            <i class="icon-fast-backward"></i>
+        </a>
+      </li>
+      
+      <li class="pagination-back-button" ng-class="{disabled : pagination.page.number === 0}">
+        <a ng-click="pager.previousPage()">
+            <i class="icon-step-backward"></i>
+        </a>
+      </li>
+
+      <li class="pagination-begin-ellipsis" ng-show="pagination.page.number > 2 && pagination.page.totalPages > 5">
+        <a><i class="icon-ellipsis-horizontal"></i></a>
+      </li>
+      
+      <li rez-pagination-item 
+        ng-repeat="pageNumber in getPageNumbers()" 
+        pagination="pagination" 
+        page-number="pageNumber"
+        request-page="requestPage"
+        ng-class="{active : pagination.page.number === pageNumber}"
+        ng-show="showMe()">{{pageNumber + 1}}</li>
+
+      <li class="pagination-end-ellipsis" ng-show="pagination.page.number < pagination.page.totalPages - 3 && pagination.page.totalPages > 5">
+        <a><i class="icon-ellipsis-horizontal"></i></a>
+      </li>
+      
+      <li class="pagination-next-button" ng-class="{disabled : pagination.page.number === pagination.page.totalPages - 1}">
+        <a ng-click="pager.nextPage()">
+            <i class="icon-step-forward"></i>
+        </a>
+      </li>
+
+      <li class="pagination-fast-forward" ng-class="{disabled : pagination.page.number === pagination.page.totalPages - 1}">
+        <a ng-click="pager.lastPage()">
+            <i class="icon-fast-forward"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</div>

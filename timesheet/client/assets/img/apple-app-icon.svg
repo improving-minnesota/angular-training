@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="114px" height="114px" viewBox="0 0 114 114" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>114 - App Icon</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1" stop-color="#FFFFFF">
+            <stop stop-opacity="0" offset="0%"></stop>
+            <stop offset="100%"></stop>
+        </linearGradient>
+        <path d="M6,46 L0,49.2889089 L0.0508871401,64 L5.97438929,61.0458913 L6,46 Z M6,46" id="path-2"></path>
+        <path d="M5.9842753,25 L0,28.0554126 L0.0511052805,37.0700736 L6,40 L5.9842753,25 Z M5.9842753,25" id="path-3"></path>
+        <path d="M5.9842753,0 L0,3.25349682 L0.0511052805,18 L6,15.0821093 L5.9842753,0 Z M5.9842753,0" id="path-4"></path>
+    </defs>
+    <g id="Page 1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="114 - App Icon">
+            <path d="M-18,-19 L-18,131 L132,131 L132,-19 L-18,-19 Z M-18,-19" id="Rectangle 1" stroke="#979797" fill="#17283D"></path>
+            <g id="d3-logo" transform="translate(16.000000, 25.000000)">
+                <path d="M28.2549975,48.9588554 C50.5099951,48.8379694 50.5099951,48.8379694 52.5625533,47.8279229 C53.6914588,47.272395 55.1853036,46.33833 55.8822109,45.7522272 C57.3009084,44.5590808 58.8156879,41.8745747 58.8156879,40.5534925 C58.8156879,39.688785 58.7036463,39.6851025 32.407844,39.6851025 L6,39.6851025 L6,32.2350946 L6,24.7850866 L32.407844,24.7850866 C58.8156879,24.7850866 58.8156879,24.7850866 58.8140949,23.6143711 C58.8123912,22.3022374 57.5025153,19.9313128 56.0159922,18.5493874 C55.4750829,18.0465417 53.9191199,17.0886835 52.5582939,16.4208137 C50.0840621,15.206505 50.0840621,15.206505 28.042031,15.0756317 L6,14.9447585 L6,7.47237926 L6,0 L29.1068635,0.216522774 C51.812464,0.429286487 52.2955316,0.451508796 56.9244007,1.49628088 C68.3887869,4.08388576 75.8367317,10.0715806 79.7805388,19.8712359 C81.6835391,24.5998496 82.4068798,30.7518533 81.7789523,36.8677054 C80.6601968,47.7641253 75.6440865,55.4984979 66.9084143,59.7966672 C58.8300419,63.7714338 59.9593094,63.6436427 31.2365283,63.8333327 L6,64 L6,49.0797456 L28.2549975,48.9588554 Z M28.2549975,48.9588554" id="d3" fill="#FFFFFF"></path>
+                <use id="edge-shaddow-bottom" transform="translate(3.000000, 55.000000) scale(1, -1) translate(-3.000000, -55.000000) " xlink:href="#path-2"></use>
+                <use id="edge-shaddow-bottom-1" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <use id="edge-shadow-middle" xlink:href="#path-3"></use>
+                <use id="edge-shadow-middle-1" fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+                <use id="edge-shaddow-top" xlink:href="#path-4"></use>
+                <use id="edge-shaddow-top-1" fill="url(#linearGradient-1)" xlink:href="#path-4"></use>
+            </g>
+        </g>
+    </g>
+</svg>

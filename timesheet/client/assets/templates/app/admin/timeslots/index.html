@@ -1,0 +1,47 @@
+<div class="rez-admin-timeslots">
+  <div ng-show="$state.is('admin.timeslots')">
+    <div class="row rez-form-row">
+      <div class="col-sm-10">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" ng-model="q">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="search()">
+              <i class="icon-search"></i>
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-default btn-block" type="button" ng-click="createNew()">
+          <i class="icon-plus"></i>
+          Add Timeslot
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="rezr-responsive-table-container">
+          <table class="table table-bordered table-hover rezr-table-row-cursor">
+             <thead>
+              <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tr ng-repeat="timeslot in timeslots" ng-click="showDetail(timeslot.id)">
+              <td>{{timeslot.name}}</td>
+              <td>{{timeslot.startDate | userLocalDateTime}}</td>
+              <td>{{timeslot.endDate | userLocalDateTime}}</td>
+              <td>{{timeslot.state}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div ui-view></div>
+</div>

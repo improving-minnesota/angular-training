@@ -1,0 +1,23 @@
+<div class="container rez-quickview-list-item">
+  <div ng-repeat="event in events" class="row item"  ng-click="closeQuickNav()" navigate-to-on-click="'/system/events/' + event.id">
+    <div class="row">
+      <div class="col-xs-2 icon">
+        <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-info icon-light"></i>
+        </span>
+      </div>
+      <div class="col-xs-7 category">
+        <strong>{{event.category}}</strong>
+      </div>
+      <div class="col-xs-3 date">
+        <div>{{event.date | momentFromNow}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 subject">
+        {{event.description}}
+      </div>
+    </div>
+  </div>
+</div>

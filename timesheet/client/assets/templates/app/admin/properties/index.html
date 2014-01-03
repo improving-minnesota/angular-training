@@ -1,0 +1,49 @@
+<div class="rezr-admin-properties">
+  <div ng-show="$state.is('admin.properties')">
+    <div class="row rez-form-row">
+      <div class="col-sm-10">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" ng-model="q">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="search()">
+              <i class="icon-search"></i>
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-default btn-block" type="button" ng-click="createNew()">
+          <i class="icon-plus"></i>
+          Add Property
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="rezr-responsive-table-container">
+          <table class="table table-bordered table-hover rez-table-row-cursor">
+             <thead>
+              <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+              </tr>
+            </thead>
+            <tr ng-repeat="property in properties" ng-click="showDetail(property.id)">
+              <td>{{property.name}}</td>
+              <td>{{property.address}}</td>
+              <td>{{property.city}}</td>
+              <td>{{property.state}}</td>
+              <td>{{property.zip}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div ui-view></div>
+</div>

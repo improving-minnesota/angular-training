@@ -1,0 +1,8 @@
+<div class="hidden-xs rez-navbar-institution-select pull-left" ng-show="showInstitutionSelect">
+  <select ui-select2="institutionSelectOptions"
+    ng-model="context.institution" 
+    data-placeholder="Choose an institution...">
+    <option value=""></option>
+    <option ng-repeat="institution in context.institutions" value="{{institution.id}}">{{institution.description}}</option>
+  </select>
+</div>

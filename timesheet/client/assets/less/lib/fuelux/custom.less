@@ -1,0 +1,11 @@
+.wizard {
+  margin-bottom: 20px;
+  .badge {
+    // Success (green)
+    &-success           { background-color: @successText; }
+    &-success[href]     { background-color: darken(@successText, 10%); }
+    // Info (turquoise)
+    &-info              { background-color: @infoText; }
+    &-info[href]        { background-color: darken(@infoText, 10%); }
+  }
+}

@@ -1,0 +1,23 @@
+<div class="container rez-quickview-list-item">
+  <div ng-repeat="alert in alerts" class="row item" ng-click="closeQuickNav()" navigate-to-on-click="'/system/alerts/' + alert.id">
+    <div class="row">
+      <div class="col-xs-2 icon">
+        <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-exclamation icon-light"></i>
+        </span>
+      </div>
+      <div class="col-xs-7 type">
+        <strong>{{alert.type}}</strong>
+      </div>
+      <div class="col-xs-3 date">
+        <div>{{alert.date | momentFromNow}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 subject">
+        {{alert.subject}}
+      </div>
+    </div>
+  </div>
+</div>

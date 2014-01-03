@@ -1,0 +1,14 @@
+// Mixins
+.border-radius(@rad: 1px) {
+  -webkit-border-radius: @rad;
+  -moz-border-radius: @rad;
+  border-radius: @rad;
+}
+
+.single-transition(@property: all, @duration: 0.3s, @function:ease-in-out, @delay:0) {
+  -webkit-transition: @property @duration @function @delay;
+  -moz-transition: @property @duration @function @delay;
+  -o-transition: @property @duration @function @delay;
+  -ms-transition: @property @duration @function @delay;
+  transition: @property @duration @function @delay;
+}
