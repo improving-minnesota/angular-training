@@ -1,8 +1,8 @@
 {
-  "name": "cabin-rez-ui",
-  "title": "Cabin Reservation System",
+  "name": "timesheetz",
+  "title": "Timesheetz Application",
   "main": "./client/dist/release/main.js",
-  "description": "OPI Cabin Reservation System",
+  "description": "Timesheet demo application",
   "version": "0.0.1-SNAPSHOT",
   "dependencies": {
     "jquery": "2.0.3",
@@ -25,7 +25,6 @@
     "font-awesome": "~3.2.1",
     "respond.js": "scottjehl/Respond",
     "bootstrap-select": "latest",
-    "add-to-homescreen": "*",
     "fuelux": "~2.3.1",
     "dynatree": "~1.2.4",
     "jquery-ui": "~1.10.3",
@@ -33,7 +32,6 @@
     "faker": "Marak/Faker.js",
     "jquery-ui-touch-punch": "*",
     "hammerjs": "~1.0.5",
-    "highcharts": "~3.0.1",
     "lesshat": "csshat/lesshat#1.1.2",
     "lato": "~0.1.0",
     "farbtastic": "4bb6bbf49b02940cf8e278ce54a70d299852b7b7",

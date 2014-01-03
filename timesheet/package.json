@@ -1,8 +1,8 @@
 {
-  "name": "cabin-rez-ui",
-  "title": "OPI Cabin Reservation System",
+  "name": "timesheetz",
+  "title": "Timesheet Application",
   "main": "./client/dist/release/main.js",
-  "description": "OPI Cabin Reservation System",
+  "description": "Timesheet application for Angular training labs",
   "version": "0.0.1-SNAPSHOT",
   "dependencies": {
     "express": "3.2.6",
@@ -47,7 +47,6 @@
     "grunt-mixtape-run-app": "0.0.2",
     "grunt-docco-multi": "0.0.2",
     "walkdir": "0.0.7",
-    "grunt-html2js": "~0.1.8",
-    "grunt-maven-tasks": "~1.1.0"
+    "grunt-html2js": "~0.1.8"
   }
 }

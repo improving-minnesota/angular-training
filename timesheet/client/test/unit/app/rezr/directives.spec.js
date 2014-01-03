@@ -3,10 +3,10 @@
 
     var expect = chai.expect;
 
-    describe('rezr.directives', function() {
+    describe('tsz.directives', function() {
 
         beforeEach(function () {
-            angular.mock.module('rezr.directives');
+            angular.mock.module('tsz.directives');
         });
 
         // Sample: 
@@ -14,7 +14,7 @@
 
         //     var appDirectives, scope, elm;  
 
-        //     beforeEach(module('assets/templates/rezr/sampleDirective.html'));
+        //     beforeEach(module('assets/templates/tsz/sampleDirective.html'));
             
         //     beforeEach(function () {
                 

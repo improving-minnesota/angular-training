@@ -4,16 +4,16 @@
   var expect = chai.expect;
   var controller, scope;
 
-  describe('rezr.controllers', function () {
+  describe('tsz.controllers', function () {
 
-    beforeEach(module('rezr.controllers'));
+    beforeEach(module('tsz.controllers'));
 
-    describe('RezrController', function () {
+    describe('tszController', function () {
 
       beforeEach(function (){
         inject(function($rootScope, $controller){
           scope = $rootScope.$new();
-          controller = $controller('RezrController', {
+          controller = $controller('tszController', {
             $scope: scope
           }); 
         });

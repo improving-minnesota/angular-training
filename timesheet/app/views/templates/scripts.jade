@@ -6,20 +6,11 @@ case env
   default
 
     // Shims
-    script(src='assets/js/components/respond.js/respond.min.js')
+    script(src='assets/js/components/respond.js/src/respond.js')
     script(src='assets/js/components/modernizr/modernizr.js')
 
     // jQuery and Related
     script(src='assets/js/components/jquery/jquery.js')
-    script(src='assets/js/components/jquery-ui/ui/jquery.ui.core.js')
-    script(src='assets/js/components/jquery-ui/ui/jquery.ui.widget.js')
-    script(src='assets/js/components/jquery-ui/ui/jquery.ui.mouse.js')
-    script(src='assets/js/components/jquery-ui/ui/jquery.ui.position.js')
-    script(src='assets/js/components/jquery-ui/ui/jquery.ui.draggable.js')
-    script(src='assets/js/components/jquery-ui/ui/jquery.ui.droppable.js')
-    script(src='assets/js/components/dynatree/src/jquery.dynatree.js')
-    script(src='assets/js/components/jquery-ui-touch-punch/jquery.ui.touch-punch.js')
-    script(src='assets/js/components/hammerjs/dist/hammer.js')
     script(src='assets/js/components/select2/select2.js')
     script(src='assets/js/components/messenger/build/js/messenger.js')
     script(src='assets/js/components/messenger/build/js/messenger-theme-future.js')
@@ -45,20 +36,9 @@ case env
     script(src='assets/js/components/angular-ui-router/release/angular-ui-router.js')
     script(src='assets/js/components/angular-ui-utils/components/angular-ui-docs/build/ui-utils.js')
     script(src='assets/js/components/angular-ui-select2/src/select2.js')
-    script(src='assets/js/components/angular-dragdrop/src/angular-dragdrop.js')
-    script(src='assets/js/components/angular-ui-calendar/src/calendar.js')
-
-    //Highcharts
-    script(src='assets/js/components/highcharts/highcharts.src.js')
-
-    //Farbtastic
-    script(src='assets/js/components/farbtastic/farbtastic.js')
 
     //NProgress
     script(src='assets/js/components/nprogress/nprogress.js')
-
-    //Full calendar
-    script(src='assets/js/components/fullcalendar/fullcalendar.js')
 
     // logger
     script(src='assets/js/components/javascript-debug/ba-debug.js')
@@ -68,7 +48,6 @@ case env
     script(src='assets/js/components/moment/moment.js')
     script(src='assets/js/components/add-to-homescreen/src/add2home.js')
     script(src='assets/js/components/faker/Faker.js')
-    script(src='assets/js/components/color/one-color-all-debug.js')
 
     each script in applicationScripts
       script(src=script)

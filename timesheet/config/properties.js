@@ -2,7 +2,7 @@
 /*jslint nomen: false*/
 module.exports = {
 
-  appName: "cabin-rez-ui",
+  appName: "cabin-tsz-ui",
 
   logs : {
     folder : './logs',
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   security : {
-    cookieSecret: 'cabin-rez-cookie-secret'
+    cookieSecret: 'cabin-tsz-cookie-secret'
   },
 
   server : {
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   proxy : {
-    '\/rezr-api\/.*' : {
+    '\/tsz-api\/.*' : {
       urlType: 'pass',
       protocol: 'http',
       host: 'localhost',

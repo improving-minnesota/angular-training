@@ -97,14 +97,6 @@ module.exports = function (grunt) {
 
           // jQuery and Related
           '<%= components %>/jquery/jquery.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.core.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.widget.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.mouse.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.position.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.draggable.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.droppable.js',
-          '<%= components %>/dynatree/src/jquery.dynatree.js',
-          '<%= components %>/jquery-ui-touch-punch/jquery.ui.touch-punch.js',
           '<%= components %>/hammerjs/dist/hammer.js',
           '<%= components %>/select2/select2.js',
           '<%= components %>/messenger/build/js/messenger.js',
@@ -131,14 +123,6 @@ module.exports = function (grunt) {
           '<%= components %>/angular-ui-select2/src/select2.js',
           '<%= components %>/angular-ui-router/release/angular-ui-router.js',
           '<%= components %>/angular-ui-utils/components/angular-ui-docs/build/ui-utils.js',
-          '<%= components %>/angular-dragdrop/src/angular-dragdrop.js',
-          '<%= components %>/angular-ui-calendar/src/calendar.js',
-
-          //Highcharts
-          '<%= components %>/highcharts/highcharts.src.js',
-
-          //Farbtastic
-          '<%= components %>/farbtastic/farbtastic.js',
 
           //NProgress
           '<%= components %>/nprogress/nprogress.js',
@@ -152,10 +136,8 @@ module.exports = function (grunt) {
           // utilities
           '<%= components %>/lodash/dist/lodash.js',
           '<%= components %>/moment/moment.js',
-          '<%= components %>/add-to-homescreen/src/add2home.js',
           '<%= components %>/responsive-tables/responsive-tables.js',
-          '<%= components %>/faker/Faker.js',
-          '<%= components %>/color/one-color-all-debug.js'
+          '<%= components %>/faker/Faker.js'
         ],
 
         dest: "<%= clientdist %>/assets/js/deps.js"
@@ -174,16 +156,10 @@ module.exports = function (grunt) {
           "<%= components %>/select2/select2.css",
           "<%= components %>/bootstrap-select/bootstrap-select.css",
           "<%= components %>/angular-strap/vendor/bootstrap-datepicker.css",
-          "<%= components %>/add-to-homescreen/style/add2home.css",
-          "<%= components %>/jquery-ui/themes/base/jquery.ui.core.css",
-          "<%= components %>/jquery-ui/themes/base/jquery.ui.dialog.css",
-          "<%= components %>/dynatree/src/skin/ui.dynatree.css",
-          "<%= components %>/farbtastic/farbtastic.css",
           "<%= components %>/nprogress/nprogress.css",
           "<%= components %>/messenger/build/css/messenger.css",
           "<%= components %>/messenger/build/css/messenger-theme-air.css",
           "<%= components %>/messenger/build/css/messenger-spinner.css",
-          "<%= components %>/fullcalendar/fullcalendar.css",
           "<%= clientdist %>/assets/css/style.css"
         ],
         dest: "<%= clientdist %>/assets/css/style.css"

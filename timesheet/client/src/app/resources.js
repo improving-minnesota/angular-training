@@ -9,8 +9,7 @@
     .factory('$control', [
       '$q',
       '$api',
-      'authorization',
-      function ($q, $api, authorization) {
+      function ($q, $api) {
 
         var control = {
 
@@ -42,42 +41,6 @@
 
         var api = {
 
-          // administration
-          vacationProperty : $resource($apiUrl + '/vacationProperty/:id', {
-            id: '@id'
-          }, {
-            update : {
-              method: 'PUT'
-            }
-          }),
-
-          season : $resource($apiUrl + '/season', {
-            id: '@id'
-          }, {
-            update : {
-              method: 'PUT'
-            }
-          }),
-
-          timeslot : $resource($apiUrl + '/timeslot', {
-            id: '@id'
-          }, {
-            update : {
-              method: 'PUT'
-            }
-          }),
-
-          reservation : $resource($apiUrl + '/reservation', {
-            id: '@id'
-            }, {
-              update : {
-                method: 'PUT'
-              }
-            }),
-
-          // rezr
-
-
           // security
           login : $resource($apiUrl + '/login', {}, {
             'login' : {
@@ -89,14 +52,13 @@
               headers: {'X-Requested-With': 'XMLHttpRequest'}
             }
           }),
+
           logout : $resource($apiUrl + '/logout', {}, {
             'logout' : {
               method: 'POST',
               headers: {'X-Requested-With': 'XMLHttpRequest'}
             }
-          }),
-          // ui 
-          sidenav : $resource($apiUrl + '/ui/sidenav/items')
+          })
 
         };
 
@@ -104,7 +66,7 @@
       }
     ]);
   
-  resources.value('$apiUrl', '/rezr-api');
+  resources.value('$apiUrl', '/tsz-api');
 
   logger.debug("Registered api.resources");
 

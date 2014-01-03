@@ -12,11 +12,9 @@
     'templates-lib',
     'app',
     'common',
-    'navigation.topnav',
-    'navigation.sidenav',
+    'security',
     'navigation.pagenav',
     'navigation.pagination',
-    'navigation.quickview',
     'ui.router',
     'ui.select2',
     'ui.bootstrap.datepicker',
@@ -40,7 +38,7 @@
     'authorizationProvider', 
     function ($stateProvider, $httpProvider, $urlRouterProvider, authorizationProvider) {
     
-      $urlRouterProvider.otherwise("/rezr/dashboard");
+      $urlRouterProvider.otherwise("/home");
   }])
 
   .run(['$state', '$rootScope', '$stateParams', function ($state, $rootScope, $stateParams) {

@@ -1,0 +1,4 @@
+{"users": [
+  {"username": "admin@mixtape.com", "password": "password", "admin": true, "firstName": "Admin", "lastName": "User"},
+  {"username": "user@mixtape.com", "password": "password", "admin": false, "firstName": "Normal", "lastName": "User"}
+]}

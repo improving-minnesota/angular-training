@@ -10,13 +10,13 @@ html(class="no-js", ng-app="main")
   // <![endif]
   head
     meta(charset="utf-8")
-    title(ng-bind-template="Rezr") Cabin Reservation System
+    title(ng-bind-template="Timesheetz") Timesheetz
     base(href="/")
     meta(name="viewport", content="width=device-width, user-scalable=no, maximum-scale=1, minimum-scale=1")
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(name="apple-mobile-web-app-status-bar-style", content="black")
 
-    meta(name="description", content="OPI's Cabin and Condo Reservation Systm")
+    meta(name="description", content="Timesheet Demo Application")
 
     meta(property="og:title", content="")
     meta(property="og:description", content="")
@@ -32,19 +32,9 @@ html(class="no-js", ng-app="main")
     link(rel="apple-touch-icon", href="/assets/img/apple-app-icon.png")
 
     body
-      .rez-page-container(ng-class="{'rez-quick-view-open':pushLeft, 'rez-side-nav-open':pushRight, 'rez-authenticated-user': authenticatedUser}", ng-cloak, ng-controller="MainController")
-        .rez-navbar-container
-          .rez-side-nav-navbar
-            .navbar.navbar-default.navbar-static-top
-          .rez-main-navbar(topnav)
-          .rez-quick-view-navbar(quickview-nav)
-        .rez-content-container
-          .rez-login-background(ng-show="!authenticatedUser")
-            i.icon-opi-logo
-          .rez-side-nav-container(sidenav, items="items")
-          .rez-view-container(swipe-left="contentSwipeLeft($event)", swipe-right="contentSwipeRight($event)")
-            .container
-              .ui-view
-          .rez-quick-view-container(quickview)
+      .tsz-page-container(ng-class="{'tsz-authenticated-user': authenticatedUser}", ng-cloak, ng-controller="HomeController")
+        .tsz-content-container
+          .container
+            .ui-view
             
     include ../templates/scripts

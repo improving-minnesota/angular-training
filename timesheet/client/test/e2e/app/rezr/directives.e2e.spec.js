@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    describe('rezr.directives', function () {
+    describe('tsz.directives', function () {
 
         beforeEach (function () {
             browser().navigateTo("/");

@@ -1,4 +1,4 @@
-# REZR UI #
+# tsz UI #
 
 ## Getting Started ##
 
