@@ -1,0 +1,73 @@
+<mockup version="1.0" skin="sketch" measuredW="1014" measuredH="629" mockupW="960" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="54" y="29" w="960" h="600" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="69" y="111" w="64" h="64" measuredW="77" measuredH="79" zOrder="2" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="148" y="143" w="177" h="26" measuredW="164" measuredH="26" zOrder="3" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>The%20Timesheet%20App</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="70" y="182" w="915" h="-1" measuredW="100" measuredH="5" zOrder="4" locked="true" isInGroup="-1"/>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::TextInput" x="437" y="272" w="194" h="-1" measuredW="79" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="437" y="316" w="194" h="-1" measuredW="79" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="336" y="273" w="-1" h="-1" measuredW="65" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Username</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="336" y="319" w="-1" h="-1" measuredW="60" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Password</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::CheckBox" x="439" y="359" w="-1" h="-1" measuredW="114" measuredH="22" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Remember%20Me</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="574" y="394" w="-1" h="-1" measuredW="54" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>timesheet_list%26bm%3Btimesheet_list.bmml%26bm%3Btimesheet_list.bmml%26bm%3Btimesheet_list.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22520%2C365%2C574%2C392%22%20href%3D%22timesheet_list.bmml%22%20alt%3D%22timesheet_list%22%20id%3D%2210%22/%3E</map>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Canvas" x="56" y="101" w="953" h="79" measuredW="100" measuredH="70" zOrder="1" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderColor>9684093</borderColor>
+        <borderStyle>none</borderStyle>
+        <color>9684093</color>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Canvas" x="58" y="189" w="951" h="34" measuredW="100" measuredH="70" zOrder="11" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>14540253</color>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="860" y="193" w="111" h="24" measuredW="102" measuredH="24" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>16</size>
+        <text>Please%20Log%20In</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

@@ -1,0 +1,71 @@
+<mockup version="1.0" skin="sketch" measuredW="1014" measuredH="629" mockupW="960" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="54" y="29" w="960" h="600" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="69" y="111" w="64" h="64" measuredW="77" measuredH="79" zOrder="3" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="148" y="143" w="177" h="26" measuredW="164" measuredH="26" zOrder="4" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>The%20Timesheet%20App</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="70" y="182" w="915" h="-1" measuredW="100" measuredH="5" zOrder="5" locked="true" isInGroup="-1"/>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="945" y="146" w="-1" h="-1" measuredW="40" measuredH="21" zOrder="6" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="836" y="146" w="-1" h="-1" measuredW="94" measuredH="21" zOrder="7" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Welcome%20John.</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="858" y="192" w="-1" h="-1" measuredW="127" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>16</size>
+        <text>Show%20Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Canvas" x="56" y="101" w="953" h="79" measuredW="100" measuredH="70" zOrder="2" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderColor>9684093</borderColor>
+        <borderStyle>none</borderStyle>
+        <color>9684093</color>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Canvas" x="58" y="189" w="951" h="34" measuredW="100" measuredH="70" zOrder="1" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>14540253</color>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Link" x="79" y="243" w="-1" h="-1" measuredW="92" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Timesheet%20List</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Link" x="185" y="242" w="-1" h="-1" measuredW="97" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>New%20Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Link" x="294" y="243" w="-1" h="-1" measuredW="99" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit%20Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::LinkBar" x="69" y="196" w="-1" h="-1" measuredW="245" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Employees%2CTimesheets%2CTime%20Units</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

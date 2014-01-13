@@ -14,8 +14,10 @@ module.exports = function(config) {
 
     files: [
       '../node_modules/chai/chai.js',
+      '../node_modules/chai-as-promised/lib/chai-as-promised.js',
+      '../node_modules/sinon-chai/lib/sinon-chai.js',
       '../node_modules/sinon/pkg/sinon.js',
-
+      
       'dist/assets/js/deps.js',
       'src/**/*.js',
 

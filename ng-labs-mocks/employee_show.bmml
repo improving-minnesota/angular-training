@@ -1,0 +1,149 @@
+<mockup version="1.0" skin="sketch" measuredW="1014" measuredH="629" mockupW="960" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="54" y="29" w="960" h="600" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="69" y="111" w="64" h="64" measuredW="77" measuredH="79" zOrder="3" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="148" y="143" w="177" h="26" measuredW="164" measuredH="26" zOrder="4" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>The%20Timesheet%20App</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="70" y="182" w="915" h="-1" measuredW="100" measuredH="5" zOrder="5" locked="true" isInGroup="-1"/>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="945" y="146" w="-1" h="-1" measuredW="40" measuredH="21" zOrder="6" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="836" y="146" w="-1" h="-1" measuredW="94" measuredH="21" zOrder="7" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Welcome%20John.</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="869" y="194" w="-1" h="-1" measuredW="117" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>16</size>
+        <text>Show%20Employee</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Canvas" x="56" y="101" w="953" h="79" measuredW="100" measuredH="70" zOrder="2" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderColor>9684093</borderColor>
+        <borderStyle>none</borderStyle>
+        <color>9684093</color>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Canvas" x="58" y="189" w="951" h="34" measuredW="100" measuredH="70" zOrder="1" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>14540253</color>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::DataGrid" x="90" y="360" w="888" h="175" measuredW="792" measuredH="175" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Begin%20Date%2C%20End%20Date%2C%20Description%2C%20Date%20Created%2C%20Employee%2C%20Last%20Updated%2C%20Delete%0A1/5/14%2C1/12/14%2CJohn%20Doe%20Timesheet1%2C2014-01-12%2015%3A56%3A49%20CST%2CJohn%20Doe%20%28john%29%2C2014-01-12%2015%3A56%3A49%20CST%0A12/29/13%2C1/4/14%2CTime%20Sheet%202%20for%20John%2C2014-01-12%2015%3A56%3A49%20CST%2CJohn%20Doe%20%28john%29%2C2014-01-12%2015%3A56%3A49%20CST%0A12/22/13%2C12/28/13%2CTime%20Sheet%203%20for%20John%2C2014-01-12%2015%3A56%3A49%20CST%2CJohn%20Doe%20%28john%29%2C2014-01-12%2015%3A56%3A49%20CST%0A12/15/13%2C12/21/13%2CTime%20Sheet%204%20for%20John%2C2014-01-12%2015%3A56%3A49%20CST%2CJohn%20Doe%20%28john%29%2C2014-01-12%2015%3A56%3A49%20CST%0A12/8/13%2C12/14/13%2CTime%20Sheet%205%20for%20John%2C2014-01-12%2015%3A56%3A49%20CST%2CJohn%20Doe%20%28john%29%2C2014-01-12%2015%3A56%3A49%20CST</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::ButtonBar" x="372" y="552" w="-1" h="-1" measuredW="243" measuredH="29" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>2</selectedIndex>
+        <text>%3C%3C%2C%3C%2C1%2C2%2C%3E%2C%3E%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Link" x="922" y="384" w="-1" h="-1" measuredW="44" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Link" x="923" y="416" w="-1" h="-1" measuredW="44" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Link" x="923" y="446" w="-1" h="-1" measuredW="44" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::Link" x="923" y="475" w="-1" h="-1" measuredW="44" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Link" x="923" y="504" w="-1" h="-1" measuredW="44" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::Label" x="94" y="247" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>First%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Label" x="106" y="275" w="-1" h="-1" measuredW="90" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Username%09</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Label" x="352" y="247" w="-1" h="-1" measuredW="65" measuredH="21" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>LastName</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Label" x="360" y="274" w="-1" h="-1" measuredW="36" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Email</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Paragraph" x="445" y="247" w="155" h="21" measuredW="200" measuredH="80" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Doe</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Paragraph" x="187" y="275" w="55" h="21" measuredW="200" measuredH="80" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>john</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Paragraph" x="187" y="247" w="60" h="21" measuredW="200" measuredH="80" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>John</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Paragraph" x="445" y="276" w="181" h="19" measuredW="200" measuredH="80" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>john.doe@objectpartners.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Button" x="863" y="323" w="-1" h="-1" measuredW="115" measuredH="27" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>timesheet_new%26bm%3Btimesheet_new.bmml%26bm%3Btimesheet_new.bmml%26bm%3Btimesheet_new.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22809%2C294%2C924%2C321%22%20href%3D%22timesheet_new.bmml%22%20alt%3D%22timesheet_new%22%20id%3D%2233%22/%3E</map>
+        <text>New%20Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::Button" x="863" y="244" w="111" h="27" measuredW="105" measuredH="27" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>employee_edit%26bm%3Bemployee_edit.bmml%26bm%3Bemployee_edit.bmml%26bm%3Bemployee_edit.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22809%2C215%2C920%2C242%22%20href%3D%22employee_edit.bmml%22%20alt%3D%22employee_edit%22%20id%3D%2234%22/%3E</map>
+        <text>Edit%20Employee</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::HRule" x="68" y="311" w="911" h="-1" measuredW="100" measuredH="5" zOrder="26" locked="false" isInGroup="-1"/>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::LinkBar" x="69" y="196" w="-1" h="-1" measuredW="161" measuredH="21" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>employee_list%26bm%3Bemployee_list.bmml%26bm%3Bemployee_list.bmml%26bm%3Bemployee_list.bmml%2Ctimesheet_list%26bm%3Btimesheet_list.bmml%26bm%3Btimesheet_list.bmml%26bm%3Btimesheet_list.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2215%2C167%2C84%2C188%22%20href%3D%22employee_list.bmml%22%20alt%3D%22employee_list%22%20id%3D%2236_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22102%2C167%2C176%2C188%22%20href%3D%22timesheet_list.bmml%22%20alt%3D%22timesheet_list%22%20id%3D%2236_1%22/%3E%0A</map>
+        <text>Employees%2CTimesheets</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

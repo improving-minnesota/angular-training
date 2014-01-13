@@ -130,9 +130,6 @@ module.exports = function (grunt) {
           // logger
           '<%= components %>/javascript-debug/ba-debug.js',
 
-          // Full calendar
-          '<%= components %>/angular-ui-calendar/src/calendar.js',
-
           // utilities
           '<%= components %>/lodash/dist/lodash.js',
           '<%= components %>/moment/moment.js',
