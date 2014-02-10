@@ -2,7 +2,6 @@ var walkdir = require('walkdir'),
   path = require('path'),
   locomotive = require('locomotive'),
   Controller = locomotive.Controller,
-  mongoose = require('mongoose'),
   Q = require('q');
 
 var ApplicationController = new Controller();

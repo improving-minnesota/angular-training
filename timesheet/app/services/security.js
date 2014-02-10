@@ -1,8 +1,6 @@
-var express = require('express')
-  , passport = require('passport')
-  ;
+var passport = require('passport');
 
-var filterUser = function(user) {
+var sanitize = function(user) {
   if ( user ) {
     return {
       user : {
@@ -24,7 +22,7 @@ var security = {
     if (req.isAuthenticated()) {
       next();
     } else {
-      res.json(401, filterUser(req.user));
+      res.json(401, sanitize(req.user));
     }
   },
 
@@ -33,26 +31,29 @@ var security = {
     if (req.user && req.user.admin ) {
       next();
     } else {
-      res.json(401, filterUser(req.user));
+      res.json(401, sanitize(req.user));
     }
   },
 
   sendCurrentUser: function(req, res, next) {
     console.log('Sending current user: ' + req.user);
     console.log('req.session : ' + req.session);
-    var currentUser = filterUser(req.user);
+    var currentUser = sanitize(req.user);
     console.log(currentUser);
     res.json(200, currentUser);
   },
 
   login: function(req, res, next) {
     function authenticationFailed(err, user, info) {
+      console.log("in auth failed : " + JSON.stringify(user));
+      console.log("info : " + JSON.stringify(info));
       if (err) { return next(err); }
-      if (!user) { return res.json(filterUser(user)); }
+      if (!user) { return res.json(sanitize(user)); }
 
       req.login(user, function(err) {
         if ( err ) { return next(err); }
-        return res.json(filterUser(user));
+        console.log("req.login");
+        return res.json(sanitize(user));
       });
     }
 

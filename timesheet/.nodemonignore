@@ -4,6 +4,7 @@
 /grunt_tasks/*
 /node_modules/*
 /dist/*
+/data/*.db
 Gruntfile.js
 karma.e2e.config.js
 karma.unit.config.js

@@ -175,7 +175,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Takes the built require.js file and minifies it for filesize benefits.
+    // Takes the built app.js file and minifies it for filesize benefits.
     uglify : {
       dist : {
         files: {

@@ -1,83 +1,80 @@
-var _ = require('underscore')
-  , mongoose = require('mongoose')
-  , User = require('../../app/models/user')
-  ; 
+var _ = require('underscore'),
+  db = require('../../app/services/db.js'),
+  Q = require('q'); 
 
-function logResult(err, result) {
-  if  (err) {
-    console.log('Error saving ' + result.model + " : " + err);
-  }
-  else {
-    console.log('Created : ' + result.model);
-  }
-}
-
-// The saveAll function will iterate through an array of json objects and 
-// save them as the passed in Schema. This helps us create a nested tree 
-// of objects. 
-// 
-// schema : The actual Mongoose schema object to be saved.
-// nested : The string name of the nested property.
-// docs: The array of json objects.
-// callback : Will be called with an error and/or the array of saved sub-items.
-function saveAll( schema, nested, docs, callback ){
-  var count = 0;
-  var savedItems = [];
-
-  docs.forEach(function(doc){
-      saveDoc(schema, nested, doc, function(err, item) {
-          savedItems.push(item);
-
-          count++;
-          if( count == docs.length ){
-             callback(err, savedItems);
-          }
-      });
-  });
-}
-
-// saveDoc saves an individual do to a Mongoose schema object. 
-//
-// schema : The actual Mongoose schema object to be saved.
-// nested : The string name of the nested property.
-// doc: The json object to be saved.
-// callback : Will be called with an error and/or the saved item.
-function saveDoc(schema, nested, doc, callback) {
-  if (!!doc[nested] && !_.isUndefined(nested)) {
-    saveAll(schema, nested, doc[nested], function (err, subItems) {
-
-      doc[nested] = _.map(subItems, function (item) {
-        return item._id;
-      });
-
-      new schema(doc).save(function (err, sn) {
-        logResult(err, {model: doc.state});
-        callback(err, sn);
-      });
-    });
-  }
-  else {
-    new schema(doc).save(function (err, sn) {
-      logResult(err, {model: doc.state});
-      callback(err, sn);
-    });
-  }
-}
 
 ////////////  USERS //////////////////
-function newUsers() {
+function seed() {
   console.log('Seeding Users into DB');
   var users = require('../../data/users').users;
+  var adminTimesheets = require('../../data/admin.timesheets').timesheets;
+  var userTimesheets = require('../../data/user.timesheets').timesheets;
+  var projects = require('../../data/projects').projects;
 
-  _(users).each(function (user) {
-    new User(user).save(function (err) {
-      logResult(err, {model: user.username});
+  Q.all([
+    db.insert('projects', projects[0]),
+    db.insert('projects', projects[1]),
+    db.insert('projects', projects[2])
+  ])
+
+  .then(function () { 
+    var userPromises = [];
+
+    _.forEach(users, function (user) {
+      console.log("Seeding " + user.username);
+
+      db.insert('users', user)
+        .then(function (newUser) {
+
+          console.log("Created " + newUser.username);
+          
+          var timesheets = user.username === "admin" ? adminTimesheets: userTimesheets;
+
+          _.forEach(timesheets, function(timesheet) {
+            var timesheetModel = _.omit(timesheet, 'timeunits');
+            timesheetModel.user_id = newUser._id;
+
+            db.insert('timesheets', timesheetModel)
+              .then(function (newTimesheet) {
+
+                console.log("Seeding timeunits : " + timesheet.timeunits.length);
+                
+                _.forEach(timesheet.timeunits, function (timeunit) {
+                  timeunit.timesheet_id = newTimesheet._id;
+
+                  console.log("Attempting to seed timeunit : " + timeunit.project);
+                  db.findOne('projects', {name: timeunit.project})
+                    .then(function (project) {
+                      timeunit.project_id = project._id;
+                      return db.insert('timeunits', timeunit);
+                    })
+                    .then(function (newTimeunit) {
+                      console.log("Created timeunit for " + newTimeunit.dateWorked);
+                    })
+                    .fail(function (err) {
+                      console.log("Error : " + err);
+                    });
+                });
+              });
+          });
+        });
     });
+  })
+
+  .then(function (){
+    console.log("Created user " + user.username + " and timesheets.");
+  })
+
+  .fail(function (err) {
+    console.log("Error creating " + user.username + " : " + err);
   });
 }
 
-// User.remove().exec().then(function (){
-//   newUsers();
-// });
-
-newUsers();
+db.findOne('users', {username: 'admin'})
+  .then(function (user) {
+      console.log("User -> " + JSON.stringify(user));
+      console.log("Found user. DB already seeded.");
+      if (user === null) seed();
+  }, function(err) {
+    console.log("Error : " + err);
+  }); 

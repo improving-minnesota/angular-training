@@ -1,10 +1,9 @@
 var express = require('express'),
   passport = require('passport'),
-  MongoStore = require('connect-mongo')(express),
   poweredBy = require('connect-powered-by'),
   util = require('util'),
-  properties = require('../properties'),
-  proxy = require('../proxy');
+  properties = require('../properties'), 
+  NedbStore = require('connect-nedb-session')(express);
 
 module.exports = function() {
   console.log('Starting all configuration');
@@ -32,8 +31,18 @@ module.exports = function() {
   this.use(express.favicon());
   this.use(express.compress());
   this.use(express.cookieParser(properties.security.cookieSecret));
-  this.use(proxy);
   this.use(express.bodyParser());
+
+  this.use(express.session({ 
+    secret: properties.session.secret,
+    key: properties.session.key,
+    cookie: { 
+      path: '/',
+      httpOnly: true,
+      maxAge: 3600 * 1000, 
+      store: new NedbStore({filename: 'data/session.db'})
+    }
+  }));
 
   this.use(passport.initialize());
   this.use(passport.session());

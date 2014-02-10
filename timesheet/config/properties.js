@@ -16,7 +16,7 @@ module.exports = {
   },
 
   security : {
-    cookieSecret: 'cabin-tsz-cookie-secret'
+    cookieSecret: 'timesheet-cookie-secret'
   },
 
   server : {
@@ -33,15 +33,6 @@ module.exports = {
     prod : {
       listenPort: 3033,
       securePort: 8433
-    }
-  },
-
-  proxy : {
-    '\/tsz-api\/.*' : {
-      urlType: 'pass',
-      protocol: 'http',
-      host: 'localhost',
-      port: 8080
     }
   }
 };

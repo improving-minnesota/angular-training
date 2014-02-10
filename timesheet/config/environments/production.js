@@ -6,7 +6,7 @@ module.exports = function() {
   this.set('securePort', properties.server.prod.securePort);
 
   // Serve static content
-  this.use(express.static(__dirname + "/../../client/dist/d3-control-ui"));
+  this.use(express.static(__dirname + "/../../client/dist/timesheet"));
 
   this.use(function (req, res) {
     res.send(404);

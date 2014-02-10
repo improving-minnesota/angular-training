@@ -31,7 +31,7 @@ locomotive.boot('./', process.env.NODE_ENV, function (err, app) {
   })
   // Then send the ready
   .then(function() {
-    console.log('Server is ready and serving on HTTP and HTTPS.');
+    console.log('Server is ready and serving on HTTP.');
     console.log('Returning ready to the parent process if any.');
     if (process.send) {
       process.send({ status: 'ready' });

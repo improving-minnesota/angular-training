@@ -8,8 +8,13 @@
 module.exports = function routes () {
   this.root('application#index');
 
-  this.get("/cache.manifest", function(req, res) {
-    res.header("Content-Type", "text/cache-manifest");
-    return res.sendfile("client/cache.manifest");
+  this.resources('projects');
+  this.resources('users', function () {
+    this.resources('timesheets', function () {
+      this.resources('timeunits');
+    });
   });
+
+  this.resources('login', {only: ['create', 'index']});
+  this.resources('logout', {only: ['create']});
 };
