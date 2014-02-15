@@ -53,6 +53,7 @@
     "grunt-mixtape-run-app": "0.0.2",
     "grunt-docco-multi": "0.0.2",
     "walkdir": "0.0.7",
-    "grunt-html2js": "0.1.8"
+    "grunt-html2js": "0.1.8",
+    "grunt-ngmin": "0.0.3"
   }
 }

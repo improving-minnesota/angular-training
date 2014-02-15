@@ -23,7 +23,9 @@ module.exports = function () {
   passport.use(new LocalStrategy(
     function(username, password, done) {
       db.users.find({username: username}, function (err, user) {
+
         console.log("authentication : " + JSON.stringify(user));
+        
         if (err) { return done(err); }
         if (!user) { return done(null, false); }
         

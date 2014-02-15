@@ -1,6 +1,4 @@
 !!! 5
-//if IE 7
-  html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
 //if IE 8
   html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
 //if IE 9
@@ -32,9 +30,8 @@ html(class="no-js", ng-app="main")
     link(rel="apple-touch-icon", href="/assets/img/apple-app-icon.png")
 
     body
-      .tsz-page-container(ng-class="{'tsz-authenticated-user': authenticatedUser}", ng-cloak, ng-controller="HomeController")
-        .tsz-content-container
-          .container
-            .ui-view
+      .tsz-page-container(ng-cloak)
+        div(ui-view="navbar")
+        div(ui-view="content")
             
     include ../templates/scripts

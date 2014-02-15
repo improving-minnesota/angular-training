@@ -6,15 +6,11 @@
 
 * [Locomotive](http://locomotivejs.org/)
 * [Express](http://expressjs.com/)
-* [SocketIO](http://socket.io/)
 * [Angular](http://angularjs.org/)
 * [karma](http://karma-runner.github.io/0.8/index.html)
-* [Mocha](http://visionmedia.github.io/mocha/)
 * [chai](http://chaijs.com/)
 * [sinon](http://sinonjs.org/)
 * [Bootstrap](http://twitter.github.io/bootstrap/)
-* [Redis](http://redis.io/)
-* [MongoDB](http://www.mongodb.org/)
 * [Less](http://lesscss.org/)
 * [Jade](http://jade-lang.com/)
 
@@ -30,7 +26,6 @@
 
 * [Node](http://nodejs.org/)
 * [Mongo](http://www.mongodb.org/)
-* [Redis](http://redis.io/)
 * [Grunt](https://github.com/cowboy/grunt) `npm install -g grunt-cli` 
 * [Bower](http://twitter.github.com/bower/) `npm install -g bower`
 * [Nodemon](https://github.com/remy/nodemon/) `npm install -g nodemon`

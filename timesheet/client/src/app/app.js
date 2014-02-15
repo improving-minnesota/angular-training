@@ -14,77 +14,80 @@
     'security'
   ]);
 
-  app.config([
-    '$stateProvider', 
-    'authorizationProvider',
-    function ($stateProvider, authorizationProvider) {
+  app.config(function ($stateProvider, authorizationProvider) {
       
       $stateProvider
-        .state('main', {
-          url: '/',
-          controller: 'HomeController',
-          templateUrl: 'assets/templates/common/main-page.html',
+        .state('app', {
+          url: '/app',
           data: {
-            title: 'Home',
-            section: 'Main'
+            title: 'The Timesheet App'
           },
-          resolve: {
-            authenticatedUser: authorizationProvider.requireAuthenticatedUser
+          views : {
+            'navbar' : {
+              controller: 'NavCtrl',
+              templateUrl: 'assets/templates/navigation/navbar/index.html'
+            },
+            'content' : {
+              controller: 'AppCtrl',
+              templateUrl: 'assets/templates/app/index.html'
+            }
+          }
+          //, resolve: {
+          //   authenticatedUser: authorizationProvider.requireAuthenticatedUser
+          // }
+        })
+
+        .state('app.timesheet', {
+          url: '/timesheets',
+          controller: 'TimesheetCtrl',
+          templateUrl: 'assets/templates/app/timesheets/index.html',
+          data: {
+            section: 'Timesheet: List'
           }
         })
 
-        .state('main.two', {
-          url: 'two',
-          controller: 'HomeController',
-          templateUrl: 'assets/templates/two/index.html',
+        .state('app.timesheet.detail', {
+          url: '/:id',
+          controller: 'TimesheetDetailCtrl',
+          templateUrl: 'assets/templates/app/timesheets/detail.html',
           data: {
-            title: 'Page Two',
-            section: 'Nothing Selected'
+            section: 'Timesheet: Detail'
           }
         })
 
-        .state('main.two.one', {
-          url: '/one',
-          controller: 'HomeController',
-          templateUrl: 'assets/templates/two/index.html',
+        .state('app.timesheet.detail.edit', {
+          url: '/edit',
+          controller: 'TimesheetEditCtrl',
+          templateUrl: 'assets/templates/app/timesheets/edit.html',
           data: {
-            title: 'Page Two',
-            section: 'Selection Result',
-            selection: 'Selection One'
+            section: 'Timesheet: Edit'
           }
         })
 
-        .state('main.two.two', {
-          url: '/two',
-          controller: 'HomeController',
-          templateUrl: 'assets/templates/two/index.html',
+        .state('app.timesheet.create', {
+          url: '/new',
+          controller: 'TimesheetCreateCtrl',
+          templateUrl: 'assets/templates/app/timesheets/create.html',
           data: {
-            title: 'Page Two',
-            section: 'Selection Result',
-            selection: 'Selection Two'
+            section: 'Timesheet: Create'
           }
         })
 
-        .state('main.three', {
-          url: 'three',
-          controller: 'HomeController',
-          templateUrl: 'assets/templates/three/index.html',
-          data: {
-            title: 'Page Three',
-            section: 'Main'
-          }
+        .state('app.timesheet.timeunits', {
+          url: '/timeunits',
+          controller: 'TimeunitCtrl',
+          templateUrl: 'assets/templates/app/timesheets/timeunits/index.html'
         })
 
-        .state('main.four', {
-          url: 'four',
-          controller: 'HomeController',
-          templateUrl: 'assets/templates/four/index.html',
+        .state('app.timesheet.timeunits.detail', {
+          url: '/create',
+          controller: 'TimeunitDetailCtrl',
+          templateUrl: 'assets/templates/app/timesheets/timeunits/detail.html',
           data: {
-            title: 'Page Four',
-            section: 'Main'
+            section: 'Timesheet: Log Time'
           }
         });
-  }]);
+  });
 
   logger.debug("App module bootstrapped.");
   logger.groupEnd(); 

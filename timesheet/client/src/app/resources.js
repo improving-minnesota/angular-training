@@ -6,9 +6,7 @@
   logger.debug("Registering api.resources");
 
   var resources = angular.module('app.resources', [])
-    .factory('$control', [
-      '$q',
-      '$api',
+    .factory('$control', 
       function ($q, $api) {
 
         var control = {
@@ -26,17 +24,16 @@
           }, 
 
           update : function (resource, model) {
-            return $api[resource].update(model).$promise;
+            var updated = $api[resource].update(model);
+            return updated.$promise || updated;
           }
         };
 
         return control;
       }
-    ])
+    )
 
-    .factory('$api', [
-      '$resource',
-      '$apiUrl',
+    .factory('$api', 
       function ($resource, $apiUrl) {
 
         var api = {
@@ -64,7 +61,7 @@
 
         return api;
       }
-    ]);
+    );
   
   resources.value('$apiUrl', '/tsz-api');
 

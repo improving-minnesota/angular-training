@@ -29,6 +29,6 @@ module.exports = function(config) {
 
     browsers: ['Chrome', 'Firefox'],
 
-    plugins: ['karma-jasmine', 'karma-chrome-launcher', 'karma-firefox-launcher', 'karma-ng-html2js-preprocessor']
+    plugins: ['karma-jasmine', 'karma-chrome-launcher', 'karma-ng-html2js-preprocessor']
   });
 };

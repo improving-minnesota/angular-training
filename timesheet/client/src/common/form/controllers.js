@@ -7,7 +7,7 @@
     controller('FormController', [
       '$scope',
       '$routeParams',
-      function ($scope, $routeParams){
+      function ($scope, $routeParams) {
          $scope.params = $routeParams;
       }
     ]);

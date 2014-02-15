@@ -22,13 +22,6 @@
     'ngSanitize'
   ]);
 
-  app.value('$strapConfig', {
-    datepicker: {
-      language: 'en',
-      format: 'M d, yyyy'
-    }
-  });
-
   logger.group("Loading Routes");
 
   app.config([
@@ -38,13 +31,14 @@
     'authorizationProvider', 
     function ($stateProvider, $httpProvider, $urlRouterProvider, authorizationProvider) {
     
-      $urlRouterProvider.otherwise("/home");
+      $urlRouterProvider.otherwise("/app");
   }])
 
   .run(['$state', '$rootScope', '$stateParams', function ($state, $rootScope, $stateParams) {
     // putting state into $rootScope so that these services are available in views
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+    
     logger.debug("Application running.");
   }]);
 

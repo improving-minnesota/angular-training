@@ -163,6 +163,14 @@ module.exports = function (grunt) {
       }
     },
 
+    // Task to add the array-style angular injection to protect against uglifying.
+    ngmin : {
+      app : {
+        src : 'client/src/**/*.js',
+        dest : '<%= clientdist %>/app.js'
+      }
+    },
+
     // This task uses the MinCSS Node.js project to take all your CSS files in
     // order and concatenate them into a single CSS file named style.css.  It
     // also minifies all the CSS as well.  This is named style.css, because we
@@ -260,15 +268,6 @@ module.exports = function (grunt) {
       e2eci : {
         configFile: 'karma.ci.e2e.config.js'
       }
-    },
-
-    // Run the server-side Mocha tests
-    mochacli : {
-      options : {
-        reporter: 'spec',
-        bail: true
-      },
-      all : ['test/**/*.js']
     },
 
     // Stages all the files for running the application.  Each of these
@@ -529,6 +528,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-maven-tasks');
+  grunt.loadNpmTasks('grunt-ngmin');
 
   // **********************************************************************************************
 

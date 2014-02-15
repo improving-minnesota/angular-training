@@ -14,6 +14,6 @@ module.exports = function(config) {
 
         browsers: ['Chrome', 'Firefox'],
 
-        plugins: ['karma-chrome-launcher', 'karma-firefox-launcher', 'karma-ng-scenario']
+        plugins: ['karma-chrome-launcher', 'karma-ng-scenario']
     });
 };
