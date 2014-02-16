@@ -282,7 +282,7 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%= components %>/font-awesome/font',
+            cwd: '<%= components %>/font-awesome/fonts',
             src:['**'],
             dest:'<%= clientdist %>/assets/font/font-awesome'
           },
