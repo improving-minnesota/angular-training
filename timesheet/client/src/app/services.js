@@ -1,11 +1,7 @@
 /*global Messenger window */
 
-(function() {
+(function () {
   'use strict';
-
-  var logger = window.debug;
-
-  logger.debug("Registering app.services");
 
   angular.module('app.services', [])
     .factory('notifications', 
@@ -33,7 +29,7 @@
             notifications.message({message: message, type: 'error'}, config);
           },
 
-          success : function(message, config) {
+          success : function (message, config) {
             notifications.message({message: message, type: 'success'}, config);
           },
 

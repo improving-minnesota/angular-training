@@ -5,7 +5,7 @@ var locomotive = require('locomotive'),
 
 var ProjectsController = new Controller();
 
-ProjectsController.index = function() {
+ProjectsController.index = function () {
   var controller = this;
   
   db.find('projects', controller.req.query)
@@ -17,7 +17,7 @@ ProjectsController.index = function() {
     });
 };
 
-ProjectsController.create = function() {
+ProjectsController.create = function () {
   var controller = this;
 
   db.insert('projects', controller.req.body)
@@ -29,7 +29,7 @@ ProjectsController.create = function() {
     });
 };
 
-ProjectsController.show = function() {
+ProjectsController.show = function () {
   var controller = this;
   var id = this.param('id');
 
@@ -42,7 +42,7 @@ ProjectsController.show = function() {
     });
 };
 
-ProjectsController.update = function() {
+ProjectsController.update = function () {
   var controller = this;
   var id = this.param('id');
 
@@ -55,7 +55,7 @@ ProjectsController.update = function() {
     });
 };
 
-ProjectsController.destroy = function() {
+ProjectsController.destroy = function () {
   var controller = this;
   var id = this.param('id');
 

@@ -1,18 +1,13 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
   angular.module('security.interceptor', [
     'security.retry.queue',
     'security.context'
   ])
 
   // This http interceptor listens for authentication failures
-  .factory('securityInterceptor', [
-    '$q',
-    '$injector', 
-    function($q, $injector) {
+  .factory('securityInterceptor', function ($q, $injector) {
 
       return {
 
@@ -35,12 +30,9 @@
         }
       };
     }
-  ])
+  )
 
-  .factory('csrfInterceptor', [
-    '$q',
-    '$injector', 
-    function ($q, $injector) {
+  .factory('csrfInterceptor', function ($q, $injector) {
   
       return {
 
@@ -64,13 +56,13 @@
 
       };
     }
-  ])
+  )
 
   // We have to add the interceptor to the queue as a string because the interceptor 
   // depends upon service instances that are not available in the config block.
-  .config(['$httpProvider', function($httpProvider) {
+  .config(function ($httpProvider) {
     $httpProvider.interceptors.push('securityInterceptor');
     $httpProvider.interceptors.push('csrfInterceptor');
-  }]);
+  });
 
 }());

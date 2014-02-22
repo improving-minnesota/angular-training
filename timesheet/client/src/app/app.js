@@ -2,9 +2,6 @@
   
   'use strict';
 
-  var logger = window.debug;
-  logger.group("Registering app module");
-
   var app = angular.module('app', [
     'app.directives', 
     'app.controllers',
@@ -14,10 +11,11 @@
     'security'
   ]);
 
-  app.config(function ($stateProvider, authorizationProvider) {
-      
+  app.config(function ($logProvider, $stateProvider, authorizationProvider) {
+
       $stateProvider
         .state('app', {
+          abstract: true,
           url: '/app',
           data: {
             title: 'The Timesheet App'
@@ -31,10 +29,10 @@
               controller: 'AppCtrl',
               templateUrl: 'assets/templates/app/index.html'
             }
+          }, 
+          resolve: {
+            authenticatedUser: authorizationProvider.requireAuthenticatedUser
           }
-          //, resolve: {
-          //   authenticatedUser: authorizationProvider.requireAuthenticatedUser
-          // }
         })
 
         .state('app.timesheet', {
@@ -86,10 +84,16 @@
           data: {
             section: 'Timesheet: Log Time'
           }
+        })
+
+        .state('app.login', {
+          url: '/login?redirect',
+          templateUrl: 'assets/templates/security/login/index.html',
+          controller: 'LoginCtrl',
+          data: {
+            section: 'Please Log In'
+          }
         });
   });
-
-  logger.debug("App module bootstrapped.");
-  logger.groupEnd(); 
 
 }());

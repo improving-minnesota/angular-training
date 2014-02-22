@@ -30,7 +30,7 @@ function seed() {
           
           var timesheets = user.username === "admin" ? adminTimesheets: userTimesheets;
 
-          _.forEach(timesheets, function(timesheet) {
+          _.forEach(timesheets, function (timesheet) {
             var timesheetModel = _.omit(timesheet, 'timeunits');
             timesheetModel.user_id = newUser._id;
 
@@ -75,6 +75,6 @@ db.findOne('users', {username: 'admin'})
       console.log("User -> " + JSON.stringify(user));
       console.log("Found user. DB already seeded.");
       if (user === null) seed();
-  }, function(err) {
+  }, function (err) {
     console.log("Error : " + err);
   }); 

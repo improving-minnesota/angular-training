@@ -1,10 +1,6 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
-  logger.debug("Registering common.form.field.directives");
-
   var fieldScope = {
     model: "=ngModel",
     id: "@id",
@@ -39,9 +35,7 @@
 
   angular.module('common.form.field.directives', [])
 
-    .directive('tszFieldWrap', [
-      '$compile',
-      function ($compile) {
+    .directive('tszFieldWrap', function ($compile) {
         return {
           transclude: true,
           restrict: 'A',
@@ -63,26 +57,20 @@
             };
           }
         };
-      }]
+      }
     )
 
-    .directive('tszDatepickerPopup', [
-      '$compile',
-      '$parse',
-      '$document',
-      'dateFilter',
-      'datepickerPopupConfig',
-      function ($compile, $parse, $document, dateFilter, datepickerPopupConfig) {
+    .directive('tszDatepickerPopup', function ($compile, $parse, $document, dateFilter, datepickerPopupConfig) {
         return {
           restrict: 'EA',
           require: '?ngModel',
-          link: function(originalScope, element, attrs, ngModel) {
+          link: function (originalScope, element, attrs, ngModel) {
             var closeOnDateSelection = angular.isDefined(attrs.closeOnDateSelection) ? scope.$eval(attrs.closeOnDateSelection) : datepickerPopupConfig.closeOnDateSelection;
             var dateFormat = attrs.tszDatepickerPopup || datepickerPopupConfig.dateFormat;
 
             // create a child scope for the datepicker directive so we are not polluting original scope
             var scope = originalScope.$new();
-            originalScope.$on('$destroy', function() {
+            originalScope.$on('$destroy', function () {
               scope.$destroy();
             });
 
@@ -107,22 +95,22 @@
               }
             }
 
-            var documentClickBind = function(event) {
+            var documentClickBind = function (event) {
               if (scope.isOpen && event.target !== element[0]) {
-                scope.$apply(function() {
+                scope.$apply(function () {
                   setOpen(false);
                 });
               }
             };
 
-            var elementFocusBind = function() {
-              scope.$apply(function() {
+            var elementFocusBind = function () {
+              scope.$apply(function () {
                 setOpen( true );
               });
             };
 
             var documentBindingInitialized = false, elementFocusInitialized = false;
-            scope.$watch('isOpen', function(value) {
+            scope.$watch('isOpen', function (value) {
               if (value) {
                 $document.bind('click', documentClickBind);
                 if(elementFocusInitialized) {
@@ -157,7 +145,7 @@
             // Watch for configuration changes
             function addWatchableAttribute(attribute, scopeProperty, datepickerAttribute) {
               if (attribute) {
-                originalScope.$watch($parse(attribute), function(value){
+                originalScope.$watch($parse(attribute), function (value){
                   scope[scopeProperty] = value;
                 });
                 datepickerEl.attr(datepickerAttribute || scopeProperty, scopeProperty);
@@ -177,7 +165,7 @@
 
             // Date parser.  This section needs some love
             // Need to remove the hard coded formats
-            ngModel.$parsers.unshift(function(data) {
+            ngModel.$parsers.unshift(function (data) {
               if (_.isUndefined(data) || data === null) {
                 ngModel.$setValidity('date', true);
                 return null;
@@ -207,7 +195,7 @@
             });
 
             //formatter
-            ngModel.$formatters.push(function(data) {
+            ngModel.$formatters.push(function (data) {
               if (data === null) {
                 return null;
               } else {
@@ -216,7 +204,7 @@
             });
 
             // Change from field
-            ngModel.$render = function() {
+            ngModel.$render = function () {
               logger.debug('here2');
               var date = ngModel.$viewValue ? dateFilter(ngModel.$viewValue, dateFormat) : '';
               element.val(date);
@@ -224,7 +212,7 @@
             };
 
             // Change from date picker
-            scope.dateSelection = function() {
+            scope.dateSelection = function () {
               ngModel.$setViewValue(scope.date);
               ngModel.$render();
               var date = ngModel.$viewValue ? dateFilter(ngModel.$viewValue, dateFormat) : '';
@@ -240,8 +228,8 @@
               scope.date = ngModel.$viewValue;
             }
 
-            element.bind('input change keyup', function() {
-              scope.$apply(function() {
+            element.bind('input change keyup', function () {
+              scope.$apply(function () {
                 if (ngModel.$valid) {
                   updateDatepicker();
                 }
@@ -252,7 +240,7 @@
           }
         };
       }
-    ])
+    )
 
     .directive('tszStaticField', function () {
       return {

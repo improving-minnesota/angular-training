@@ -1,13 +1,9 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
   angular.module('security.context', [])
 
-  .factory('securityContext', [
-    '$q',
-    function ($q) {
+  .factory('securityContext', function ($q) {
 
       var securityContext =  {
 
@@ -31,6 +27,6 @@
 
       return securityContext;
     }
-  ]);
+  );
 
 }());

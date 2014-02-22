@@ -5,7 +5,7 @@ var express = require('express'),
   properties = require('../properties'), 
   NedbStore = require('connect-nedb-session')(express);
 
-module.exports = function() {
+module.exports = function () {
   console.log('Starting all configuration');
 
   // Warn of version mismatch between global "lcm" binary and local installation

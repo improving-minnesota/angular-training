@@ -2,13 +2,10 @@
   
   'use strict';
 
-  var logger = window.debug;
-  logger.group("Registering common.formatting.filters module");
-
   var app = angular.module('common.formatting.filters', [])
 
-    .filter('userLocalDateTime', function() {
-      return function(dateString, targetFormat) {
+    .filter('userLocalDateTime', function () {
+      return function (dateString, targetFormat) {
         if ((_.isUndefined(dateString) || dateString === null)) {
           return 'None';
         } else {
@@ -22,8 +19,8 @@
       };
     })
 
-    .filter('userLocalDate', function() {
-      return function(dateString, targetFormat) {
+    .filter('userLocalDate', function () {
+      return function (dateString, targetFormat) {
         if ((_.isUndefined(dateString) || dateString === null)) {
           return 'None';
         } else {
@@ -37,31 +34,28 @@
       };
     })
 
-    .filter('momentFromNow', function() {
-      return function(dateString) {
+    .filter('momentFromNow', function () {
+      return function (dateString) {
         return moment(new Date(dateString)).fromNow(true);
       };
     })
 
-    .filter('momentFromNowAgo', function() {
-      return function(dateString) {
+    .filter('momentFromNowAgo', function () {
+      return function (dateString) {
         return moment(new Date(dateString)).fromNow();
       };
     })
 
-    .filter('momentDateWithoutTime', function() {
-      return function(dateString) {
+    .filter('momentDateWithoutTime', function () {
+      return function (dateString) {
         return moment(new Date(dateString)).format("M/D/YYYY");
       };
     })
 
-    .filter('momentCalendar', function() {
-      return function(dateString) {
+    .filter('momentCalendar', function () {
+      return function (dateString) {
         return moment(new Date(dateString)).calendar();
       };
     });
-
-  logger.debug("common.formatting.filters module bootstrapped.");
-  logger.groupEnd(); 
 
 }());

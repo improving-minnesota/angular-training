@@ -1,14 +1,10 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
   angular.module('app.controllers', [])
     .controller('AppCtrl', 
       function ($scope, $state, $stateParams){
-         logger.info('in app controller');
-
-         logger.info($state.current.data);
+        
       }
     )
     .controller('NavCtrl', 
@@ -47,11 +43,9 @@
     )
 
     .controller('TimeunitDetailCtrl', 
-      function ($scope, $state, $stateParams){
+      function ($scope, $state, $stateParams) {
 
       }
     );
-
-    logger.debug('Registered app.controllers');
 
 }());

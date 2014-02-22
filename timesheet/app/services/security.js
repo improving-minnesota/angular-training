@@ -1,10 +1,11 @@
 var passport = require('passport');
 
-var sanitize = function(user) {
+var sanitize = function (user) {
   if ( user ) {
     return {
+      authenticated: true,
       user : {
-        id: user._id,
+        _id: user._id,
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -17,7 +18,8 @@ var sanitize = function(user) {
 };
 
 var security = {
-  authenticationRequired: function(req, res, next) {
+
+  authenticationRequired: function (req, res, next) {
     console.log('authRequired');
     if (req.isAuthenticated()) {
       next();
@@ -26,7 +28,7 @@ var security = {
     }
   },
 
-  adminRequired: function(req, res, next) {
+  adminRequired: function (req, res, next) {
     console.log('adminRequired');
     if (req.user && req.user.admin ) {
       next();
@@ -35,22 +37,26 @@ var security = {
     }
   },
 
-  sendCurrentUser: function(req, res, next) {
+  sendCurrentUser: function (req, res, next) {
     console.log('Sending current user: ' + req.user);
-    console.log('req.session : ' + req.session);
+    console.log('req.session : ' + JSON.stringify(req.session));
+
     var currentUser = sanitize(req.user);
-    console.log(currentUser);
+
+    console.log('Sanitized user : ' + JSON.stringify(currentUser));
     res.json(200, currentUser);
   },
 
-  login: function(req, res, next) {
+  login: function (req, res, next) {
+    
     function authenticationFailed(err, user, info) {
       console.log("in auth failed : " + JSON.stringify(user));
       console.log("info : " + JSON.stringify(info));
+
       if (err) { return next(err); }
       if (!user) { return res.json(sanitize(user)); }
 
-      req.login(user, function(err) {
+      req.login(user, function (err) {
         if ( err ) { return next(err); }
         console.log("req.login");
         return res.json(sanitize(user));
@@ -60,7 +66,7 @@ var security = {
     return passport.authenticate('local', authenticationFailed)(req, res, next);
   },
 
-  logout: function(req, res, next) {
+  logout: function (req, res, next) {
     req.logout();
     res.send(204);
   }

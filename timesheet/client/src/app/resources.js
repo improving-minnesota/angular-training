@@ -1,10 +1,6 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
-  logger.debug("Registering api.resources");
-
   var resources = angular.module('app.resources', [])
     .factory('$control', 
       function ($q, $api) {
@@ -63,8 +59,6 @@
       }
     );
   
-  resources.value('$apiUrl', '/tsz-api');
-
-  logger.debug("Registered api.resources");
+  resources.value('$apiUrl', '');
 
 }());

@@ -1,21 +1,10 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
-  logger.debug('Registering security.login.controllers');
-
   angular.module('security.login.controllers', [])
 
-    // The LoginFormController provides the behaviour behind a reusable form to allow users to authenticate.
-    .controller('LoginFormController', [
-      '$scope',
-      '$location',
-      '$stateParams',
-      'authentication',
-      'authorization',
-      'securityContext',
-      function($scope, $location, $stateParams, authentication, authorization, securityContext) {
+    // The LoginCtrl provides the behaviour behind a reusable form to allow users to authenticate.
+    .controller('LoginCtrl', function ($scope, $location, $stateParams, authentication, authorization, securityContext) {
 
         // Request the current user, this will wait until the current user
         // promise is resolved.
@@ -45,29 +34,27 @@
         }
 
         // Attempt to authenticate the user specified in the form's model
-        $scope.login = function() {
+        $scope.login = function () {
 
           // Clear any previous security errors
           $scope.authError = null;
 
           // Try to login
-          authentication.login($scope.user.username, $scope.user.password).then(function() {
+          authentication.login($scope.user.username, $scope.user.password).then(function () {
             if ( !securityContext.authenticated ) {
               // If we get here then the login failed due to bad credentials
               $scope.authError = "Invalid username and password combination.";
             }
-          }, function(x) {
+          }, function (x) {
             // If we get here then there was a problem with the login request to the server
             $scope.authError = "Invalid username and password combination.";
           });
         };
 
-        $scope.clearForm = function() {
+        $scope.clearForm = function () {
           $scope.user = {};
         };
       }
-    ]);
-
-    logger.debug('Registered security.login.controllers');
+    );
 
 }());

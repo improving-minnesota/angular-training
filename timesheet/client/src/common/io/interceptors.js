@@ -1,14 +1,8 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
-  angular.module('common.io.interceptors', [
-  ])
-    .factory('nProgressInterceptor', [
-      '$q',
-      '$injector', 
-      function ($q, $injector) {
+  angular.module('common.io.interceptors', [])
+    .factory('nProgressInterceptor', function ($q, $injector) {
     
         return {
 
@@ -18,7 +12,7 @@
             return $q.when(config);
           },
 
-          requestError: function(rejection) {
+          requestError: function (rejection) {
             NProgress.done();
             return $q.reject(rejection);
           },
@@ -29,19 +23,19 @@
             return $q.when(response);
           },
 
-          responseError: function(rejection) {
+          responseError: function (rejection) {
             NProgress.done();
             return $q.reject(rejection);
           }
 
         };
       }
-    ])
+    )
 
   // We have to add the interceptor to the queue as a string because the interceptor 
   // depends upon service instances that are not available in the config block.
-  .config(['$httpProvider', function($httpProvider) {
+  .config(function ($httpProvider) {
     $httpProvider.interceptors.push('nProgressInterceptor');
-  }]);
+  });
 
 }());

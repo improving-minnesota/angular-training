@@ -1,13 +1,9 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
-  logger.debug("Registering pagination.directives");
-
   angular.module('navigation.pagination.directives', [])
 
-    .directive('tszPagination',[
+    .directive('tszPagination',
       function () {
         return {
           replace: true,
@@ -17,9 +13,9 @@
             requestPage: '='
           },
           templateUrl: 'assets/templates/navigation/pagination/pagination.html',
-          controller: 'paginationController'
+          controller: 'paginationCtrl'
         };
-      }]
+      }
     )
 
     .directive('tszPaginationItem',
@@ -28,7 +24,7 @@
           replace: false,
           transclude: true,
           restrict: 'A',
-          controller : 'paginationItemController',
+          controller : 'paginationItemCtrl',
           scope: {
             pagination: '=',
             pageNumber: '=',

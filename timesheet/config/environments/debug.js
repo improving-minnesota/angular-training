@@ -1,7 +1,7 @@
 var express = require('express')
   , properties = require('../properties');
 
-module.exports = function() {
+module.exports = function () {
   this.set('port', properties.server.debug.listenPort);
   this.set('securePort', properties.server.debug.securePort);
 

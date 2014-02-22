@@ -6,14 +6,14 @@ var walkdir = require('walkdir'),
 
 var ApplicationController = new Controller();
 
-ApplicationController.index = function() {
+ApplicationController.index = function () {
   var controller = this;
   this.env = locomotive.express.settings.env;
 
   var applicationScripts = [];
   var templateScripts = [];
 
-  Q.fcall(function() {
+  Q.fcall(function () {
     var deferred = Q.defer();
       emitter = walkdir.walk('client/src');
 
@@ -28,7 +28,7 @@ ApplicationController.index = function() {
     });
 
     return deferred.promise;
-  }).then(function() {
+  }).then(function () {
     var deferred = Q.defer();
     var emitter = walkdir.walk('client/dist/assets/templates');
 
@@ -43,7 +43,7 @@ ApplicationController.index = function() {
     });
 
     return deferred.promise;
-  }).then(function() {
+  }).then(function () {
     controller.render({
       applicationScripts : applicationScripts,
       templateScripts : templateScripts 

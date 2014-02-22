@@ -1,8 +1,6 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
-
   angular.module('security.authorization', [
     'security.retry.queue',
     'security.authentication'
@@ -15,7 +13,7 @@
 
     requireAuthenticatedUser: [
       'authorization',
-      function(authorization) {
+      function (authorization) {
         return authorization.requireAuthenticatedUser();
       }
     ],
@@ -23,7 +21,7 @@
     requireAuthorizedUser: function (permission) {
       return [
         'authorization',
-        function(authorization) {
+        function (authorization) {
           return authorization.requireAuthorizedUser(permission);
         }
       ];
@@ -31,58 +29,52 @@
 
     requireInstitutionContext: [
       'authorization',
-      function(authorization) {
+      function (authorization) {
         return authorization.requireInstitutionContext();
       }
     ],
 
-    $get: [
-      '$q',
-      '$injector',
-      'authentication',
-      'securityContext',
-      function($q, $injector, authentication, securityContext) {
-        var service = {
+    $get: function ($injector, authentication, securityContext) {
+      var service = {
 
-          // Require that there is an authenticated user
-          // (use this in a state resolve to prevent non-authenticated users from entering that state)
-          requireAuthenticatedUser: function() {
-            var queue = $injector.get('security.retry.queue');
+        // Require that there is an authenticated user
+        // (use this in a state resolve to prevent non-authenticated users from entering that state)
+        requireAuthenticatedUser: function () {
+          var queue = $injector.get('retryQueue');
 
-            var promise = authentication.requestCurrentUser().then(function(userInfo) {
-              if ( !securityContext.authenticated ) {
-                return queue.pushRetryFn('unauthenticated-client', function() {
-                  return service.requireAuthenticatedUser();
-                });
-              }
-            });
-            return promise;
-          },
+          var promise = authentication.requestCurrentUser().then(function (userInfo) {
+            if ( !securityContext.authenticated ) {
+              return queue.pushRetryFn('unauthenticated-client', function () {
+                return service.requireAuthenticatedUser();
+              });
+            }
+          });
+          return promise;
+        },
 
-          requireAuthorizedUser: function (authorization) {
-            var queue = $injector.get('security.retry.queue');
+        requireAuthorizedUser: function (authorization) {
+          var queue = $injector.get('retryQueue');
 
-            var promise = authentication.requestCurrentUser().then(function(userInfo) {
-              if ( !service.hasAuthorization(authorization) ) {
-                return queue.pushRetryFn('unauthorized-client', service.requireAuthorizedUser);
-              }
-            });
-            return promise;
-          },
+          var promise = authentication.requestCurrentUser().then(function (userInfo) {
+            if ( !service.hasAuthorization(authorization) ) {
+              return queue.pushRetryFn('unauthorized-client', service.requireAuthorizedUser);
+            }
+          });
+          return promise;
+        },
 
-          hasAuthorization : function (authorization) {
-            var auth = _.find(securityContext.permissions, function(permission) {
-              return permission === authorization;
-            });
+        hasAuthorization : function (authorization) {
+          var auth = _.find(securityContext.permissions, function (permission) {
+            return permission === authorization;
+          });
 
-            return !!auth;
-          }
+          return !!auth;
+        }
 
-        };
+      };
 
-        return service;
-      }
-    ]
+      return service;
+    }
   });
 
 }());

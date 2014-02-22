@@ -1,16 +1,9 @@
 (function () {
   'use strict';
 
-  var logger = window.debug;
+  angular.module('navigation.pagination.controllers', [])
 
-  angular.module('navigation.pagination.controllers', ['ui.router'])
-
-    .controller('paginationController', [
-      '$scope',
-      '$element',
-      '$state',
-      'paginationService',
-      function ($scope, $element, $state, paginationService) {
+    .controller('paginationCtrl', function ($scope, $element, $state, paginationService) {
 
         $scope.pagination = {
           page : {
@@ -66,13 +59,9 @@
           }
         };
       }
-    ])
+    )
 
-    .controller('paginationItemController', [
-      '$scope',
-      '$element',
-      '$state',
-      function ($scope, $element, $state) {
+    .controller('paginationItemCtrl', function ($scope, $element, $state) {
 
         $element.on('click', function (e) {
           $scope.$apply(function () {
@@ -106,8 +95,6 @@
           }
         };
       }
-    ]);
-
-    logger.debug('Registered navigation.pagination.controllers');
+    );
 
 }());

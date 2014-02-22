@@ -77,10 +77,10 @@ module.exports = function (grunt) {
       },
       lib: {
         options: {
-          base: '<%= assets %>/templates/lib/angular-ui-bootstrap',
+          base: '<%= assets %>/js/components/angular-ui-bootstrap',
         },
         src: [
-          '<%= assets %>/templates/lib/angular-ui-bootstrap/**/*.html'
+          '<%= assets %>/js/components/angular-ui-bootstrap/template/**/*.html'
         ],
         dest: '<%= clientdist %>/assets/templates/lib.templates.js'
       }
@@ -92,49 +92,36 @@ module.exports = function (grunt) {
       jsdeps : {
         src : [
           // Shims
-          '<%= components %>/respond.js/respond.min.js',
           '<%= components %>/modernizr/modernizr.js',
 
           // jQuery and Related
           '<%= components %>/jquery/jquery.js',
-          '<%= components %>/hammerjs/dist/hammer.js',
           '<%= components %>/select2/select2.js',
           '<%= components %>/messenger/build/js/messenger.js',
           '<%= components %>/messenger/build/js/messenger-theme-future.js',
 
           // bootstrap
           '<%= components %>/bootstrap/dist/js/bootstrap.js',
-          '<%= components %>/bootstrap-datepicker/js/bootstrap-datepicker.js',
-          '<%= components %>/bootstrap-timepicker/js/bootstrap-timepicker.js',
 
           // AngularJS libraries
           '<%= components %>/angular/angular.js',
           '<%= components %>/angular-cookies/angular-cookies.js',
           '<%= components %>/angular-resource/angular-resource.js',
           '<%= components %>/angular-sanitize/angular-sanitize.js',
-          '<%= components %>/angular-strap/dist/angular-strap.js',
-
-          //AngularJS Library Dependencies
-          '<%= components %>/bootstrap-select/bootstrap-select.js',
-          '<%= components %>/angular-strap/vendor/bootstrap-datepicker.js',
 
           // Angular UI libraries
-          '<%= components %>/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.6.0.js',
-          '<%= components %>/angular-ui-select2/src/select2.js',
           '<%= components %>/angular-ui-router/release/angular-ui-router.js',
           '<%= components %>/angular-ui-utils/components/angular-ui-docs/build/ui-utils.js',
+          '<%= components %>/angular-ui-select2/src/select2.js',
+          '<%= components %>/angular-ui-bootstrap/src/position/position.js',
+          '<%= components %>/angular-ui-bootstrap/src/datepicker/datepicker.js',
 
           //NProgress
           '<%= components %>/nprogress/nprogress.js',
 
-          // logger
-          '<%= components %>/javascript-debug/ba-debug.js',
-
           // utilities
           '<%= components %>/lodash/dist/lodash.js',
           '<%= components %>/moment/moment.js',
-          '<%= components %>/responsive-tables/responsive-tables.js',
-          '<%= components %>/faker/Faker.js'
         ],
 
         dest: "<%= clientdist %>/assets/js/deps.js"
@@ -151,8 +138,6 @@ module.exports = function (grunt) {
       css : {
         src : [
           "<%= components %>/select2/select2.css",
-          "<%= components %>/bootstrap-select/bootstrap-select.css",
-          "<%= components %>/angular-strap/vendor/bootstrap-datepicker.css",
           "<%= components %>/nprogress/nprogress.css",
           "<%= components %>/messenger/build/css/messenger.css",
           "<%= components %>/messenger/build/css/messenger-theme-air.css",
@@ -227,13 +212,6 @@ module.exports = function (grunt) {
           'app/views/**/*.jade'
         ],
         tasks: ['production', 'karma:unit:run', 'karma:e2e:run']
-      },
-      server : {
-        files: [
-          'test/**/*.js',
-          'app/**/*.js'
-        ],
-        tasks: ['mochacli']
       }
     },
 
@@ -259,14 +237,6 @@ module.exports = function (grunt) {
           runnerPort: 9101,
           background: true
         }
-      },
-
-      unitci : {
-        configFile: 'karma.ci.unit.config.js'
-      },
-
-      e2eci : {
-        configFile: 'karma.ci.e2e.config.js'
       }
     },
 
@@ -291,18 +261,6 @@ module.exports = function (grunt) {
             cwd: '<%= components %>/lato/font',
             src:['**'],
             dest:'<%= clientdist %>/assets/font/lato'
-          },
-          {
-            expand: true,
-            cwd: '<%= components %>/dynatree/src/skin',
-            src:['**.gif'],
-            dest:'<%= clientdist %>/assets/img/dynatree'
-          },
-          {
-            expand: true,
-            cwd: '<%= components %>/farbtastic',
-            src:['**.png'],
-            dest:'<%= clientdist %>/assets/img/farbtastic'
           }
         ]
         },
@@ -451,68 +409,12 @@ module.exports = function (grunt) {
         'grunt karma:e2e',
         'grunt watch'
         ].join('&')
-      },
-      angularuibootstrap : {
-        options: {
-          stdout: true,
-          stderr: true,
-          execOptions: {
-            cwd: '<%= components %>/angular-ui-bootstrap'
-          }
-        },
-        command: 'npm install'
-      },
-      angularuiutils : {
-        options: {
-          stdout: true,
-          stderr: true,
-          execOptions: {
-            cwd: '<%= components %>/angular-ui-utils'
-          }
-        },
-        command: 'npm install'
-      }
-    },
-
-    // Runs dependency grunt builds
-    hub: {
-      angularuibootstrap: {
-        src: ['<%= components %>/angular-ui-bootstrap/Gruntfile.js'],
-        tasks: ['html2js', 'build']
-      },
-      angularuiutils: {
-        src: ['<%= components %>/angular-ui-utils/gruntFile.js'],
-        tasks: ['build']
-      }
-    },
-
-    maven: {
-      options: {
-        groupId: 'com.lodosoftware.control',
-        artifactId: 'd3-control-ui',        
-      },
-      deploy: {
-        options: {
-          goal: 'deploy',
-          url: 'http://nexus.dev.d3banking.com/nexus/content/repositories/snapshots',
-          repositoryId: 'lodosoftware-nexus'
-        },
-        src: ['**']
-      },
-      release: {
-        options: {
-          goal: 'deploy',
-          url: 'http://nexus.dev.d3banking.com/nexus/content/repositories/releases',
-          repositoryId: 'lodosoftware-nexus'
-        },
-        src: ['**']
       }
     }
   });
 
   // *********************************************************************************************
 
-  grunt.loadNpmTasks('grunt-hub');
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks("grunt-contrib-jade");
   grunt.loadNpmTasks("grunt-contrib-less");
@@ -527,22 +429,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-shell");
   grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-html2js');
-  grunt.loadNpmTasks('grunt-maven-tasks');
   grunt.loadNpmTasks('grunt-ngmin');
 
   // **********************************************************************************************
 
-  //Initialize a fresh project.  This will build any dependencies and run the default grunt task.
-  grunt.registerTask("init", ['shell:bowerInstall', 'builddeps', 'production']);
-
-  //Build dependencies of the project
-  grunt.registerTask("builddeps", ['angularuibootstrap', 'angularuiutils']);
-
-  //Build angular-ui bootstrap
-  grunt.registerTask("angularuibootstrap", ['shell:angularuibootstrap', 'hub:angularuibootstrap']);
-
-  //Build angular-ui utils
-  grunt.registerTask("angularuiutils", ['shell:angularuiutils', 'hub:angularuiutils']);
+  //Initialize a fresh project. 
+  grunt.registerTask("init", ['shell:bowerInstall', 'production']);
 
   // The default task will remove all contents inside the dist/ folder, lint
   // all your code, precompile all the underscore templates into
@@ -550,18 +442,14 @@ module.exports = function (grunt) {
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
 
-  grunt.registerTask("default", ['clean']);
+  grunt.registerTask("default", ['clean', 'jshint', 'less', 'concat:css', 'html2js', 'concat:jsdeps', 'copy:vendor', 'copy:development']);
 
   // Task to compile everything in development mode
-  grunt.registerTask("development", ['default', 'jshint', 'less', 'concat:css', 'html2js', 'concat:jsdeps', 'copy:vendor', 'copy:development']);
+  grunt.registerTask("development", ['default']);
   grunt.registerTask("debug", ['development', 'concat:appjs', 'jade:debug', 'copy:debug']);
   grunt.registerTask("production", ['debug', 'cssmin', 'uglify', 'jade:production', 'copy:production']);
 
   // Forks off the application server and runs the unit and e2e tests.
   // Test results stored in client/test-reports
   grunt.registerTask("test", ['production', 'runapp:test', 'karma:unitci', 'karma:e2eci']);
-
-  // Gitflow tasks
-  grunt.registerTask('deploy', ['test', 'maven:deploy', 'clean']);
-  grunt.registerTask('release', ['test', 'maven:release', 'clean']);
 };

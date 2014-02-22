@@ -1,11 +1,5 @@
 (function () {
-
-  var logger = window.debug;
-
-  logger.group("Starting application.");
-  logger.group("Setup Main module.");
-
-  logger.debug("Setting application dependencies.");
+  'use strict';
 
   var app = angular.module('main', [
     'templates-main',
@@ -22,31 +16,16 @@
     'ngSanitize'
   ]);
 
-  logger.group("Loading Routes");
+  app.config(function ($stateProvider, $httpProvider, $urlRouterProvider, authorizationProvider) {
+    $urlRouterProvider.otherwise("/app/timesheets");
+  })
 
-  app.config([
-    '$stateProvider', 
-    '$httpProvider',
-    '$urlRouterProvider', 
-    'authorizationProvider', 
-    function ($stateProvider, $httpProvider, $urlRouterProvider, authorizationProvider) {
-    
-      $urlRouterProvider.otherwise("/app");
-  }])
-
-  .run(['$state', '$rootScope', '$stateParams', function ($state, $rootScope, $stateParams) {
+  .run(function ($log, $state, $rootScope, $stateParams) {
     // putting state into $rootScope so that these services are available in views
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     
-    logger.debug("Application running.");
-  }]);
-
-  logger.groupEnd();
-
-  logger.debug("Main module and routes configured.");
-
-  logger.groupEnd();
-  logger.groupEnd();
+    $log.info("Application running.");
+  });
 
 }());

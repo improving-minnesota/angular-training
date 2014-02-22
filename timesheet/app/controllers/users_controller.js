@@ -4,7 +4,7 @@ var locomotive = require('locomotive'),
 
 var UsersController = new Controller();
 
-UsersController.index = function() {
+UsersController.index = function () {
   var controller = this;
 
   controller.req.session.me = "hello";
@@ -18,7 +18,7 @@ UsersController.index = function() {
     });
 };
 
-UsersController.create = function() {
+UsersController.create = function () {
   var controller = this;
 
   db.insert('users', controller.req.body)
@@ -30,7 +30,7 @@ UsersController.create = function() {
     });
 };
 
-UsersController.show = function() {
+UsersController.show = function () {
   var controller = this;
   var id = this.param('id');
 
@@ -45,7 +45,7 @@ UsersController.show = function() {
     });
 };
 
-UsersController.update = function() {
+UsersController.update = function () {
   var controller = this;
   var id = this.param('id');
 
@@ -58,7 +58,7 @@ UsersController.update = function() {
     });
 };
 
-UsersController.destroy = function() {
+UsersController.destroy = function () {
   var controller = this;
   var id = this.param('id');
 

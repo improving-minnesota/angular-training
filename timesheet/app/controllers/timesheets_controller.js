@@ -6,7 +6,7 @@ var locomotive = require('locomotive'),
 
 var TimesheetsController = new Controller();
 
-TimesheetsController.index = function() {
+TimesheetsController.index = function () {
   var controller = this;
   var userId = controller.param('user_id');
   var query = _.extend({user_id: userId}, controller.req.query);
@@ -20,7 +20,7 @@ TimesheetsController.index = function() {
     });
 };
 
-TimesheetsController.create = function() {
+TimesheetsController.create = function () {
   var controller = this;
   var userId = controller.param("user_id");
 
@@ -28,15 +28,15 @@ TimesheetsController.create = function() {
   newTimesheet.user_id = userId;
 
   db.insert('timesheets', newTimesheet)
-    .then(function(){
+    .then(function (){
       controller.res.json(newTimesheet);
     })
-    .fail(function(err) {
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
 
-TimesheetsController.show = function() {
+TimesheetsController.show = function () {
   var controller = this;
   var userId = controller.param('user_id');
   var id = controller.param('id');
@@ -50,7 +50,7 @@ TimesheetsController.show = function() {
     });
 };
 
-TimesheetsController.update = function() {
+TimesheetsController.update = function () {
   var controller = this;
   var id = this.param('id');
 
@@ -63,7 +63,7 @@ TimesheetsController.update = function() {
     });
 };
 
-TimesheetsController.destroy = function() {
+TimesheetsController.destroy = function () {
   var controller = this;
   var id = this.param('id');
 

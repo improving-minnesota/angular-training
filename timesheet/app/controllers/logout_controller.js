@@ -6,12 +6,12 @@ var locomotive = require('locomotive'),
 
 var LoginController = new Controller();
 
-LoginController.index = function() {
+LoginController.index = function () {
   var controller = this;
   
 };
 
-LoginController.create = function() {
+LoginController.create = function () {
   var controller = this;
 
 };

@@ -6,7 +6,7 @@ var locomotive = require('locomotive'),
 
 var TimeunitsController = new Controller();
 
-TimeunitsController.index = function() {
+TimeunitsController.index = function () {
   var controller = this;
   var userId = controller.param('user_id');
   var timesheetId = controller.param('timesheet_id');
@@ -18,7 +18,7 @@ TimeunitsController.index = function() {
     });
 };
 
-TimeunitsController.create = function() {
+TimeunitsController.create = function () {
   var controller = this;
 
   db.insert('timeunits', controller.req.body)
@@ -30,7 +30,7 @@ TimeunitsController.create = function() {
     });
 };
 
-TimeunitsController.show = function() {
+TimeunitsController.show = function () {
   var controller = this;
   var id = this.param('id');
 
@@ -43,7 +43,7 @@ TimeunitsController.show = function() {
     });
 };
 
-TimeunitsController.update = function() {
+TimeunitsController.update = function () {
   var controller = this;
   var id = this.param('id');
 
@@ -56,7 +56,7 @@ TimeunitsController.update = function() {
     });
 };
 
-TimeunitsController.destroy = function() {
+TimeunitsController.destroy = function () {
   var controller = this;
   var id = this.param('id');
 
