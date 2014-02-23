@@ -7,9 +7,9 @@
       function ($control, $scope, $state, $stateParams, securityContext) {
 
         $scope.requestEmployees = function requestEmployees() {
-          $control.list('timesheets', {userId: securityContext.user._id})
-            .then(function (timesheets) {
-              $scope.timesheets = timesheets;
+          $control.list('employees')
+            .then(function (employees) {
+              $scope.employees = employees;
             });
         };
 

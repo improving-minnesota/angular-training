@@ -1,1 +1,59 @@
-<div>projects.index</div>
+<div class="project-list">
+  <div ng-show="$state.is('app.project')">
+    <div class="row tsz-form-row">
+      <div class="col-sm-2 pull-right">
+        <button class="btn btn-default btn-block" type="button" ng-click="createNew()">
+          <i class="icon-plus"></i>
+          New Project
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-bordered table-hover">
+           <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th width="5%">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="project in projects" 
+              class="fadeable-row" 
+              ng-class="{'faded' : project.deleted}" 
+              ng-click="showDetail(project._id)">
+
+              <td>{{project.name}}</td>
+              <td>{{project.description}}</td>
+              <td>
+                <div ng-switch="project.deleted">
+                  <div ng-switch-when="undefined">
+                    <button class="btn btn-sm btn-danger" ng-click="remove(project); $event.stopPropagation();">Delete</button>
+                  </div>
+                  <div ng-switch-when="true">
+                    <button class="btn btn-sm" ng-click="undoRemove(project); $event.stopPropagation();">Undo</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="pagination-container">
+      <div pagination class="pagination-sm"
+        total-items="bigTotalItems" 
+        page="bigCurrentPage" 
+        max-size="maxSize" 
+        boundary-links="true" 
+        rotate="true" 
+        num-pages="numPages">
+      </div>
+    </div>
+
+  </div>
+  
+  <div ui-view></div>
+</div>

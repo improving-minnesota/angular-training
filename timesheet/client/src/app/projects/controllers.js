@@ -6,14 +6,14 @@
     .controller('ProjectCtrl', 
       function ($control, $scope, $state, $stateParams, securityContext) {
 
-        $scope.requestTimesheets = function requestTimesheets() {
-          $control.list('timesheets', {userId: securityContext.user._id})
-            .then(function (timesheets) {
-              $scope.timesheets = timesheets;
+        $scope.requestProjects = function requestProjects() {
+          $control.list('projects')
+            .then(function (projects) {
+              $scope.projects = projects;
             });
         };
 
-        $scope.requestTimesheets();
+        $scope.requestProjects();
 
         $scope.totalItems = 64;
         $scope.currentPage = 4;
