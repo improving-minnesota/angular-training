@@ -6,34 +6,6 @@
   left: 0;
   right: 0;
   overflow: hidden;
-
-  //Push the page over when the quick view is toggled
-  &.tsz-quick-view-open {
-    .tsz-navbar-container {
-      .translate3d(-@quick-view-container-width, 0, 0);
-    }
-
-    .tsz-content-container {
-      .translate3d(-@quick-view-container-width, 0, 0);
-    }
-  }
-}
-
-//IE can't handle transforms, fall back to left/right for the quick view toggle
-.ie {
-  .tsz-page-container {
-    &.tsz-quick-view-open {
-      .tsz-navbar-container {
-        left: -@quick-view-container-width;
-        right: @quick-view-container-width;
-      }
-
-      .tsz-content-container {
-        left: -@quick-view-container-width;
-        right: @quick-view-container-width;
-      }
-    }
-  }
 }
 
 //This contains the nav bars for the main content, side nav, and quick view
@@ -48,28 +20,9 @@
   perspective: 1000;
 }
 
-.tsz-side-nav-navbar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -@side-nav-container-width;
-  width: @side-nav-container-width;
-}
-
-.tsz-main-navbar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.tsz-quick-view-navbar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: -@quick-view-container-width;
-  width: @quick-view-container-width;
+// This contains the nav pills for the top of the page
+.tsz-nav-container {
+  padding-top: 22px;
 }
 
 // This contains the page content (other than the nav bars)
@@ -86,19 +39,6 @@
 }
 
 // Hidden until the tsz-authenticated-user class is applied
-.tsz-side-nav-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -@side-nav-container-width;
-  width: @side-nav-container-width;
-
-  background-repeat: repeat;
-  background-color: lighten(@brand-primary, 70%);
-  .transition(~"left 0.3s ease-in-out");
-}
-
-// Hidden until the tsz-authenticated-user class is applied
 .tsz-view-container {
   position: absolute;
   top: 0;
@@ -107,28 +47,6 @@
   right: 0;
   overflow-y: scroll;
   .transition(~"left 0.3s ease-in-out");
-}
-
-.tsz-quick-view-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: -@quick-view-container-width;
-  width: @quick-view-container-width;
-
-  //background-image: url('../img/fabric_plaid/fabric_plaid.png');
-  background-repeat: repeat;
-  //.box-shadow(~"inset 14px 1px 27px -13px rgba(0, 0, 0, 0.3)");
-}
-
-// Renders the sidenav for an authenticated user
-.tsz-authenticated-user {
-  .tsz-side-nav-container {
-    left: 0;
-  }
-  .tsz-view-container {
-    left: @side-nav-container-width;
-  }
 }
 
 // A background for the login page that lives inside the content container
@@ -140,48 +58,4 @@
   font-size: 100em;
   text-align: center;
   color: #fafafa;
-}
-
-
-@media (max-width: @screen-md) {
-  // Only when the user is authenticated
-  .tsz-authenticated-user {
-    //This hides the side nav when the window width reaches the md threshold
-    .tsz-side-nav-container {
-      left: -@side-nav-container-width;
-    }
-    .tsz-view-container {
-      left: 0;
-    }
-  }
-
-  //This transforms (pushes) the page when the side nav is toggled
-  .tsz-page-container {
-    &.tsz-side-nav-open {
-      .tsz-navbar-container {
-        .translate3d(@side-nav-container-width, 0, 0);
-      }
-
-      .tsz-content-container {
-        .translate3d(@side-nav-container-width, 0, 0);
-      }
-    }
-  }
-
-  //IE can't handle transforms, fall back to left/right
-  .ie {
-    .tsz-page-container {
-      &.tsz-side-nav-open {
-        .tsz-navbar-container {
-          left: @side-nav-container-width;
-          right: -@side-nav-container-width;
-        }
-
-        .tsz-content-container {
-          left: @side-nav-container-width;
-          right: -@side-nav-container-width;
-        }
-      }
-    }
-  }
 }

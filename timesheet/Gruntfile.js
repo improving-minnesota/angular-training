@@ -115,6 +115,7 @@ module.exports = function (grunt) {
           '<%= components %>/angular-ui-select2/src/select2.js',
           '<%= components %>/angular-ui-bootstrap/src/position/position.js',
           '<%= components %>/angular-ui-bootstrap/src/datepicker/datepicker.js',
+          '<%= components %>/angular-ui-bootstrap/src/pagination/pagination.js',
 
           //NProgress
           '<%= components %>/nprogress/nprogress.js',

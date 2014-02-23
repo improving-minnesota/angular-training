@@ -7,8 +7,14 @@
 
         var control = {
 
-          getAll : function (resource, query) {
-              return $api[resource].query(query || {}).$promise;
+          list : function (resource, query) {
+            var queryObject = {};
+
+            if (angular.isObject(query)) {
+              queryObject = angular.extend(queryObject, query);
+            }
+
+            return $api[resource].query(queryObject).$promise;
           },
 
           get : function (resource, id) {
@@ -44,6 +50,19 @@
       function ($resource) {
 
         var api = {
+
+          timesheets : $resource('/users/:userId/timesheets/:id', {
+            userId: '@userId',
+            id: '@id'
+          }),
+
+          projects : $resource('/projects/:id', {
+            id: '@id'
+          }),
+
+          employees : $resource('/users/:id', {
+            id: '@id'
+          }),
 
           // security
           login : $resource('/login', {}, {

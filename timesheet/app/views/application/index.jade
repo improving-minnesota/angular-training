@@ -29,7 +29,7 @@ html(class="no-js", ng-app="main")
 
     link(rel="apple-touch-icon", href="/assets/img/apple-app-icon.png")
 
-    body
+    body(ng-controller="MainCtrl")
       .tsz-page-container(ng-cloak)
         div(ui-view="navbar")
         div(ui-view="content")

@@ -5,6 +5,7 @@
         "beginDate": "11/18/2013",
         "endDate": "11/24/2013",
         "description": "Timesheet one for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "11/18/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "11/19/2013", "hoursWorked": 8, "project": "Project1"},
@@ -18,6 +19,7 @@
         "beginDate": "11/25/2013",
         "endDate": "12/1/2013",
         "description": "Timesheet two for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "11/25/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "11/26/2013", "hoursWorked": 8, "project": "Project1"},
@@ -31,6 +33,7 @@
         "beginDate": "12/2/2013",
         "endDate": "12/8/2013",
         "description": "Timesheet three for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "12/2/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "12/3/2013", "hoursWorked": 8, "project": "Project1"},
@@ -44,6 +47,7 @@
         "beginDate": "12/9/2013",
         "endDate": "12/15/2013",
         "description": "Timesheet four for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "12/9/2013", "hoursWorked": 8, "project": "Project2"},
           {"dateWorked": "12/10/2013", "hoursWorked": 8, "project": "Project2"},
@@ -57,6 +61,7 @@
         "beginDate": "12/16/2013",
         "endDate": "12/22/2013",
         "description": "Timesheet five for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "12/16/2013", "hoursWorked": 8, "project": "Project2"},
           {"dateWorked": "12/17/2013", "hoursWorked": 8, "project": "Project2"},
@@ -70,6 +75,7 @@
         "beginDate": "12/23/2013",
         "endDate": "12/29/2013",
         "description": "Timesheet six for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "12/23/2013", "hoursWorked": 8, "project": "Project2"},
           {"dateWorked": "12/24/2013", "hoursWorked": 8, "project": "Project2"},
@@ -83,6 +89,7 @@
         "beginDate": "12/30/2013",
         "endDate": "1/5/2013",
         "description": "Timesheet seven for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "12/30/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "12/31/2013", "hoursWorked": 8, "project": "Project1"},
@@ -96,6 +103,7 @@
         "beginDate": "1/6/2013",
         "endDate": "1/12/2013",
         "description": "Timesheet eight for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "1/6/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "1/7/2013", "hoursWorked": 8, "project": "Project1"},
@@ -109,6 +117,7 @@
         "beginDate": "1/13/2013",
         "endDate": "1/19/2013",
         "description": "Timesheet nine for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "1/13/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "1/14/2013", "hoursWorked": 8, "project": "Project1"},
@@ -122,6 +131,7 @@
         "beginDate": "1/20/2013",
         "endDate": "1/26/2013",
         "description": "Timesheet ten for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "1/20/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "1/21/2013", "hoursWorked": 8, "project": "Project1"},
@@ -135,6 +145,7 @@
         "beginDate": "1/27/2013",
         "endDate": "2/2/2013",
         "description": "Timesheet eleven for admin",
+        "deleted": false,
         "timeunits": [
           {"dateWorked": "1/27/2013", "hoursWorked": 8, "project": "Project1"},
           {"dateWorked": "1/28/2013", "hoursWorked": 8, "project": "Project1"},

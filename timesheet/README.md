@@ -86,13 +86,6 @@
 * `runapp:debug` - Runs the application server in debug mode inside a nodemon process that restarts the server on source changes.
 * `runapp:production` - Runs the application server in production mode inside a nodemon process that restarts the server on source changes.
 * `runapp:test` - Runs the application for tests.  This server is ran in the background and terminated once the parent Grunt task ends. 
-* `shell:bowerInstall` - Runs `bower install`.
-* `shell:angular` - Runs npm install for the Angular source pulled down with bower install.
-* `shell:angularuibootstrap` - Runs npm install for the angular-ui bootstrap source pulled down with bower install.
-* `shell:angularuiutils` - Runs npm install for the angular-ui utils source pulled down with bower install.
-* `hub:angular` - Runs the Grunt package task for the Angular source checked out by bower.
-* `hub:angularuibootstrap` - Runs the Grunt build task for the angular-ui boostrap source checked out by bower.
-* `hub:angularuiutils` - Runs the Grunt build task for the angular-ui utils source checked out by bower.
 
 
 ### And a couple of shortcut tasks to run various combinations: ###
@@ -100,29 +93,12 @@
 * `grunt init` 
 
   * Runs bower install
-  * Builds project dependencies (Angular)
-  * Runs the assemble task
-
-* `grunt builddeps` 
-
-  * Builds Angular
-  * Builds angular-ui bootstrap
-  * Builds angular-ui utils
+  * Runs the production task
 
 * `grunt angular` 
 
   * Runs NPM install for the angular project
   * Runs the Angular package Grunt task
-
-* `grunt angularuibootstrap` 
-
-  * Runs NPM install for the angular-ui bootstrap project
-  * Runs the angular-ui bootstrap package Grunt task
-
-* `grunt angularuiutils` 
-
-  * Runs NPM install for the angular-ui utils project
-  * Runs the angular-ui utils package Grunt task
 
 * `grunt development` 
 
@@ -133,7 +109,7 @@
   * Concatinates the application javascript dependencies (for the unit and e2e tests)
   * Stages the vendor and application development files
 
-* `grunt development` 
+* `grunt debug` 
 
   * Runs the development build
   * Runs ngtemplates to concatenate the applciation template files into javascript

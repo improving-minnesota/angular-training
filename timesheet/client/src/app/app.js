@@ -7,6 +7,9 @@
     'app.controllers',
     'app.resources',
     'app.services',
+    'employee.controllers',
+    'project.controllers',
+    'timesheet.controllers',
     'ui.router',
     'security'
   ]);
@@ -32,6 +35,7 @@
           }
         })
 
+        // -------------  Timesheets ----------------
         .state('app.timesheet', {
           url: '/timesheets',
           controller: 'TimesheetCtrl',
@@ -86,6 +90,69 @@
           }
         })
 
+        // -------------  Employees ----------------
+        .state('app.employee', {
+          url: '/employees',
+          controller: 'EmployeeCtrl',
+          templateUrl: 'assets/templates/app/employees/index.html',
+          data: {
+            section: 'Employee: List'
+          }, 
+          resolve: {
+            authenticatedUser: authorizationProvider.requireAuthenticatedUser
+          }
+        })
+
+        .state('app.employee.detail', {
+          url: '/:id',
+          controller: 'EmployeeDetailCtrl',
+          templateUrl: 'assets/templates/app/employees/detail.html',
+          data: {
+            section: 'Employee: Detail'
+          }
+        })
+
+        .state('app.employee.create', {
+          url: '/create',
+          controller: 'EmployeeCreateCtrl',
+          templateUrl: 'assets/templates/app/employees/create.html',
+          data: {
+            section: 'Employee: Create'
+          }
+        })
+
+        // -------------  Projects ----------------
+        .state('app.project', {
+          url: '/projects',
+          controller: 'ProjectCtrl',
+          templateUrl: 'assets/templates/app/projects/index.html',
+          data: {
+            section: 'Project: List'
+          }, 
+          resolve: {
+            authenticatedUser: authorizationProvider.requireAuthenticatedUser
+          }
+        })  
+
+        .state('app.project.detail', {
+          url: '/:id',
+          controller: 'ProjectDetailCtrl',
+          templateUrl: 'assets/templates/app/projects/detail.html',
+          data: {
+            section: 'Project: Detail'
+          }
+        })
+
+        .state('app.project.create', {
+          url: '/create',
+          controller: 'ProjectCreateCtrl',
+          templateUrl: 'assets/templates/app/projects/create.html',
+          data: {
+            section: 'Project: Create'
+          }
+        })
+
+        // -------------  Login ----------------
         .state('app.login', {
           url: '/login?redirect',
           templateUrl: 'assets/templates/security/login/index.html',

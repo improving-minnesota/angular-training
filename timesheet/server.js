@@ -1,7 +1,6 @@
 var fs = require('fs'),
   Q = require('q'),
-  locomotive = require('locomotive'),
-  https = require('https');
+  locomotive = require('locomotive');
 
 locomotive.boot('./', process.env.NODE_ENV, function (err, app) {
   if (err){

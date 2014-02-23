@@ -40,7 +40,7 @@ module.exports = function () {
       path: '/',
       httpOnly: true,
       maxAge: 3600 * 1000, 
-      store: new NedbStore({filename: 'data/session.db'})
+      store: new NedbStore({filename: 'data/db/session.json'})
     }
   }));
 
