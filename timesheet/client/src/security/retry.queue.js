@@ -39,13 +39,14 @@
           reason: reason,
           retry: function () {
             // Wrap the result of the retryFn into a promise if it is not already
-            $q.when(retryFn()).then(function (value) {
-              // If it was successful then resolve our deferred
-              deferred.resolve(value);
-            }, function (value) {
-              // Othewise reject it
-              deferred.reject(value);
-            });
+            $q.when(retryFn())
+              .then(function (value) {
+                // If it was successful then resolve our deferred
+                deferred.resolve(value);
+              }, function (value) {
+                // Othewise reject it
+                deferred.reject(value);
+              });
           },
           cancel: function () {
             // Give up on retrying and reject our deferred

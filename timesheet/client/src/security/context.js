@@ -3,24 +3,22 @@
 
   angular.module('security.context', [])
 
-  .factory('securityContext', function ($q) {
+  .factory('securityContext', function () {
 
       var securityContext =  {
 
         user : {},
         authenticated : false,
-        permissions : [],
-        authorizedCompanies : [],
-        institutionContext : undefined,
-        csrf : null,
 
         reset : function () {
           securityContext.user = {};
           securityContext.authenticated = false;
-          securityContext.permissions = [];
-          securityContext.authorizedCompanies = [];
-          securityContext.institutionContext = undefined;
           return securityContext;
+        },
+
+        setAuthentication : function (context) {
+          securityContext.authenticated = context.authenticated;
+          securityContext.user = context.user;
         }
         
       };

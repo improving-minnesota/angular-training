@@ -16,7 +16,7 @@
     'ngSanitize'
   ]);
 
-  app.config(function ($stateProvider, $httpProvider, $urlRouterProvider, authorizationProvider) {
+  app.config(function ($stateProvider, $urlRouterProvider, authorizationProvider) {
     $urlRouterProvider.otherwise("/app/timesheets");
   })
 

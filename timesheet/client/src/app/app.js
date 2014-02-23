@@ -29,9 +29,6 @@
               controller: 'AppCtrl',
               templateUrl: 'assets/templates/app/index.html'
             }
-          }, 
-          resolve: {
-            authenticatedUser: authorizationProvider.requireAuthenticatedUser
           }
         })
 
@@ -41,6 +38,9 @@
           templateUrl: 'assets/templates/app/timesheets/index.html',
           data: {
             section: 'Timesheet: List'
+          }, 
+          resolve: {
+            authenticatedUser: authorizationProvider.requireAuthenticatedUser
           }
         })
 

@@ -6,5 +6,13 @@
         {{$state.current.data.title}}
       </a>
     </div>
+    <div ng-if="authenticated">
+      <div class="nav navbar-nav navbar-right">
+        <a class="navbar-brand" ng-click="logout()">  
+          <i class="fa fa-user"></i>
+          Logout
+        </a>
+      </div>
+    </div>
   </div>
 </div>

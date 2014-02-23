@@ -8,8 +8,18 @@
       }
     )
     .controller('NavCtrl', 
-      function ($scope, $state, $stateParams) {
+      function ($scope, $state, $stateParams, securityContext, authentication) {
+        
+        $scope.$watch(function () {
+          return securityContext.authenticated;
+        },
+        function (authenticated) {
+          $scope.authenticated = authenticated;
+        });
 
+        $scope.logout = function logout () {
+          authentication.logout();
+        };
       }
     )
     .controller('TimesheetCtrl', 

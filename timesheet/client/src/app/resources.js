@@ -22,6 +22,17 @@
           update : function (resource, model) {
             var updated = $api[resource].update(model);
             return updated.$promise || updated;
+          },
+
+          login : function (model, current) {
+            if (current) {
+              return $api.login.current().$promise;
+            }
+            return $api.login.login(model).$promise;
+          },
+
+          logout : function () {
+            return $api.logout.logout().$promise;
           }
         };
 
@@ -30,26 +41,23 @@
     )
 
     .factory('$api', 
-      function ($resource, $apiUrl) {
+      function ($resource) {
 
         var api = {
 
           // security
-          login : $resource($apiUrl + '/login', {}, {
+          login : $resource('/login', {}, {
             'login' : {
-              method: 'POST',
-              headers: {'X-Requested-With': 'XMLHttpRequest'}
+              method: 'POST'
             },
             'current' : {
-              method: 'GET',
-              headers: {'X-Requested-With': 'XMLHttpRequest'}
+              method: 'GET'
             }
           }),
 
-          logout : $resource($apiUrl + '/logout', {}, {
+          logout : $resource('/logout', {}, {
             'logout' : {
-              method: 'POST',
-              headers: {'X-Requested-With': 'XMLHttpRequest'}
+              method: 'POST'
             }
           })
 
@@ -58,7 +66,5 @@
         return api;
       }
     );
-  
-  resources.value('$apiUrl', '');
 
 }());

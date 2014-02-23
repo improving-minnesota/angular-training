@@ -1,19 +1,11 @@
 var locomotive = require('locomotive'),
   Controller = locomotive.Controller,
-  Q = require('q'),
-  db = require('../services/db.js'),
-  _ = require('lodash');
+  security = require('../services/security.js');
 
-var LoginController = new Controller();
+var LogoutController = new Controller();
 
-LoginController.index = function () {
-  var controller = this;
-  
+LogoutController.create = function () {
+  security.logout(this.__req, this.__res, this.__next);
 };
 
-LoginController.create = function () {
-  var controller = this;
-
-};
-
-module.exports = LoginController;
+module.exports = LogoutController;

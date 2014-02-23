@@ -8,16 +8,17 @@
 
         // Request the current user, this will wait until the current user
         // promise is resolved.
-        authorization.requireAuthenticatedUser().then(function () {
-          // Once the user logs in, redirect to the state the user originally 
-          // attempted to navigate to (passed in as a redirect parameter)
-          if ($stateParams.redirect) {
-            $location.path(decodeURIComponent($stateParams.redirect));
-          // If not redirect, change the state to main
-          } else {
-            $location.path('/');
-          }
-        });
+        authorization.requireAuthenticatedUser()
+          .then(function () {
+            // Once the user logs in, redirect to the state the user originally 
+            // attempted to navigate to (passed in as a redirect parameter)
+            if ($stateParams.redirect) {
+              $location.path(decodeURIComponent($stateParams.redirect));
+            // If not redirect, change the state to main
+            } else {
+              $location.path('/');
+            }
+          });
 
         // The model for this form 
         $scope.user = {};
@@ -40,15 +41,16 @@
           $scope.authError = null;
 
           // Try to login
-          authentication.login($scope.user.username, $scope.user.password).then(function () {
-            if ( !securityContext.authenticated ) {
-              // If we get here then the login failed due to bad credentials
+          authentication.login($scope.user.username, $scope.user.password)
+            .then(function () {
+              if ( !securityContext.authenticated ) {
+                // If we get here then the login failed due to bad credentials
+                $scope.authError = "Invalid username and password combination.";
+              }
+            }, function (x) {
+              // If we get here then there was a problem with the login request to the server
               $scope.authError = "Invalid username and password combination.";
-            }
-          }, function (x) {
-            // If we get here then there was a problem with the login request to the server
-            $scope.authError = "Invalid username and password combination.";
-          });
+            });
         };
 
         $scope.clearForm = function () {

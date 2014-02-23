@@ -3,7 +3,7 @@
 
   angular.module('security.authentication', [])
 
-  .factory('authentication', function ($q, $api, $state, $location, securityContext, retryQueue, notifications, $timeout) {
+  .factory('authentication', function ($q, $control, $state, $location, securityContext, retryQueue, notifications) {
 
       function processRetry(success) {
         if ( success ) {
@@ -59,67 +59,49 @@
         login: function (username, password) {
           var deferred = $q.defer();
 
-          // var user = {username: 'demo@opi.com', firstName: 'OPI', lastName: 'Rules', authenticated: true};
-          // authentication.setAuthentication(user);
-          // processRetry(true);
-          // $timeout(function () {
-          //   deferred.resolve(user);
-          // };
+          $control.login({username: username, password: password})
+            .then(function (user) {
+              securityContext.setAuthentication(user);
 
-          $api.login.login({username: username, password: password}).$promise.then(function (user) {
-            authentication.setAuthentication(user);
+              if (securityContext.authenticated) {
+                processRetry(true);
+              }
 
-            if (securityContext.authenticated) {
-              processRetry(true);
-            }
-
-            deferred.resolve(user);
-          },
-          function (x) {
-            deferred.reject(x);
-          });
+              deferred.resolve(user);
+            },
+            function (x) {
+              deferred.reject(x);
+            });
 
           return deferred.promise;
         },
 
         // Logout the current user and redirect
         logout: function (redirectTo) {
-          $api.logout.logout().$promise.then(function () {
-            securityContext.reset();
-            window.location.assign('/');
-          });
+          $control.logout()
+            .then(function () {
+              securityContext.reset();
+              window.location.assign('/');
+            });
         },
 
         // Ask the backend to see if a user is already authenticated - this may be from a previous session.
         requestCurrentUser: function () {
 
-          // return  $q.when({username: 'demo@opi.com', firstName: 'OPI', lastName: 'Rules', authenticated: true});
-
           if ( securityContext.authenticated ) {
-            return $q.when(securityContext.user);
+            return $q.when(securityContext);
           } else {
-            return $api.login.current().$promise.then(function (currentUser) {
-        
-              if(currentUser.username) {
-                notifications.displayMessage({message: "Welcome Back, " + currentUser.username + ".", type: 'success', id: 'welcome-message' });
-                var stop = $timeout(function () {
-                  notifications.displayMessage({message: "You have 4 new messages.", type: 'info', id:'message-alert'});
-                  $timeout.cancel(stop);
-                }, 8000);
-              }
+            return $control.login(null, true)
+              .then(function (user) {
+                securityContext.setAuthentication(user);
+          
+                if (securityContext.user && securityContext.user.username) {
+                  notifications.success("Welcome Back, " + securityContext.user.username + ".");
+                }
 
-              return authentication.setAuthentication(currentUser);  
-            });
+                return securityContext;  
+              });
           }
-        },
-
-        setAuthentication : function (authenticationData) {
-          if (authenticationData) {
-            securityContext.user = authenticationData.user || {};
-            securityContext.authenticated = authenticationData.authenticated || false;
-          }
-
-          return securityContext;
         }
       };
 
