@@ -11,13 +11,24 @@ TimesheetsController.index = function () {
   var userId = controller.param('user_id');
   var query = _.extend({user_id: userId}, controller.req.query);
 
-  db.find('timesheets', query)
-    .then(function (timesheets) {
-      controller.res.json(timesheets);
-    })
-    .fail(function (err) {
-      controller.res.status(500).json(err);
-    });
+  if (query.page) {
+    db.page('timesheets', query)
+      .then(function (timesheets) {
+        controller.res.json(timesheets);
+      })
+      .fail(function (err) {
+        controller.res.status(500).json(err);
+      });
+  }
+  else {
+    db.find('timesheets', query)
+      .then(function (timesheets) {
+        controller.res.json(timesheets);
+      })
+      .fail(function (err) {
+        controller.res.status(500).json(err);
+      });
+  }
 };
 
 TimesheetsController.create = function () {

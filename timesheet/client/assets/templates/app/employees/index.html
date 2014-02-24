@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover tsz-table-row-cursor">
            <thead>
             <tr>
               <th>Username</th>
@@ -23,8 +23,6 @@
           </thead>
           <tbody>
             <tr ng-repeat="employee in employees" 
-              class="fadeable-row" 
-              ng-class="{'faded' : employee.deleted}" 
               ng-click="showDetail(employee._id)">
 
               <td>{{employee.username}}</td>

@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover tsz-table-row-cursor">
            <thead>
             <tr>
               <th>Name</th>
@@ -20,21 +20,12 @@
           </thead>
           <tbody>
             <tr ng-repeat="project in projects" 
-              class="fadeable-row" 
-              ng-class="{'faded' : project.deleted}" 
               ng-click="showDetail(project._id)">
 
               <td>{{project.name}}</td>
               <td>{{project.description}}</td>
               <td>
-                <div ng-switch="project.deleted">
-                  <div ng-switch-when="undefined">
-                    <button class="btn btn-sm btn-danger" ng-click="remove(project); $event.stopPropagation();">Delete</button>
-                  </div>
-                  <div ng-switch-when="true">
-                    <button class="btn btn-sm" ng-click="undoRemove(project); $event.stopPropagation();">Undo</button>
-                  </div>
-                </div>
+                <button class="btn btn-sm btn-danger" ng-click="remove(project); $event.stopPropagation();">Delete</button>
               </td>
             </tr>
           </tbody>

@@ -7,24 +7,19 @@
       function ($control, $scope, $state, $stateParams, securityContext) {
 
         $scope.requestTimesheets = function requestTimesheets() {
-          $control.list('timesheets', {userId: securityContext.user._id})
+          var query = angular.extend($scope.pageConfig, {userId: securityContext.user._id});
+          $control.list('timesheets', query)
             .then(function (timesheets) {
               $scope.timesheets = timesheets;
             });
         };
 
-        $scope.requestTimesheets();
-
-        $scope.totalItems = 64;
-        $scope.currentPage = 4;
-        $scope.maxSize = 5;
-        
-        $scope.setPage = function (pageNo) {
-          $scope.currentPage = pageNo;
+        $scope.pageConfig = {
+          page: 1,
+          limit: 5
         };
 
-        $scope.bigTotalItems = 175;
-        $scope.bigCurrentPage = 1;
+        $scope.requestTimesheets();
       }
     )
 

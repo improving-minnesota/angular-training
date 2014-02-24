@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover tsz-table-row-cursor">
            <thead>
             <tr>
               <th>Begin Date</th>
@@ -21,8 +21,6 @@
           </thead>
           <tbody>
             <tr ng-repeat="timesheet in timesheets" 
-              class="fadeable-row" 
-              ng-class="{'faded' : timesheet.deleted}" 
               ng-click="showDetail(timesheet._id)">
 
               <td>{{timesheet.beginDate | date}}</td>
@@ -46,12 +44,13 @@
 
     <div class="pagination-container">
       <div pagination class="pagination-sm"
-        total-items="bigTotalItems" 
-        page="bigCurrentPage" 
-        max-size="maxSize" 
+        total-items="pageConfig.totalItems" 
+        page="pageConfig.page" 
+        max-size="pageConfig.limit" 
+        num-pages="pageConfig.totalPages"
         boundary-links="true" 
         rotate="true" 
-        num-pages="numPages">
+        on-select-page="requestTimesheets()">
       </div>
     </div>
 
