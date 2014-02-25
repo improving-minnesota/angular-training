@@ -19,8 +19,6 @@
     "open": "0.0.4",
     "request": "2.26.0",
     "q": "0.9.6",
-    "connect-mongo": "0.3.3",
-    "nodejs-microdb": "0.0.2",
     "nedb": "0.10.2",
     "moment": "2.5.1",
     "connect-nedb-session": "0.0.2",
