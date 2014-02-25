@@ -6,20 +6,20 @@
     .controller('TimesheetCtrl', 
       function ($control, $scope, $state, $stateParams, securityContext) {
 
-        $scope.requestTimesheets = function requestTimesheets() {
-          var query = angular.extend($scope.pageConfig, {userId: securityContext.user._id});
-          $control.list('timesheets', query)
-            .then(function (timesheets) {
-              $scope.timesheets = timesheets;
+        $scope.requestTimesheets = function requestTimesheets(page) {
+          var query = {
+            userId: securityContext.user._id,
+            page: page,
+            sort: {beginDate: 1}
+          };
+
+          $control.page('timesheets', query)
+            .then(function (pageConfig) {
+              $scope.pageConfig = pageConfig;
             });
         };
 
-        $scope.pageConfig = {
-          page: 1,
-          limit: 5
-        };
-
-        $scope.requestTimesheets();
+        $scope.requestTimesheets(1);
       }
     )
 

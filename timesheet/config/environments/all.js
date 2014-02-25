@@ -35,12 +35,12 @@ module.exports = function () {
 
   this.use(express.session({ 
     secret: properties.session.secret,
-    key: properties.session.key,
+    key: properties.session.key, 
+    store: new NedbStore({filename: 'data/db/session.json'}),
     cookie: { 
       path: '/',
       httpOnly: true,
-      maxAge: 3600 * 1000, 
-      store: new NedbStore({filename: 'data/db/session.json'})
+      maxAge: 24 * 3600 * 1000
     }
   }));
 

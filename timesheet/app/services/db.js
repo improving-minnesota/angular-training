@@ -25,27 +25,35 @@ module.exports = (function () {
       var deferred = Q.defer();
 
       var page = query.page || 1;
-      var limit = query.maxSize || 5;
-      var skip = page * limit;
+      var skip = (page - 1) * 5;
+      var sort = query.sort ? JSON.parse(query.sort) : {_id: 1};
 
-      console.log("page: " + page + ", limit: " + limit + ', skip: ' + skip );
+      var sanitizedQuery = _.omit(query, 'page', 'sort');
 
-      var pageConfig = {page: page, limit: limit};
+      console.log('page : ' + page + ', skip: ' + skip + ', sort : ' + JSON.stringify(sort));
 
+      var pageConfig = {page: page, limit: 5};
 
-      db[model].count(query, function (err, total) {
+      db[model]
+        .count(sanitizedQuery, function (err, total) {
           if (err) {
             deferred.reject(err);
           }
 
           pageConfig.totalItems = total;
-          pageConfig.totalPages = Math.ceil((total / limit) * 10) / 10; 
+          console.log('pageConfig : ' + JSON.stringify(pageConfig));
 
-          db[model].find(query).skip(skip).limit(limit)
+          db[model]
+            .find(sanitizedQuery)
+            .sort(sort)
+            .skip(skip)
+            .limit(5)
             .exec(function (err, docs) {
               if (err) {
                 deferred.reject(err);
               }
+
+              console.log("data docs : " + docs.length);
 
               pageConfig.data = docs;
               deferred.resolve(pageConfig);

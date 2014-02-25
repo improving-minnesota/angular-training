@@ -20,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="timesheet in timesheets" 
+            <tr ng-repeat="timesheet in pageConfig.data" 
               ng-click="showDetail(timesheet._id)">
 
               <td>{{timesheet.beginDate | date}}</td>
@@ -46,11 +46,10 @@
       <div pagination class="pagination-sm"
         total-items="pageConfig.totalItems" 
         page="pageConfig.page" 
-        max-size="pageConfig.limit" 
-        num-pages="pageConfig.totalPages"
+        items-per-page="pageConfig.limit" 
         boundary-links="true" 
         rotate="true" 
-        on-select-page="requestTimesheets()">
+        on-select-page="requestTimesheets(page)">
       </div>
     </div>
 

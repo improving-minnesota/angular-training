@@ -7,6 +7,10 @@
 
         var control = {
 
+          page : function (resource, query) {        
+            return $api[resource].paged(query).$promise;
+          },
+
           list : function (resource, query) {
             var queryObject = {};
 
@@ -49,20 +53,38 @@
     .factory('$api', 
       function ($resource) {
 
+        var extraMethods = {
+          'paged' : {
+            method: 'GET'
+          },
+          'update' : {
+            method: 'PUT'
+          },
+          'restore' : {
+            method: 'PUT',
+            params: {
+              verb: 'restore'
+            }
+          }
+        };
+
         var api = {
 
           timesheets : $resource('/users/:userId/timesheets/:id', {
             userId: '@userId',
             id: '@id'
-          }),
+          },
+          extraMethods),
 
           projects : $resource('/projects/:id', {
             id: '@id'
-          }),
+          },
+          extraMethods),
 
           employees : $resource('/users/:id', {
             id: '@id'
-          }),
+          },
+          extraMethods),
 
           // security
           login : $resource('/login', {}, {
