@@ -6,7 +6,6 @@
     'app.directives', 
     'app.controllers',
     'app.resources',
-    'app.services',
     'employee.controllers',
     'project.controllers',
     'timesheet.controllers',
@@ -37,7 +36,7 @@
 
         // -------------  Timesheets ----------------
         .state('app.timesheet', {
-          url: '/timesheets',
+          url: '/users/:userId/timesheets',
           controller: 'TimesheetCtrl',
           templateUrl: 'assets/templates/app/timesheets/index.html',
           data: {
@@ -54,6 +53,22 @@
           templateUrl: 'assets/templates/app/timesheets/detail.html',
           data: {
             section: 'Timesheet: Detail'
+          },
+          resolve : {
+            timesheet : [
+              '$control', 
+              '$stateParams', 
+              function ($control, $stateParams) {
+                return $control.get('timesheets', {id: $stateParams.id, userId: $stateParams.userId});
+              }
+            ],
+            timeunits : [
+              '$control',
+              '$stateParams',
+              function ($control, $stateParams) {
+                return $control.list('timeunits', {userId: $stateParams.userId, timesheetId: $stateParams.id});
+              }
+            ]
           }
         })
 

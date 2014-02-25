@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  angular.module('app.services', [])
+  angular.module('common.notifications.services', [])
     .factory('notifications', 
       function () {
 

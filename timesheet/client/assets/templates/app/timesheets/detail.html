@@ -1,3 +1,96 @@
-<div>timesheets.detail</div>
+<div class="tsz-timesheets-detail" ng-cloak>
+  <div ng-show="$state.is('app.timesheet.detail')">
+    <div class="row">
+      <div class="col-xs-12">
+        <form name="systemCategoryEdit" novalidate class="form-horizontal">
+        
+          <div tsz-form-section-header header="Timesheet Details"></div>
 
-<div ui-view></div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Name</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{timesheet.name}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Description</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{timesheet.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Begin Date</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{timesheet.beginDate | date}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">End Date</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{timesheet.endDate | date}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 col-sm-offset-8">
+              <button type="button" class="btn btn-default btn-block" ng-click="edit(timesheet)">Edit</button>
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <hr/>
+    </div>
+
+    <div tsz-form-section-header header="Time Units">
+      <div class="row">
+      <div class="col-sm-6 col-sm-offset-6 pull-right">
+        <button type="button" class="btn btn-default btn-block">Log Time</button>
+      </div></div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="tsz-responsive-table-container">
+          <table class="table table-bordered table-hover tsz-table-row-cursor">
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Date Worked</th>
+                <th>Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="timeunit in timeunits" ng-click="showDetail(timeunit)">
+                <td>{{timeunit.project}}</td>
+                <td>{{timeunit.dateWorked | date}}</td>
+                <td>{{timeunit.hoursWorked}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ui-view></div>
+</div>

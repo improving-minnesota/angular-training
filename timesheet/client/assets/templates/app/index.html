@@ -13,7 +13,7 @@
                   <a ui-sref="app.employee">Employees</a>
                 </li>
                 <li ng-class="{active: $state.includes('app.timesheet')}">
-                  <a ui-sref="app.timesheet">Timesheets</a>
+                  <a ui-sref="app.timesheet({userId: loggedInUser._id})">Timesheets</a>
                 </li>
               </ul>
             </div>  

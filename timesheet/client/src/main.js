@@ -15,7 +15,7 @@
   ]);
 
   app.config(function ($stateProvider, $urlRouterProvider, authorizationProvider) {
-    $urlRouterProvider.otherwise("/app/timesheets");
+    $urlRouterProvider.otherwise("/app/projects");
   })
 
   .run(function ($log, $state, $rootScope, $stateParams) {

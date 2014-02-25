@@ -21,8 +21,8 @@
             return $api[resource].query(queryObject).$promise;
           },
 
-          get : function (resource, id) {
-              return $api[resource].get({id: id}).$promise;
+          get : function (resource, query) {
+              return $api[resource].get(query).$promise;
           },
 
           create : function (resource, model) {
@@ -72,6 +72,13 @@
 
           timesheets : $resource('/users/:userId/timesheets/:id', {
             userId: '@userId',
+            id: '@id'
+          },
+          extraMethods),
+
+          timeunits : $resource('/users/:userId/timesheets/:timesheetId/timeunits/:id', {
+            userId: '@userId',
+            timesheetId: '@timesheetId',
             id: '@id'
           },
           extraMethods),

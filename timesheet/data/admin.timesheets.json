@@ -2,156 +2,145 @@
   "timesheets": [
       {
         "name": "AdminOne",
-        "beginDate": "11/18/2013",
-        "endDate": "11/24/2013",
+        "beginDate": "2013-11-18",
+        "endDate": "2013-11-24",
         "description": "Timesheet one for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "11/18/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "11/19/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "11/20/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "11/21/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "11/22/2013", "hoursWorked": 8, "project": "Project1"}
+          {"dateWorked": "2013-11-18", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-11-19", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-11-20", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-11-21", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-11-22", "hoursWorked": 8, "project": "Project1"}
         ]
       },
       {
         "name": "AdminTwo",
-        "beginDate": "11/25/2013",
-        "endDate": "12/1/2013",
+        "beginDate": "2013-11-25",
+        "endDate": "2013-12-01",
         "description": "Timesheet two for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "11/25/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "11/26/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "11/27/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "11/28/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "11/29/2013", "hoursWorked": 8, "project": "Project2"}
+          {"dateWorked": "2013-11-25", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-11-26", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-11-27", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-11-28", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-11-29", "hoursWorked": 8, "project": "Project2"}
         ]
       },
       {
         "name": "AdminThree",
-        "beginDate": "12/2/2013",
-        "endDate": "12/8/2013",
+        "beginDate": "2013-12-02",
+        "endDate": "2013-12-08",
         "description": "Timesheet three for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "12/2/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "12/3/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "12/4/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "12/5/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/6/2013", "hoursWorked": 8, "project": "Project2"}
+          {"dateWorked": "2013-12-02", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-12-03", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-12-04", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-12-05", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-06", "hoursWorked": 8, "project": "Project2"}
         ]
       },
       {
         "name": "AdminFour",
-        "beginDate": "12/9/2013",
-        "endDate": "12/15/2013",
+        "beginDate": "2013-12-09",
+        "endDate": "2013-12-15",
         "description": "Timesheet four for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "12/9/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/10/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/11/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/12/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/13/2013", "hoursWorked": 8, "project": "Project2"}
+          {"dateWorked": "2013-12-09", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-10", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-11", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-12", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-13", "hoursWorked": 8, "project": "Project2"}
         ]
       },
       {
         "name": "AdminFive",
-        "beginDate": "12/16/2013",
-        "endDate": "12/22/2013",
+        "beginDate": "2013-12-16",
+        "endDate": "2013-12-22",
         "description": "Timesheet five for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "12/16/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/17/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/18/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/19/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/20/2013", "hoursWorked": 8, "project": "Project2"}
+          {"dateWorked": "2013-12-16", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-17", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-18", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-19", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-20", "hoursWorked": 8, "project": "Project2"}
         ]
       },
       {
         "name": "AdminSix",
-        "beginDate": "12/23/2013",
-        "endDate": "12/29/2013",
+        "beginDate": "2013-12-23",
+        "endDate": "2013-12-29",
         "description": "Timesheet six for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "12/23/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/24/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/25/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/26/2013", "hoursWorked": 8, "project": "Project2"},
-          {"dateWorked": "12/27/2013", "hoursWorked": 8, "project": "Project2"}
+          {"dateWorked": "2013-12-23", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-24", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-25", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-26", "hoursWorked": 8, "project": "Project2"},
+          {"dateWorked": "2013-12-27", "hoursWorked": 8, "project": "Project2"}
         ]
       },
       { 
         "name": "AdminSeven",
-        "beginDate": "12/30/2013",
-        "endDate": "1/5/2013",
+        "beginDate": "2013-12-30",
+        "endDate": "2013-01-05",
         "description": "Timesheet seven for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "12/30/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "12/31/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/1/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/2/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/3/2013", "hoursWorked": 8, "project": "Project1"}
+          {"dateWorked": "2013-12-30", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2013-12-31", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-01", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-02", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-03", "hoursWorked": 8, "project": "Project1"}
         ]
       },
       {
         "name": "AdminEight",
-        "beginDate": "1/6/2013",
-        "endDate": "1/12/2013",
-        "description": "Timesheet eight for admin",
-        "deleted": false,
+        "beginDate": "2014-01-06",
+        "endDate": "2014-01-12",
+        "description": "Timesheet eight for admin", 
         "timeunits": [
-          {"dateWorked": "1/6/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/7/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/8/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/9/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/10/2013", "hoursWorked": 8, "project": "Project1"}
+          {"dateWorked": "2014-01-06", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-07", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-08", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-09", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-10", "hoursWorked": 8, "project": "Project1"}
         ]
       },
       {
         "name": "AdminNine",
-        "beginDate": "1/13/2013",
-        "endDate": "1/19/2013",
+        "beginDate": "2014-01-13",
+        "endDate": "2014-01-19",
         "description": "Timesheet nine for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "1/13/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/14/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/15/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/16/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/17/2013", "hoursWorked": 8, "project": "Project1"}
+          {"dateWorked": "2014-01-13", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-14", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-15", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-16", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-17", "hoursWorked": 8, "project": "Project1"}
         ]
         },
       {
         "name": "AdminTen",
-        "beginDate": "1/20/2013",
-        "endDate": "1/26/2013",
+        "beginDate": "2014-01-20",
+        "endDate": "2014-01-26",
         "description": "Timesheet ten for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "1/20/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/21/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/22/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/23/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/24/2013", "hoursWorked": 8, "project": "Project1"}
+          {"dateWorked": "2014-01-20", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-21", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-22", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-23", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-24", "hoursWorked": 8, "project": "Project1"}
         ]
         },
       {
         "name": "AdminEleven",
-        "beginDate": "1/27/2013",
-        "endDate": "2/2/2013",
+        "beginDate": "2014-01-27",
+        "endDate": "2014-02-02",
         "description": "Timesheet eleven for admin",
-        "deleted": false,
         "timeunits": [
-          {"dateWorked": "1/27/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/28/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/29/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/30/2013", "hoursWorked": 8, "project": "Project1"},
-          {"dateWorked": "1/31/2013", "hoursWorked": 8, "project": "Project1"}
+          {"dateWorked": "2014-01-27", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-28", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-29", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-30", "hoursWorked": 8, "project": "Project1"},
+          {"dateWorked": "2014-01-31", "hoursWorked": 8, "project": "Project1"}
         ]
       }
     ]

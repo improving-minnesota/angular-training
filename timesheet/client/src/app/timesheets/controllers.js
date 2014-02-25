@@ -4,11 +4,11 @@
   angular.module('timesheet.controllers', [])
 
     .controller('TimesheetCtrl', 
-      function ($control, $scope, $state, $stateParams, securityContext) {
+      function ($control, $scope, $state, $stateParams) {
 
         $scope.requestTimesheets = function requestTimesheets(page) {
           var query = {
-            userId: securityContext.user._id,
+            userId: $stateParams.userId,
             page: page,
             sort: {beginDate: 1}
           };
@@ -19,14 +19,27 @@
             });
         };
 
+        $scope.showDetail = function showDetail (timesheet) {
+          $state.go('app.timesheet.detail', {id: timesheet._id, userId: $stateParams.userId});
+        };
+
         $scope.requestTimesheets(1);
       }
     )
 
     .controller('TimesheetDetailCtrl', 
-      function ($scope, $state, $stateParams) {
+      function ($scope, $state, $stateParams, timesheet, timeunits) {
+        $scope.timesheet = timesheet;
+        $scope.timeunits = timeunits;
 
-      }
+        $scope.edit = function edit (timesheet) {
+          $state.go('app.timesheet.detail.edit', $stateParams);
+        };
+
+        $scope.cancel = function cancel () {
+          $state.go('app.timesheet', {userId: $stateParams.userId}, {reload: true});
+        };
+      } 
     )
 
     .controller('TimesheetEditCtrl', 

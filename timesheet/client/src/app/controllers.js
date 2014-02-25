@@ -10,6 +10,7 @@
       },
       function (authenticated) {
         $scope.authenticated = authenticated;
+        $scope.loggedInUser = securityContext.user;
       });
 
     })
