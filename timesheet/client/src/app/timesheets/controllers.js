@@ -106,7 +106,7 @@
     )
 
     .controller('TimeunitEditCtrl', 
-      function ($scope, $state, $stateParams) {
+      function ($scope, $state, $stateParams, notifications) {
         
         $scope.save = function save () {
 
@@ -115,14 +115,14 @@
     )
 
     .controller('TimeunitCreateCtrl', 
-      function ($scope, $state, $stateParams, $control) {
+      function ($scope, $state, $stateParams, $control, notifications) {
         $scope.timeunit = {};
 
         $scope.save = function save () {
           $control.create('timeunits', $scope.timeunit)
             .then(function (created) {
               $state.go('app.timesheets.detail', $stateParams, {reload: true});
-              notifications.success("Logged Time for " + create.dateWorked);
+              notifications.success("Logged Time for " + created.dateWorked);
             },
             function (err) {
               notifications.error("There was an error logging time.");
