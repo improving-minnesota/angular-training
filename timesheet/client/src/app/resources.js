@@ -26,7 +26,8 @@
           },
 
           create : function (resource, model) {
-              return new $api[resource](model).$save().$promise;
+            var saved = new $api[resource](model).$save();
+            return saved.$promise || saved;
           }, 
 
           update : function (resource, model) {
@@ -70,26 +71,26 @@
 
         var api = {
 
-          timesheets : $resource('/users/:userId/timesheets/:id', {
-            userId: '@userId',
-            id: '@id'
+          timesheets : $resource('/users/:user_id/timesheets/:_id', {
+            user_id: '@user_id',
+            _id: '@_id'
           },
           extraMethods),
 
-          timeunits : $resource('/users/:userId/timesheets/:timesheetId/timeunits/:id', {
-            userId: '@userId',
-            timesheetId: '@timesheetId',
-            id: '@id'
+          timeunits : $resource('/users/:user_id/timesheets/:timesheet_id/timeunits/:_id', {
+            user_id: '@user_id',
+            timesheet_id: '@timesheet_id',
+            _id: '@_id'
           },
           extraMethods),
 
-          projects : $resource('/projects/:id', {
-            id: '@id'
+          projects : $resource('/projects/:_id', {
+            _id: '@_id'
           },
           extraMethods),
 
-          employees : $resource('/users/:id', {
-            id: '@id'
+          employees : $resource('/users/:_id', {
+            _id: '@_id'
           },
           extraMethods),
 

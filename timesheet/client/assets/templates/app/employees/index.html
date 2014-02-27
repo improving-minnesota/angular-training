@@ -1,5 +1,5 @@
 <div class="employee-list">
-  <div ng-show="$state.is('app.employee')">
+  <div ng-show="$state.is('app.employees')">
     <div class="row tsz-form-row">
       <div class="col-sm-2 pull-right">
         <button class="btn btn-default btn-block" type="button" ng-click="createNew()">
@@ -47,7 +47,7 @@
     </div>
 
     <div class="pagination-container">
-      <div pagination class="pagination-sm"
+      <div pagination
         total-items="bigTotalItems" 
         page="bigCurrentPage" 
         max-size="maxSize" 

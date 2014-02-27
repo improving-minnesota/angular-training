@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('employee.controllers', [])
+  angular.module('app.employees.controllers', [])
     
     .controller('EmployeeCtrl', 
       function ($control, $scope, $state, $stateParams, securityContext) {

@@ -6,14 +6,14 @@
           <div ng-if="authenticated">
             <div class="tsz-nav-container">
               <ul class="nav nav-pills">
-                <li ng-class="{active: $state.includes('app.project')}">
-                  <a ui-sref="app.project">Projects</a>
+                <li ng-class="{active: $state.includes('app.projects')}">
+                  <a ui-sref="app.projects">Projects</a>
                 </li>
-                <li ng-class="{active: $state.includes('app.employee')}">
-                  <a ui-sref="app.employee">Employees</a>
+                <li ng-class="{active: $state.includes('app.employees')}">
+                  <a ui-sref="app.employees">Employees</a>
                 </li>
-                <li ng-class="{active: $state.includes('app.timesheet')}">
-                  <a ui-sref="app.timesheet({userId: loggedInUser._id})">Timesheets</a>
+                <li ng-class="{active: $state.includes('app.timesheets')}">
+                  <a ui-sref="app.timesheets({user_id: loggedInUser._id})">Timesheets</a>
                 </li>
               </ul>
             </div>  

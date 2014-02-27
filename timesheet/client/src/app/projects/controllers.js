@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('project.controllers', [])
+  angular.module('app.projects.controllers', [])
     
     .controller('ProjectCtrl', 
       function ($control, $scope, $state, $stateParams, securityContext) {

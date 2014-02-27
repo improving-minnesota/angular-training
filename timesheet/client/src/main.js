@@ -11,10 +11,11 @@
     'ui.bootstrap.datepicker',
     'ui.bootstrap.pagination',
     'ngResource',
-    'ngSanitize'
+    'ngSanitize',
+    'ui.router'
   ]);
 
-  app.config(function ($stateProvider, $urlRouterProvider, authorizationProvider) {
+  app.config(function ($urlRouterProvider) {
     $urlRouterProvider.otherwise("/app/projects");
   })
 

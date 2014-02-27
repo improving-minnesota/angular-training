@@ -1,0 +1,69 @@
+<div class="tsz-edit-timesheet" ng-cloak>
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="form-horizontal" novalidate name="timesheetForm">
+
+        <div class="form-group">
+          <div tsz-field-wrap input-id="timesheet-name" label="Name">
+            <input type="text" class="form-control" 
+              name="timesheet-name" placeholder="Timesheet Name"
+              ng-model="timesheet.name" 
+              ng-minlength="1" ng-maxlength="40" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div tsz-field-wrap input-id="timesheet-description" label="Description">
+            <input type="text" class="form-control" 
+              name="timesheet-description" placeholder="Timesheet Description"
+              ng-model="timesheet.description" 
+              ng-minlength="1" ng-maxlength="255" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div tsz-field-wrap input-id="timesheet-beginDate" label="Begin Date">
+            <p class="input-group">
+              <input type="text" class="form-control" 
+                datepicker-popup="MM/dd/yyyy" 
+                ng-model="timesheet.beginDate" 
+                ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default"><i class="fa fa-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div tsz-field-wrap input-id="timesheet-endDate" label="End Date">
+            <p class="input-group">
+              <input type="text" class="form-control" 
+                datepicker-popup="MM/dd/yyyy" 
+                ng-model="timesheet.endDate" 
+                ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default"><i class="fa fa-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <hr/>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-2 col-sm-offset-8">
+            <button class="btn btn-default btn-block" 
+              ng-click="save()"
+              ng-disabled="timesheetForm.$invalid">{{saveText}}</button>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
