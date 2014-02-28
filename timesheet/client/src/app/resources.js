@@ -35,6 +35,11 @@
             return updated.$promise || updated;
           },
 
+          remove : function (resource, model) {
+            var removed = $api[resource].remove(model);
+            return removed.$promise || removed;
+          },
+
           login : function (model, current) {
             if (current) {
               return $api.login.current().$promise;

@@ -1,4 +1,4 @@
-{"username":"admin","email":"admin@mixtape.com","password":"password","admin":true,"firstName":"Admin","lastName":"User","_id":"U9mnZHwNE9JqkZ2o"}
-{"username":"user","email":"user@mixtape.com","password":"password","admin":false,"firstName":"Normal","lastName":"User","_id":"kYYk5xLMQDqzceR2"}
+{"username":"user","email":"user@mixtape.com","password":"password","admin":false,"firstName":"Normal","lastName":"User","_id":"RiXPaHbAroHs1qER"}
+{"username":"admin","email":"admin@mixtape.com","password":"password","admin":true,"firstName":"Admin","lastName":"User","_id":"o3C8InBHT9wBQZcD"}
 {"$$indexCreated":{"fieldName":"username","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
