@@ -4,39 +4,94 @@
   angular.module('app.employees.controllers', [])
     
     .controller('EmployeeCtrl', 
-      function ($control, $scope, $state, $stateParams, securityContext) {
+      function ($control, $scope, $state, $stateParams, notifications) {
 
-        $scope.requestEmployees = function requestEmployees() {
-          $control.list('employees')
-            .then(function (employees) {
-              $scope.employees = employees;
+        $scope.requestEmployees = function requestEmployees (page) {
+          var query = {
+            page: page,
+            sort: {username: 1}
+          };
+
+          $control.page('employees', query)
+            .then(function (pageConfig) {
+              $scope.pageConfig = pageConfig;
             });
         };
 
-        $scope.requestEmployees();
+        $scope.showDetail = function showDetail (employee) {
+          $state.go('app.employees.detail', employee);
+        };  
 
-        $scope.totalItems = 64;
-        $scope.currentPage = 4;
-        $scope.maxSize = 5;
-        
-        $scope.setPage = function (pageNo) {
-          $scope.currentPage = pageNo;
+        $scope.createNew = function createNew () {
+          $state.go('app.employees.create', $stateParams);
         };
 
-        $scope.bigTotalItems = 175;
-        $scope.bigCurrentPage = 1;
+        $scope.remove = function remove (employee) {
+          var deleted = angular.extend(employee, {deleted: true});
+
+          $control.remove('employees', deleted) 
+            .then(function () {
+              notifications.success('Employee : ' + employee.username + ', was deleted.');
+            },
+            function (err) {
+              notifications.error('Error attempting to delete employee.');
+            });
+        };
+
+        $scope.restore = function restore (employee) {
+          var deleted = angular.extend(employee, {deleted: false});
+          delete deleted._id;
+
+          $control.create('employees', deleted)
+            .then(function (restored) {
+              notifications.success('Employee was restored.');
+              employee._id = restored._id;
+            },
+            function (err) {
+              notifications.error('Error restoring employee.');
+            });
+        };
+
+        $scope.cancel = function cancel () {
+          $state.go('app.employees', {}, {reload: true});
+        };
+
+        $scope.requestEmployees(1);
       }
     )
 
     .controller('EmployeeDetailCtrl', 
-      function ($scope, $state, $stateParams) {
+      function ($scope, $state, $stateParams, notifications, employee) {
+        $scope.saveText = $state.current.data.saveText;
+        $scope.employee = employee;
 
+        $scope.save = function save () {
+          $scope.employee.$update()
+            .then(function (updated) {
+              $scope.timesheet = updated;
+              notifications.success('Updated employee: ' + employee.username);
+            },  
+            function (err) {
+              notifications.error('There was an error updating the employee.');
+            });
+        };
       }
     )
 
     .controller('EmployeeCreateCtrl', 
-      function ($scope, $state, $stateParams) {
+      function ($scope, $state, $stateParams, $control, notifications) {
+        $scope.saveText = $state.current.data.saveText;
+        $scope.employee = {admin: false};
 
+        $scope.save = function save () {
+          $control.create('employees', $scope.employee)
+            .then(function (created) {
+              notifications.success('Employee : ' + created.username + ' , created.');
+            },
+            function (err) {
+              notifications.error('There was an error creating employee.');
+            });
+        };
       }
     );
 

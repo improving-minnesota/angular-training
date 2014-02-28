@@ -2,3 +2,6 @@
 {"name":"Project1","description":"This is your first project","_id":"Kcoo7ScIVXOGK7lb"}
 {"name":"Project3","description":"This is the third project","_id":"ske1Qfaof75FBlB7"}
 {"$$indexCreated":{"fieldName":"name","unique":true,"sparse":false}}
+{"$$deleted":true,"_id":"ske1Qfaof75FBlB7"}
+{"name":"asdfads","description":"fdsaf f asdf asdf a","_id":"RuXKSEjYHoYqUWQK"}
+{"$$deleted":true,"_id":"RuXKSEjYHoYqUWQK"}

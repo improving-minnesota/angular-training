@@ -7,15 +7,27 @@ var UsersController = new Controller();
 UsersController.index = function () {
   var controller = this;
 
-  controller.req.session.me = "hello";
+  var query = controller.req.query;
 
-  db.find('users', controller.req.query)
-    .then(function (users) {
-      controller.res.json(users);
-    },
-    function (err) {
-      controller.res.status(500).json(err);
-    });
+  if (query.page) {
+    
+    db.page('users', query)
+      .then(function (users) {
+        controller.res.json(users);
+      })
+      .fail(function (err) {
+        controller.res.status(500).json(err);
+      });
+  } else {
+    
+    db.find('users', query)
+      .then(function (users) {
+        controller.res.json(users);
+      })
+      .fail(function (err) {
+        controller.res.status(500).json(err);
+      });
+  }
 };
 
 UsersController.create = function () {
