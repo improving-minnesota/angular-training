@@ -6,10 +6,10 @@
           <div ng-if="authenticated">
             <div class="tsz-nav-container">
               <ul class="nav nav-pills">
-                <li ui-sref-active="app.projects">
+                <li ng-class="{active: $state.includes('app.projects')}">
                   <a ui-sref="app.projects">Projects</a>
                 </li>
-                <li ui-sref-active="app.employees">
+                <li ng-class="{active: $state.includes('app.employees')}">
                   <a ui-sref="app.employees">Employees</a>
                 </li>
                 <li ng-class="{active: $state.includes('app.timesheets')}">

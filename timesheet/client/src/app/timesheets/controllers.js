@@ -41,7 +41,7 @@
         };
 
         $scope.restore = function restore (timesheet) {
-          var deleted = angular.extend(timesheet, {deleted: false, previous_id: timesheet._id});
+          var deleted = angular.extend(timesheet, {deleted: false});
           delete deleted._id;
 
           $control.create('timesheets', deleted)

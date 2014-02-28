@@ -2,7 +2,7 @@
   
   'use strict';
 
-  var app = angular.module('common.formatting.filters', [])
+  var app = angular.module('date.filters', [])
 
     .filter('userLocalDateTime', function () {
       return function (dateString, targetFormat) {
