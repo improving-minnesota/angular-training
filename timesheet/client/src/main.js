@@ -5,12 +5,16 @@
     'templates-main',
     'templates-lib',
     'app',
-    'common',
     'security',
+    'form.directives',
+    'date.filters',
+    'progress.interceptors',
+    'security.interceptors',
+    'notifications.services',
     'ui.select2',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.pagination',
-    'ngResource',
+    'ui.bootstrap.buttons',
     'ngSanitize',
     'ui.router'
   ]);

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('common.form.directives', [])
+  angular.module('form.directives', [])
 
     .directive('tszFormSectionHeader', function () {
       return {

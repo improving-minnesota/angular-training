@@ -77,13 +77,24 @@
                 <th>Project</th>
                 <th>Date Worked</th>
                 <th>Hours</th>
+                <th class="tsz-table-delete-column">Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="timeunit in timeunits" ng-click="showDetail(timeunit)">
+              <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeUnitDetail(timeunit._id)">
                 <td>{{timeunit.project}}</td>
                 <td>{{timeunit.dateWorked | date}}</td>
                 <td>{{timeunit.hoursWorked}}</td>
+                <td>
+                  <div ng-switch="timeunit.deleted">
+                    <div ng-switch-when="true">
+                      <button class="btn btn-sm" ng-click="restoreTimeunit(timeunit); $event.stopPropagation();">Undo</button>
+                    </div>
+                    <div ng-switch-default>
+                      <button class="btn btn-sm btn-danger" ng-click="removeTimeunit(timeunit); $event.stopPropagation();">Delete</button>
+                    </div>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

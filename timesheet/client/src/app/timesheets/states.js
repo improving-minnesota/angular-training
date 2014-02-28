@@ -74,9 +74,11 @@
         controller: 'TimeunitCtrl',
         template: '<div ui-view></div>',
         resolve: {
-          projects: ['$control', function ($control) {
-            return $control.list('projects');
-          }]
+          projects: [
+            '$control', 
+            function ($control) {
+              return $control.list('projects');
+            }]
         }
       })
 
@@ -95,6 +97,14 @@
         templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
         data: {
           section: 'Timesheet: Edit Time'
+        },
+        resolve : {
+          timeunit : [
+            '$control', 
+            '$stateParams', 
+            function ($control, $stateParams) {
+              return $control.get('timeunits', {_id: $stateParams.timeunit_id, user_id: $stateParams.user_id, timesheet_id: $stateParams._id});
+            }]
         }
       });
   });

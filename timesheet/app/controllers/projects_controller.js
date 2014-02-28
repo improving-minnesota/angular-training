@@ -8,13 +8,27 @@ var ProjectsController = new Controller();
 ProjectsController.index = function () {
   var controller = this;
   
-  db.find('projects', controller.req.query)
-    .then(function (projects) {
-      controller.res.json(projects);
-    },
-    function (err) {
-      controller.res.status(500).json(err);
-    });
+   var query = controller.req.query;
+
+  if (query.page) {
+    
+    db.page('projects', query)
+      .then(function (projects) {
+        controller.res.json(projects);
+      })
+      .fail(function (err) {
+        controller.res.status(500).json(err);
+      });
+  } else {
+    
+    db.find('projects', query)
+      .then(function (projects) {
+        controller.res.json(projects);
+      })
+      .fail(function (err) {
+        controller.res.status(500).json(err);
+      });
+  }
 };
 
 ProjectsController.create = function () {
