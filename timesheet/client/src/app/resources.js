@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var resources = angular.module('app.resources', [])
+  var resources = angular.module('app.resources', ['ngResource'])
     .factory('$control', 
       function ($q, $api) {
 
@@ -33,6 +33,11 @@
           update : function (resource, model) {
             var updated = $api[resource].update(model);
             return updated.$promise || updated;
+          },
+
+          remove : function (resource, model) {
+            var removed = $api[resource].remove(model);
+            return removed.$promise || removed;
           },
 
           login : function (model, current) {

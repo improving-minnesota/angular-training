@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('common.io.interceptors', [])
+  angular.module('progress.interceptors', [])
     .factory('nProgressInterceptor', function ($q, $injector) {
     
         return {

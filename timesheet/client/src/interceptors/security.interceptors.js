@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('security.interceptor', [
+  angular.module('security.interceptors', [
     'security.retry.queue',
     'security.context'
   ])
@@ -32,37 +32,10 @@
     }
   )
 
-  .factory('csrfInterceptor', function ($q, $injector) {
-  
-      return {
-
-        request : function (config) {
-          var securityContext = $injector.get('securityContext');
-          config.headers['x-csrf-token'] = securityContext.csrf;
-          return $q.when(config);
-        },
-
-        response : function (response) {
-          var securityContext = $injector.get('securityContext');
-          securityContext.csrf = response.headers('x-csrf-token') || securityContext.csrf;
-          return $q.when(response);
-        },
-
-        responseError : function (response) {
-          var securityContext = $injector.get('securityContext');
-          securityContext.csrf = response.headers('x-csrf-token') || securityContext.csrf;
-          return $q.when(response);
-        }
-
-      };
-    }
-  )
-
   // We have to add the interceptor to the queue as a string because the interceptor 
   // depends upon service instances that are not available in the config block.
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('securityInterceptor');
-    $httpProvider.interceptors.push('csrfInterceptor');
   });
 
 }());
