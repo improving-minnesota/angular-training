@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var resources = angular.module('app.resources', [])
+  var resources = angular.module('app.resources', ['ngResource'])
     .factory('$control', 
       function ($q, $api) {
 

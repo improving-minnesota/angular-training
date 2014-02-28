@@ -10,7 +10,6 @@
     'ui.select2',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.pagination',
-    'ngResource',
     'ngSanitize',
     'ui.router'
   ]);
