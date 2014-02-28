@@ -15,17 +15,24 @@
             <tr>
               <th>Name</th>
               <th>Description</th>
-              <th width="5%">Delete</th>
+              <th class="tsz-table-delete-column">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="project in projects" 
-              ng-click="showDetail(project._id)">
+            <tr ng-repeat="project in pageConfig.data | orderBy:'name'" 
+              ng-click="showDetail(project)">
 
               <td>{{project.name}}</td>
               <td>{{project.description}}</td>
               <td>
-                <button class="btn btn-sm btn-danger" ng-click="remove(project); $event.stopPropagation();">Delete</button>
+                <div ng-switch="project.deleted">
+                  <div ng-switch-when="true">
+                    <button class="btn btn-sm" ng-click="restore(project); $event.stopPropagation();">Undo</button>
+                  </div>
+                  <div ng-switch-default>
+                    <button class="btn btn-sm btn-danger" ng-click="remove(project); $event.stopPropagation();">Delete</button>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -33,14 +40,14 @@
       </div>
     </div>
 
-    <div class="pagination-container">
+    <div class="tsz-pagination-container">
       <div pagination
-        total-items="bigTotalItems" 
-        page="bigCurrentPage" 
-        max-size="maxSize" 
+        total-items="pageConfig.totalItems" 
+        page="pageConfig.page" 
+        items-per-page="pageConfig.limit" 
         boundary-links="true" 
         rotate="true" 
-        num-pages="numPages">
+        on-select-page="requestProjects(page)">
       </div>
     </div>
 

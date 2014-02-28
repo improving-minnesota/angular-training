@@ -14,6 +14,7 @@
     'ui.select2',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.pagination',
+    'ui.bootstrap.buttons',
     'ngSanitize',
     'ui.router'
   ]);

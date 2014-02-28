@@ -24,11 +24,20 @@
       })
 
       .state('app.employees.detail', {
-        url: '/:id',
+        url: '/detail/:_id',
         controller: 'EmployeeDetailCtrl',
-        templateUrl: 'assets/templates/app/employees/detail.html',
+        templateUrl: 'assets/templates/app/employees/form.html',
         data: {
-          section: 'Employee: Detail'
+          section: 'Employee: Detail',
+          saveText: 'Update'
+        },
+        resolve : {
+          employee : [
+            '$control', 
+            '$stateParams',
+            function ($control, $stateParams) {
+              return $control.get('employees', $stateParams);
+            }]
         }
       })
 
@@ -37,7 +46,8 @@
         controller: 'EmployeeCreateCtrl',
         templateUrl: 'assets/templates/app/employees/form.html',
         data: {
-          section: 'Employee: Create'
+          section: 'Employee: Create',
+          saveText: 'Create'
         }
       });
   });
