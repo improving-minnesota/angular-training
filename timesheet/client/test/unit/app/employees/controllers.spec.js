@@ -4,13 +4,13 @@
   var expect = chai.expect;
   var controller, scope;
 
-  describe('App', function() {
+  describe('Employees', function () {
    
-    describe('Controllers', function() {
+    describe('Controllers', function () {
         
       beforeEach(
         module(
-          'app.controllers', 
+          'app.employees.controllers', 
           'app.resources',
           'ngResource',
           'security',
@@ -18,11 +18,11 @@
           'notifications.services'
         ));
 
-      describe('MainCtrl', function() {
-        it('should be able to instantiate the controller',
+      describe('EmployeeCtrl', function () {
+        it('should have the main controller in the app.controllers module',
           inject(function($rootScope, $controller) {
             var scope = $rootScope.$new(),
-              controller = $controller("MainCtrl", {
+              controller = $controller("EmployeeCtrl", {
                 $scope: scope
               });
             
@@ -30,23 +30,37 @@
         }));
       });
 
-      describe('AppCtrl', function() {
+      describe('EmployeeDetailCtrl', function () {
+        var employee;
+
+        beforeEach(function () {
+          employee = {
+            "username": "test", 
+            "email": "test@test.com", 
+            "password": "password", 
+            "admin": true, 
+            "firstName": "Test", 
+            "lastName": "User"
+          };
+        });
+
         it('should be able to instantiate the controller',
           inject(function($rootScope, $controller) {
             var scope = $rootScope.$new(),
-              controller = $controller("AppCtrl", {
-                $scope: scope
+              controller = $controller("EmployeeDetailCtrl", {
+                $scope: scope,
+                employee: employee
               });
             
             expect(controller).to.be.ok;
         }));
       });
 
-      describe('NavCtrl', function() {
+      describe('EmployeeCreateCtrl', function () {
         it('should be able to instantiate the controller',
           inject(function($rootScope, $controller) {
             var scope = $rootScope.$new(),
-              controller = $controller("NavCtrl", {
+              controller = $controller("EmployeeCreateCtrl", {
                 $scope: scope
               });
             

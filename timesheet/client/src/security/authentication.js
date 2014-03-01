@@ -3,16 +3,9 @@
 
   angular.module('security.authentication', [])
 
-  .factory('authentication', function ($q, $control, $state, $location, securityContext, retryQueue, notifications) {
-
-      function processRetry(success) {
-        if ( success ) {
-          retryQueue.retryAll();
-        } else {
-          retryQueue.cancelAll();
-        }
-      }
-
+  .factory('authentication', 
+    function ($q, $control, $state, $location, securityContext, retryQueue, notifications) {
+      
       // Register a handler for when an item is added to the retry retryQueue
       // This forces the login page on entry. 
       retryQueue.onItemAddedCallbacks.push(function (retryItem) {
@@ -64,7 +57,7 @@
               securityContext.setAuthentication(user);
 
               if (securityContext.authenticated) {
-                processRetry(true);
+                retryQueue.retryAll();
               }
 
               deferred.resolve(user);

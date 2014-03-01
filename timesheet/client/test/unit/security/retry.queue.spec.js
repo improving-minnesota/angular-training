@@ -1,18 +1,18 @@
-describe('security.retry.queue', function() {
+describe('Security Retry Queue', function() {
   var expect = chai.expect;
   var queue;
 
   function mockRetryItem() {
-    return jasmine.createSpyObj('retryItem', ['retry', 'cancel']);
+    //return jasmine.createSpyObj('retryItem', ['retry', 'cancel']);
+    return sinon.mock('retryItem');
   }
 
   beforeEach(module(
-    'common.security.retry.queue',
-    'app.services'
+    'security.retry.queue'
   ));
 
   beforeEach(inject(function($injector) {
-    queue = $injector.get('security.retry.queue');
+    queue = $injector.get('retryQueue');
   }));
 
   describe('hasMore', function() {

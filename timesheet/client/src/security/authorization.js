@@ -7,7 +7,7 @@
   ])
 
   // This service provides guard methods to protect application states.
-  // You can add them as resolves to states to require authorization levels
+  // You can add them as resolves to states to require an admin user
   // before allowing a state change to complete
   .provider('authorization', {
 
@@ -18,14 +18,12 @@
       }
     ],
 
-    requireAuthorizedUser: function (permission) {
-      return [
-        'authorization',
-        function (authorization) {
-          return authorization.requireAuthorizedUser(permission);
-        }
-      ];
-    },
+    requireAdminUser: [
+      'authorization',
+      function (authorization) {
+        return authorization.requireAdminUser();
+      }
+    ],
 
     $get: function ($injector, authentication, securityContext) {
       
@@ -45,23 +43,15 @@
             });
         },
 
-        requireAuthorizedUser: function (authorization) {
+        requireAdminUser: function () {
           var queue = $injector.get('retryQueue');
 
           return authentication.requestCurrentUser()
             .then(function (userInfo) {
-              if ( !service.hasAuthorization(authorization) ) {
-                return queue.pushRetryFn('unauthorized-client', service.requireAuthorizedUser);
+              if ( !userInfo.user || !userInfo.user.admin ) {
+                return queue.pushRetryFn('unauthorized-client', service.requireAdminUser);
               }
             });
-        },
-
-        hasAuthorization : function (authorization) {
-          var auth = _.find(securityContext.permissions, function (permission) {
-            return permission === authorization;
-          });
-
-          return !!auth;
         }
 
       };

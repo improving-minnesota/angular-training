@@ -4,9 +4,8 @@
   angular.module('security.context', [])
 
   .factory('securityContext', function () {
-
+      
       var securityContext =  {
-
         user : {},
         authenticated : false,
 
@@ -20,7 +19,6 @@
           securityContext.authenticated = context.authenticated;
           securityContext.user = context.user;
         }
-        
       };
 
       return securityContext;

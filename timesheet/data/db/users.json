@@ -2,9 +2,3 @@
 {"username":"admin","email":"admin@mixtape.com","password":"password","admin":true,"firstName":"Admin","lastName":"User","_id":"o3C8InBHT9wBQZcD"}
 {"$$indexCreated":{"fieldName":"username","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
-{"admin":false,"username":"asdf","email":"fdas.aa.com","firstName":"fd","lastName":"fdsaf","_id":"aSotRKaE2TXnPXPa"}
-{"admin":false,"username":"fdsaf","email":"fdsaf","firstName":"fdsaf","lastName":"fdsa","_id":"FcOz22p4wDl33Jzj"}
-{"$$deleted":true,"_id":"FcOz22p4wDl33Jzj"}
-{"$$deleted":true,"_id":"aSotRKaE2TXnPXPa"}
-{"admin":true,"username":"fasdf","email":"fdsaf","firstName":"fdsa","lastName":"fdsa","_id":"Q7UNesK7ml0YqJFJ"}
-{"$$deleted":true,"_id":"Q7UNesK7ml0YqJFJ"}
