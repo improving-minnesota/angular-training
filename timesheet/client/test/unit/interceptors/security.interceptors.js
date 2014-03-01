@@ -6,12 +6,12 @@ describe('securityInterceptor', function() {
 
   beforeEach(
     module(
-      'common.security.interceptor',
-      'common.security.retry.queue'
+      'security.interceptors',
+      'security.retry.queue'
     ));
 
   beforeEach(inject(function($injector) {
-    queue = $injector.get('security.retry.queue');
+    queue = $injector.get('retryQueue');
     interceptor = $injector.get('securityInterceptor');
   }));
 

@@ -4,7 +4,8 @@
   angular.module('security.login.controllers', [])
 
     // The LoginCtrl provides the behaviour behind a reusable form to allow users to authenticate.
-    .controller('LoginCtrl', function ($scope, $location, $stateParams, authentication, authorization, securityContext) {
+    .controller('LoginCtrl', 
+      function ($scope, $location, $stateParams, authentication, authorization, securityContext) {
 
         // Request the current user, this will wait until the current user
         // promise is resolved.

@@ -33,7 +33,7 @@
             .then(function (removed) {
               notifications.success('Project : ' + removed.name + ', was deleted.');
             },
-            function (err) {
+            function (x) {
               notifications.error('Error attempting to delete project.');
             });
         };
@@ -46,7 +46,7 @@
               notifications.success('Project was restored.');
               project._id = restored._id;
             },
-            function (err) {
+            function (x) {
               notifications.error('Error restoring project.');
             });
         };
@@ -70,7 +70,7 @@
               $scope.project = updated;
               notifications.success('Updated project: ' + updated.name);
             },  
-            function (err) {
+            function (x) {
               notifications.error('There was an error updating the employee.');
             });
         };
@@ -88,7 +88,7 @@
               $state.go('app.projects.detail', created);
               notifications.success('Project : ' + created.name + ', created.');
             },
-            function (err) {
+            function (x) {
               notifications.error('There was an error creating the project.');
             });
         };

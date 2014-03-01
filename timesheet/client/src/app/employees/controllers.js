@@ -33,7 +33,7 @@
             .then(function () {
               notifications.success('Employee : ' + employee.username + ', was deleted.');
             },
-            function (err) {
+            function (x) {
               notifications.error('Error attempting to delete employee.');
             });
         };
@@ -47,7 +47,7 @@
               notifications.success('Employee was restored.');
               employee._id = restored._id;
             },
-            function (err) {
+            function (x) {
               notifications.error('Error restoring employee.');
             });
         };
@@ -71,7 +71,7 @@
               $scope.timesheet = updated;
               notifications.success('Updated employee: ' + employee.username);
             },  
-            function (err) {
+            function (x) {
               notifications.error('There was an error updating the employee.');
             });
         };
@@ -88,7 +88,7 @@
             .then(function (created) {
               notifications.success('Employee : ' + created.username + ' , created.');
             },
-            function (err) {
+            function (x) {
               notifications.error('There was an error creating employee.');
             });
         };

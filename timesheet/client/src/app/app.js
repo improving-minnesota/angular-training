@@ -8,6 +8,7 @@
     'app.employees',
     'app.projects',
     'app.timesheets',
+    'app.timesheets.timeunits',
     'security'
   ]);
 

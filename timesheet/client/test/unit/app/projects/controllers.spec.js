@@ -4,13 +4,13 @@
   var expect = chai.expect;
   var controller, scope;
 
-  describe('App', function() {
+  describe('Projects', function() {
    
     describe('Controllers', function() {
         
       beforeEach(
         module(
-          'app.controllers', 
+          'app.projects.controllers',
           'app.resources',
           'ngResource',
           'security',
@@ -18,11 +18,11 @@
           'notifications.services'
         ));
 
-      describe('MainCtrl', function() {
+      describe('ProjectCtrl', function() {
         it('should be able to instantiate the controller',
           inject(function($rootScope, $controller) {
             var scope = $rootScope.$new(),
-              controller = $controller("MainCtrl", {
+              controller = $controller("ProjectCtrl", {
                 $scope: scope
               });
             
@@ -30,23 +30,35 @@
         }));
       });
 
-      describe('AppCtrl', function() {
+      describe('ProjectDetailCtrl', function() {
+        var project;
+
+        beforeEach(function () {
+          project = {
+            "_id": "abcdefghijklmnop",
+            "name": "Project2", 
+            "description": "This is your second project"
+          };
+    
+        });
+
         it('should be able to instantiate the controller',
           inject(function($rootScope, $controller) {
             var scope = $rootScope.$new(),
-              controller = $controller("AppCtrl", {
-                $scope: scope
+              controller = $controller("ProjectDetailCtrl", {
+                $scope: scope,
+                project: project
               });
             
             expect(controller).to.be.ok;
         }));
       });
 
-      describe('NavCtrl', function() {
+      describe('ProjectCreateCtrl', function() {
         it('should be able to instantiate the controller',
           inject(function($rootScope, $controller) {
             var scope = $rootScope.$new(),
-              controller = $controller("NavCtrl", {
+              controller = $controller("ProjectCreateCtrl", {
                 $scope: scope
               });
             

@@ -35,7 +35,7 @@
             .then(function () {
               notifications.success('Timesheet deleted.');
             },
-            function (err) {  
+            function (x) {  
               notifications.error('Error deleting timesheet : ' + err); 
             });
         };
@@ -49,7 +49,7 @@
               notifications.success('Timesheet restored.');
               timesheet._id = restored._id;
             }, 
-            function (err) {
+            function (x) {
               notifications.error('Error restoring timesheet: ' + err);
             });
         };
@@ -87,7 +87,7 @@
             .then(function () {
               notifications.success('Timeunit deleted.');
             },
-            function (err) {
+            function (x) {
               notifications.error('Timeunit restored.');
             });
         };
@@ -101,7 +101,7 @@
               notifications.success('Timeunit was restored.');
               timeunit._id = restoredTimeunit._id;
             },
-            function (err) {
+            function (x) {
               notifications.error('Error restoring the timeunit.');
             });
         };
@@ -119,7 +119,7 @@
               $scope.timesheet = updated;
               notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully updated.");
             }, 
-            function (err) {
+            function (x) {
               notifications.error('There was an error updating timesheet : ' + $scope.timesheet.name);
             });
         };
@@ -143,7 +143,7 @@
               $state.go('app.timesheets.detail', {user_id: $stateParams.user_id, _id: created._id});
               notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully created.");
             }, 
-            function (err) {
+            function (x) {
               notifications.error('There was an error creating timesheet : ' + $scope.timesheet.name);
             });
         };
@@ -151,56 +151,6 @@
         $scope.cancel = function cancel () {
           $state.go('app.timesheets', $stateParams, {reload: true});
         };
-      }
-    )
-
-    .controller('TimeunitCtrl', 
-      function ($scope, $state, $stateParams, projects) {
-        $scope.projects = projects; 
-
-        $scope.cancel = function cancel () {
-          $state.go('app.timesheets.detail', $stateParams, {reload: true});
-        };
-      }
-    )
-
-    .controller('TimeunitEditCtrl', 
-      function ($scope, $state, $stateParams, notifications, timeunit) {
-        $scope.timeunit = timeunit;
-        
-        $scope.save = function save () {
-          $scope.timeunit.$update()
-            .then(function (updated) {
-              $scope.timeunit = updated;
-              notifications.success('Timeunit updated.');
-            },
-            function (err) {
-              notifications.error('Error updating timeunit.');
-              $state.reload();
-            });
-        };
-      }
-    )
-
-    .controller('TimeunitCreateCtrl', 
-      function ($scope, $state, $stateParams, $control, notifications, dateFilter) {
-        $scope.timeunit = {
-          user_id: $stateParams.user_id,
-          timesheet_id: $stateParams._id
-        };
-
-        $scope.save = function save () {
-
-          $control.create('timeunits', $scope.timeunit)
-            .then(function (created) {
-              $state.go('app.timesheets.detail', $stateParams, {reload: true});
-              notifications.success("Logged Time for " + dateFilter(created.dateWorked));
-            },
-            function (err) {
-              notifications.error("There was an error logging time.");
-            });
-        };
-
       }
     );
 
