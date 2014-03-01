@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('security.authentication', [])
+  angular.module('authentication.services', [
+    'security.services'
+  ])
 
   .factory('authentication', 
     function ($q, $control, $state, $location, securityContext, retryQueue, notifications) {

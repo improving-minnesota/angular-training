@@ -14,8 +14,9 @@ describe('Authorization', function() {
   
   beforeEach(
     module(
-      'test', 
-      'security',
+      'test',
+      'authorization.services', 
+      'security.services',
       'app.resources',
       'ngResource',
       'stateMock',
