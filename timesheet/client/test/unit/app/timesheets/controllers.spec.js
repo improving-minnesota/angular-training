@@ -13,7 +13,7 @@
           'app.timesheets.controllers', 
           'app.resources',
           'ngResource',
-          'security',
+          'security.services',
           'stateMock',
           'notifications.services'
         ));

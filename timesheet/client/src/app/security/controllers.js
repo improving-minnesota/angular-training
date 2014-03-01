@@ -1,7 +1,11 @@
 (function () {
   'use strict';
 
-  angular.module('security.login.controllers', [])
+  angular.module('app.security.controllers', [
+    'authentication.services',
+    'authorization.services',
+    'security.services'
+  ])
 
     // The LoginCtrl provides the behaviour behind a reusable form to allow users to authenticate.
     .controller('LoginCtrl', 

@@ -7,7 +7,7 @@ describe('securityInterceptor', function() {
   beforeEach(
     module(
       'security.interceptors',
-      'security.retry.queue'
+      'security.services'
     ));
 
   beforeEach(inject(function($injector) {

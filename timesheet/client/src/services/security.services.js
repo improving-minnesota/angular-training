@@ -1,9 +1,31 @@
 (function () {
   'use strict';
 
-  angular.module('security.retry.queue', [])
+  var app = angular.module('security.services', [])
 
-  // This is a generic retry queue for security failures.  Each item is expected to expose two functions: retry and cancel.
+  .factory('securityContext', function () {
+      
+      var securityContext =  {
+        user : {},
+        authenticated : false,
+
+        reset : function () {
+          securityContext.user = {};
+          securityContext.authenticated = false;
+          return securityContext;
+        },
+
+        setAuthentication : function (context) {
+          securityContext.authenticated = context.authenticated;
+          securityContext.user = context.user;
+        }
+      };
+
+      return securityContext;
+    }
+  )
+
+   // This is a generic retry queue for security failures.  Each item is expected to expose two functions: retry and cancel.
   .factory('retryQueue', function ($q, $log) {
     var queue = [];
     var service = {

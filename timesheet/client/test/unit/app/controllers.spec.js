@@ -13,7 +13,8 @@
           'app.controllers', 
           'app.resources',
           'ngResource',
-          'security',
+          'security.services',
+          'authentication.services',
           'stateMock',
           'notifications.services'
         ));

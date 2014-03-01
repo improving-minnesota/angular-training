@@ -16,9 +16,8 @@ describe('Authentication', function() {
 
   beforeEach(
     module(
-      'security.retry.queue',
-      'security.authentication',
-      'security.context',
+      'authentication.services',
+      'security.services',
       'test', 
       'stateMock', 
       'assets/templates/security/login/index.html',

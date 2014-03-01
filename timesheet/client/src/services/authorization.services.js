@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('security.authorization', [
-    'security.retry.queue',
-    'security.authentication'
+  angular.module('authorization.services', [
+    'security.services',
+    'authentication.services'
   ])
 
   // This service provides guard methods to protect application states.

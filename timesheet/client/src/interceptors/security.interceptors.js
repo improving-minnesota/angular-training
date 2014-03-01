@@ -2,8 +2,7 @@
   'use strict';
 
   angular.module('security.interceptors', [
-    'security.retry.queue',
-    'security.context'
+    'security.services'
   ])
 
   // This http interceptor listens for authentication failures
@@ -13,9 +12,9 @@
 
         responseError : function (response) {
           // We must use $injector to prevent circular dependency
-          var queue = $injector.get('security.retry.queue');
+          var queue = $injector.get('retryQueue');
 
-          if (response.status == 401 && response.config.url !== '/api/login' ) {
+          if (response.status == 401 && response.config.url !== '/login' ) {
             return queue.pushRetryFn('unauthorized-server', function retryRequest() {
               return $injector.get('$http')(response.config);
             });
