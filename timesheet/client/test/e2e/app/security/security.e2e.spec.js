@@ -2,14 +2,14 @@
   'use strict';
   var expect = chai.expect;
 
-  describe('tsz.controllers', function () {
+  describe('Security', function () {
 
     beforeEach (function () {
-      browser().navigateTo("/");
+      browser().navigateTo("/login");
       sleep(0.5);
     });
 
-    describe('tszController', function () {
+    describe('Login', function () {
 
       it('be a passing spec', function () {
         expect(true).to.be.ok;
