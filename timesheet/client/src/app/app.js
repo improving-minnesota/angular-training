@@ -3,13 +3,13 @@
   'use strict';
 
   var app = angular.module('app', [
-    'app.directives', 
     'app.resources',
     'app.controllers',
     'app.employees',
     'app.projects',
     'app.timesheets',
-    'security'
+    'app.timesheets.timeunits',
+    'app.security'
   ]);
 
   app.config(function ($stateProvider) {

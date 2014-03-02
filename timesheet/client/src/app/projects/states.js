@@ -5,7 +5,7 @@
   var app = angular.module('app.projects', [
     'app.projects.controllers',
     'ui.router',
-    'security'
+    'authorization.services'
   ]);
 
   app.config(function ($stateProvider, authorizationProvider) {
@@ -24,11 +24,20 @@
       })  
 
       .state('app.projects.detail', {
-        url: '/:id',
+        url: '/detail/:_id',
         controller: 'ProjectDetailCtrl',
-        templateUrl: 'assets/templates/app/projects/detail.html',
+        templateUrl: 'assets/templates/app/projects/form.html',
         data: {
-          section: 'Project: Detail'
+          section: 'Project: Detail',
+          saveText: 'Update'
+        },
+        resolve : {
+          project: [
+            '$control', 
+            '$stateParams',
+            function ($control, $stateParams) {
+              return $control.get('projects', $stateParams);
+            }]
         }
       })
 
@@ -37,17 +46,8 @@
         controller: 'ProjectCreateCtrl',
         templateUrl: 'assets/templates/app/projects/form.html',
         data: {
-          section: 'Project: Create'
-        }
-      })
-
-      // -------------  Login ----------------
-      .state('app.login', {
-        url: '/login?redirect',
-        templateUrl: 'assets/templates/security/login/index.html',
-        controller: 'LoginCtrl',
-        data: {
-          section: 'Please Log In'
+          section: 'Project: Create',
+          saveText: 'Create'
         }
       });
   });

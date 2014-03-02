@@ -5,7 +5,7 @@
   var app = angular.module('app.timesheets', [
     'app.timesheets.controllers',
     'ui.router',
-    'security'
+    'authorization.services'
   ]);
 
   app.config(function ($stateProvider, authorizationProvider) {
@@ -65,36 +65,6 @@
         data: {
           section: 'Timesheet: Create',
           saveText: 'Create'
-        }
-      })
-
-      .state('app.timesheets.detail.timeunits', {
-        abstract: true,
-        url: '/timeunits',
-        controller: 'TimeunitCtrl',
-        template: '<div ui-view></div>',
-        resolve: {
-          projects: ['$control', function ($control) {
-            return $control.list('projects');
-          }]
-        }
-      })
-
-      .state('app.timesheets.detail.timeunits.create', {
-        url: '/create',
-        controller: 'TimeunitCreateCtrl',
-        templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
-        data: {
-          section: 'Timesheet: Log Time'
-        }
-      })
-
-      .state('app.timesheets.detail.timeunits.edit', {
-        url: '/edit/:timeunit_id',
-        controller: 'TimeunitEditCtrl',
-        templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
-        data: {
-          section: 'Timesheet: Edit Time'
         }
       });
   });

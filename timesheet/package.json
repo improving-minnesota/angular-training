@@ -1,7 +1,7 @@
 {
   "name": "timesheetz",
   "title": "Timesheet Application",
-  "main": "./client/dist/release/main.js",
+  "main": "./api/server.js",
   "description": "Timesheet application for Angular training labs",
   "version": "0.0.1-SNAPSHOT",
   "dependencies": {

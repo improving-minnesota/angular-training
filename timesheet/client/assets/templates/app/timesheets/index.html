@@ -17,11 +17,11 @@
               <th>End Date</th>
               <th>Name</th>
               <th>Description</th>
-              <th width="5%">Delete</th>
+              <th class="tsz-table-delete-column">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="timesheet in pageConfig.data" 
+            <tr ng-repeat="timesheet in pageConfig.data | orderBy:beginDate" 
               ng-click="showDetail(timesheet)">
 
               <td>{{timesheet.beginDate | date}}</td>
@@ -30,11 +30,11 @@
               <td>{{timesheet.description}}</td>
               <td>
                 <div ng-switch="timesheet.deleted">
-                  <div ng-switch-when="undefined">
-                    <button class="btn btn-sm btn-danger" ng-click="remove(timesheet); $event.stopPropagation();">Delete</button>
-                  </div>
                   <div ng-switch-when="true">
-                    <button class="btn btn-sm" ng-click="undoRemove(timesheet); $event.stopPropagation();">Undo</button>
+                    <button class="btn btn-sm" ng-click="restore(timesheet); $event.stopPropagation();">Undo</button>
+                  </div>
+                  <div ng-switch-default>
+                      <button class="btn btn-sm btn-danger" ng-click="remove(timesheet); $event.stopPropagation();">Delete</button>
                   </div>
                 </div>
               </td>

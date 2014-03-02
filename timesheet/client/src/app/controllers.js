@@ -16,13 +16,13 @@
     })
     
     .controller('AppCtrl', 
-      function ($scope, $state, $stateParams){
+      function ($scope){
         
       }
     )
 
     .controller('NavCtrl', 
-      function ($scope, $state, $stateParams, securityContext, authentication) {
+      function ($scope, authentication) {
       
         $scope.logout = function logout () {
           authentication.logout();

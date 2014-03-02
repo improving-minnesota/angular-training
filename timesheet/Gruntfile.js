@@ -116,6 +116,7 @@ module.exports = function (grunt) {
           '<%= components %>/angular-ui-bootstrap/src/position/position.js',
           '<%= components %>/angular-ui-bootstrap/src/datepicker/datepicker.js',
           '<%= components %>/angular-ui-bootstrap/src/pagination/pagination.js',
+          '<%= components %>/angular-ui-bootstrap/src/buttons/buttons.js',
 
           //NProgress
           '<%= components %>/nprogress/nprogress.js',
@@ -389,9 +390,6 @@ module.exports = function (grunt) {
 
     // Runs shell tasks
     // bowerInstall - Runs `bower install`
-    // angular - Runs npm install for the Angular source pulled down with bower install.
-    // angularuibootstrap - Runs npm install for the angular-ui bootstrap source pulled down with bower install.
-    // angularuiutils - Runs npm install for the angular-ui utils source pulled down with bower install.
     shell : {
       bowerInstall : {
         options: {
