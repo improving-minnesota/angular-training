@@ -1,7 +1,7 @@
 module.exports = (function () {
   var DataStore = require('nedb'),
     Q = require('q'),
-    _ = require('underscore');
+    _ = require('lodash');
 
   var db;
   var initDb = function initDb() {
