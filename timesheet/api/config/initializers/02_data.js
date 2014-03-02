@@ -1,4 +1,4 @@
-var _ = require('underscore'),
+var _ = require('lodash'),
   db = require('../../app/services/db.js'),
   Q = require('q'); 
 
