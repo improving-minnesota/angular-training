@@ -5,7 +5,7 @@
   var app = angular.module('app.employees', [
     'app.employees.controllers',
     'ui.router',
-    'security'
+    'authorization.services'
   ]);
 
   app.config(function ($stateProvider, authorizationProvider) {
