@@ -27,6 +27,7 @@
     "sinon": "1.7.3",
     "sinon-chai": "2.4.0",
     "karma": "0.9.4",
+    "karma-ng-html2js-preprocessor": "0.1.0",
     "grunt": "0.4.1",
     "grunt-contrib-concat": "0.3.0",
     "grunt-contrib-watch": "0.5.3",

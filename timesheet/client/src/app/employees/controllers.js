@@ -19,7 +19,10 @@
         };
 
         $scope.showDetail = function showDetail (employee) {
-          if (employee.deleted) return;
+          if (employee.deleted) {
+            notifications.error('You cannot edit a deleted employee.');
+            return;
+          }
           $state.go('app.employees.detail', employee);
         };  
 
@@ -86,6 +89,7 @@
           $control.create('employees', $scope.employee)
             .then(function (created) {
               notifications.success('Employee : ' + created.username + ' , created.');
+              $state.go('app.employees.detail', created);
             },
             function (x) {
               notifications.error('There was an error creating employee.');

@@ -1,4 +1,3 @@
-
 describe('Authentication', function() {
   var expect = chai.expect;
 

@@ -218,10 +218,7 @@ module.exports = function (grunt) {
     },
 
     // Starts the karama runner for unit and e2e tests.
-    // For the non CI tasks, tests are ran when the task is re-invoked 
-    // from the watch task.
-    // For the CI tasks, tests are ran immediately.  The application server
-    // must be running for these to succeed 
+    // Tests are run when the task is re-invoked from the watch task.
     karma : {
       unit : {
         reporters: 'dots',
