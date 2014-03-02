@@ -3,7 +3,7 @@ var express = require('express')
 
 module.exports = function () {
 
-  console.log('in development config');
+  console.log(' * Starting Development Configuration');
 
   this.set('port', properties.server.dev.listenPort);
   this.set('securePort', properties.server.dev.securePort);

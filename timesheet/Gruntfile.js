@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 
     // The clean task ensures all files are removed from the dist/ directory so
     // that no files linger from previous builds.
-    clean: ["dist", "<%= clientdist %>", "client/docs", "client/test-reports", "*.zip"],
+    clean: ["dist", "<%= clientdist %>", "client/docs", "client/test-reports"],
 
     // The jshint option for scripturl is set to lax, because the anchor
     // override inside main.js needs to test for them so as to not accidentally
@@ -319,7 +319,7 @@ module.exports = function (grunt) {
           }
         },
         files: {
-          '<%= clientdist %>/assets/html/index.html' : ['app/views/application/index.jade']
+          '<%= clientdist %>/assets/html/index.html' : ['api/app/views/application/index.jade']
         }
       },
       production : {
@@ -330,7 +330,7 @@ module.exports = function (grunt) {
           }
         },
         files: {
-          '<%= clientdist %>/assets/html/index.min.html' : ['app/views/application/index.jade']
+          '<%= clientdist %>/assets/html/index.min.html' : ['api/app/views/application/index.jade']
         }
       }
     },
@@ -386,34 +386,13 @@ module.exports = function (grunt) {
         },
         env: 'development'
       }
-    },
-
-    // Runs shell tasks
-    // bowerInstall - Runs `bower install`
-    shell : {
-      bowerInstall : {
-        options: {
-          stdout: true,
-          stderr: true
-        },
-        command: 'bower install'
-      },
-      startup : {
-        options: {
-          stdout: true,
-          stderror: true
-        },
-        command: [
-        'grunt karma:unit',
-        'grunt karma:e2e',
-        'grunt watch'
-        ].join('&')
-      }
     }
+
   });
 
   // *********************************************************************************************
 
+  // Load NPM Package Tasks
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks("grunt-contrib-jade");
   grunt.loadNpmTasks("grunt-contrib-less");
@@ -423,17 +402,15 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-cssmin");
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-mixtape-run-app');
   grunt.loadNpmTasks("grunt-karma");
-  grunt.loadNpmTasks("grunt-shell");
   grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ngmin');
 
-  // **********************************************************************************************
+  // Load Project Tasks
+  grunt.loadTasks('grunt_tasks');
 
-  //Initialize a fresh project. 
-  grunt.registerTask("init", ['shell:bowerInstall', 'production']);
+  // **********************************************************************************************
 
   // The default task will remove all contents inside the dist/ folder, lint
   // all your code, precompile all the underscore templates into
