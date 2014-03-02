@@ -19,6 +19,7 @@
         };
 
         $scope.showDetail = function showDetail (employee) {
+          if (employee.deleted) return;
           $state.go('app.employees.detail', employee);
         };  
 
@@ -27,27 +28,25 @@
         };
 
         $scope.remove = function remove (employee) {
-          var deleted = angular.extend(employee, {deleted: true});
 
-          $control.remove('employees', deleted) 
+          $control.remove('employees', employee) 
             .then(function () {
               notifications.success('Employee : ' + employee.username + ', was deleted.');
             },
             function (x) {
+              employee.deleted = false;
               notifications.error('Error attempting to delete employee.');
             });
         };
 
         $scope.restore = function restore (employee) {
-          var deleted = angular.extend(employee, {deleted: false});
-          delete deleted._id;
-
-          $control.create('employees', deleted)
+         
+         $control.restore('employees', employee)
             .then(function (restored) {
               notifications.success('Employee was restored.');
-              employee._id = restored._id;
             },
             function (x) {
+              employee.deleted = true;
               notifications.error('Error restoring employee.');
             });
         };
