@@ -1,4 +1,4 @@
-describe('securityInterceptor', function() {
+describe('Security interceptor', function() {
   var expect = chai.expect;
 
   var queue, 

@@ -390,9 +390,6 @@ module.exports = function (grunt) {
 
     // Runs shell tasks
     // bowerInstall - Runs `bower install`
-    // angular - Runs npm install for the Angular source pulled down with bower install.
-    // angularuibootstrap - Runs npm install for the angular-ui bootstrap source pulled down with bower install.
-    // angularuiutils - Runs npm install for the angular-ui utils source pulled down with bower install.
     shell : {
       bowerInstall : {
         options: {
