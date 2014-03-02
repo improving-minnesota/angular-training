@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('authentication.services', [
-    'security.services'
+    'security.services',
+    'notifications.services'
   ])
 
   .factory('authentication', 
