@@ -27,7 +27,7 @@ module.exports = function(config) {
       'assets/templates/**/*.html': ['ng-html2js']
     },
 
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Chrome'],
 
     plugins: ['karma-jasmine', 'karma-chrome-launcher', 'karma-ng-html2js-preprocessor']
   });
