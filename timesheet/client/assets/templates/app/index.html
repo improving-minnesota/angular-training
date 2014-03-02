@@ -1,9 +1,9 @@
 <div class="tsz-content-container">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <div class="col-xs-6">
-          <div ng-if="authenticated">
+      <div ng-if="authenticated" class="col-xs-12">
+        <div class="row">
+          <div class="col-xs-6">
             <div class="tsz-nav-container">
               <ul class="nav nav-pills">
                 <li ng-class="{active: $state.includes('app.projects')}">
@@ -16,15 +16,20 @@
                   <a ui-sref="app.timesheets({user_id: loggedInUser._id})">Timesheets</a>
                 </li>
               </ul>
-            </div>  
+            </div>
+          </div>
+          
+          <div class="col-xs-6 tsz-nav-title">
+            <div class="pull-right">
+              <h2>
+                <small>{{$state.current.data.section}}</small>
+              </h2>
+            </div>
           </div>
         </div>
-
-        <div class="col-xs-6">
-          <div class="pull-right">
-            <h2>
-              <small>{{$state.current.data.section}}</small>
-            </h2>
+        <div class="row">
+          <div class="col-xs-12">
+            <hr/> 
           </div>
         </div>
       </div>  
@@ -32,10 +37,9 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <hr/> 
+        <div ui-view></div>
       </div>
     </div>
 
-    <div ui-view></div>
   </div>
 </div>
