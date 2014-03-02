@@ -406,9 +406,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ngmin');
+  grunt.loadNpmTasks('grunt-mixtape-run-app');
 
-  // Load Project Tasks
-  grunt.loadTasks('grunt_tasks');
 
   // **********************************************************************************************
 
