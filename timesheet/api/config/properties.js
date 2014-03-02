@@ -2,7 +2,7 @@
 /*jslint nomen: false*/
 module.exports = {
 
-  appName: "cabin-tsz-ui",
+  appName: "timesheet-api",
 
   logs : {
     folder : './logs',

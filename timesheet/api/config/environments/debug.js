@@ -11,7 +11,7 @@ module.exports = function () {
   }));
 
   // Serve static content
-  this.use(express.static(__dirname + "/../../client/dist/timesheet-debug"));
+  this.use(express.static(__dirname + "/../../../client/dist/timesheet-debug"));
 
   this.use(function (req, res) {
     res.send(404);

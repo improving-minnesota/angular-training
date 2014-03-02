@@ -7,14 +7,14 @@ module.exports = (function () {
   var initDb = function initDb() {
     db = {};
     
-    db.users = new DataStore({filename: 'data/db/users.json', autoload: true});
+    db.users = new DataStore({filename: 'api/data/db/users.json', autoload: true});
     db.users.ensureIndex({fieldName: 'username', unique: true});
     db.users.ensureIndex({fieldName: 'email', unique: true});
 
-    db.timesheets = new DataStore({filename: 'data/db/timesheets.json', autoload: true});
-    db.timeunits = new DataStore({filename: 'data/db/timeunits.json', autoload: true});
+    db.timesheets = new DataStore({filename: 'api/data/db/timesheets.json', autoload: true});
+    db.timeunits = new DataStore({filename: 'api/data/db/timeunits.json', autoload: true});
 
-    db.projects = new DataStore({filename: 'data/db/projects.json', autoload: true});
+    db.projects = new DataStore({filename: 'api/data/db/projects.json', autoload: true});
     db.projects.ensureIndex({fieldName: 'name', unique: true});
 
     db.find = function (model, query) {

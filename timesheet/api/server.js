@@ -2,7 +2,7 @@ var fs = require('fs'),
   Q = require('q'),
   locomotive = require('locomotive');
 
-locomotive.boot('./', process.env.NODE_ENV, function (err, app) {
+locomotive.boot('./api/', process.env.NODE_ENV, function (err, app) {
   if (err){
     throw err;
   }

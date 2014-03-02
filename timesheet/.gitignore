@@ -18,5 +18,9 @@ client/cache.manifest
 *.iml
 
 client/index.html
+
 libpeerconnection.log
+
 dist
+
+api/data/db/*
