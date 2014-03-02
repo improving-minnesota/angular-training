@@ -8,7 +8,7 @@ var express = require('express'),
 
 module.exports = function () {
 
-  console.log('Configuring Application Security');
+  console.log(' * Configuring Application Security');
 
   passport.serializeUser(function (user, done) {
     done(null, user._id);
