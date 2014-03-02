@@ -36,7 +36,7 @@ module.exports = function () {
   this.use(express.session({ 
     secret: properties.session.secret,
     key: properties.session.key, 
-    store: new NedbStore({filename: 'data/db/session.json'}),
+    store: new NedbStore({filename: 'api/data/db/session.json'}),
     cookie: { 
       path: '/',
       httpOnly: true,
