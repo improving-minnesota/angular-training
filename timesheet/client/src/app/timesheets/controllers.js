@@ -21,6 +21,7 @@
         };
 
         $scope.showDetail = function showDetail (timesheet) {
+          if (timesheet.deleted) return;
           $state.go('app.timesheets.detail', timesheet);
         };
 
@@ -29,27 +30,25 @@
         };
 
         $scope.remove = function remove (timesheet) {
-          var deleted = angular.extend(timesheet, {deleted: true});
 
-          $control.remove('timesheets', deleted)
+          $control.remove('timesheets', timesheet)
             .then(function () {
               notifications.success('Timesheet deleted.');
             },
             function (x) {  
+              timesheet.deleted = false;
               notifications.error('Error deleting timesheet : ' + err); 
             });
         };
 
         $scope.restore = function restore (timesheet) {
-          var deleted = angular.extend(timesheet, {deleted: false});
-          delete deleted._id;
-
-          $control.create('timesheets', deleted)
+          
+          $control.restore('timesheets', timesheet)
             .then(function (restored) {
               notifications.success('Timesheet restored.');
-              timesheet._id = restored._id;
             }, 
             function (x) {
+              timesheet.deleted = true;
               notifications.error('Error restoring timesheet: ' + err);
             });
         };

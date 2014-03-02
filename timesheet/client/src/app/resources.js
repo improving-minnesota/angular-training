@@ -36,8 +36,13 @@
           },
 
           remove : function (resource, model) {
-            var removed = $api[resource].remove(model);
-            return removed.$promise || removed;
+            model.deleted = true;
+            return control.update(resource, model);
+          },
+
+          restore : function (resource, model) {
+            model.deleted = false;
+            return control.update(resource, model);
           },
 
           login : function (model, current) {

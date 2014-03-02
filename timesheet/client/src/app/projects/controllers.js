@@ -19,6 +19,10 @@
         };
 
         $scope.showDetail = function showDetail (project) {
+          if (project.deleted) {
+            notifications.error('You cannot edit a deleted project.');
+            return;
+          }
           $state.go('app.projects.detail', project);
         };
 
@@ -27,26 +31,24 @@
         };
 
         $scope.remove = function remove (project) {
-          var deleted = angular.extend(project, {deleted: true});
-
-          $control.remove('projects', deleted)
+          $control.remove('projects', project)
             .then(function (removed) {
-              notifications.success('Project : ' + removed.name + ', was deleted.');
+              notifications.success('Project : ' + project.name + ', was deleted.');
             },
             function (x) {
+              project.deleted = false;
               notifications.error('Error attempting to delete project.');
             });
         };
 
         $scope.restore = function restore (project) { 
-          var deleted = angular.extend(project, {deleted: false});
 
-          $control.create('projects', deleted) 
+          $control.restore('projects', project) 
             .then(function (restored) {
               notifications.success('Project was restored.');
-              project._id = restored._id;
             },
             function (x) {
+              project.deleted = true;
               notifications.error('Error restoring project.');
             });
         };

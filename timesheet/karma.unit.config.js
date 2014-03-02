@@ -24,10 +24,10 @@ module.exports = function(config) {
 
 		// generate js files from html templates
 		preprocessors : {
-      'assets/templates/**/*.html': 'html2js'
+      'assets/templates/**/*.html': ['ng-html2js']
     },
 
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Chrome'],
 
     plugins: ['karma-jasmine', 'karma-chrome-launcher', 'karma-ng-html2js-preprocessor']
   });
