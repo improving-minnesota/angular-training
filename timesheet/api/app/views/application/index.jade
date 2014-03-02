@@ -1,33 +1,16 @@
-!!! 5
-//if IE 8
-  html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
-//if IE 9
-  html(lang="en", class="no-js ie9", data-ng-app="main", id="ng-app")
-//if [(gt IE 9)|!(IE)] <!
 html(class="no-js", ng-app="main")
-  // <![endif]
   head
-    meta(charset="utf-8")
-    title(ng-bind-template="Timesheetz") Timesheetz
     base(href="/")
+    title(ng-bind-template="Timesheetz") Timesheetz
+    
+    meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, user-scalable=no, maximum-scale=1, minimum-scale=1")
-    meta(name="apple-mobile-web-app-capable", content="yes")
-    meta(name="apple-mobile-web-app-status-bar-style", content="black")
-
     meta(name="description", content="Timesheet Demo Application")
-
-    meta(property="og:title", content="")
-    meta(property="og:description", content="")
-    meta(property="og:type", content="")
-    meta(property="og:url", content="")
-    meta(property="og:image", content="")
 
     - if (env == 'production')
       link(href="/assets/css/style.min.css", rel="stylesheet", type="text/css")
     - else
       link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
-
-    link(rel="apple-touch-icon", href="/assets/img/apple-app-icon.png")
 
     body(ng-controller="MainCtrl")
       .tsz-page-container(ng-cloak)

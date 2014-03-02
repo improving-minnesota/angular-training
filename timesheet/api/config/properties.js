@@ -4,11 +4,6 @@ module.exports = {
 
   appName: "timesheet-api",
 
-  logs : {
-    folder : './logs',
-    filename : 'output.log'
-  },
-
   session : {
     secret : "d0853b30-3d95-11e2-a25f-0800200c9a66", // uuid hash
     maxAge : new Date(Date.now() + 300000),

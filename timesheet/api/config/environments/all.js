@@ -1,12 +1,11 @@
 var express = require('express'),
   passport = require('passport'),
-  poweredBy = require('connect-powered-by'),
   util = require('util'),
   properties = require('../properties'), 
   NedbStore = require('connect-nedb-session')(express);
 
 module.exports = function () {
-  console.log('Starting all configuration');
+  console.log(' * Starting Base Configuration');
 
   // Warn of version mismatch between global "lcm" binary and local installation
   // of Locomotive.
@@ -26,7 +25,6 @@ module.exports = function () {
   // Use middleware.  Standard [Connect](http://www.senchalabs.org/connect/)
   // middleware is built-in, with additional [third-party](https://github.com/senchalabs/connect/wiki)
   // middleware available as separate modules.
-  this.use(poweredBy('Locomotive'));
   this.use(express.logger());
   this.use(express.favicon());
   this.use(express.compress());
@@ -47,7 +45,5 @@ module.exports = function () {
   this.use(passport.initialize());
   this.use(passport.session());
   this.use(this.router);
-
-  console.log('Finished all configuration');
   
 };
