@@ -17,39 +17,50 @@ describe('App', function() {
       ));
 
     describe('MainCtrl', function() {
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("MainCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("MainCtrl", { 
+          $scope: scope 
+        });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
     });
 
     describe('AppCtrl', function() {
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("AppCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("AppCtrl", { 
+          $scope: scope 
+        });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
     });
 
     describe('NavCtrl', function() {
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("NavCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("NavCtrl", { 
+          $scope: scope 
+        });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
     });
 
   });

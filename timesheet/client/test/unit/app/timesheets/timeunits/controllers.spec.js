@@ -19,52 +19,67 @@ describe('Timeunits', function() {
       var projects;
 
       beforeEach(function () {
-        projects = [
-          {"name": "Project1", "description": "This is your first project"}
-        ];
+        projects = [{
+          "name": "Project1", 
+          "description": "This is your first project"
+        }];
       });
 
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("TimeunitCtrl", {
-              $scope: scope,
-              projects: projects
-            });
-          
-          expect(controller).to.be.ok;
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("TimeunitCtrl", { 
+          $scope: scope,
+          projects: projects
+        });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
     });
 
     describe('TimeunitEditCtrl', function() {
       var timeunit;
 
       beforeEach(function () {
-        timeunit = {"dateWorked": "2013-11-18", "hoursWorked": 8, "project": "Project1"};
+        timeunit = {
+          "dateWorked": "2013-11-18", 
+          "hoursWorked": 8, 
+          "project": "Project1"
+        };
       });
 
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("TimeunitEditCtrl", {
-              $scope: scope,
-              timeunit: timeunit
-            });
-          
-          expect(controller).to.be.ok;
+      beforeEach(inject(function($rootScope, $controller) {
+        var scope = $rootScope.$new(),
+          controller = $controller("TimeunitEditCtrl", {
+            $scope: scope,
+            timeunit: timeunit
+          });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () {
+          expect(controller).to.be.ok;
+        });
+      });
     });
 
     describe('TimeunitCreateCtrl', function() {
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("TimeunitCreateCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+
+      beforeEach(inject(function($rootScope, $controller) {
+        var scope = $rootScope.$new(),
+          controller = $controller("TimeunitCreateCtrl", {
+            $scope: scope
+          });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () {
+          expect(controller).to.be.ok;
+        });
+      }); 
     });
 
   });

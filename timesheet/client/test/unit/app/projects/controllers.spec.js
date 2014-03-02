@@ -1,7 +1,8 @@
 describe('Projects', function() {
 
   var expect = chai.expect;
-  var controller, scope;
+  var controller, 
+    scope;
  
   describe('Controllers', function() {
       
@@ -16,15 +17,20 @@ describe('Projects', function() {
       ));
 
     describe('ProjectCtrl', function() {
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("ProjectCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("ProjectCtrl", { 
+          $scope: scope 
+        });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
+
     });
 
     describe('ProjectDetailCtrl', function() {
@@ -36,31 +42,38 @@ describe('Projects', function() {
           "name": "Project2", 
           "description": "This is your second project"
         };
-  
       });
 
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("ProjectDetailCtrl", {
-              $scope: scope,
-              project: project
-            });
-          
-          expect(controller).to.be.ok;
+      beforeEach(inject(function($rootScope, $controller) {
+        var scope = $rootScope.$new(),
+          controller = $controller("ProjectDetailCtrl", {
+            $scope: scope,
+            project: project
+          });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () {
+          expect(controller).to.be.ok;
+        });
+      });
     });
 
     describe('ProjectCreateCtrl', function() {
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("ProjectCreateCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+
+      beforeEach(inject(function($rootScope, $controller) {
+        var scope = $rootScope.$new(),
+          controller = $controller("ProjectCreateCtrl", {
+            $scope: scope
+          });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () {
+          expect(controller).to.be.ok;
+        });
+      }); 
+
     });
 
   });

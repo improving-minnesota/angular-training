@@ -15,15 +15,19 @@ describe('Employees', function () {
       ));
 
     describe('EmployeeCtrl', function () {
-      it('should have the main controller in the app.controllers module',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("EmployeeCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("EmployeeCtrl", { 
+          $scope: scope 
+        });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
     });
 
     describe('EmployeeDetailCtrl', function () {
@@ -40,28 +44,36 @@ describe('Employees', function () {
         };
       });
 
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("EmployeeDetailCtrl", {
-              $scope: scope,
-              employee: employee
-            });
-          
-          expect(controller).to.be.ok;
+      beforeEach(inject(function($rootScope, $controller) {
+        var scope = $rootScope.$new(),
+          controller = $controller("EmployeeDetailCtrl", {
+            $scope: scope,
+            employee: employee
+          });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () {
+          expect(controller).to.be.ok;
+        });
+      });
+
     });
 
     describe('EmployeeCreateCtrl', function () {
-      it('should be able to instantiate the controller',
-        inject(function($rootScope, $controller) {
-          var scope = $rootScope.$new(),
-            controller = $controller("EmployeeCreateCtrl", {
-              $scope: scope
-            });
-          
-          expect(controller).to.be.ok;
+
+      beforeEach(inject(function($rootScope, $controller) {
+        var scope = $rootScope.$new(),
+          controller = $controller("EmployeeCreateCtrl", {
+            $scope: scope
+          });
       }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () {
+          expect(controller).to.be.ok;
+        });
+      });
     });
 
   });

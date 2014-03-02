@@ -21,7 +21,7 @@ describe('Authorization', function() {
       'ngResource',
       'stateMock',
       'notifications.services',
-      'assets/templates/security/login/index.html'
+      'assets/templates/app/security/login/index.html'
     ));
   
   beforeEach(inject(function($injector) {

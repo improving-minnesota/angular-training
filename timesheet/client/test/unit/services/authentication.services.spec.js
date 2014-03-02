@@ -20,7 +20,7 @@ describe('Authentication', function() {
       'security.services',
       'test', 
       'stateMock', 
-      'assets/templates/security/login/index.html',
+      'assets/templates/app/security/login/index.html',
       'app.resources',
       'ngResource',
       'notifications.services'
