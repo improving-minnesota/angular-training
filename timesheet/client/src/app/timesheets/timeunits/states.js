@@ -5,7 +5,7 @@
   var app = angular.module('app.timesheets.timeunits', [
     'app.timesheets.timeunits.controllers',
     'ui.router',
-    'security'
+    'authorization.services'
   ]);
 
   app.config(function ($stateProvider, authorizationProvider) {
