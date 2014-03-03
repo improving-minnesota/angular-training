@@ -81,7 +81,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeUnitDetail(timeunit._id)">
+              <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeunitDetail(timeunit._id)">
                 <td>{{timeunit.project}}</td>
                 <td>{{timeunit.dateWorked | date}}</td>
                 <td>{{timeunit.hoursWorked}}</td>
