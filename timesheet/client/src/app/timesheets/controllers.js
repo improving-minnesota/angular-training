@@ -21,7 +21,10 @@
         };
 
         $scope.showDetail = function showDetail (timesheet) {
-          if (timesheet.deleted) return;
+          if (timesheet.deleted) {
+            notifications.error('You cannot edit a deleted timesheet.');
+            return;
+          }
           $state.go('app.timesheets.detail', timesheet);
         };
 
@@ -37,7 +40,7 @@
             },
             function (x) {  
               timesheet.deleted = false;
-              notifications.error('Error deleting timesheet : ' + err); 
+              notifications.error('Error deleting timesheet : ' + x); 
             });
         };
 
@@ -49,7 +52,7 @@
             }, 
             function (x) {
               timesheet.deleted = true;
-              notifications.error('Error restoring timesheet: ' + err);
+              notifications.error('Error restoring timesheet: ' + x);
             });
         };
 
@@ -74,33 +77,29 @@
           $state.go('app.timesheets.detail.timeunits.create', $stateParams);
         };
 
-        $scope.showTimeUnitDetail = function showTimeUnitDetail (timeunitId) {
+        $scope.showTimeunitDetail = function showTimeunitDetail (timeunitId) {
           $stateParams.timeunit_id = timeunitId;
           $state.go('app.timesheets.detail.timeunits.edit', $stateParams);
         };
 
         $scope.removeTimeunit = function removeTimeunit (timeunit) {
-          var removed = angular.extend(timeunit, {deleted: true, user_id: $scope.timesheet.user_id});
-
-          $control.remove('timeunits', removed) 
+          $control.remove('timeunits', timeunit) 
             .then(function () {
               notifications.success('Timeunit deleted.');
             },
             function (x) {
+              timeunit.deleted = false;
               notifications.error('Timeunit restored.');
             });
         };
 
         $scope.restoreTimeunit = function restoreTimeunit (timeunit) {
-          var restored = angular.extend(timeunit, {deleted: false, user_id: $scope.timesheet.user_id});
-          delete restored._id;
-
-          $control.create('timeunits', restored)
-            .then(function (restoredTimeunit) {
+          $control.restore('timeunits', timeunit)
+            .then(function (restored) {
               notifications.success('Timeunit was restored.');
-              timeunit._id = restoredTimeunit._id;
             },
             function (x) {
+              timeunit.deleted = true;
               notifications.error('Error restoring the timeunit.');
             });
         };
