@@ -44,6 +44,10 @@ angular.module('stateMock',[])
         throw Error('Not all transitions happened!');
       }
     };
+
+    this.reload = function () {
+      return angular.noop();
+    };
   })
 
   .service('$stateParams', function () {
