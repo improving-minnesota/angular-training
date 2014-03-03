@@ -77,8 +77,13 @@
           $state.go('app.timesheets.detail.timeunits.create', $stateParams);
         };
 
-        $scope.showTimeunitDetail = function showTimeunitDetail (timeunitId) {
-          $stateParams.timeunit_id = timeunitId;
+        $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
+          if (timeunit.deleted) {
+            notifications.error('Cannot edit a deleted timeunit.');
+            return;
+          }
+
+          $stateParams.timeunit_id = timeunit._id;
           $state.go('app.timesheets.detail.timeunits.edit', $stateParams);
         };
 
