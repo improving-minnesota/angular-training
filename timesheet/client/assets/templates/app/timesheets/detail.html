@@ -30,7 +30,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label">Begin Date</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static">{{timesheet.beginDate | date}}</p>
+                  <p class="form-control-static">{{timesheet.beginDate | momentLongDate}}</p>
                 </div>
               </div>
             </div>
@@ -38,7 +38,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label">End Date</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static">{{timesheet.endDate | date}}</p>
+                  <p class="form-control-static">{{timesheet.endDate | momentLongDate}}</p>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@
             <tbody>
               <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeunitDetail(timeunit._id)">
                 <td>{{timeunit.project}}</td>
-                <td>{{timeunit.dateWorked | date}}</td>
+                <td>{{timeunit.dateWorked | momentShortDate}}</td>
                 <td>{{timeunit.hoursWorked}}</td>
                 <td>
                   <div ng-switch="timeunit.deleted">

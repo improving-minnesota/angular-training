@@ -4,57 +4,45 @@
 
   var app = angular.module('date.filters', [])
 
-    .filter('userLocalDateTime', function () {
-      return function (dateString, targetFormat) {
-        if ((_.isUndefined(dateString) || dateString === null)) {
-          return 'None';
-        } else {
-          var localMoment = moment(dateString, 'YYYY-MM-DDTHH:mm:ss.SSSZ').local();
-          if (!_.isUndefined(targetFormat)) {
-            return localMoment.format(targetFormat);
-          } else {
-            return localMoment.format('M/D/YYYY h:mm:ss A');
-          }
-        }
+    // Date format from the API
+    .value('apiDateFormat', "YYYY-MM-DD")
+
+    .factory('dateUtils', function() {
+      var dateUtils = {};
+
+      dateUtils.nullOrUndefined = function nullOrUndefined(dateString) {
+        return (!angular.isDefined(dateString) || dateString === null ? 'None' : false);
       };
+
+      return dateUtils;
     })
 
-    .filter('userLocalDate', function () {
-      return function (dateString, targetFormat) {
-        if ((_.isUndefined(dateString) || dateString === null)) {
-          return 'None';
-        } else {
-          var localMoment = moment(dateString, 'YYYY-MM-DDTHH:mm:ss.SSSZ').local();
-          if (!_.isUndefined(targetFormat)) {
-            return localMoment.format(targetFormat);
-          } else {
-            return localMoment.format('M/D/YYYY');
-          }
-        }
-      };
-    })
-
-    .filter('momentFromNow', function () {
+    // http://momentjs.com/docs/#/displaying/fromnow/
+    .filter('momentFromNowAgo', function (apiDateFormat, dateUtils) {
       return function (dateString) {
-        return moment(new Date(dateString)).fromNow(true);
+        var momentDate = moment(dateString, apiDateFormat);
+        return dateUtils.nullOrUndefined(dateString) || (momentDate.isValid() ? momentDate.fromNow() : 'Invalid date');
       };
     })
 
-    .filter('momentFromNowAgo', function () {
+    // http://momentjs.com/docs/#/displaying/calendar-time/
+    .filter('momentCalendar', function (apiDateFormat, dateUtils) {
       return function (dateString) {
-        return moment(new Date(dateString)).fromNow();
+        return dateUtils.nullOrUndefined(dateString) || moment(dateString, apiDateFormat).calendar();
       };
     })
 
-    .filter('momentDateWithoutTime', function () {
+    // Nov 18, 2013
+    .filter('momentShortDate', function (apiDateFormat, dateUtils) {
       return function (dateString) {
-        return moment(new Date(dateString)).format("M/D/YYYY");
+        return dateUtils.nullOrUndefined(dateString) || moment(dateString, apiDateFormat).format("MMM D, YYYY");
       };
     })
 
-    .filter('momentCalendar', function () {
+    // November 18th, 2013
+    .filter('momentLongDate', function (apiDateFormat, dateUtils) {
       return function (dateString) {
-        return moment(new Date(dateString)).calendar();
+        return dateUtils.nullOrUndefined(dateString) || moment(dateString, apiDateFormat).format("MMMM Do, YYYY");
       };
     });
 
