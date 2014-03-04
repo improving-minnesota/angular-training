@@ -1,10 +1,5 @@
-# this is so that nodemon does not restart when client code changes, etc. 
-
+# adding all files so that nodemon does not restart for training. 
+/api/*
 /client/*
-/grunt_tasks/*
 /node_modules/*
-/dist/*
-/data/*
-Gruntfile.js
-karma.e2e.config.js
-karma.unit.config.js
+*
