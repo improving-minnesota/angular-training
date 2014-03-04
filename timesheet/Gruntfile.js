@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 
     // The clean task ensures all files are removed from the dist/ directory so
     // that no files linger from previous builds.
-    clean: ["dist", "<%= clientdist %>", "client/docs", "client/test-reports"],
+    clean: ['dist', '<%= clientdist %>', 'client/docs', 'client/test-reports'],
 
     // The jshint option for scripturl is set to lax, because the anchor
     // override inside main.js needs to test for them so as to not accidentally
@@ -34,10 +34,10 @@ module.exports = function (grunt) {
         }
       },
       code : {
-        src: ["client/src/**/*.js"]
+        src: ['client/src/**/*.js']
       },
       specs : {
-        src: ["client/test/**/*.js"],
+        src: ['client/test/**/*.js'],
         options: {
           expr: true
         }
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
     less:{
       app:{
         options: {
-          paths: ["<%= assets %>/less"]
+          paths: ['<%= assets %>/less']
         },
         files : {
           '<%= clientdist %>/assets/css/style.css': '<%= assets %>/less/style.less'
@@ -126,7 +126,7 @@ module.exports = function (grunt) {
           '<%= components %>/moment/moment.js',
         ],
 
-        dest: "<%= clientdist %>/assets/js/deps.js"
+        dest: '<%= clientdist %>/assets/js/deps.js'
       },
       appjs : {
         src : [
@@ -135,18 +135,18 @@ module.exports = function (grunt) {
           '<%= clientdist %>/assets/templates/lib.templates.js',
           'client/src/**/*.js'
         ],
-        dest: "<%= clientdist %>/assets/js/app.js"
+        dest: '<%= clientdist %>/assets/js/app.js'
       },
       css : {
         src : [
-          "<%= components %>/select2/select2.css",
-          "<%= components %>/nprogress/nprogress.css",
-          "<%= components %>/messenger/build/css/messenger.css",
-          "<%= components %>/messenger/build/css/messenger-theme-air.css",
-          "<%= components %>/messenger/build/css/messenger-spinner.css",
-          "<%= clientdist %>/assets/css/style.css"
+          '<%= components %>/select2/select2.css',
+          '<%= components %>/nprogress/nprogress.css',
+          '<%= components %>/messenger/build/css/messenger.css',
+          '<%= components %>/messenger/build/css/messenger-theme-air.css',
+          '<%= components %>/messenger/build/css/messenger-spinner.css',
+          '<%= clientdist %>/assets/css/style.css'
         ],
-        dest: "<%= clientdist %>/assets/css/style.css"
+        dest: '<%= clientdist %>/assets/css/style.css'
       }
     },
 
@@ -165,7 +165,7 @@ module.exports = function (grunt) {
     cssmin :{
       all : {
         files : {
-          "<%= clientdist %>/assets/css/style.min.css": ["<%= clientdist %>/assets/css/style.css"]
+          '<%= clientdist %>/assets/css/style.min.css': ['<%= clientdist %>/assets/css/style.css']
         }
       }
     },
@@ -174,7 +174,7 @@ module.exports = function (grunt) {
     uglify : {
       dist : {
         files: {
-          "<%= clientdist %>/assets/js/app.min.js" : ["<%= clientdist %>/assets/js/app.js"]
+          '<%= clientdist %>/assets/js/app.min.js' : ['<%= clientdist %>/assets/js/app.js']
         }
       }
     },
@@ -193,7 +193,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development', 'karma:unit:run', 'karma:e2e:run']
+        tasks: ['development', 'karma:unit:run', 'protractor:e2e']
       },
       debug: {
         files: [
@@ -203,7 +203,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug', 'karma:unit:run', 'karma:e2e:run']
+        tasks: ['debug', 'karma:unit:run', 'protractor:e2e']
       },
       production: {
         files: [
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production', 'karma:unit:run', 'karma:e2e:run']
+        tasks: ['production', 'karma:unit:run', 'protractor:e2e']
       }
     },
 
@@ -226,15 +226,16 @@ module.exports = function (grunt) {
         options: {
           background: true
         }
-      },
+      }
+    },
 
-      e2e : {
-        reporters: 'dots',
-        configFile: 'karma.e2e.config.js',
-        options : {
-          port: 9877,
-          runnerPort: 9101,
-          background: true
+    // Starts the protractor e2e tests. 
+    protractor: {
+      e2e: {
+        options: {
+          configFile: 'protractor.config.js',
+          keepAlive: true,
+          noColor: false
         }
       }
     },
@@ -335,31 +336,31 @@ module.exports = function (grunt) {
     // The **docco** task iterates through the `src` files and creates annotated source reports for them.
     docco: {
       options: {
-        layout : "parallel"
+        layout : 'parallel'
       },
       client: {
         options: {
-          output : "dist/docs/client/"
+          output : 'dist/docs/client/'
         },
-        src: "client/src/**/*.js"
+        src: 'client/src/**/*.js'
       },
       app: {
         options: {
-          output : "dist/docs/app/"
+          output : 'dist/docs/app/'
         },
-        src: "app/**/*.js"
+        src: 'app/**/*.js'
       },
       grunt: {
         options: {
-          output : "dist/docs/docs/grunt/"
+          output : 'dist/docs/docs/grunt/'
         },
-        src: "Gruntfile.js"
+        src: 'Gruntfile.js'
       },
       config: {
         options: {
-          output : "dist/docs/config/"
+          output : 'dist/docs/config/'
         },
-        src: "config/**/*.js"
+        src: 'config/**/*.js'
       }
     },
 
@@ -390,20 +391,21 @@ module.exports = function (grunt) {
   // *********************************************************************************************
 
   // Load NPM Package Tasks
-  grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.loadNpmTasks("grunt-contrib-jade");
-  grunt.loadNpmTasks("grunt-contrib-less");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-contrib-copy");
-  grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-cssmin");
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks("grunt-karma");
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-mixtape-run-app');
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
 
   // **********************************************************************************************
@@ -414,14 +416,14 @@ module.exports = function (grunt) {
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
 
-  grunt.registerTask("default", ['clean', 'jshint', 'less', 'concat:css', 'html2js', 'concat:jsdeps', 'copy:vendor', 'copy:development']);
+  grunt.registerTask('default', ['clean', 'jshint', 'less', 'concat:css', 'html2js', 'concat:jsdeps', 'copy:vendor', 'copy:development']);
 
   // Task to compile everything in development mode
-  grunt.registerTask("development", ['default']);
-  grunt.registerTask("debug", ['development', 'concat:appjs', 'jade:debug', 'copy:debug']);
-  grunt.registerTask("production", ['debug', 'cssmin', 'uglify', 'jade:production', 'copy:production']);
+  grunt.registerTask('development', ['default']);
+  grunt.registerTask('debug', ['development', 'concat:appjs', 'jade:debug', 'copy:debug']);
+  grunt.registerTask('production', ['debug', 'cssmin', 'uglify', 'jade:production', 'copy:production']);
 
   // Forks off the application server and runs the unit and e2e tests.
   // Test results stored in client/test-reports
-  grunt.registerTask("test", ['production', 'runapp:test', 'karma:unitci', 'karma:e2eci']);
+  grunt.registerTask('test', ['production', 'runapp:test']);
 };
