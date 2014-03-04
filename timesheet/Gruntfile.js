@@ -222,7 +222,7 @@ module.exports = function (grunt) {
     karma : {
       unit : {
         reporters: 'dots',
-        configFile: 'karma.unit.config.js',
+        configFile: 'karma.config.js',
         options: {
           background: true
         }
