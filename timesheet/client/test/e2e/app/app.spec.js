@@ -20,8 +20,7 @@ describe('App', function () {
 
     describe('Content', function () {
       beforeEach (function () {
-          browser.get("/");
-          
+        browser.get("/");
       });
 
       it('be a passing spec', function () {

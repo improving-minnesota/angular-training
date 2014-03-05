@@ -1,0 +1,364 @@
+.reveal em, .reveal i {
+  font-style: inherit;
+}
+
+.reveal ul.icons-ul {
+  list-style-type: none;
+}
+
+.index-section {
+  .sliding-image-container {
+    position: relative;
+    width: auto;
+    height: 256px;
+    margin-bottom: 30px;
+  }
+
+  .fading-header-container {
+    position: relative;
+    width: auto;
+    height: auto;
+    margin-top: -30px;
+    h1 {
+      position: absolute;
+      margin-top: 10px;
+      left: 0;
+      right: 0;
+      opacity: 0;
+    }
+  }
+
+  p {
+    padding-top: 110px;
+  }
+
+  img {
+    &.angular,
+    &.grunt,
+    &.yeoman,
+    &.bower {
+      position:absolute;
+      margin-left: 2000px;
+      width: 256px;
+      height: 256px;
+      border: none;
+      background: none;
+      box-shadow: none;
+    }
+    &.node {
+      position:absolute;
+      margin-left: 2000px;
+      top: 100px;
+      width: 512px;
+      height: 131px;
+      border: none;
+      background: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.index-slide {
+
+  .animate-logos {
+    &.angular {
+      -webkit-animation: anuglarlogo 20s infinite ease;
+    }
+    &.grunt {
+      -webkit-animation: gruntlogo 20s infinite ease;
+    }
+    &.yeoman {
+      -webkit-animation: yeomanlogo 20s infinite ease;
+    }
+    &.node {
+      -webkit-animation: nodelogo 20s infinite ease;
+    }
+    &.bower {
+      -webkit-animation: bowerlogo 20s infinite ease;
+      -webkit-animation-delay: 1s;
+    }
+  }
+
+  .animate-headers {
+    &.angular {
+      -webkit-animation: anuglarheader 20s infinite ease;
+    }
+    &.grunt {
+      -webkit-animation: gruntheader 20s infinite ease;
+    }
+    &.yeoman {
+      -webkit-animation: yeomanheader 20s infinite ease;
+    }
+    &.node {
+      -webkit-animation: nodeheader 20s infinite ease;
+    }
+    &.bower {
+      -webkit-animation: bowerheader 20s infinite ease;
+      -webkit-animation-delay: 1s;
+    }
+  }
+}
+
+@-webkit-keyframes anuglarlogo {
+
+  0% {
+    margin-left: 2000px;
+  }
+
+  5% {
+    margin-left: -128px;
+  }
+
+  15% {
+    margin-left: -128px;
+  }
+
+  20% {
+    margin-left: -2000px;
+  }
+
+  100% {
+    margin-left: -2000px;
+  }
+
+}
+
+@-webkit-keyframes gruntlogo {
+
+  0% {
+    margin-left: 2000px;
+  }
+
+  15% {
+    margin-left: 2000px;
+  }
+
+  22% {
+    margin-left: -128px;
+  }
+
+  40% {
+    margin-left: -128px;
+  }
+
+  50% {
+    margin-left: -2000px;
+  }
+
+  100% {
+    margin-left: -2000px;
+  }
+
+}
+
+@-webkit-keyframes yeomanlogo {
+
+  0% {
+    margin-left: 2000px;
+  }
+
+  42% {
+    margin-left: 2000px;
+  }
+
+  47% {
+    margin-left: -128px;
+  }
+
+  65% {
+    margin-left: -128px;
+  }
+
+  75% {
+    margin-left: -2000px;
+  }
+
+  100% {
+    margin-left: -2000px;
+  }
+
+}
+
+@-webkit-keyframes nodelogo {
+
+  0% {
+    margin-left: 2000px;
+  }
+
+  65% {
+    margin-left: 2000px;
+  }
+
+  70% {
+    margin-left: -242px;
+  }
+
+  80% {
+    margin-left: -242px;
+  }
+
+  85% {
+    margin-left: -2000px;
+  }
+
+  100% {
+    margin-left: -2000px;
+  }
+
+}
+
+@-webkit-keyframes bowerlogo {
+
+  0% {
+    margin-left: 2000px;
+  }
+
+  80% {
+    margin-left: 2000px;
+  }
+
+  82% {
+    margin-left: -128px;
+  }
+
+  92% {
+    margin-left: -128px;
+  }
+
+  100% {
+    margin-left: -2000px;
+  }
+
+}
+
+@-webkit-keyframes anuglarheader {
+
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+
+}
+
+@-webkit-keyframes gruntheader {
+
+  0% {
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0;
+  }
+
+  22% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+
+}
+
+@-webkit-keyframes yeomanheader {
+
+  0% {
+    opacity: 0;
+  }
+
+  42% {
+    opacity: 0;
+  }
+
+  47% {
+    opacity: 1;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+
+}
+
+@-webkit-keyframes nodeheader {
+
+  0% {
+    opacity: 0;
+  }
+
+  65% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+
+}
+
+@-webkit-keyframes bowerheader {
+
+  0% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0;
+  }
+
+  82% {
+    opacity: 1;
+  }
+
+  92% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+
+}
