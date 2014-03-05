@@ -8,7 +8,7 @@ describe('Projects', function () {
 
   describe('List', function () {
 
-   it('be a passing spec', function () {
+    it('be a passing spec', function () {
       var body = by.tagName('body');
       expect(ptor.isElementPresent(body)).toBe(true);
     });

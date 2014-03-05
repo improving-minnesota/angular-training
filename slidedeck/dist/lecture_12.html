@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--if IE 7html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
+-->
+<!--if IE 8html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
+-->
+<!--if IE 9html(lang="en", class="no-js ie9", data-ng-app="main", id="ng-app")
+-->
+<!--if [(gt IE 9)|!(IE)] <!-->
+<html ng-app="main" class="no-js">
+  <!-- <![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>UP Lunch and Learn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="UP Lunch and Learn">
+    <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="opi-logo"></div>
+      <div class="slides">
+        <section data-state="index-slide" class="index-section">
+          <div class="sliding-image-container"><img src="assets/img/angular.png" class="animate-logos angular"><img src="assets/img/grunt-logo.png" class="animate-logos grunt"><img src="assets/img/yeoman-logo.png" class="animate-logos yeoman"><img src="assets/img/node-logo.png" class="animate-logos node"><img src="assets/img/bower-logo.png" class="animate-logos bower"></div>
+          <div class="fading-header-container">
+            <h1 class="animate-headers angular">Angular.js</h1>
+            <h1 class="animate-headers grunt">Grunt.js</h1>
+            <h1 class="animate-headers yeoman">Yeoman</h1>
+            <h1 class="animate-headers node">Node.js</h1>
+            <h1 class="animate-headers bower">Bower.js</h1>
+          </div>
+          <p>
+            Lunch and Learn @ Union Pacific
+            
+          </p>
+        </section>
+        <section>
+          <h1><i class="icon-github"></i></h1>
+          <p>These slides are up on GitHub!</p><a href="http://mrkelly.github.io/up-angular" target="_blank">mrkelly/up-angular</a>
+        </section>
+        <section>
+          <section>
+            <h2>Today's Objective</h2>
+            <p>Share our experience building a production application using Angular JS</p>
+            <p>Many of the topics covered are universal to any JS dev</p>
+            <p>We love questions, don't be shy..you cannot derail us (challenge)</p>
+          </section>
+          <section>
+            <h2>About Us</h2>
+            <p>We are NOT experts, just write a ton of code.</p>
+            <ul>
+              <li>Mike Kelly<a href="https://twitter.com/mikerkelly" target="_blank">(@mikerkelly)</a></li>
+              <li>Bruce Coddington<a href="https://twitter.com/brucecoddington" target="_blank">(@brucecoddington)</a></li>
+            </ul><small>We're ALL noobs</small>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Project Layout</h2>
+          </section>
+          <section>
+            <h2>Objectives</h2>
+            <ul>
+              <li>Familiar for enterprise Java devs</li>
+              <li>Clear separation of concerns</li>
+              <li>Compiled code away from written code</li>
+              <li>Obvious (please)</li>
+              <li>Have our favorite libs play together nicely</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Let's take a look</h2><a href="https://github.com/brucecoddington/mixtape" target="_blank">Mixtape on Github</a>
+          </section>
+        </section>
+        <section>
+          <h2><a href="http://yeoman.io/" target="_blank">Yeoman generators</a></h2>
+          <ul>
+            <li>Spearheaded by famous Googlers (Paul Irish and Addy Osmani)</li>
+            <li>Easy to write custom generators to fit your project</li>
+            <li>Helps keep the project structure consistent</li>
+            <li>Can be published as NPM Modules</li>
+          </ul><a href="https://npmjs.org/package/generator-mixtape" target="_blank">generator-mixtape</a>
+        </section>
+        <section>
+          <section>
+            <h2>Build Process</h2>
+            <ul>
+              <li>Automate Everything!!</li>
+              <li>Minimize developer interaction (just write the code)</li>
+              <li>Discover devs' complaints and try to eliminate them</li>
+            </ul>
+          </section>
+          <section>
+            <h2><a href="http://gruntjs.com/" target="_blank">Grunt</a></h2>
+            <ul>
+              <li>The JavaScript Task Runner</li>
+              <li>A ton of tasks already written to do most anything</li>
+              <li>Easy to extend and write your own tasks</li>
+              <li>Gruntfile.js (let's take a look)</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Watch Task</h3>
+            <pre><code data-trim contenteditable>
+// A task that runs in the background 'watching' for changes to code.
+watch : {
+    options : {
+        livereload: true
+    },
+    client: {
+        files: [
+            'client/src/**/*.js',
+            'client/test/**/*.js',
+            '<%= assetsDir %>/templates/**/*.html'
+        ],
+        tasks: ['assemble', 'karma:unit:run', 'karma:e2e:run']
+    },
+    server : {
+        files: [
+            'test/**/*.js',
+            'app/**/*.js'
+        ],
+        tasks: ['mochacli']
+    },
+    views : {
+        files: [
+            'app/views/**/*.jade',
+            '<%= assetsDir %>/less/**/*.less'
+        ],
+        tasks: ['assemble']
+    }
+}
+</code></pre>
+          </section>
+          <section>
+            <h3>Server Task</h3>
+            <ul>
+              <li>Simple custom Grunt task to serve our index.html locally</li>
+              <li>Gives us 'environments' to run our code in different phases</li>
+              <li>Uses <a href="https://github.com/remy/nodemon" target="_blank">nodemon</a>&nbsp;to monitor for changes (restarts the server)</li>
+              <li>Just a wrapper around the CLI for nodemon</li>
+            </ul>
+          </section>
+          <section>
+            <h3><a href="http://www.jshint.com/" target="_blank">JSHINT</a></h3>
+            <ul>
+              <li>Since JavaScript is a dynamic language, it's impossible to get static compilation feedback</li>
+              <li>Check that your code follows best practices</li>
+              <li>Add settings to tweak the linting to your tastes</li>
+              <li>Helps keep the code consistent among the team</li>
+            </ul>
+          </section>
+          <section>
+            <h3><a href="http://lesscss.org/" target="_blank">LESS</a></h3>
+            <ul>
+              <li>CSS preprocessor to make life a little easier</li>
+              <li>Adds variables and mixins</li>
+              <li>Twitter Bootstrap is written in LESS</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Minification and Uglification</h3>
+            <p>Uglification is the optimization/compression/minimization of source code.  For JavaScript, we use <a href="https://github.com/mishoo/UglifyJS2" target="_blank">UglifyJS2</a></p>
+            <ul>
+              <li>Parser produces abstract syntax tree</li>
+              <li>AST is optimized into a smaller one by
+                <ul>
+                  <li>Applying optimization transforms</li>
+                  <li>Mangling variables</li>
+                  <li>Analyzing the scope</li>
+                </ul>
+              </li>
+              <li>As an added benefit: your source code is obfuscated</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Minification Example</h3>
+            <p>Minification results on a real project</p>
+            <ul>
+              <li><strong>Original </strong>&nbsp;2611949 bytes (2.49MB)</li>
+              <li><strong>Minified </strong>&nbsp;996966 bytes (973.5KB)</li>
+              <li><strong>Gzipped </strong>&nbsp;170552 bytes (166.5KB)</li>
+              <li>15:1 Compression ratio</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Special Considerations</h3>
+            <p>Because of mangling, Angular dependency injection and "Pretotyping" no longer works and leads to the infamous:</p>
+            <pre><code data-trim contenteditable>
+Uncaught Error: Unknown provider: aProvider <- a
+</code></pre>
+            <ul>
+              <li>Convert all modules and components to string argument style  </li>
+              <li>Lets take a look</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Templates</h3>
+            <p>Templates are static, so why not provide them as a compiled resource? This is where <a href="https://github.com/ericclemmons/grunt-angular-templates" target="_blank">grunt-angular-templates</a>&nbsp;comes in.</p>
+            <ol>
+              <li>Glob match files and directories</li>
+              <li>The $templateCache service is then preloaded with the static content</li>
+              <li>Template preload file is then uglified with the rest of the source</li>
+            </ol>
+          </section>
+          <section>
+            <h3>Other useful Grunt plugins</h3>
+            <ul>
+              <li><a href="https://github.com/shama/grunt-hub" target="_blank">grunt-hub  </a>&nbsp;A Grunt task to watch and run tasks on multiple Grunt projects</li>
+              <li><a href="https://github.com/sindresorhus/grunt-shell" target="_blank">grunt-shell  </a>&nbsp;Grunt task to run shell commands</li>
+              <li><a href="https://github.com/abovethewater/grunt-docco-multi" target="_blank">grunt-docco-multi </a>&nbsp;Generate&nbsp;<a href="http://jashkenas.github.io/docco/" target="_blank">Docco</a>&nbsp;from your source files.</li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+<grunt-docco-multi>
+  <section>
+    <section>
+      <h2>3rd Party Libraries</h2>
+    </section>
+    <section>
+      <h3><a href="http://momentjs.com/" target="_blank">moment.js</a></h3>
+      <p>Arguably the best date formatting library on the planet</p>
+      <ul>
+        <li>Formatting</li>
+        <li>Internationalization</li>
+        <li>Calculations</li>
+        <li>Fuzzy dates</li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills" target="_blank">HTML5 Shims and Polyfills</a></h3>
+      <p>A long list of libraries for providing standard HTML4 and HTML5 capabilities in "web browsers" (IE)</p>
+      <ul>
+        <li>SVG</li>
+        <li>Form Elements</li>
+        <li>Web Sockets</li>
+        <li>Browser state</li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="https://github.com/scottjehl/Respond" target="_blank">respond.js</a></h3>
+      <p>respond.js is a CSS3 polyfill for media queries.</p>
+      <ul>
+        <li>Automatic browser detection</li>
+        <li>Fast and lightweight</li>
+        <li>Works great with Twitter Bootstrap</li>
+        <li>Has a few <a href="https://github.com/scottjehl/Respond#support--caveats" target="_blank">caveats</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="http://lodash.com/" target="_blank">Lo-dash</a></h3>
+      <p>"A utility library delivering consistency, customization, performance, and extras."</p>
+      <ul>
+        <li>High performance (in some cases beats browser implementations)</li>
+        <li>Has most utility functions you would typically create yourself</li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a></h3>
+      <p>One of the best base stylesheets and a great place to start with new applications </p>
+      <ul>
+        <li>Responsive</li>
+        <li>Written in LESS so its easily extendable</li>
+        <li>Bootstrap 3 supports browsers newer than internet explorer 7</li>
+        <li>Fast paint and rendering times</li>
+        <li>Some of the best plugin support</li>
+      </ul>
+    </section>
+  </section>
+  <section>
+    <section>
+      <h2>Automated Testing</h2>
+      <ul>
+        <li>Tests should run automatically during build process</li>
+        <li>Should be very easy to write </li>
+        <li>Logical placement of tests within code</li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="http://visionmedia.github.io/mocha/" target="_blank">Mocha</a></h3>
+      <ul>
+        <li>Behavior driven development</li>
+        <li>Runs in the browser and on the server (Node)</li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="http://chaijs.com/" target="_blank">Chai</a></h3>
+      <ul>
+        <li>Assertion library</li>
+        <li>Can actually be used in real code</li>
+      </ul>
+      <pre><code data-trim content-editable>
+  expect(foo).to.be.a('string');
+  expect(foo).to.equal('bar');
+  expect(foo).to.have.length(3);
+  expect(tea).to.have.property('flavors').with.length(3);
+</code></pre>
+      <p>Check out <a href="https://www.youtube.com/watch?v=-WpDN2k7vbU" target="_blank">this </a>&nbsp;awesome talk by Rebecca Murphey at JSConf 2013</p>
+    </section>
+    <section>
+      <h3><a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing" target="_blank">Angular Scenarios</a></h3>
+      <ul>
+        <li>End to End tests</li>
+        <li>Similar to Selenium testing</li>
+        <li>Created by the Angular team so they are 'Angular-aware'</li>
+        <li>Navigate through the browser and check for correct behavior</li>
+        <li><a href="http://pivotal.github.io/jasmine/" target="_blank">Jasmine</a>&nbsp;syntax (very similar to Mocha)</li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="http://karma-runner.github.io/0.10/index.html" target="_blank">Karma Integration</a></h3>
+      <p>Spectacular test runner from the Angular JS team</p>
+      <ul>
+        <li>Run your tests in multiple browsers at once</li>
+        <li>simple configuration</li>
+        <li>'Debug' mode to see your tests in action in the browser</li>
+      </ul>
+    </section>
+  </section>
+  <section>
+    <section>
+      <h2>Continuous Integration</h2>
+    </section>
+    <section>
+      <h3>Jenkins</h3>
+      <ul>
+        <li>Works out of the box</li>
+        <li>Uses development tools</li>
+        <li>Run commands as you would locally</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Git source control</h3>
+      <ul>
+        <li>Building a single branch</li>
+        <li>Building multiple branches</li>
+        <li>Special considerations with the workspace</li>
+      </ul>
+    </section>
+    <section>
+      <h3>The Process</h3>
+      <ul>
+        <li>Install NPM and Bower packages</li>
+        <li>Run the assembly task</li>
+        <li>Test</li>
+        <li>Record the JUnit test results</li>
+      </ul>
+    </section>
+    <section>
+      <h3>More on Tests</h3>
+      <p>More than likely your CI will be running on a headless OS. How do you run end-to-end tests with no display?</p>
+    </section>
+    <section>
+      <h3><a href="http://phantomjs.org/" target="_blank">PhantomJS</a></h3>
+      <p>Phantom JS is a headless WebKit browser</p>
+      <ul class="icons-ul">
+        <li><i class="icon-li icon-ok"></i>Works out of the box</li>
+        <li><i class="icon-li icon-ok"></i>Scriptable API</li>
+        <li><i class="icon-li icon-ok"></i>Performance reporting</li>
+        <li><i class="icon-li icon-remove"></i>Not comparable with Firefox</li>
+        <li><i class="icon-li icon-remove"></i>It's a WebKit port, not a real browser</li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="http://en.wikipedia.org/wiki/Xvfb" target="_blank">Xvfb</a></h3>
+      <p>
+        <strong>X</strong> <strong>V</strong>irtual <strong>F</strong>rame <strong>B</strong>uffer
+        provides a virtual X11 server on a headless device for GUI applications.
+      </p>
+      <ul class="icons-ul">
+        <li><i class="icon-li icon-ok"></i>Color depth and resolutions are customizable</li>
+        <li><i class="icon-li icon-ok"></i>Easy to install and configure</li>
+        <li><i class="icon-li icon-ok"></i>Test with Chrome, Firefox, etc.</li>
+        <li><i class="icon-li icon-remove"></i>*nix only</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Examples</h3>
+    </section>
+  </section>
+  <section>
+    <section>
+      <h2>Angular.js</h2>
+      <ul>
+        <li>Teaching the browser new tricks</li>
+        <li>Dependency Injection</li>
+        <li>A bit of a learning curve (but not much)</li>
+        <li>Change the model, let Angular do the rest</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Modules</h3>
+      <ul>
+        <li>Small packages of functionality</li>
+        <li>Helps keep the application decoupled and promotes re-use</li>
+        <li>If minifying your code, make sure to use the array syntax<a href="https://npmjs.org/package/grunt-ngmin" target="_blank">(or use ng-min)</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3>Directives</h3>
+      <ul>
+        <li>The most powerful part of Angular</li>
+        <li>Meta-framework that you can use to create a DSL for the browser</li>
+        <li><a href="http://www.youtube.com/watch?v=WqmeI5fZcho&amp;list=TLu6EfJmyWLcE" target="_blank">Great talk by Misko</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3><a href="https://github.com/angular-ui/ui-router/wiki" target="_blank">UI Router</a></h3>
+      <ul>
+        <li>Cool project by the<a href="http://angular-ui.github.io/" target="_blank">Angular UI devs</a></li>
+        <li>Allows for nested views</li>
+        <li>Provides a complete state machine linked to your urls</li>
+      </ul>
+    </section>
+  </section>
+  <section>
+    <section>
+      <h2><a href="http://joshdmiller.github.io/ng-boilerplate/#/home" target="_blank">ng-boilerplate</a></h2>
+      <ul>
+        <li>Very cool new project</li>
+        <li>Takes a different approach to code organization</li>
+        <li>Modules are self-contained (feels very Web Component-ish)</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Let's take a gander</h3><a href="https://github.com/joshdmiller/ng-boilerplate">ng-boilerplate on Github</a>
+    </section>
+  </section>
+  <section>
+    <section>
+      <h2>Conclusion</h2>
+    </section>
+    <section>
+      <h1><i class="icon-question-sign"></i></h1>
+      <h2>Questions</h2>
+    </section>
+  </section>
+</grunt-docco-multi>
+<script src="./assets/js/app.js"></script>
