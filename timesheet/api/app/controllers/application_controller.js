@@ -17,9 +17,7 @@ ApplicationController.index = function () {
   Q.fcall(function() {
     var fsStatDeferred = Q.defer();
     fs.stat('client/dist/assets/templates', function(err, stat) {
-      console.log(err, stat);
       if (!err) {
-        console.log('here');
         Q.fcall(function() {
           var deferred = Q.defer();
           emitter = walkdir.walk('client/src');
@@ -36,7 +34,6 @@ ApplicationController.index = function () {
 
           return deferred.promise;
         }).then(function() {
-          console.log('here2');
           var deferred = Q.defer();
           var emitter = walkdir.walk('client/dist/assets/templates');
 
@@ -55,7 +52,6 @@ ApplicationController.index = function () {
           fsStatDeferred.resolve();
         });
       } else {
-        console.log('here3');
         return fsStatDeferred.resolve();
       }
     });

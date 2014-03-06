@@ -30,8 +30,6 @@ module.exports = (function () {
 
       var sanitizedQuery = _.omit(query, 'page', 'sort');
 
-      console.log('page : ' + page + ', skip: ' + skip + ', sort : ' + JSON.stringify(sort));
-
       var pageConfig = {page: page, limit: 5};
 
       db[model]
@@ -41,7 +39,6 @@ module.exports = (function () {
           }
 
           pageConfig.totalItems = total;
-          console.log('pageConfig : ' + JSON.stringify(pageConfig));
 
           db[model]
             .find(sanitizedQuery)
@@ -52,8 +49,6 @@ module.exports = (function () {
               if (err) {
                 deferred.reject(err);
               }
-
-              console.log("data docs : " + docs.length);
 
               pageConfig.data = docs;
               deferred.resolve(pageConfig);
