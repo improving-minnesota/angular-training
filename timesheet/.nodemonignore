@@ -1,5 +1,2 @@
 # adding all files so that nodemon does not restart for training. 
-/api/*
-/client/*
-/node_modules/*
-*
+**
