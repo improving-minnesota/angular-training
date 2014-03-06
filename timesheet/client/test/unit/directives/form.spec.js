@@ -95,24 +95,11 @@ describe('Form directives', function () {
       it('should set the "for" attribute of the label', function() {
         expect(element.find('label').attr('for')).to.equal('my-input-id');
       });
-      it('should respond to changes', function() {
-        expect(element.find('label').attr('for')).to.equal('my-input-id');
-        $scope.$apply(function() {
-          $scope.inputId = "my-updated-id";
-        });
-        expect(element.find('label').attr('for')).to.equal('my-updated-id');
-      });
     });
 
     describe('label-col attribute', function() {
       it('should set the number specified by the attribute', function() {
         expect(element.find('label').hasClass('col-sm-5')).to.be.true;
-      });
-      it('should respond to changes', function() {
-        $scope.$apply(function() {
-          $scope.labelCol = "10";
-        });
-        expect(element.find('label').hasClass('col-sm-10')).to.be.true;
       });
     });
 
@@ -120,23 +107,11 @@ describe('Form directives', function () {
       it('should set the number specified by the attribute', function() {
         expect(element.find('div').hasClass('col-sm-8')).to.be.true;
       });
-      it('should respond to changes', function() {
-        $scope.$apply(function() {
-          $scope.fieldCol = "10";
-        });
-        expect(element.find('div').hasClass('col-sm-10')).to.be.true;
-      });
     });
 
     describe('label attribute', function() {
       it('should set the label contents', function() {
         expect(element.find('label').text()).to.equal('My Label');
-      });
-      it('should respond to changes', function() {
-        $scope.$apply(function() {
-          $scope.label = "My Updated Label";
-        });
-        expect(element.find('label').text()).to.equal('My Updated Label');
       });
     });
 
@@ -171,24 +146,11 @@ describe('Form directives', function () {
       it('should set the "for" attribute of the label', function() {
         expect(element.find('label').attr('for')).to.equal('my-input-id');
       });
-      it('should respond to changes', function() {
-        expect(element.find('label').attr('for')).to.equal('my-input-id');
-        $scope.$apply(function() {
-          $scope.inputId = "my-updated-id";
-        });
-        expect(element.find('label').attr('for')).to.equal('my-updated-id');
-      });
     });
 
     describe('label-col attribute', function() {
       it('should set the number specified by the attribute', function() {
         expect(element.find('label').hasClass('col-sm-5')).to.be.true;
-      });
-      it('should respond to changes', function() {
-        $scope.$apply(function() {
-          $scope.labelCol = "10";
-        });
-        expect(element.find('label').hasClass('col-sm-10')).to.be.true;
       });
     });
 
@@ -196,35 +158,17 @@ describe('Form directives', function () {
       it('should set the number specified by the attribute', function() {
         expect(element.find('div').hasClass('col-sm-8')).to.be.true;
       });
-      it('should respond to changes', function() {
-        $scope.$apply(function() {
-          $scope.fieldCol = "10";
-        });
-        expect(element.find('div').hasClass('col-sm-10')).to.be.true;
-      });
     });
 
     describe('label attribute', function() {
       it('should set the label contents', function() {
         expect(element.find('label').text()).to.equal('My Label');
       });
-      it('should respond to changes', function() {
-        $scope.$apply(function() {
-          $scope.label = "My Updated Label";
-        });
-        expect(element.find('label').text()).to.equal('My Updated Label');
-      });
     });
 
     describe('static field value attribute', function() {
       it('should set the value', function() {
         expect(element.find('.tsz-form-static-text').text()).to.equal('My Value');
-      });
-      it('should respond to changes', function() {
-        $scope.$apply(function() {
-          $scope.value = "My Updated Value";
-        });
-        expect(element.find('.tsz-form-static-text').text()).to.equal('My Updated Value');
       });
     });
   });
