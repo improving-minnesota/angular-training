@@ -12,7 +12,7 @@ angular.module('app.employees', [
       controller: 'EmployeeCtrl',
       templateUrl: 'assets/templates/app/employees/index.html',
       data: {
-        section: 'Employee: List'
+        section: 'Employees'
       }, 
       resolve: {
         authenticatedUser: authorizationProvider.requireAuthenticatedUser
@@ -24,7 +24,7 @@ angular.module('app.employees', [
       controller: 'EmployeeDetailCtrl',
       templateUrl: 'assets/templates/app/employees/form.html',
       data: {
-        section: 'Employee: Detail',
+        section: 'Update Employee',
         saveText: 'Update'
       },
       resolve : {
@@ -42,7 +42,7 @@ angular.module('app.employees', [
       controller: 'EmployeeCreateCtrl',
       templateUrl: 'assets/templates/app/employees/form.html',
       data: {
-        section: 'Employee: Create',
+        section: 'Create Employee',
         saveText: 'Create'
       }
     });

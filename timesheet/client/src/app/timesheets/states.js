@@ -12,7 +12,7 @@ angular.module('app.timesheets', [
         controller: 'TimesheetCtrl',
         templateUrl: 'assets/templates/app/timesheets/index.html',
         data: {
-          section: 'Timesheet: List'
+          section: 'Timesheets'
         }, 
         resolve: {
           authenticatedUser: authorizationProvider.requireAuthenticatedUser
@@ -24,7 +24,7 @@ angular.module('app.timesheets', [
         controller: 'TimesheetDetailCtrl',
         templateUrl: 'assets/templates/app/timesheets/detail.html',
         data: {
-          section: 'Timesheet: Detail'
+          section: 'Timesheet Details'
         },
         resolve : {
           timesheet : [
@@ -49,7 +49,7 @@ angular.module('app.timesheets', [
         controller: 'TimesheetEditCtrl',
         templateUrl: 'assets/templates/app/timesheets/form.html',
         data: {
-          section: 'Timesheet: Edit',
+          section: 'Edit Timesheet',
           saveText: 'Update'
         }
       })
@@ -59,7 +59,7 @@ angular.module('app.timesheets', [
         controller: 'TimesheetCreateCtrl',
         templateUrl: 'assets/templates/app/timesheets/form.html',
         data: {
-          section: 'Timesheet: Create',
+          section: 'Create Timesheet',
           saveText: 'Create'
         }
       });

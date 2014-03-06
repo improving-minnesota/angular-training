@@ -26,7 +26,7 @@ angular.module('app.timesheets.timeunits', [
         controller: 'TimeunitCreateCtrl',
         templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
         data: {
-          section: 'Timesheet: Log Time'
+          section: 'Log Time'
         }
       })
 
@@ -35,7 +35,7 @@ angular.module('app.timesheets.timeunits', [
         controller: 'TimeunitEditCtrl',
         templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
         data: {
-          section: 'Timesheet: Edit Time'
+          section: 'Edit Time'
         },
         resolve : {
           timeunit : [
