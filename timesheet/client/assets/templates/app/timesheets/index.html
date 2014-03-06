@@ -2,7 +2,7 @@
   <div ng-show="$state.is('app.timesheets')">
     <div class="row tsz-form-row">
       <div class="col-sm-2 pull-right">
-        <button class="btn btn-default btn-block" type="button" ng-click="createNew()">
+        <button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
           <i class="icon-plus"></i>
           New Timesheet
         </button>
@@ -31,7 +31,7 @@
               <td>
                 <div ng-switch="timesheet.deleted">
                   <div ng-switch-when="true">
-                    <button class="btn btn-sm" ng-click="restore(timesheet); $event.stopPropagation();">Undo</button>
+                    <button class="btn btn-default btn-sm" ng-click="restore(timesheet); $event.stopPropagation();">Undo</button>
                   </div>
                   <div ng-switch-default>
                       <button class="btn btn-sm btn-danger" ng-click="remove(timesheet); $event.stopPropagation();">Delete</button>
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="tsz-pagination-container">
+    <div class="text-center">
       <div pagination
         total-items="pageConfig.totalItems" 
         page="pageConfig.page" 

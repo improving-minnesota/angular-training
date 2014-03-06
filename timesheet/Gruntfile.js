@@ -193,7 +193,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development', 'karma:unit:run', 'protractor:e2e']
+        tasks: ['development']
       },
       debug: {
         files: [
@@ -203,7 +203,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug', 'karma:unit:run', 'protractor:e2e']
+        tasks: ['debug']
       },
       production: {
         files: [
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production', 'karma:unit:run', 'protractor:e2e']
+        tasks: ['production']
       }
     },
 

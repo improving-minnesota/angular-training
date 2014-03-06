@@ -16,7 +16,7 @@
         controller: 'EmployeeCtrl',
         templateUrl: 'assets/templates/app/employees/index.html',
         data: {
-          section: 'Employee: List'
+          section: 'Employees'
         }, 
         resolve: {
           authenticatedUser: authorizationProvider.requireAuthenticatedUser
@@ -28,7 +28,7 @@
         controller: 'EmployeeDetailCtrl',
         templateUrl: 'assets/templates/app/employees/form.html',
         data: {
-          section: 'Employee: Detail',
+          section: 'Employee Details',
           saveText: 'Update'
         },
         resolve : {
@@ -46,7 +46,7 @@
         controller: 'EmployeeCreateCtrl',
         templateUrl: 'assets/templates/app/employees/form.html',
         data: {
-          section: 'Employee: Create',
+          section: 'Create Employee',
           saveText: 'Create'
         }
       });

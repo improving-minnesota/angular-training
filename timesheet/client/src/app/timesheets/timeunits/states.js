@@ -30,7 +30,7 @@
         controller: 'TimeunitCreateCtrl',
         templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
         data: {
-          section: 'Timesheet: Log Time'
+          section: 'Log Time'
         }
       })
 
@@ -39,7 +39,7 @@
         controller: 'TimeunitEditCtrl',
         templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
         data: {
-          section: 'Timesheet: Edit Time'
+          section: 'Edit Time'
         },
         resolve : {
           timeunit : [

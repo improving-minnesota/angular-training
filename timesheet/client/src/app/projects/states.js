@@ -16,7 +16,7 @@
         controller: 'ProjectCtrl',
         templateUrl: 'assets/templates/app/projects/index.html',
         data: {
-          section: 'Project: List'
+          section: 'Projects'
         }, 
         resolve: {
           authenticatedUser: authorizationProvider.requireAuthenticatedUser
@@ -28,7 +28,7 @@
         controller: 'ProjectDetailCtrl',
         templateUrl: 'assets/templates/app/projects/form.html',
         data: {
-          section: 'Project: Detail',
+          section: 'Project Details',
           saveText: 'Update'
         },
         resolve : {
@@ -46,7 +46,7 @@
         controller: 'ProjectCreateCtrl',
         templateUrl: 'assets/templates/app/projects/form.html',
         data: {
-          section: 'Project: Create',
+          section: 'Create Project',
           saveText: 'Create'
         }
       });

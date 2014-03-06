@@ -61,6 +61,18 @@
           };
         }
       };
+    })
+
+    .directive('tszAfterDate', function () {
+      return {
+        replace: true,
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModel) {
+
+          
+        }
+      };
     });
 
 }());
