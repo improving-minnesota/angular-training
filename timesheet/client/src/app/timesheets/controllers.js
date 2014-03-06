@@ -1,160 +1,156 @@
-(function () {
-  'use strict';
+angular.module('app.timesheets.controllers', [])
 
-  angular.module('app.timesheets.controllers', [])
+  .controller('TimesheetCtrl', 
+    function ($control, $scope, $state, $stateParams, notifications) {
 
-    .controller('TimesheetCtrl', 
-      function ($control, $scope, $state, $stateParams, notifications) {
+      $scope.requestTimesheets = function requestTimesheets (page) {
 
-        $scope.requestTimesheets = function requestTimesheets (page) {
-
-          var query = {
-            user_id: $stateParams.user_id,
-            page: page,
-            sort: {beginDate: 1}
-          };
-
-          $control.page('timesheets', query)
-            .then(function (pageConfig) {
-              $scope.pageConfig = pageConfig;
-            });
+        var query = {
+          user_id: $stateParams.user_id,
+          page: page,
+          sort: {beginDate: 1}
         };
 
-        $scope.showDetail = function showDetail (timesheet) {
-          if (timesheet.deleted) {
-            notifications.error('You cannot edit a deleted timesheet.');
-            return;
-          }
-          $state.go('app.timesheets.detail', timesheet);
-        };
+        $control.page('timesheets', query)
+          .then(function (pageConfig) {
+            $scope.pageConfig = pageConfig;
+          });
+      };
 
-        $scope.createNew = function createNew () {
-          $state.go('app.timesheets.create', $stateParams);
-        };
+      $scope.showDetail = function showDetail (timesheet) {
+        if (timesheet.deleted) {
+          notifications.error('You cannot edit a deleted timesheet.');
+          return;
+        }
+        $state.go('app.timesheets.detail', timesheet);
+      };
 
-        $scope.remove = function remove (timesheet) {
+      $scope.createNew = function createNew () {
+        $state.go('app.timesheets.create', $stateParams);
+      };
 
-          $control.remove('timesheets', timesheet)
-            .then(function () {
-              notifications.success('Timesheet deleted.');
-            },
-            function (x) {  
-              timesheet.deleted = false;
-              notifications.error('Error deleting timesheet : ' + x); 
-            });
-        };
+      $scope.remove = function remove (timesheet) {
 
-        $scope.restore = function restore (timesheet) {
-          
-          $control.restore('timesheets', timesheet)
-            .then(function (restored) {
-              notifications.success('Timesheet restored.');
-            }, 
-            function (x) {
-              timesheet.deleted = true;
-              notifications.error('Error restoring timesheet: ' + x);
-            });
-        };
+        $control.remove('timesheets', timesheet)
+          .then(function () {
+            notifications.success('Timesheet deleted.');
+          },
+          function (x) {  
+            timesheet.deleted = false;
+            notifications.error('Error deleting timesheet : ' + x); 
+          });
+      };
 
-        $scope.requestTimesheets(1);
-      }
-    )
+      $scope.restore = function restore (timesheet) {
+        
+        $control.restore('timesheets', timesheet)
+          .then(function (restored) {
+            notifications.success('Timesheet restored.');
+          }, 
+          function (x) {
+            timesheet.deleted = true;
+            notifications.error('Error restoring timesheet: ' + x);
+          });
+      };
 
-    .controller('TimesheetDetailCtrl', 
-      function ($scope, $state, $stateParams, $control, notifications, timesheet, timeunits) {
-        $scope.timesheet = timesheet;
-        $scope.timeunits = timeunits;
+      $scope.requestTimesheets(1);
+    }
+  )
 
-        $scope.edit = function edit (timesheet) {
-          $state.go('app.timesheets.detail.edit', $stateParams);
-        };
+  .controller('TimesheetDetailCtrl', 
+    function ($scope, $state, $stateParams, $control, notifications, timesheet, timeunits) {
+      $scope.timesheet = timesheet;
+      $scope.timeunits = timeunits;
 
-        $scope.cancel = function cancel () {
-          $state.go('app.timesheets', $stateParams, {reload: true});
-        };
+      $scope.edit = function edit (timesheet) {
+        $state.go('app.timesheets.detail.edit', $stateParams);
+      };
 
-        $scope.logTime = function logTime () {
-          $state.go('app.timesheets.detail.timeunits.create', $stateParams);
-        };
+      $scope.cancel = function cancel () {
+        $state.go('app.timesheets', $stateParams, {reload: true});
+      };
 
-        $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
-          if (timeunit.deleted) {
-            notifications.error('Cannot edit a deleted timeunit.');
-            return;
-          }
+      $scope.logTime = function logTime () {
+        $state.go('app.timesheets.detail.timeunits.create', $stateParams);
+      };
 
-          $stateParams.timeunit_id = timeunit._id;
-          $state.go('app.timesheets.detail.timeunits.edit', $stateParams);
-        };
+      $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
+        if (timeunit.deleted) {
+          notifications.error('Cannot edit a deleted timeunit.');
+          return;
+        }
 
-        $scope.removeTimeunit = function removeTimeunit (timeunit) {
-          $control.remove('timeunits', timeunit) 
-            .then(function () {
-              notifications.success('Timeunit deleted.');
-            },
-            function (x) {
-              timeunit.deleted = false;
-              notifications.error('Timeunit restored.');
-            });
-        };
+        $stateParams.timeunit_id = timeunit._id;
+        $state.go('app.timesheets.detail.timeunits.edit', $stateParams);
+      };
 
-        $scope.restoreTimeunit = function restoreTimeunit (timeunit) {
-          $control.restore('timeunits', timeunit)
-            .then(function (restored) {
-              notifications.success('Timeunit was restored.');
-            },
-            function (x) {
-              timeunit.deleted = true;
-              notifications.error('Error restoring the timeunit.');
-            });
-        };
-      } 
-    )
+      $scope.removeTimeunit = function removeTimeunit (timeunit) {
+        $control.remove('timeunits', timeunit) 
+          .then(function () {
+            notifications.success('Timeunit deleted.');
+          },
+          function (x) {
+            timeunit.deleted = false;
+            notifications.error('Timeunit restored.');
+          });
+      };
 
-    .controller('TimesheetEditCtrl', 
-      function ($scope, $state, $stateParams, $control, notifications, timesheet) {
-        $scope.saveText = $state.current.data.saveText;
-        $scope.timesheet = timesheet;
+      $scope.restoreTimeunit = function restoreTimeunit (timeunit) {
+        $control.restore('timeunits', timeunit)
+          .then(function (restored) {
+            notifications.success('Timeunit was restored.');
+          },
+          function (x) {
+            timeunit.deleted = true;
+            notifications.error('Error restoring the timeunit.');
+          });
+      };
+    } 
+  )
 
-        $scope.save = function save () {
-          $scope.timesheet.$update()
-            .then(function (updated) {
-              $scope.timesheet = updated;
-              notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully updated.");
-            }, 
-            function (x) {
-              notifications.error('There was an error updating timesheet : ' + $scope.timesheet.name);
-            });
-        };
+  .controller('TimesheetEditCtrl', 
+    function ($scope, $state, $stateParams, $control, notifications, timesheet) {
+      $scope.saveText = $state.current.data.saveText;
+      $scope.timesheet = timesheet;
 
-        $scope.cancel = function cancel () {
-          $state.go('app.timesheets.detail', $stateParams, {reload: true});
-        };
-      }
-    )
+      $scope.save = function save () {
+        $scope.timesheet.$update()
+          .then(function (updated) {
+            $scope.timesheet = updated;
+            notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully updated.");
+          }, 
+          function (x) {
+            notifications.error('There was an error updating timesheet : ' + $scope.timesheet.name);
+          });
+      };
 
-    .controller('TimesheetCreateCtrl', 
-      function ($scope, $state, $stateParams, $control, notifications) {
-        $scope.saveText = $state.current.data.saveText;
-        $scope.timesheet = {};
+      $scope.cancel = function cancel () {
+        $state.go('app.timesheets.detail', $stateParams, {reload: true});
+      };
+    }
+  )
 
-        $scope.save = function save () {
-          var timesheet = angular.extend({user_id: $stateParams.user_id}, $scope.timesheet);
+  .controller('TimesheetCreateCtrl', 
+    function ($scope, $state, $stateParams, $control, notifications) {
+      $scope.saveText = $state.current.data.saveText;
+      $scope.timesheet = {};
 
-          $control.create('timesheets', timesheet)
-            .then(function (created) {
-              $state.go('app.timesheets.detail', {user_id: $stateParams.user_id, _id: created._id});
-              notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully created.");
-            }, 
-            function (x) {
-              notifications.error('There was an error creating timesheet : ' + $scope.timesheet.name);
-            });
-        };
+      $scope.save = function save () {
+        var timesheet = angular.extend({user_id: $stateParams.user_id}, $scope.timesheet);
 
-        $scope.cancel = function cancel () {
-          $state.go('app.timesheets', $stateParams, {reload: true});
-        };
-      }
-    );
+        $control.create('timesheets', timesheet)
+          .then(function (created) {
+            $state.go('app.timesheets.detail', {user_id: $stateParams.user_id, _id: created._id});
+            notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully created.");
+          }, 
+          function (x) {
+            notifications.error('There was an error creating timesheet : ' + $scope.timesheet.name);
+          });
+      };
 
-}());
+      $scope.cancel = function cancel () {
+        $state.go('app.timesheets', $stateParams, {reload: true});
+      };
+    }
+  );
+    

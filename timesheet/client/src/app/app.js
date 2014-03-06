@@ -1,18 +1,15 @@
-(function () {
-  
-  'use strict';
+angular.module('app', [
+  'app.values',
+  'app.resources',
+  'app.controllers',
+  'app.employees',
+  'app.projects',
+  'app.timesheets',
+  'app.timesheets.timeunits',
+  'app.security'
+])
 
-  var app = angular.module('app', [
-    'app.resources',
-    'app.controllers',
-    'app.employees',
-    'app.projects',
-    'app.timesheets',
-    'app.timesheets.timeunits',
-    'app.security'
-  ]);
-
-  app.config(function ($stateProvider) {
+  .config(function ($stateProvider) {
 
     $stateProvider
       .state('app', {
@@ -33,5 +30,4 @@
         }
       });
   });
-
-}());
+  

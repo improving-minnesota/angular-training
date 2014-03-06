@@ -1,100 +1,95 @@
-(function () {
-  'use strict';
-
-  angular.module('app.projects.controllers', [])
+angular.module('app.projects.controllers', [])
     
-    .controller('ProjectCtrl', 
-      function ($control, $scope, $state, $stateParams, notifications) {
+  .controller('ProjectCtrl', 
+    function ($control, $scope, $state, $stateParams, notifications) {
 
-        $scope.requestProjects = function requestProjects (page) {
-          var query = {
-            page: page,
-            sort: {name: 1}
-          };
-
-          $control.page('projects', query)
-            .then(function (pageConfig) {
-              $scope.pageConfig = pageConfig;
-            });
+      $scope.requestProjects = function requestProjects (page) {
+        var query = {
+          page: page,
+          sort: {name: 1}
         };
 
-        $scope.showDetail = function showDetail (project) {
-          if (project.deleted) {
-            notifications.error('You cannot edit a deleted project.');
-            return;
-          }
-          $state.go('app.projects.detail', project);
-        };
+        $control.page('projects', query)
+          .then(function (pageConfig) {
+            $scope.pageConfig = pageConfig;
+          });
+      };
 
-        $scope.createNew = function createNew () {
-          $state.go('app.projects.create', $stateParams);
-        };
+      $scope.showDetail = function showDetail (project) {
+        if (project.deleted) {
+          notifications.error('You cannot edit a deleted project.');
+          return;
+        }
+        $state.go('app.projects.detail', project);
+      };
 
-        $scope.remove = function remove (project) {
-          $control.remove('projects', project)
-            .then(function (removed) {
-              notifications.success('Project : ' + project.name + ', was deleted.');
-            },
-            function (x) {
-              project.deleted = false;
-              notifications.error('Error attempting to delete project.');
-            });
-        };
+      $scope.createNew = function createNew () {
+        $state.go('app.projects.create', $stateParams);
+      };
 
-        $scope.restore = function restore (project) { 
+      $scope.remove = function remove (project) {
+        $control.remove('projects', project)
+          .then(function (removed) {
+            notifications.success('Project : ' + project.name + ', was deleted.');
+          },
+          function (x) {
+            project.deleted = false;
+            notifications.error('Error attempting to delete project.');
+          });
+      };
 
-          $control.restore('projects', project) 
-            .then(function (restored) {
-              notifications.success('Project was restored.');
-            },
-            function (x) {
-              project.deleted = true;
-              notifications.error('Error restoring project.');
-            });
-        };
+      $scope.restore = function restore (project) { 
 
-        $scope.cancel = function cancel () {
-          $state.go('app.projects', {}, {reload: true});
-        };
+        $control.restore('projects', project) 
+          .then(function (restored) {
+            notifications.success('Project was restored.');
+          },
+          function (x) {
+            project.deleted = true;
+            notifications.error('Error restoring project.');
+          });
+      };
 
-        $scope.requestProjects(1);
-      }
-    )
+      $scope.cancel = function cancel () {
+        $state.go('app.projects', {}, {reload: true});
+      };
 
-    .controller('ProjectDetailCtrl', 
-      function ($scope, $state, $stateParams, notifications, project) {
-        $scope.saveText = $state.current.data.saveText;
-        $scope.project = project;
+      $scope.requestProjects(1);
+    }
+  )
 
-        $scope.save = function save () {
-          $scope.project.$update()
-            .then(function (updated) {
-              $scope.project = updated;
-              notifications.success('Updated project: ' + updated.name);
-            },  
-            function (x) {
-              notifications.error('There was an error updating the employee.');
-            });
-        };
-      }
-    )
+  .controller('ProjectDetailCtrl', 
+    function ($scope, $state, $stateParams, notifications, project) {
+      $scope.saveText = $state.current.data.saveText;
+      $scope.project = project;
 
-    .controller('ProjectCreateCtrl', 
-      function ($scope, $state, $stateParams, $control, notifications) {
-        $scope.saveText = $state.current.data.saveText;
-        $scope.project = {};
+      $scope.save = function save () {
+        $scope.project.$update()
+          .then(function (updated) {
+            $scope.project = updated;
+            notifications.success('Updated project: ' + updated.name);
+          },  
+          function (x) {
+            notifications.error('There was an error updating the employee.');
+          });
+      };
+    }
+  )
 
-        $scope.save = function save () {
-          $control.create('projects', $scope.project) 
-            .then(function (created) {
-              $state.go('app.projects.detail', created);
-              notifications.success('Project : ' + created.name + ', created.');
-            },
-            function (x) {
-              notifications.error('There was an error creating the project.');
-            });
-        };
-      }
-    );
+  .controller('ProjectCreateCtrl', 
+    function ($scope, $state, $stateParams, $control, notifications) {
+      $scope.saveText = $state.current.data.saveText;
+      $scope.project = {};
 
-}());
+      $scope.save = function save () {
+        $control.create('projects', $scope.project) 
+          .then(function (created) {
+            $state.go('app.projects.detail', created);
+            notifications.success('Project : ' + created.name + ', created.');
+          },
+          function (x) {
+            notifications.error('There was an error creating the project.');
+          });
+      };
+    }
+  );

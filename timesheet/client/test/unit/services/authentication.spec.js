@@ -15,8 +15,8 @@ describe('Authentication', function() {
 
   beforeEach(
     module(
-      'authentication.services',
       'security.services',
+      'authentication.services',
       'test', 
       'stateMock', 
       'assets/templates/app/security/login/index.html',

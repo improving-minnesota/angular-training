@@ -1,14 +1,10 @@
-(function () {
-  
-  'use strict';
-
-  var app = angular.module('app.timesheets.timeunits', [
+angular.module('app.timesheets.timeunits', [
     'app.timesheets.timeunits.controllers',
     'ui.router',
     'authorization.services'
-  ]);
-
-  app.config(function ($stateProvider, authorizationProvider) {
+  ])
+  
+  .config(function ($stateProvider, authorizationProvider) {
 
     $stateProvider
       .state('app.timesheets.detail.timeunits', {
@@ -51,5 +47,3 @@
         }
       });
   });
-
-}());
