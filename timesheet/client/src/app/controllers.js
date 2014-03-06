@@ -1,33 +1,28 @@
-(function () {
-  'use strict';
+angular.module('app.controllers', [])
 
-  angular.module('app.controllers', [])
-
-    .controller('MainCtrl', function ($scope, securityContext){
-      
-      $scope.$watch(function () {
-        return securityContext.authenticated;
-      },
-      function (authenticated) {
-        $scope.authenticated = authenticated;
-        $scope.loggedInUser = securityContext.user;
-      });
-
-    })
+  .controller('MainCtrl', function ($scope, securityContext){
     
-    .controller('AppCtrl', 
-      function ($scope){
-        
-      }
-    )
+    $scope.$watch(function () {
+      return securityContext.authenticated;
+    },
+    function (authenticated) {
+      $scope.authenticated = authenticated;
+      $scope.loggedInUser = securityContext.user;
+    });
 
-    .controller('NavCtrl', 
-      function ($scope, authentication) {
+  })
+  
+  .controller('AppCtrl', 
+    function ($scope){
       
-        $scope.logout = function logout () {
-          authentication.logout();
-        };
-      }
-    );
+    }
+  )
 
-}());
+  .controller('NavCtrl', 
+    function ($scope, authentication) {
+    
+      $scope.logout = function logout () {
+        authentication.logout();
+      };
+    }
+  );
