@@ -17,15 +17,22 @@
 
         <div class="form-group">
           <div tsz-field-wrap input-id="timeunit-dateWorked" label="Date">
-            <p class="input-group">
+            <div class="input-group">
               <input type="text" class="form-control" 
-                datepicker-popup="MM/dd/yyyy" 
-                ng-model="timeunit.dateWorked" 
-                ng-required="true" close-text="Close" />
+                datepicker-popup="MM/dd/yyyy"
+                ng-model="timeunit.dateWorked"  
+                show-weeks="false"
+                show-button-bar="false"
+                min="timesheet.beginDate"
+                max="timesheet.endDate"
+                ng-required="true" 
+                close-text="Close" />
               <span class="input-group-btn">
-                <button class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                <button class="btn btn-default">
+                  <i class="fa fa-fw fa-calendar"></i>
+                </button>
               </span>
-            </p>
+            </div>
           </div>
         </div>
 

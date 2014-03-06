@@ -25,11 +25,16 @@
           <div tsz-field-wrap input-id="timesheet-beginDate" label="Begin Date">
             <div class="input-group">
               <input type="text" class="form-control" 
-                datepicker-popup="MM/dd/yyyy" 
-                ng-model="timesheet.beginDate" 
-                ng-required="true" close-text="Close" />
+                datepicker-popup="MM/dd/yyyy"
+                ng-model="timesheet.beginDate"  
+                show-weeks="false"
+                show-button-bar="false"
+                ng-required="true" 
+                close-text="Close" />
               <span class="input-group-btn">
-                <button class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                <button class="btn btn-default">
+                  <i class="fa fa-fw fa-calendar"></i>
+                </button>
               </span>
             </div>
           </div>
@@ -38,14 +43,18 @@
         <div class="form-group">
           <div tsz-field-wrap input-id="timesheet-endDate" label="End Date">
             <div class="input-group">
-              <div class="form-control">
-              <input type="text"  
-                datepicker-popup="MM/dd/yyyy" 
-                ng-model="timesheet.endDate" 
-                ng-required="true" close-text="Close" />
-              </div>
+              <input type="text" class="form-control" 
+                datepicker-popup="MM/dd/yyyy"
+                ng-model="timesheet.endDate"  
+                show-weeks="false"
+                show-button-bar="false"
+                min="timesheet.beginDate"
+                ng-required="true" 
+                close-text="Close" />
               <span class="input-group-btn">
-                <button class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                <button class="btn btn-default">
+                  <i class="fa fa-fw fa-calendar"></i>
+                </button>
               </span>
             </div>
           </div>
