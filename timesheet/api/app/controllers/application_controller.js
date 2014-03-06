@@ -1,4 +1,5 @@
 var walkdir = require('walkdir'), 
+  fs = require('fs'),
   path = require('path'),
   locomotive = require('locomotive'),
   Controller = locomotive.Controller,
@@ -13,45 +14,59 @@ ApplicationController.index = function () {
   var applicationScripts = [];
   var templateScripts = [];
 
-  Q.fcall(function () {
-    var deferred = Q.defer();
-      emitter = walkdir.walk('client/src');
+  Q.fcall(function() {
+    var fsStatDeferred = Q.defer();
+    fs.stat('client/dist/assets/templates', function(err, stat) {
+      console.log(err, stat);
+      if (!err) {
+        console.log('here');
+        Q.fcall(function() {
+          var deferred = Q.defer();
+          emitter = walkdir.walk('client/src');
 
-    emitter.on('file', function (file, stat) {
-      if (path.extname(file) === '.js') {
-        applicationScripts.push(file.substring([process.cwd(), 'client/'].join('/').length));
+          emitter.on('file', function (file, stat) {
+            if (path.extname(file) === '.js') {
+              applicationScripts.push(file.substring([process.cwd(), 'client/'].join('/').length));
+            }
+          });
+
+          emitter.on('end', function () {
+            deferred.resolve();
+          });
+
+          return deferred.promise;
+        }).then(function() {
+          console.log('here2');
+          var deferred = Q.defer();
+          var emitter = walkdir.walk('client/dist/assets/templates');
+
+          emitter.on('file', function (file, stat) {
+            if (path.extname(file) === '.js') {
+              templateScripts.push(file.substring([process.cwd(), 'client/dist/'].join('/').length));
+            }
+          });
+
+          emitter.on('end', function () {
+            deferred.resolve();
+          });
+
+          return deferred.promise;
+        }).then(function() {
+          fsStatDeferred.resolve();
+        });
+      } else {
+        console.log('here3');
+        return fsStatDeferred.resolve();
       }
     });
 
-    emitter.on('end', function () {
-      deferred.resolve();
-    });
-
-    return deferred.promise;
-  }).then(function () {
-    var deferred = Q.defer();
-    var emitter = walkdir.walk('client/dist/assets/templates');
-
-    emitter.on('file', function (file, stat) {
-      if (path.extname(file) === '.js') {
-        templateScripts.push(file.substring([process.cwd(), 'client/dist/'].join('/').length));
-      }
-    });
-
-    emitter.on('end', function () {
-      deferred.resolve();
-    });
-
-    return deferred.promise;
-  }).then(function () {
+    return fsStatDeferred.promise; 
+  }).then(function() {
     controller.render({
       applicationScripts : applicationScripts,
-      templateScripts : templateScripts 
+      templateScripts : templateScripts
     });
   });
-
-
-
 };
 
 module.exports = ApplicationController;
