@@ -41,7 +41,7 @@ angular.module('form.directives', [])
       restrict: 'A',
       scope : {
         value: "@",
-        id: "@id",
+        inputId: "@",
         label: "@",
         labelCol: "@",
         fieldCol: "@"

@@ -46,8 +46,6 @@ UsersController.show = function () {
   var controller = this;
   var id = this.param('id');
 
-  console.log("session : " + JSON.stringify(controller.req.session));
-
   db.findOne('users', {_id: id})
     .then(function (user) {
       controller.res.json(user);

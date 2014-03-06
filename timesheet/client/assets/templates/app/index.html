@@ -1,45 +1,13 @@
-<div class="tsz-content-container">
-  <div class="container">
-    <div class="row">
-      <div ng-if="authenticated" class="col-xs-12">
-        <div class="row">
-          <div class="col-xs-6">
-            <div class="tsz-nav-container">
-              <ul class="nav nav-pills">
-                <li ng-class="{active: $state.includes('app.projects')}">
-                  <a ui-sref="app.projects">Projects</a>
-                </li>
-                <li ng-class="{active: $state.includes('app.employees')}">
-                  <a ui-sref="app.employees">Employees</a>
-                </li>
-                <li ng-class="{active: $state.includes('app.timesheets')}">
-                  <a ui-sref="app.timesheets({user_id: loggedInUser._id})">Timesheets</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="col-xs-6 tsz-nav-title">
-            <div class="pull-right">
-              <h2>
-                <small>{{$state.current.data.section}}</small>
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <hr/> 
-          </div>
-        </div>
-      </div>  
+<div class="container">
+  <div class="row">
+    <div ng-if="authenticated" class="col-xs-12">
+      <h2>{{$state.current.data.section}}</h2>
+      <hr/>   
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div ui-view></div>
     </div>
-
-    <div class="row">
-      <div class="col-xs-12">
-        <div ui-view></div>
-      </div>
-    </div>
-
   </div>
 </div>

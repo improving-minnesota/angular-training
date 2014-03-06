@@ -9,18 +9,14 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label class="col-sm-4 control-label">Name</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{timesheet.name}}</p>
-                </div>
+                <div tsz-static-field label="Name" label-col="4" 
+                field-col="8" value="{{timesheet.name}}"></div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label class="col-sm-4 control-label">Description</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{timesheet.description}}</p>
-                </div>
+                <div tsz-static-field label="Description" label-col="4" 
+                field-col="8" value="{{timesheet.description}}"></div>
               </div>
             </div>
           </div>
@@ -28,25 +24,21 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label class="col-sm-4 control-label">Begin Date</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{timesheet.beginDate | momentLongDate}}</p>
-                </div>
+                <div tsz-static-field label="Begin Date" label-col="4" 
+                field-col="8" value="{{timesheet.beginDate | momentLongDate}}"></div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label class="col-sm-4 control-label">End Date</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{timesheet.endDate | momentLongDate}}</p>
-                </div>
+                <div tsz-static-field label="End Date" label-col="4" 
+                field-col="8" value="{{timesheet.endDate | momentLongDate}}"></div>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-2 col-sm-offset-8">
-              <button type="button" class="btn btn-default btn-block" ng-click="edit(timesheet)">Edit</button>
+              <button type="button" class="btn btn-primary btn-block" ng-click="edit(timesheet)">Edit</button>
             </div>
             <div class="col-sm-2">
               <button type="button" class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
@@ -63,9 +55,10 @@
 
     <div tsz-form-section-header header="Time Units">
       <div class="row">
-      <div class="col-sm-6 col-sm-offset-6 pull-right">
-        <button type="button" class="btn btn-default btn-block" ng-click="logTime()">Log Time</button>
-      </div></div>
+        <div class="col-sm-4 col-sm-offset-8 pull-right">
+          <button type="button" class="btn btn-primary btn-block" ng-click="logTime()">Log Time</button>
+        </div>
+      </div>
     </div>
 
     <div class="row">
