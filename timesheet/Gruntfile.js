@@ -150,14 +150,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Task to add the array-style angular injection to protect against uglifying.
-    ngmin : {
-      app : {
-        src : 'client/src/**/*.js',
-        dest : '<%= clientdist %>/app.js'
-      }
-    },
-
     // This task uses the MinCSS Node.js project to take all your CSS files in
     // order and concatenate them into a single CSS file named style.css.  It
     // also minifies all the CSS as well.  This is named style.css, because we
@@ -193,7 +185,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development', 'karma:unit:run', 'protractor:e2e']
+        tasks: ['development', 'karma:unit:run']
       },
       debug: {
         files: [
@@ -203,7 +195,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug', 'karma:unit:run', 'protractor:e2e']
+        tasks: ['debug', 'karma:unit:run']
       },
       production: {
         files: [
@@ -213,30 +205,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production', 'karma:unit:run', 'protractor:e2e']
-      }
-    },
-
-    // Starts the karama runner for unit and e2e tests.
-    // Tests are run when the task is re-invoked from the watch task.
-    karma : {
-      unit : {
-        reporters: 'dots',
-        configFile: 'karma.config.js',
-        options: {
-          background: true
-        }
-      }
-    },
-
-    // Starts the protractor e2e tests. 
-    protractor: {
-      e2e: {
-        options: {
-          configFile: 'protractor.config.js',
-          keepAlive: true,
-          noColor: false
-        }
+        tasks: ['production', 'karma:unit:run']
       }
     },
 
@@ -383,6 +352,40 @@ module.exports = function (grunt) {
           dieWithParent: true
         },
         env: 'development'
+      }
+    },
+
+  // *********************************************************************************************
+  // New Tasks go below here !!! 
+
+    // Starts the karama runner for unit and e2e tests.
+    // Tests are run when the task is re-invoked from the watch task.
+    karma : {
+      unit : {
+        reporters: 'dots',
+        configFile: 'karma.config.js',
+        options: {
+          background: true
+        }
+      }
+    },
+
+    // Starts the protractor e2e tests. 
+    protractor: {
+      e2e: {
+        options: {
+          configFile: 'protractor.config.js',
+          keepAlive: true,
+          noColor: false
+        }
+      }
+    },
+
+    // Task to add the array-style angular injection to protect against uglifying.
+    ngmin : {
+      app : {
+        src : 'client/src/**/*.js',
+        dest : '<%= clientdist %>/app.js'
       }
     }
 

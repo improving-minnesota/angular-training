@@ -1,14 +1,10 @@
-(function () {
-  
-  'use strict';
+angular.module('app.timesheets', [
+  'app.timesheets.controllers',
+  'ui.router',
+  'authorization.services'
+])
 
-  var app = angular.module('app.timesheets', [
-    'app.timesheets.controllers',
-    'ui.router',
-    'authorization.services'
-  ]);
-
-  app.config(function ($stateProvider, authorizationProvider) {
+  .config(function ($stateProvider, authorizationProvider) {
 
     $stateProvider
       .state('app.timesheets', {
@@ -68,5 +64,3 @@
         }
       });
   });
-
-}());

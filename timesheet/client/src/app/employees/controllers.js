@@ -1,101 +1,96 @@
-(function () {
-  'use strict';
+angular.module('app.employees.controllers', [])
+  
+  .controller('EmployeeCtrl', 
+    function ($control, $scope, $state, $stateParams, notifications) {
 
-  angular.module('app.employees.controllers', [])
-    
-    .controller('EmployeeCtrl', 
-      function ($control, $scope, $state, $stateParams, notifications) {
-
-        $scope.requestEmployees = function requestEmployees (page) {
-          var query = {
-            page: page,
-            sort: {username: 1}
-          };
-
-          $control.page('employees', query)
-            .then(function (pageConfig) {
-              $scope.pageConfig = pageConfig;
-            });
+      $scope.requestEmployees = function requestEmployees (page) {
+        var query = {
+          page: page,
+          sort: {username: 1}
         };
 
-        $scope.showDetail = function showDetail (employee) {
-          if (employee.deleted) {
-            notifications.error('You cannot edit a deleted employee.');
-            return;
-          }
-          $state.go('app.employees.detail', employee);
-        };  
+        $control.page('employees', query)
+          .then(function (pageConfig) {
+            $scope.pageConfig = pageConfig;
+          });
+      };
 
-        $scope.createNew = function createNew () {
-          $state.go('app.employees.create', $stateParams);
-        };
+      $scope.showDetail = function showDetail (employee) {
+        if (employee.deleted) {
+          notifications.error('You cannot edit a deleted employee.');
+          return;
+        }
+        $state.go('app.employees.detail', employee);
+      };  
 
-        $scope.remove = function remove (employee) {
+      $scope.createNew = function createNew () {
+        $state.go('app.employees.create', $stateParams);
+      };
 
-          $control.remove('employees', employee) 
-            .then(function () {
-              notifications.success('Employee : ' + employee.username + ', was deleted.');
-            },
-            function (x) {
-              employee.deleted = false;
-              notifications.error('Error attempting to delete employee.');
-            });
-        };
+      $scope.remove = function remove (employee) {
 
-        $scope.restore = function restore (employee) {
-         
-         $control.restore('employees', employee)
-            .then(function (restored) {
-              notifications.success('Employee was restored.');
-            },
-            function (x) {
-              employee.deleted = true;
-              notifications.error('Error restoring employee.');
-            });
-        };
+        $control.remove('employees', employee) 
+          .then(function () {
+            notifications.success('Employee : ' + employee.username + ', was deleted.');
+          },
+          function (x) {
+            employee.deleted = false;
+            notifications.error('Error attempting to delete employee.');
+          });
+      };
 
-        $scope.cancel = function cancel () {
-          $state.go('app.employees', {}, {reload: true});
-        };
+      $scope.restore = function restore (employee) {
+       
+       $control.restore('employees', employee)
+          .then(function (restored) {
+            notifications.success('Employee was restored.');
+          },
+          function (x) {
+            employee.deleted = true;
+            notifications.error('Error restoring employee.');
+          });
+      };
 
-        $scope.requestEmployees(1);
-      }
-    )
+      $scope.cancel = function cancel () {
+        $state.go('app.employees', {}, {reload: true});
+      };
 
-    .controller('EmployeeDetailCtrl', 
-      function ($scope, $state, $stateParams, notifications, employee) {
-        $scope.saveText = $state.current.data.saveText;
-        $scope.employee = employee;
+      $scope.requestEmployees(1);
+    }
+  )
 
-        $scope.save = function save () {
-          $scope.employee.$update()
-            .then(function (updated) {
-              $scope.timesheet = updated;
-              notifications.success('Updated employee: ' + employee.username);
-            },  
-            function (x) {
-              notifications.error('There was an error updating the employee.');
-            });
-        };
-      }
-    )
+  .controller('EmployeeDetailCtrl', 
+    function ($scope, $state, $stateParams, notifications, employee) {
+      $scope.saveText = $state.current.data.saveText;
+      $scope.employee = employee;
 
-    .controller('EmployeeCreateCtrl', 
-      function ($scope, $state, $stateParams, $control, notifications) {
-        $scope.saveText = $state.current.data.saveText;
-        $scope.employee = {admin: false};
+      $scope.save = function save () {
+        $scope.employee.$update()
+          .then(function (updated) {
+            $scope.timesheet = updated;
+            notifications.success('Updated employee: ' + employee.username);
+          },  
+          function (x) {
+            notifications.error('There was an error updating the employee.');
+          });
+      };
+    }
+  )
 
-        $scope.save = function save () {
-          $control.create('employees', $scope.employee)
-            .then(function (created) {
-              notifications.success('Employee : ' + created.username + ' , created.');
-              $state.go('app.employees.detail', created);
-            },
-            function (x) {
-              notifications.error('There was an error creating employee.');
-            });
-        };
-      }
-    );
+  .controller('EmployeeCreateCtrl', 
+    function ($scope, $state, $stateParams, $control, notifications) {
+      $scope.saveText = $state.current.data.saveText;
+      $scope.employee = {admin: false};
 
-}());
+      $scope.save = function save () {
+        $control.create('employees', $scope.employee)
+          .then(function (created) {
+            notifications.success('Employee : ' + created.username + ' , created.');
+            $state.go('app.employees.detail', created);
+          },
+          function (x) {
+            notifications.error('There was an error creating employee.');
+          });
+      };
+    }
+  );

@@ -274,7 +274,7 @@ describe('Timesheets', function() {
       describe('showTimeunitDetail', function () {
         it('should set the timeunit_id on state params and transistion to the edit timeunits state', function () {
           $state.expectTransitionTo('app.timesheets.detail.timeunits.edit');
-          $scope.showTimeunitDetail('abc');
+          $scope.showTimeunitDetail({_id: 'abc'});
           expect($stateParams.timeunit_id).to.equal('abc');
         });
       }); 
