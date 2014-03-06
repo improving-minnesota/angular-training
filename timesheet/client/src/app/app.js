@@ -1,4 +1,5 @@
 angular.module('app', [
+  'ui.router',
   'app.values',
   'app.resources',
   'app.controllers',

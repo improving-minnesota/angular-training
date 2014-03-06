@@ -46,4 +46,11 @@ angular.module('app.employees', [
         saveText: 'Create'
       }
     });
+})
+
+.run(function ($api) {
+  $api.add({
+    resource: 'employees',
+    url: '/users'
+  });
 });

@@ -16,20 +16,21 @@ describe('Employees', function() {
       
     beforeEach(
       module(
-        'app.employees.controllers',
-        'app.resources',
         'ngResource',
+        'app.resources',
         'security.services',
-        'stateMock',
-        'notifications.services'
+        'ui.router.mock',
+        'notifications.services',
+        'app.employees',
+        'app.employees.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParamsMock_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
       $state = _$state_;
-      $stateParams = _$stateParams_;
+      $stateParams = _$stateParamsMock_;
       $api = _$api_;
     }));
 
@@ -63,7 +64,9 @@ describe('Employees', function() {
       beforeEach(function() {
         $scope = $rootScope.$new();
         controller = $controller("EmployeeCtrl", { 
-          $scope: $scope 
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams
         });
 
         $httpBackend.when('GET', '/users?page=1&sort=%7B%22username%22:1%7D').respond(200);
@@ -229,7 +232,8 @@ describe('Employees', function() {
         controller = $controller("EmployeeDetailCtrl", {
           $scope: $scope,
           employee: new $api.employees(employee),
-          $state: $state
+          $state: $state,
+          $stateParams: $stateParams
         });
       });
 
@@ -296,7 +300,9 @@ describe('Employees', function() {
 
         $scope = $rootScope.$new();
         controller = $controller("EmployeeCreateCtrl", {
-          $scope: $scope
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams
         });
       });
 

@@ -1,6 +1,6 @@
-angular.module('stateMock',[])
+angular.module('ui.router.mock',[])
 
-  .provider("$state", {
+  .provider("$stateMock", {
 
     // This is just a noop that returns itself so that modules that register states 
     // in thier config block can complete without error. All state manipulation checking
@@ -67,6 +67,6 @@ angular.module('stateMock',[])
     }
   })
 
-  .factory('$stateParams', function () {
+  .factory('$stateParamsMock', function () {
     return {};
   });

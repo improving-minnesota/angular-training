@@ -19,7 +19,7 @@ describe('Authorization', function() {
       'security.services',
       'app.resources',
       'ngResource',
-      'stateMock',
+      'ui.router.mock',
       'notifications.services',
       'assets/templates/app/security/login/index.html'
     ));

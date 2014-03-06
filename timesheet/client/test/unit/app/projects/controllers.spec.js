@@ -16,20 +16,21 @@ describe('Projects', function() {
       
     beforeEach(
       module(
-        'app.projects.controllers',
         'app.resources',
         'ngResource',
         'security.services',
-        'stateMock',
-        'notifications.services'
+        'ui.router.mock',
+        'notifications.services',
+        'app.projects',
+        'app.projects.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParamsMock_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
       $state = _$state_;
-      $stateParams = _$stateParams_;
+      $stateParams = _$stateParamsMock_;
       $api = _$api_;
     }));
 
@@ -59,7 +60,9 @@ describe('Projects', function() {
       beforeEach(function() {
         $scope = $rootScope.$new();
         controller = $controller("ProjectCtrl", { 
-          $scope: $scope 
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams 
         });
 
         $httpBackend.when('GET', '/projects?page=1&sort=%7B%22name%22:1%7D').respond(200);
@@ -225,7 +228,8 @@ describe('Projects', function() {
         controller = $controller("ProjectDetailCtrl", {
           $scope: $scope,
           project: new $api.projects(project),
-          $state: $state
+          $state: $state,
+          $stateParams: $stateParams
         });
       });
 
@@ -292,7 +296,9 @@ describe('Projects', function() {
 
         $scope = $rootScope.$new();
         controller = $controller("ProjectCreateCtrl", {
-          $scope: $scope
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams
         });
       });
 

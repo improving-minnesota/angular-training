@@ -45,4 +45,11 @@ angular.module('app.projects', [
         saveText: 'Create'
       }
     });
+})
+
+.run(function ($api) {
+   $api.add({
+    resource: 'projects',
+    url: '/projects'
+  });
 });

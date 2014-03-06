@@ -18,20 +18,21 @@ describe('Timeunits', function() {
       
     beforeEach(
       module(
-        'app.timesheets.timeunits.controllers', 
         'app.resources',
         'ngResource',
         'security.services',
-        'stateMock',
-        'notifications.services'
+        'notifications.services',
+        'app.timesheets.timeunits',
+        'app.timesheets.timeunits.controllers',
+        'ui.router.mock'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParamsMock_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
       $state = _$state_;
-      $stateParams = _$stateParams_;
+      $stateParams = _$stateParamsMock_;
       $api = _$api_;
     }));
 
@@ -75,8 +76,10 @@ describe('Timeunits', function() {
       beforeEach(inject(function($rootScope, $controller) {
         $scope = $rootScope.$new();
         controller = $controller("TimeunitCtrl", { 
-          $scope: $scope ,
-          projects: projects
+          $scope: $scope,
+          projects: projects,
+          $state: $state,
+          $stateParams: $stateParams
         });
       }));
 
@@ -102,7 +105,9 @@ describe('Timeunits', function() {
       beforeEach(inject(function($rootScope, $controller) {
         $scope  = $rootScope.$new();
         controller = $controller("TimeunitEditCtrl", {
-          $scope: $scope ,
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams,
           timeunit: new $api.timeunits(timeunit)
         });
       }));
@@ -164,7 +169,9 @@ describe('Timeunits', function() {
       beforeEach(inject(function($rootScope, $controller) {
         $scope  = $rootScope.$new();
         controller = $controller("TimeunitCreateCtrl", {
-          $scope: $scope 
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams 
         });
       }));
 

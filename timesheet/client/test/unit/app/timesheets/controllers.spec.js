@@ -18,20 +18,21 @@ describe('Timesheets', function() {
       
     beforeEach(
       module(
-        'app.timesheets.controllers', 
         'app.resources',
         'ngResource',
         'security.services',
-        'stateMock',
-        'notifications.services'
+        'ui.router.mock',
+        'notifications.services',
+        'app.timesheets',
+        'app.timesheets.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParamsMock_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
       $state = _$state_;
-      $stateParams = _$stateParams_;
+      $stateParams = _$stateParamsMock_;
       $api = _$api_;
     }));
 
@@ -74,7 +75,9 @@ describe('Timesheets', function() {
       beforeEach(function() {
         $scope = $rootScope.$new();
         controller = $controller("TimesheetCtrl", { 
-          $scope: $scope 
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams 
         });
 
         $httpBackend.when('GET', '/users/1234567890/timesheets?page=1&sort=%7B%22beginDate%22:1%7D').respond(200);
@@ -233,7 +236,8 @@ describe('Timesheets', function() {
           $scope: $scope,
           timesheet: new $api.timesheets(timesheet),
           timeunits: timeunits,
-          $state: $state
+          $state: $state,
+          $stateParams: $stateParams
         });
 
         timeunit = angular.extend(timeunits[0], {user_id: '1234567890', timesheet_id: timesheet._id});
@@ -454,7 +458,9 @@ describe('Timesheets', function() {
 
         $scope = $rootScope.$new();
         controller = $controller("TimesheetCreateCtrl", {
-          $scope: $scope
+          $scope: $scope,
+          $state: $state,
+          $stateParams: $stateParams
         });
       });
 
