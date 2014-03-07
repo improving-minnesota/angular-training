@@ -1,5 +1,5 @@
 <div class="tsz-employee-list">
-  <div ng-show="$state.is('app.employees')">
+  <div ng-show="$state.is('app.employees')" class="animate-show">
     <div class="row tsz-form-row">
       <div class="col-sm-2 pull-right">
         <button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="employee in pageConfig.data | orderBy:'username'" 
+            <tr ng-repeat="employee in pageConfig.data | orderBy:'username'" class="repeated-item"
               ng-click="showDetail(employee)">
 
               <td>{{employee.username}}</td>
@@ -58,6 +58,6 @@
     </div>
 
   </div>
-  
+
   <div ui-view></div>
 </div>

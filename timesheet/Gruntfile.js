@@ -108,6 +108,7 @@ module.exports = function (grunt) {
           '<%= components %>/angular-cookies/angular-cookies.js',
           '<%= components %>/angular-resource/angular-resource.js',
           '<%= components %>/angular-sanitize/angular-sanitize.js',
+          '<%= components %>/angular-animate/angular-animate.js',
 
           // Angular UI libraries
           '<%= components %>/angular-ui-router/release/angular-ui-router.js',

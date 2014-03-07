@@ -11,6 +11,7 @@ angular.module('main', [
   'ui.bootstrap.pagination',
   'ui.bootstrap.buttons',
   'ngSanitize',
+  'ngAnimate',
   'ui.router'
 ])
 
