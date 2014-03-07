@@ -24,8 +24,8 @@ TimeunitsController.create = function () {
   db.insert('timeunits', controller.req.body)
     .then(function (timeunit) {
       controller.res.json(timeunit);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -37,8 +37,8 @@ TimeunitsController.show = function () {
   db.findOne('timeunits', {_id: id})
     .then(function (timeunit) {
       controller.res.json(timeunit);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -50,8 +50,8 @@ TimeunitsController.update = function () {
   db.update('timeunits', {_id: id}, controller.req.body)
     .then(function (timeunit) {
       controller.res.json(timeunit);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -63,8 +63,8 @@ TimeunitsController.destroy = function () {
   db.remove('timeunits', {_id: id})
     .then(function () {
       controller.res.send(200);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };

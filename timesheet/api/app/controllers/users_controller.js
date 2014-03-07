@@ -36,8 +36,8 @@ UsersController.create = function () {
   db.insert('users', controller.req.body)
     .then(function (user) {
       controller.res.json(user);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -49,8 +49,8 @@ UsersController.show = function () {
   db.findOne('users', {_id: id})
     .then(function (user) {
       controller.res.json(user);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -62,8 +62,8 @@ UsersController.update = function () {
   db.update('users', {_id: id}, controller.req.body)
     .then(function (user) {
       controller.res.json(user);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -75,8 +75,8 @@ UsersController.destroy = function () {
   db.remove('users', {_id: id})
     .then(function () {
       controller.res.send(200);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
