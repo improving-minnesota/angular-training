@@ -1,4 +1,4 @@
-<div class="tsz-timesheet-detail" ng-cloak>
+<div class="tsz-timesheet-detail">
   <div ng-show="$state.is('app.timesheets.detail')">
     <div class="row">
       <div class="col-xs-12">
@@ -74,7 +74,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeunitDetail(timeunit)">
+              <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeunitDetail(timeunit)" class="repeated-item">
                 <td>{{timeunit.project}}</td>
                 <td>{{timeunit.dateWorked | momentShortDate}}</td>
                 <td>{{timeunit.hoursWorked}}</td>

@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="timesheet in pageConfig.data | orderBy:beginDate" 
+            <tr ng-repeat="timesheet in pageConfig.data | orderBy:beginDate" class="repeated-item"
               ng-click="showDetail(timesheet)">
 
               <td>{{timesheet.beginDate | date}}</td>
