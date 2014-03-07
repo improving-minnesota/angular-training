@@ -20,7 +20,6 @@ describe('Authentication', function() {
       'app.resources',
       'app.security',
       'security.services',
-      'ui.router.mock', 
       'assets/templates/app/security/login/index.html',
       'notifications.services',
       'authentication.services'
@@ -45,7 +44,6 @@ describe('Authentication', function() {
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
-    $state.ensureAllTransitionsHappened();
   });
 
   describe('login', function() {

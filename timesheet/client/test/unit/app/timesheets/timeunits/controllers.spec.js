@@ -23,16 +23,15 @@ describe('Timeunits', function() {
         'security.services',
         'notifications.services',
         'app.timesheets.timeunits',
-        'app.timesheets.timeunits.controllers',
-        'ui.router.mock'
+        'app.timesheets.timeunits.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParamsMock_, _$api_){
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
       $state = _$state_;
-      $stateParams = _$stateParamsMock_;
+      $stateParams = _$stateParams_;
       $api = _$api_;
     }));
 
@@ -61,14 +60,14 @@ describe('Timeunits', function() {
 
       spies = {
         error: sinon.spy(notifications, 'error'),
-        success: sinon.spy(notifications, 'success')
+        success: sinon.spy(notifications, 'success'),
+        state: sinon.stub($state)
       };
     }));
 
     afterEach(function() {
       $httpBackend.verifyNoOutstandingExpectation();
       $httpBackend.verifyNoOutstandingRequest();
-      $state.ensureAllTransitionsHappened();
     });
 
     describe('TimeunitCtrl', function() {
@@ -78,7 +77,6 @@ describe('Timeunits', function() {
         controller = $controller("TimeunitCtrl", { 
           $scope: $scope,
           projects: projects,
-          $state: $state,
           $stateParams: $stateParams
         });
       }));
@@ -94,8 +92,8 @@ describe('Timeunits', function() {
 
       describe('cancel', function () {
         it('should return back to the timesheet detail', function () {
-          $state.expectTransitionTo('app.timesheets.detail', $stateParams);
           $scope.cancel();
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail');
         });
       });
     });
@@ -106,7 +104,7 @@ describe('Timeunits', function() {
         $scope  = $rootScope.$new();
         controller = $controller("TimeunitEditCtrl", {
           $scope: $scope,
-          $state: $state,
+          $state: spies.state,
           $stateParams: $stateParams,
           timeunit: new $api.timeunits(timeunit)
         });
@@ -151,13 +149,12 @@ describe('Timeunits', function() {
 
         describe('in error', function () {
           it('should notify the user of the error and reload the state', function () {
-            spies.reload = sinon.spy($state, 'reload');
             $httpBackend.when('PUT', '/users/1234567890/timesheets/asdfghjklqwerty/timeunits/aaaaaaaaaa').respond(500);
             $scope.save();
             $httpBackend.flush();
             expect(spies.error).to.have.been.called;
             expect(spies.success).to.not.have.been.called;
-            expect(spies.reload).to.have.been.called;
+            expect(spies.state.reload).to.have.been.called;
           });
         });
 
@@ -170,7 +167,6 @@ describe('Timeunits', function() {
         $scope  = $rootScope.$new();
         controller = $controller("TimeunitCreateCtrl", {
           $scope: $scope,
-          $state: $state,
           $stateParams: $stateParams 
         });
       }));
@@ -197,7 +193,6 @@ describe('Timeunits', function() {
 
           beforeEach(function () {
             $httpBackend.when('POST', '/users/1234567890/timesheets/asdfghjklqwerty/timeunits').respond(200, updatedTimeunit);
-            $state.expectTransitionTo('app.timesheets.detail', $stateParams);
           });
 
           it('should set the timeunit on scope to be the updated timeunit', function () {

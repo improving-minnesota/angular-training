@@ -19,18 +19,17 @@ describe('Projects', function() {
         'app.resources',
         'ngResource',
         'security.services',
-        'ui.router.mock',
         'notifications.services',
         'app.projects',
         'app.projects.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParamsMock_, _$api_){
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
       $state = _$state_;
-      $stateParams = _$stateParamsMock_;
+      $stateParams = _$stateParams_;
       $api = _$api_;
     }));
 
@@ -39,7 +38,8 @@ describe('Projects', function() {
 
       spies = {
         error: sinon.spy(notifications, 'error'),
-        success: sinon.spy(notifications, 'success')
+        success: sinon.spy(notifications, 'success'),
+        state: sinon.stub($state)
       };
 
       project = {
@@ -52,7 +52,6 @@ describe('Projects', function() {
     afterEach(function() {
       $httpBackend.verifyNoOutstandingExpectation();
       $httpBackend.verifyNoOutstandingRequest();
-      $state.ensureAllTransitionsHappened();
     });
 
     describe('ProjectCtrl', function() {
@@ -61,7 +60,7 @@ describe('Projects', function() {
         $scope = $rootScope.$new();
         controller = $controller("ProjectCtrl", { 
           $scope: $scope,
-          $state: $state,
+          $state: spies.state,
           $stateParams: $stateParams 
         });
 
@@ -96,16 +95,16 @@ describe('Projects', function() {
         });
         it('should transition to the project detail state', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.projects.detail', project);
           $scope.showDetail(project);
+          expect(spies.state.go).to.have.been.calledWith('app.projects.detail', project);
         });
       });
 
       describe('creating a new project', function () {
         it('should transition to the create project state', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.projects.create');
           $scope.createNew();
+          expect(spies.state.go).to.have.been.calledWith('app.projects.create');
         });
       });
 
@@ -212,8 +211,8 @@ describe('Projects', function() {
       describe('cancel', function () {
         it('should return back to the project list', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.projects');
           $scope.cancel();
+          expect(spies.state.go).to.have.been.calledWith('app.projects');
         });
       });
 
@@ -222,13 +221,13 @@ describe('Projects', function() {
     describe('ProjectDetailCtrl', function() {
       
       beforeEach(function() {
-        $state.current.data.saveText = 'update';
+        $state.current = {data: {saveText: 'update'}};
 
         $scope = $rootScope.$new();
         controller = $controller("ProjectDetailCtrl", {
           $scope: $scope,
           project: new $api.projects(project),
-          $state: $state,
+          $state: spies.state,
           $stateParams: $stateParams
         });
       });
@@ -292,12 +291,12 @@ describe('Projects', function() {
     describe('ProjectCreateCtrl', function() {
 
       beforeEach(function() {
-        $state.current.data.saveText = 'create';
+        $state.current = {data: {saveText: 'create'}};
 
         $scope = $rootScope.$new();
         controller = $controller("ProjectCreateCtrl", {
           $scope: $scope,
-          $state: $state,
+          $state: spies.state,
           $stateParams: $stateParams
         });
       });
@@ -326,12 +325,12 @@ describe('Projects', function() {
 
           beforeEach(function () {
             $httpBackend.when('POST', '/projects').respond(200, project);
-            $state.expectTransitionTo('app.projects.detail', project);
           });
 
           it('should transition to the detail page of the created project', function () {
             $scope.save();
             $httpBackend.flush();
+            expect(spies.state.go).to.have.been.calledWith('app.projects.detail', {_id: project._id});
           });
 
           it('should notify the user of the successful create', function () {

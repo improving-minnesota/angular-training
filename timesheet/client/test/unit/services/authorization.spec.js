@@ -15,12 +15,12 @@ describe('Authorization', function() {
   beforeEach(
     module(
       'test',
-      'authorization.services', 
+      'ui.router',
       'security.services',
       'app.resources',
       'ngResource',
-      'ui.router.mock',
       'notifications.services',
+      'authorization.services', 
       'assets/templates/app/security/login/index.html'
     ));
   

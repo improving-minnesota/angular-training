@@ -7,11 +7,11 @@ describe('App', function() {
       
     beforeEach(
       module( 
+        'ui.router',
         'app.resources',
         'ngResource',
         'security.services',
         'authentication.services',
-        'ui.router.mock',
         'notifications.services',
         'app.controllers'
       ));

@@ -11,7 +11,6 @@ describe('Security', function() {
         'app.resources',
         'security.services',
         'authentication.services',
-        'ui.router.mock',
         'notifications.services',
         'app.security',
         'app.security.controllers'

@@ -84,7 +84,7 @@ angular.module('app.projects.controllers', [])
       $scope.save = function save () {
         $control.create('projects', $scope.project) 
           .then(function (created) {
-            $state.go('app.projects.detail', created);
+            $state.go('app.projects.detail', {_id: created._id});
             notifications.success('Project : ' + created.name + ', created.');
           },
           function (x) {
