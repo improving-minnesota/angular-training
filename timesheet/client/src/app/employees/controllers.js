@@ -86,7 +86,7 @@ angular.module('app.employees.controllers', [])
         $control.create('employees', $scope.employee)
           .then(function (created) {
             notifications.success('Employee : ' + created.username + ' , created.');
-            $state.go('app.employees.detail', created);
+            $state.go('app.employees.detail', {_id: created._id});
           },
           function (x) {
             notifications.error('There was an error creating employee.');

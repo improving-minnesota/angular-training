@@ -15,10 +15,6 @@ describe('Date filters:', function () {
       momentFromNowAgoFilter = $injector.get('momentFromNowAgoFilter');
     }));
 
-    it('should display "1 day ago" for a date of yesterday', function() {
-      expect(momentFromNowAgoFilter(moment().subtract('hours', 20).format())).to.equal('a day ago');
-    });
-
     it('should display "a month ago" for a date at least 25 days ago', function() {
       expect(momentFromNowAgoFilter(moment().subtract('days', 25).format())).to.equal('a month ago');
     });

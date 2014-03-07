@@ -7,13 +7,13 @@ describe('Security', function() {
       
     beforeEach(
       module(
-        'app.security.controllers', 
         'ngResource',
         'app.resources',
         'security.services',
         'authentication.services',
-        'stateMock',
-        'notifications.services'
+        'notifications.services',
+        'app.security',
+        'app.security.controllers'
       ));
 
     describe('LoginCtrl', function() {

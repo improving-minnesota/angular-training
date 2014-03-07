@@ -15,14 +15,14 @@ describe('Authentication', function() {
 
   beforeEach(
     module(
-      'security.services',
-      'authentication.services',
       'test', 
-      'stateMock', 
-      'assets/templates/app/security/login/index.html',
-      'app.resources',
       'ngResource',
-      'notifications.services'
+      'app.resources',
+      'app.security',
+      'security.services',
+      'assets/templates/app/security/login/index.html',
+      'notifications.services',
+      'authentication.services'
     ));
 
   beforeEach(inject(function(_$rootScope_, _$httpBackend_, _$http_, _$state_) {
@@ -44,7 +44,6 @@ describe('Authentication', function() {
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
-    $state.ensureAllTransitionsHappened();
   });
 
   describe('login', function() {

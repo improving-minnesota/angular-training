@@ -18,12 +18,13 @@ describe('Timesheets', function() {
       
     beforeEach(
       module(
-        'app.timesheets.controllers', 
         'app.resources',
         'ngResource',
         'security.services',
-        'stateMock',
-        'notifications.services'
+        'notifications.services',
+        'app.timesheets.timeunits',
+        'app.timesheets',
+        'app.timesheets.controllers'
       ));
 
     beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
@@ -59,14 +60,14 @@ describe('Timesheets', function() {
 
       spies = {
         error: sinon.spy(notifications, 'error'),
-        success: sinon.spy(notifications, 'success')
+        success: sinon.spy(notifications, 'success'),
+        state: sinon.stub($state)
       };
     }));
 
     afterEach(function() {
       $httpBackend.verifyNoOutstandingExpectation();
       $httpBackend.verifyNoOutstandingRequest();
-      $state.ensureAllTransitionsHappened();
     });
 
     describe('TimesheetCtrl', function() {
@@ -74,7 +75,9 @@ describe('Timesheets', function() {
       beforeEach(function() {
         $scope = $rootScope.$new();
         controller = $controller("TimesheetCtrl", { 
-          $scope: $scope 
+          $scope: $scope,
+          $state: spies.state,
+          $stateParams: $stateParams 
         });
 
         $httpBackend.when('GET', '/users/1234567890/timesheets?page=1&sort=%7B%22beginDate%22:1%7D').respond(200);
@@ -108,16 +111,16 @@ describe('Timesheets', function() {
         });
         it('should transition to the timesheet detail state', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.timesheets.detail', timesheet);
           $scope.showDetail(timesheet);
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail', timesheet);
         });
       });
 
       describe('creating a new timesheet', function () {
         it('should transition to the create timesheet state', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.timesheets.create');
           $scope.createNew();
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets.create');
         });
       });
 
@@ -233,7 +236,8 @@ describe('Timesheets', function() {
           $scope: $scope,
           timesheet: new $api.timesheets(timesheet),
           timeunits: timeunits,
-          $state: $state
+          $state: spies.state,
+          $stateParams: $stateParams
         });
 
         timeunit = angular.extend(timeunits[0], {user_id: '1234567890', timesheet_id: timesheet._id});
@@ -252,30 +256,30 @@ describe('Timesheets', function() {
 
       describe('edit', function () {
         it('should transition to the edit state', function () {
-          $state.expectTransitionTo('app.timesheets.detail.edit', $stateParams);
           $scope.edit(timesheet);
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail.edit', $stateParams);
         }); 
       });
 
       describe('cancel', function () {
         it('should return back to the timesheet list', function () {
-          $state.expectTransitionTo('app.timesheets');
           $scope.cancel();
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets');
         });
       });
 
       describe('logTime', function () {
         it('should transition to the create timeunits state', function () {
-          $state.expectTransitionTo('app.timesheets.detail.timeunits.create', $stateParams);
           $scope.logTime();
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail.timeunits.create', $stateParams);
         });
       });
 
       describe('showTimeunitDetail', function () {
         it('should set the timeunit_id on state params and transistion to the edit timeunits state', function () {
-          $state.expectTransitionTo('app.timesheets.detail.timeunits.edit');
           $scope.showTimeunitDetail({_id: 'abc'});
           expect($stateParams.timeunit_id).to.equal('abc');
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail.timeunits.edit');
         });
       }); 
 
@@ -374,13 +378,13 @@ describe('Timesheets', function() {
 
     describe('TimesheetEditCtrl', function() {
       beforeEach(function() {
-        $state.current.data.saveText = 'update';
+        spies.state.current = {data: {saveText: 'update'}};
 
         $scope = $rootScope.$new();
         controller = $controller("TimesheetEditCtrl", {
           $scope: $scope,
           timesheet: new $api.timesheets(timesheet),
-          $state: $state
+          $state: spies.state
         });
       });
 
@@ -441,8 +445,8 @@ describe('Timesheets', function() {
 
       describe('cancel', function () {
         it('should return back to the timesheet detail', function () {
-          $state.expectTransitionTo('app.timesheets.detail');
           $scope.cancel();
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail');
         });
       });
     });
@@ -450,11 +454,13 @@ describe('Timesheets', function() {
     describe('TimesheetCreateCtrl', function() {
 
       beforeEach(function() {
-        $state.current.data.saveText = 'create';
+        spies.state.current = {data: {saveText: 'create'}};
 
         $scope = $rootScope.$new();
         controller = $controller("TimesheetCreateCtrl", {
-          $scope: $scope
+          $scope: $scope,
+          $state: spies.state,
+          $stateParams: $stateParams
         });
       });
 
@@ -482,12 +488,12 @@ describe('Timesheets', function() {
 
           beforeEach(function () {
             $httpBackend.when('POST', '/users/1234567890/timesheets').respond(200, timesheet);
-            $state.expectTransitionTo('app.timesheets.detail', timesheet);
-          });
+            });
 
           it('should transition to the detail page of the created timesheet', function () {
             $scope.save();
             $httpBackend.flush();
+            expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail', {user_id: $stateParams.user_id, _id: timesheet._id});
           });
 
           it('should notify the user of the successful create', function () {
@@ -511,8 +517,8 @@ describe('Timesheets', function() {
 
       describe('cancel', function () {
         it('should return back to the timesheet list', function () {
-          $state.expectTransitionTo('app.timesheets');
           $scope.cancel();
+          expect(spies.state.go).to.have.been.calledWith('app.timesheets');
         });
       });
 

@@ -46,4 +46,16 @@ angular.module('app.timesheets.timeunits', [
             }]
         }
       });
+  })
+
+  .run(function ($api) {
+
+    $api.add({
+      resource: 'timeunits',
+      url: '/users/:user_id/timesheets/:timesheet_id/timeunits',
+      params: {
+        user_id: '@user_id',
+        timesheet_id: '@timesheet_id'
+      }
+    });
   });

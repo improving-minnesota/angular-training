@@ -1,6 +1,5 @@
 angular.module('app.resources', ['ngResource'])
-  .factory('$control', 
-    function ($q, $api) {
+  .factory('$control', function ($api) {
 
       var control = {
 
@@ -58,70 +57,48 @@ angular.module('app.resources', ['ngResource'])
     }
   )
 
-  .factory('$api', 
-    function ($resource) {
-
-      var extraMethods = {
-        'paged' : {
-          method: 'GET'
-        },
-        'update' : {
-          method: 'PUT'
-        },
-        'restore' : {
-          method: 'PUT',
-          params: {
-            verb: 'restore'
-          }
-        }
-      };
+  .factory('$api', function ($resource) {
 
       var api = {
+        idOnly : {_id: '@_id'},
 
-        timesheets : $resource(
-          '/users/:user_id/timesheets/:_id', 
-          {
-            user_id: '@user_id',
-            _id: '@_id'
+        extraMethods: {
+          'paged' : {
+            method: 'GET',
+            params: {
+              page: '@page'
+            }
           },
-          extraMethods
-        ),
-
-        timeunits : $resource('/users/:user_id/timesheets/:timesheet_id/timeunits/:_id', {
-          user_id: '@user_id',
-          timesheet_id: '@timesheet_id',
-          _id: '@_id'
-        },
-        extraMethods),
-
-        projects : $resource('/projects/:_id', {
-          _id: '@_id'
-        },
-        extraMethods),
-
-        employees : $resource('/users/:_id', {
-          _id: '@_id'
-        },
-        extraMethods),
-
-        // security
-        login : $resource('/login', {}, {
-          'login' : {
-            method: 'POST'
+          'update' : {
+            method: 'PUT'
           },
-          'current' : {
-            method: 'GET'
+          'restore' : {
+            method: 'PUT'
           }
-        }),
+        },
 
-        logout : $resource('/logout', {}, {
-          'logout' : {
-            method: 'POST'
+        add : function (config) {
+          var params, 
+            url;
+
+          // If the url follows the expected pattern, we can set cool defaults
+          if (!config.unnatural) {
+            var orig = angular.copy(api.idOnly);
+            params = angular.extend(orig, config.params);
+            url = config.url + '/:_id';
+
+          // otherwise we have to declare the entire configuration. 
+          } else {
+            params = config.params;
+            url = config.url;
           }
-        })
+          
+          // If we supply a method configuration, use that instead of the default extra. 
+          var methods = config.methods || api.extraMethods;
 
-      };
-
+          api[config.resource] = $resource(url, params, methods);
+        }
+      };    
+      
       return api;
-    }
-  );
+    });

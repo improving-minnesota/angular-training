@@ -6,14 +6,14 @@ describe('App', function() {
   describe('Controllers', function() {
       
     beforeEach(
-      module(
-        'app.controllers', 
+      module( 
+        'ui.router',
         'app.resources',
         'ngResource',
         'security.services',
         'authentication.services',
-        'stateMock',
-        'notifications.services'
+        'notifications.services',
+        'app.controllers'
       ));
 
     describe('MainCtrl', function() {

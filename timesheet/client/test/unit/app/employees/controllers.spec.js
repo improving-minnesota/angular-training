@@ -16,12 +16,12 @@ describe('Employees', function() {
       
     beforeEach(
       module(
-        'app.employees.controllers',
-        'app.resources',
         'ngResource',
+        'app.resources',
         'security.services',
-        'stateMock',
-        'notifications.services'
+        'notifications.services',
+        'app.employees',
+        'app.employees.controllers'
       ));
 
     beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
@@ -38,7 +38,8 @@ describe('Employees', function() {
 
       spies = {
         error: sinon.spy(notifications, 'error'),
-        success: sinon.spy(notifications, 'success')
+        success: sinon.spy(notifications, 'success'),
+        state: sinon.stub($state)
       };
 
       employee = {
@@ -55,7 +56,6 @@ describe('Employees', function() {
     afterEach(function() {
       $httpBackend.verifyNoOutstandingExpectation();
       $httpBackend.verifyNoOutstandingRequest();
-      $state.ensureAllTransitionsHappened();
     });
 
     describe('EmployeeCtrl', function() {
@@ -63,7 +63,9 @@ describe('Employees', function() {
       beforeEach(function() {
         $scope = $rootScope.$new();
         controller = $controller("EmployeeCtrl", { 
-          $scope: $scope 
+          $scope: $scope,
+          $state: spies.state,
+          $stateParams: $stateParams
         });
 
         $httpBackend.when('GET', '/users?page=1&sort=%7B%22username%22:1%7D').respond(200);
@@ -97,16 +99,16 @@ describe('Employees', function() {
         });
         it('should transition to the employee detail state', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.employees.detail', employee);
           $scope.showDetail(employee);
+          expect(spies.state.go).to.have.been.calledWith('app.employees.detail');
         });
       });
 
       describe('creating a new employee', function () {
         it('should transition to the create employee state', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.employees.create');
           $scope.createNew();
+          expect(spies.state.go).to.have.been.calledWith('app.employees.create');
         });
       });
 
@@ -213,8 +215,8 @@ describe('Employees', function() {
       describe('cancel', function () {
         it('should return back to the employee list', function () {
           $httpBackend.flush();
-          $state.expectTransitionTo('app.employees');
           $scope.cancel();
+          expect(spies.state.go).to.have.been.calledWith('app.employees');
         });
       });
 
@@ -223,13 +225,14 @@ describe('Employees', function() {
     describe('EmployeeDetailCtrl', function() {
       
       beforeEach(function() {
-        $state.current.data.saveText = 'update';
+        spies.state.current = {data: {saveText: 'update'}};
 
         $scope = $rootScope.$new();
         controller = $controller("EmployeeDetailCtrl", {
           $scope: $scope,
           employee: new $api.employees(employee),
-          $state: $state
+          $state: spies.state,
+          $stateParams: $stateParams
         });
       });
 
@@ -292,11 +295,13 @@ describe('Employees', function() {
     describe('EmployeeCreateCtrl', function() {
 
       beforeEach(function() {
-        $state.current.data.saveText = 'create';
+        spies.state.current = {data: {saveText: 'create'}};
 
         $scope = $rootScope.$new();
         controller = $controller("EmployeeCreateCtrl", {
-          $scope: $scope
+          $scope: $scope,
+          $state: spies.state,
+          $stateParams: $stateParams
         });
       });
 
@@ -325,12 +330,12 @@ describe('Employees', function() {
 
           beforeEach(function () {
             $httpBackend.when('POST', '/users').respond(200, employee);
-            $state.expectTransitionTo('app.employees.detail', employee);
           });
 
           it('should transition to the detail page of the created employee', function () {
             $scope.save();
             $httpBackend.flush();
+            expect(spies.state.go).to.have.been.calledWith('app.employees.detail', {_id: employee._id});
           });
 
           it('should notify the user of the successful create', function () {
