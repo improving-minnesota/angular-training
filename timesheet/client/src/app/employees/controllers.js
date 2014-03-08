@@ -32,8 +32,8 @@ angular.module('app.employees.controllers', [])
         $control.remove('employees', employee) 
           .then(function () {
             notifications.success('Employee : ' + employee.username + ', was deleted.');
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             employee.deleted = false;
             notifications.error('Error attempting to delete employee.');
           });
@@ -44,8 +44,8 @@ angular.module('app.employees.controllers', [])
        $control.restore('employees', employee)
           .then(function (restored) {
             notifications.success('Employee was restored.');
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             employee.deleted = true;
             notifications.error('Error restoring employee.');
           });
@@ -69,8 +69,8 @@ angular.module('app.employees.controllers', [])
           .then(function (updated) {
             $scope.timesheet = updated;
             notifications.success('Updated employee: ' + employee.username);
-          },  
-          function (x) {
+          })
+          .catch(function (x) {
             notifications.error('There was an error updating the employee.');
           });
       };
@@ -87,8 +87,8 @@ angular.module('app.employees.controllers', [])
           .then(function (created) {
             notifications.success('Employee : ' + created.username + ' , created.');
             $state.go('app.employees.detail', {_id: created._id});
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             notifications.error('There was an error creating employee.');
           });
       };
