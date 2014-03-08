@@ -74,7 +74,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeunitDetail(timeunit)" class="repeated-item">
+              <tr ng-repeat="timeunit in timeunits | orderBy:'dateWorked'" ng-click="showTimeunitDetail(timeunit)" 
+                class="repeated-item fadeable-row"
+                ng-class="{faded: timeunit.deleted}">
+                
                 <td>{{timeunit.project}}</td>
                 <td>{{timeunit.dateWorked | momentShortDate}}</td>
                 <td>{{timeunit.hoursWorked}}</td>

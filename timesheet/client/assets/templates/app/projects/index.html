@@ -19,7 +19,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="project in pageConfig.data | orderBy:'name'" class="repeated-item"
+            <tr ng-repeat="project in pageConfig.data | orderBy:'name'" 
+              class="repeated-item fadeable-row"
+              ng-class="{faded: project.deleted}"
               ng-click="showDetail(project)">
 
               <td>{{project.name}}</td>

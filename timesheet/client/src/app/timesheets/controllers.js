@@ -85,6 +85,8 @@ angular.module('app.timesheets.controllers', [])
       };
 
       $scope.removeTimeunit = function removeTimeunit (timeunit) {
+        timeunit.user_id = timesheet.user_id;
+
         $control.remove('timeunits', timeunit) 
           .then(function () {
             notifications.success('Timeunit deleted.');
@@ -96,6 +98,8 @@ angular.module('app.timesheets.controllers', [])
       };
 
       $scope.restoreTimeunit = function restoreTimeunit (timeunit) {
+        timeunit.user_id = timesheet.user_id;
+
         $control.restore('timeunits', timeunit)
           .then(function (restored) {
             notifications.success('Timeunit was restored.');
