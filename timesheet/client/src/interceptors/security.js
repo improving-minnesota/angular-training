@@ -22,7 +22,7 @@ angular.module('security.interceptors', [
           });
         }
 
-        return $q.when(response);
+        return $q.reject(response);
       }
     };
   }

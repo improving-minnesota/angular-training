@@ -85,25 +85,22 @@ angular.module('app.timesheets.controllers', [])
       };
 
       $scope.removeTimeunit = function removeTimeunit (timeunit) {
-        // timeunit.user_id = timesheet.user_id;
+        timeunit.user_id = timesheet.user_id;
 
-        var promise = 
         $control.remove('timeunits', timeunit) 
           .then(function () {
             notifications.success('Timeunit deleted.');
           })
           .catch(function (x) {
             timeunit.deleted = false;
-            notifications.error('Timeunit restored.');
+            notifications.error('Error deleting timeunit. Timeunit restore.');
           });
 
           console.log("remove");
       };
 
       $scope.restoreTimeunit = function restoreTimeunit (timeunit) {
-        // timeunit.user_id = timesheet.user_id;
-
-        var promise = 
+        timeunit.user_id = timesheet.user_id;
 
         $control.restore('timeunits', timeunit)
           .then(function (restored) {
