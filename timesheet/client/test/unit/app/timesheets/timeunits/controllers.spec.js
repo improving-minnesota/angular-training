@@ -45,7 +45,7 @@ describe('Timeunits', function() {
         "description": "This is your first project"
       }];
 
-      timesheet = {"_id": "asdfghjklqwerty"};
+      timesheet = {"_id": "asdfghjklqwerty", beginDate: '2014-05-12'};
       timeunit = {
         "_id": "aaaaaaaaaa", 
         "dateWorked": "2013-11-18", 
@@ -165,6 +165,7 @@ describe('Timeunits', function() {
 
       beforeEach(inject(function($rootScope, $controller) {
         $scope  = $rootScope.$new();
+        $scope.timesheet = {"_id": "asdfghjklqwerty", beginDate: '2014-05-12'};
         controller = $controller("TimeunitCreateCtrl", {
           $scope: $scope,
           $stateParams: $stateParams 

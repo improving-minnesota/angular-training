@@ -16,11 +16,13 @@ describe('Date filters:', function () {
     }));
 
     it('should display "a month ago" for a date at least 25 days ago', function() {
-      expect(momentFromNowAgoFilter(moment().subtract('days', 25).format())).to.equal('a month ago');
+      var date = moment().subtract('days', 25);
+      expect(momentFromNowAgoFilter(date.format())).to.equal(date.fromNow());
     });
 
     it('should display "a year ago" for a date at least 345 days ago', function() {
-      expect(momentFromNowAgoFilter(moment().subtract('days', 345).format())).to.equal('a year ago');
+      var date = moment().subtract('days', 345);
+      expect(momentFromNowAgoFilter(date.format())).to.equal(date.fromNow());
     });
 
     it('should display "None" for a null date', function() {
