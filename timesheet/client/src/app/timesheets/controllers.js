@@ -34,8 +34,8 @@ angular.module('app.timesheets.controllers', [])
         $control.remove('timesheets', timesheet)
           .then(function () {
             notifications.success('Timesheet deleted.');
-          },
-          function (x) {  
+          })
+          .catch(function (x) {  
             timesheet.deleted = false;
             notifications.error('Error deleting timesheet : ' + x); 
           });
@@ -46,8 +46,8 @@ angular.module('app.timesheets.controllers', [])
         $control.restore('timesheets', timesheet)
           .then(function (restored) {
             notifications.success('Timesheet restored.');
-          }, 
-          function (x) {
+          })
+          .catch(function (x) {
             timesheet.deleted = true;
             notifications.error('Error restoring timesheet: ' + x);
           });
@@ -85,26 +85,31 @@ angular.module('app.timesheets.controllers', [])
       };
 
       $scope.removeTimeunit = function removeTimeunit (timeunit) {
-        timeunit.user_id = timesheet.user_id;
+        // timeunit.user_id = timesheet.user_id;
 
+        var promise = 
         $control.remove('timeunits', timeunit) 
           .then(function () {
             notifications.success('Timeunit deleted.');
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             timeunit.deleted = false;
             notifications.error('Timeunit restored.');
           });
+
+          console.log("remove");
       };
 
       $scope.restoreTimeunit = function restoreTimeunit (timeunit) {
-        timeunit.user_id = timesheet.user_id;
+        // timeunit.user_id = timesheet.user_id;
+
+        var promise = 
 
         $control.restore('timeunits', timeunit)
           .then(function (restored) {
             notifications.success('Timeunit was restored.');
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             timeunit.deleted = true;
             notifications.error('Error restoring the timeunit.');
           });
@@ -122,8 +127,8 @@ angular.module('app.timesheets.controllers', [])
           .then(function (updated) {
             $scope.timesheet = updated;
             notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully updated.");
-          }, 
-          function (x) {
+          })
+          .catch(function (x) {
             notifications.error('There was an error updating timesheet : ' + $scope.timesheet.name);
           });
       };
@@ -146,8 +151,8 @@ angular.module('app.timesheets.controllers', [])
           .then(function (created) {
             $state.go('app.timesheets.detail', {user_id: $stateParams.user_id, _id: created._id});
             notifications.success("Timesheet: " + $scope.timesheet.name + ", was successfully created.");
-          }, 
-          function (x) {
+          })
+          .catch(function (x) {
             notifications.error('There was an error creating timesheet : ' + $scope.timesheet.name);
           });
       };

@@ -49,7 +49,8 @@ angular.module('app.security.controllers', [
             // If we get here then the login failed due to bad credentials
             $scope.authError = "Invalid username and password combination.";
           }
-        }, function (x) {
+        })
+        .catch(function (x) {
           // If we get here then there was a problem with the login request to the server
           $scope.authError = "Invalid username and password combination.";
         });

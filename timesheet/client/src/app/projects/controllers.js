@@ -31,8 +31,8 @@ angular.module('app.projects.controllers', [])
         $control.remove('projects', project)
           .then(function (removed) {
             notifications.success('Project : ' + project.name + ', was deleted.');
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             project.deleted = false;
             notifications.error('Error attempting to delete project.');
           });
@@ -43,8 +43,8 @@ angular.module('app.projects.controllers', [])
         $control.restore('projects', project) 
           .then(function (restored) {
             notifications.success('Project was restored.');
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             project.deleted = true;
             notifications.error('Error restoring project.');
           });
@@ -68,8 +68,8 @@ angular.module('app.projects.controllers', [])
           .then(function (updated) {
             $scope.project = updated;
             notifications.success('Updated project: ' + updated.name);
-          },  
-          function (x) {
+          })
+          .catch(function (x) {
             notifications.error('There was an error updating the employee.');
           });
       };
@@ -86,8 +86,8 @@ angular.module('app.projects.controllers', [])
           .then(function (created) {
             $state.go('app.projects.detail', {_id: created._id});
             notifications.success('Project : ' + created.name + ', created.');
-          },
-          function (x) {
+          })
+          .catch(function (x) {
             notifications.error('There was an error creating the project.');
           });
       };
