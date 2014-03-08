@@ -13,7 +13,15 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-    'client/test/e2e/**/*.spec.js'
+    // Load the page objects first
+    'client/test/e2e/app/**/*.pages.js',
+
+    // Have the security test run first so that we have a logged in user. 
+    'client/test/e2e/app/security/security.spec.js',
+    'client/test/e2e/app/employees/*.spec.js',
+    'client/test/e2e/app/projects/*.spec.js',
+    'client/test/e2e/app/timesheets/*.spec.js',
+    'client/test/e2e/app/timesheets/timeunits/*.spec.js'
   ],
 
   // Options to be passed to Jasmine-node.
