@@ -1,4 +1,6 @@
-angular.module('app.timesheets.controllers', [])
+angular.module('app.timesheets.controllers', [
+  'timesheet.directives'
+])
 
   .controller('TimesheetCtrl', 
     function ($control, $scope, $state, $stateParams, notifications) {
@@ -110,6 +112,28 @@ angular.module('app.timesheets.controllers', [])
             timeunit.deleted = true;
             notifications.error('Error restoring the timeunit.');
           });
+      };
+
+      $scope.hoursRequired = function hoursRequired() {
+        var daysInTimesheet = moment($scope.timesheet.endDate).diff(moment($scope.timesheet.beginDate), 'days') + 1,
+          weekDays = 0;
+        for (var i = 0; i < daysInTimesheet; i++) {
+          switch(moment($scope.timesheet.beginDate).add('days', i).isoWeekday()) {
+            case 1: case 2: case 3: case 4: case 5: 
+              weekDays++;
+          }
+        }
+        return weekDays * 8;
+      };
+
+      $scope.hoursWorked = function hoursWorked() {
+        return _.reduce(_.map($scope.timeunits, 'hoursWorked'), function(sum, hoursWorked) {
+          return sum + hoursWorked;
+        });
+      };
+
+      $scope.reportStatus = function reportStatus(percentComplete) {
+        notifications.info('You have worked ' + percentComplete + ' of your required hours');
       };
     } 
   )
