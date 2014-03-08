@@ -7,7 +7,7 @@ angular.module('form.directives', [])
       scope: {
         header: '@'
       },
-      templateUrl: 'assets/templates/common/form/form-header.html'
+      templateUrl: 'assets/templates/directives/form/form-header.html'
     };
   })
 
@@ -15,7 +15,7 @@ angular.module('form.directives', [])
     return {
       transclude: true,
       restrict: 'A',
-      templateUrl: 'assets/templates/common/form/fields/field-wrapper.html',
+      templateUrl: 'assets/templates/directives/form/field-wrapper.html',
       scope : {
         inputId: "@",
         label: "@",
@@ -46,7 +46,7 @@ angular.module('form.directives', [])
         labelCol: "@",
         fieldCol: "@"
       },
-      templateUrl: "assets/templates/common/form/fields/static-field.html",
+      templateUrl: "assets/templates/directives/form/static-field.html",
       link: function (scope, element) {
 
         scope.getLabelCol = function () {
