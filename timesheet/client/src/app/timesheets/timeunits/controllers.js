@@ -32,7 +32,8 @@ angular.module('app.timesheets.timeunits.controllers', [])
     function ($scope, $state, $stateParams, $control, notifications, dateFilter) {
       $scope.timeunit = {
         user_id: $stateParams.user_id,
-        timesheet_id: $stateParams._id
+        timesheet_id: $stateParams._id,
+        dateWorked: $scope.timesheet.beginDate
       };
 
       $scope.save = function save () {
