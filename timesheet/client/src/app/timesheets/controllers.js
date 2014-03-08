@@ -127,7 +127,9 @@ angular.module('app.timesheets.controllers', [
       };
 
       $scope.hoursWorked = function hoursWorked() {
-        return _.reduce(_.map($scope.timeunits, 'hoursWorked'), function(sum, hoursWorked) {
+        return _.reduce(_.map($scope.timeunits, function (timeunit) {
+          return timeunit.deleted ? 0 : timeunit.hoursWorked;
+        }), function(sum, hoursWorked) {
           return sum + hoursWorked;
         });
       };
