@@ -10,9 +10,9 @@ describe('Form directives', function () {
   beforeEach(module(
     'form.directives',
     'ngResource',
-    'assets/templates/common/form/form-header.html',
-    'assets/templates/common/form/fields/field-wrapper.html',
-    'assets/templates/common/form/fields/static-field.html'
+    'assets/templates/directives/form/form-header.html',
+    'assets/templates/directives/form/field-wrapper.html',
+    'assets/templates/directives/form/static-field.html'
   ));
 
   beforeEach(inject(function($rootScope, _$compile_, _$httpBackend_, $injector) {
