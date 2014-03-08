@@ -1,12 +1,7 @@
 describe('Date filters:', function () {
-  var expect = chai.expect,
-    apiDateFormat;
+  var expect = chai.expect;
 
   beforeEach(module('date.filters'));
-
-  beforeEach(inject(function($injector) {
-    apiDateFormat = $injector.get('apiDateFormat');
-  }));
 
   describe('momentFromNowAgo', function() {
     var momentFromNowAgoFilter;
