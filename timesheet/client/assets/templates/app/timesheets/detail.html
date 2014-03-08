@@ -84,7 +84,7 @@
                 <td>
                   <div ng-switch="timeunit.deleted">
                     <div ng-switch-when="true">
-                      <button class="btn btn-sm btn-default" ng-click="restoreTimeunit(timeunit); $event.stopPropagation();">Undo</button>
+                      <button class="btn btn-sm btn-default" ng-click="restoreTimeunit(timeunit); $event.stopPropagation();">Restore</button>
                     </div>
                     <div ng-switch-default>
                       <button class="btn btn-sm btn-danger" ng-click="removeTimeunit(timeunit); $event.stopPropagation();">Delete</button>

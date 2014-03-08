@@ -6,7 +6,7 @@ angular.module('notifications.services', [])
 
       Messenger.options = {
         extraClasses: 'messenger-fixed messenger-on-top messenger-on-right',
-        theme: 'air'
+        theme: 'flat'
       };
 
       var notifications = {
@@ -23,15 +23,15 @@ angular.module('notifications.services', [])
         },
 
         error : function (message, config) {
-          notifications.message({message: message, type: 'error'}, config);
+          notifications.message({message: message, type: 'error', id: 'error-message'}, config);
         },
 
         success : function (message, config) {
-          notifications.message({message: message, type: 'success'}, config);
+          notifications.message({message: message, type: 'success', id: 'success-message'}, config);
         },
 
         info: function (message, config) {
-          notifications.message({message: message, type: 'info'}, config);
+          notifications.message({message: message, type: 'info', id: 'info-message'}, config);
         }
       };
 

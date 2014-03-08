@@ -33,7 +33,7 @@
               <td>
                 <div ng-switch="timesheet.deleted">
                   <div ng-switch-when="true">
-                    <button class="btn btn-sm btn-default" ng-click="restore(timesheet); $event.stopPropagation();">Undo</button>
+                    <button class="btn btn-sm btn-default" ng-click="restore(timesheet); $event.stopPropagation();">Restore</button>
                   </div>
                   <div ng-switch-default>
                       <button class="btn btn-sm btn-danger" ng-click="remove(timesheet); $event.stopPropagation();">Delete</button>
