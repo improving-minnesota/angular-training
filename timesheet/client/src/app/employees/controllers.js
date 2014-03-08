@@ -1,4 +1,6 @@
-angular.module('app.employees.controllers', [])
+angular.module('app.employees.controllers', [
+  'boolean.filters'
+])
   
   .controller('EmployeeCtrl', 
     function ($control, $scope, $state, $stateParams, notifications) {

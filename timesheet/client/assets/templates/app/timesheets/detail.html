@@ -36,6 +36,15 @@
             </div>
           </div>
 
+          <div tsz-form-section-header header="Timesheet Progress"></div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div tsz-weekly-progress-bar hours-worked="hoursWorked()" 
+                hours-required="hoursRequired()" report="reportStatus(percentComplete)"></div>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-sm-2 col-sm-offset-8">
               <button type="button" class="btn btn-primary btn-block" ng-click="edit(timesheet)">Edit</button>

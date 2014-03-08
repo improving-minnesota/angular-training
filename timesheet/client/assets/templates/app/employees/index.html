@@ -31,7 +31,7 @@
               <td>{{employee.email}}</td>
               <td>{{employee.firstName}}</td>
               <td>{{employee.lastName}}</td>
-              <td>{{employee.admin}}</td>
+              <td>{{employee.admin | yesNo}}</td>
               <td>
                 <div ng-switch="employee.deleted">
                   <div ng-switch-when="true">
