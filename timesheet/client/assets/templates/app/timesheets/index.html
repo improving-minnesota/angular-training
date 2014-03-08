@@ -21,7 +21,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="timesheet in pageConfig.data | orderBy:beginDate" class="repeated-item"
+            <tr ng-repeat="timesheet in pageConfig.data | orderBy:beginDate" 
+              class="repeated-item fadeable-row"
+              ng-class="{faded: timesheet.deleted}"
               ng-click="showDetail(timesheet)">
 
               <td>{{timesheet.beginDate | date}}</td>

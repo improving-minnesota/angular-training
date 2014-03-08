@@ -12,6 +12,18 @@
   width: 5%;
 }
 
+// Used to fade the text of a role (deleted, etc.)
+.fadeable-row {
+  &.faded {
+    background-color: lighten(@gray-lighter, 5%);
+    color: lighten(@text-color, 60%);
+    cursor: not-allowed;
+    [class*=" icon-"] {
+      display: none;
+    }
+  }
+}
+
 //Make the table horizontally scrollable at small page widths
 @media (max-width: @screen-sm) {
   .tsz-responsive-table-container {

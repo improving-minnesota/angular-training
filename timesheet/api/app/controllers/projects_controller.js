@@ -37,8 +37,8 @@ ProjectsController.create = function () {
   db.insert('projects', controller.req.body)
     .then(function (project) {
       controller.res.json(project);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -50,8 +50,8 @@ ProjectsController.show = function () {
   db.findOne('projects', {_id: id})
     .then(function (project) {
       controller.res.json(project);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -63,8 +63,8 @@ ProjectsController.update = function () {
   db.update('projects', {_id: id}, controller.req.body)
     .then(function (project) {
       controller.res.json(project);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
@@ -76,8 +76,8 @@ ProjectsController.destroy = function () {
   db.remove('projects', {_id: id})
     .then(function () {
       controller.res.send(200);
-    },
-    function (err) {
+    })
+    .fail(function (err) {
       controller.res.status(500).json(err);
     });
 };
