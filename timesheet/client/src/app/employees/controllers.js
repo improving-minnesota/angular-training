@@ -87,7 +87,7 @@ angular.module('app.employees.controllers', [
       $scope.save = function save () {
         $control.create('employees', $scope.employee)
           .then(function (created) {
-            notifications.success('Employee : ' + created.username + ' , created.');
+            notifications.success('Employee : ' + created.username + ', created.');
             $state.go('app.employees.detail', {_id: created._id});
           })
           .catch(function (x) {

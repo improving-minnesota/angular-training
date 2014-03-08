@@ -13,8 +13,8 @@ describe('Security', function () {
     });
 
     it('should be able to login', function () {
-      element(by.input('user.username')).sendKeys('admin');
-      element(by.input('user.password')).sendKeys('password');
+      element(by.model('user.username')).sendKeys('admin');
+      element(by.model('user.password')).sendKeys('password');
       element(by.css('form button')).click();
 
       browser.sleep(1.0);

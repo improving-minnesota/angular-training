@@ -98,7 +98,7 @@ module.exports = function (grunt) {
           '<%= components %>/jquery/jquery.js',
           '<%= components %>/select2/select2.js',
           '<%= components %>/messenger/build/js/messenger.js',
-          '<%= components %>/messenger/build/js/messenger-theme-future.js',
+          //'<%= components %>/messenger/build/js/messenger-theme-future.js',
 
           // bootstrap
           '<%= components %>/bootstrap/dist/js/bootstrap.js',
@@ -143,7 +143,7 @@ module.exports = function (grunt) {
           '<%= components %>/select2/select2.css',
           '<%= components %>/nprogress/nprogress.css',
           '<%= components %>/messenger/build/css/messenger.css',
-          '<%= components %>/messenger/build/css/messenger-theme-air.css',
+          //'<%= components %>/messenger/build/css/messenger-theme-future.css',
           '<%= components %>/messenger/build/css/messenger-spinner.css',
           '<%= clientdist %>/assets/css/style.css'
         ],
@@ -373,11 +373,16 @@ module.exports = function (grunt) {
 
     // Starts the protractor e2e tests. 
     protractor: {
+      options: {
+        configFile: 'protractor.config.js',
+        keepAlive: true,
+        noColor: false
+      },
       e2e: {
+      },
+      debug: {
         options: {
-          configFile: 'protractor.config.js',
-          keepAlive: true,
-          noColor: false
+          debug: true
         }
       }
     },

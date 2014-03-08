@@ -40,28 +40,47 @@ describe('Notifications services:', function() {
     it('should post the message via Messenger', function () {
       notifications.message({message: 'allo'}, {config: true});
       expect(spies.post).to.have.been.called;
-      expect(spies.post).to.have.been.calledWith({message: 'allo', config: true, showCloseButton: true});
+      expect(spies.post).to.have.been.calledWith({
+        message: 'allo', 
+        config: true, 
+        showCloseButton: true
+      });
     });
   });
 
   describe('posting an error', function () {
     it('should post an error message', function () {
       notifications.error('oh noze');
-      expect(spies.post).to.have.been.calledWith({message: 'oh noze', type: 'error', showCloseButton: true});
+      expect(spies.post).to.have.been.calledWith({
+        message: 'oh noze', 
+        type: 'error', 
+        showCloseButton: true, 
+        id: 'error-message'
+      });
     });
   });
 
   describe('success', function () {
     it('should post a success message', function () {
       notifications.success('i can haz');
-      expect(spies.post).to.have.been.calledWith({message: 'i can haz', type: 'success', showCloseButton: true});
+      expect(spies.post).to.have.been.calledWith({
+        message: 'i can haz', 
+        type: 'success', 
+        showCloseButton: true, 
+        id: 'success-message'
+      });
     });
   });
 
   describe('info', function () {
     it('should post an info message', function () {
       notifications.info('info');
-      expect(spies.post).to.have.been.calledWith({message: 'info', type: 'info', showCloseButton: true});
+      expect(spies.post).to.have.been.calledWith({
+        message: 'info', 
+        type: 'info', 
+        showCloseButton: true,
+        id: 'info-message'
+      });
     });
   });
 });
