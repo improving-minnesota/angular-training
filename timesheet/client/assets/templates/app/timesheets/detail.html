@@ -1,5 +1,7 @@
 <div class="tsz-timesheet-detail">
-  <div ng-show="$state.is('app.timesheets.detail')">
+
+  <!-- TODO : set the below container div to only show when state is app.timesheets.detail -->
+  <div>
     <div class="row">
       <div class="col-xs-12">
         <form name="systemCategoryEdit" novalidate class="form-horizontal">
@@ -7,14 +9,18 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
+
+                <!-- TODO : bind this field's value to timesheet.name  -->
                 <div tsz-static-field label="Name" label-col="4" 
-                field-col="8" value="{{timesheet.name}}"></div>
+                field-col="8"></div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
+
+                <!-- TODO : bind this field's value to timesheet.description -->
                 <div tsz-static-field label="Description" label-col="4" 
-                field-col="8" value="{{timesheet.description}}"></div>
+                field-col="8"></div>
               </div>
             </div>
           </div>
@@ -22,24 +28,32 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
+
+                <!-- TODO : bind this field's value to timesheet.beginDate -->
                 <div tsz-static-field label="Begin Date" label-col="4" 
-                field-col="8" value="{{timesheet.beginDate}}"></div>
+                field-col="8"></div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
+
+                <!-- TODO : bind this field's value to timesheet.endDate -->
                 <div tsz-static-field label="End Date" label-col="4" 
-                field-col="8" value="{{timesheet.endDate}}"></div>
+                field-col="8"></div>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-2 col-sm-offset-8">
-              <button type="button" class="btn btn-primary btn-block" ng-click="edit(timesheet)">Edit</button>
+
+              <!-- TODO : set this button to call edit(timesheet) on scope when clicked -->
+              <button type="button" class="btn btn-primary btn-block">Edit</button>
             </div>
             <div class="col-sm-2">
-              <button type="button" class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
+
+              <!-- TODO : set this button to call cancel when clicked -->
+              <button type="button" class="btn btn-danger btn-block">Cancel</button>
             </div>
           </div>
 
@@ -53,7 +67,9 @@
 
     <div class="row">
       <div class="col-sm-4 col-sm-offset-8 pull-right">
-        <button type="button" class="btn btn-primary btn-block" ng-click="logTime()">Log Time</button>
+
+        <!-- TODO : set this button to call logTime when clicked -->
+        <button type="button" class="btn btn-primary btn-block">Log Time</button>
       </div>
     </div>
 
@@ -70,7 +86,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="timeunit in timeunits" ng-click="showTimeunitDetail(timeunit)" 
+
+              <!-- TODO : set the row to call showTimeunitDetail(timeunit) when clicked -->
+              <tr ng-repeat="timeunit in timeunits"
                 class="fadeable-row"
                 ng-class="{faded: timeunit.deleted}">
                 
@@ -95,5 +113,5 @@
     </div>
   </div>
 
-  <div ui-view></div>
+  <!-- TODO : set a ui-view for nested states -->
 </div>

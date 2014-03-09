@@ -1,11 +1,10 @@
 <div class="tsz-project-list">
-  <div ng-show="$state.is('app.projects')">
+
+  <!-- TODO : set the below container div to only show when state is app.projects -->
+  <div>
     <div class="row tsz-form-row">
       <div class="col-sm-2 pull-right">
-        <button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
-          <i class="icon-plus"></i>
-          New Project
-        </button>
+        <!-- TODO : add a button that calls createNew when clicked -->
       </div>
     </div>
     <div class="row">
@@ -19,10 +18,11 @@
             </tr>
           </thead>
           <tbody>
+
+            <!-- TODO : set the row to call showProject(project) when clicked -->
             <tr ng-repeat="project in projects" 
               class="fadeable-row"
-              ng-class="{faded: project.deleted}"
-              ng-click="showDetail(project)">
+              ng-class="{faded: project.deleted}">
 
               <td>{{project.name}}</td>
               <td>{{project.description}}</td>
@@ -44,5 +44,5 @@
 
   </div>
   
-  <div ui-view></div>
+  <!-- TODO : set a ui-view for nested states -->
 </div>

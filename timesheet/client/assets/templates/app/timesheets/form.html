@@ -5,26 +5,29 @@
 
         <div class="form-group">
           <div tsz-field-wrap input-id="timesheet-name" label="Name">
+
+            <!-- TODO : set this input's model to timesheet.name -->
             <input type="text" class="form-control" 
-              name="timesheet-name" placeholder="Timesheet Name"
-              ng-model="timesheet.name">
+              name="timesheet-name" placeholder="Timesheet Name">
           </div>
         </div>
 
         <div class="form-group">
           <div tsz-field-wrap input-id="timesheet-description" label="Description">
+
+            <!-- TODO : set this input's model to timesheet.description -->
             <input type="text" class="form-control" 
-              name="timesheet-description" placeholder="Timesheet Description"
-              ng-model="timesheet.description">
+              name="timesheet-description" placeholder="Timesheet Description">
           </div>
         </div>
 
         <div class="form-group">
           <div tsz-field-wrap input-id="timesheet-beginDate" label="Begin Date">
             <div class="input-group">
+
+              <!-- TODO : set this input's model to timesheet.beginDate -->
               <input type="text" class="form-control" 
                 datepicker-popup="MM/dd/yyyy"
-                ng-model="timesheet.beginDate"  
                 show-weeks="false"
                 show-button-bar="false"
                 ng-required="true" 
@@ -41,13 +44,13 @@
         <div class="form-group">
           <div tsz-field-wrap input-id="timesheet-endDate" label="End Date">
             <div class="input-group">
+
+              <!-- TODO : set this input's model to timesheet.endDate -->
               <input type="text" class="form-control" 
                 datepicker-popup="MM/dd/yyyy"
-                ng-model="timesheet.endDate"  
                 show-weeks="false"
                 show-button-bar="false"
                 min="timesheet.beginDate"
-                ng-required="true" 
                 close-text="Close" />
               <span class="input-group-btn">
                 <button class="btn btn-default">
@@ -64,11 +67,14 @@
 
         <div class="row">
           <div class="col-sm-2 col-sm-offset-8">
-            <button class="btn btn-primary btn-block" 
-              ng-click="save()">{{saveText}}</button>
+
+            <!-- TODO : bind this button's text to saveText and have it call save() when clicked -->
+            <button class="btn btn-primary btn-block"></button>
           </div>
           <div class="col-sm-2">
-            <button class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
+
+            <!-- TODO : set this button to call cancel() when clicked -->
+            <button class="btn btn-danger btn-block">Cancel</button>
           </div>
         </div>
       </form>
