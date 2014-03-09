@@ -4,10 +4,11 @@ angular.module('app.projects.controllers', [])
     function ($control, $scope, $state, $stateParams, notifications) {
 
       $scope.requestProjects = function requestProjects (page) {
-        // TODO : Set up pagination for projects
-        // 1. Create a query object
-        // 2. Call the new 'page' function on $control
-        // 3. Set the pageConfig on scope to the returned object
+        
+        $control.list('projects')
+          .then(function (projects) {
+            $scope.projects = projects;
+          });
       };
 
       $scope.showDetail = function showDetail (project) {

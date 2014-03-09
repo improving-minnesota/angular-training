@@ -80,20 +80,25 @@ describe('Timesheets', function() {
           $stateParams: $stateParams 
         });
 
-        $httpBackend.when('GET', '/users/1234567890/timesheets?page=1&sort=%7B%22beginDate%22:1%7D').respond(200);
-        $httpBackend.when('GET', '/users/1234567890/timesheets?page=2&sort=%7B%22beginDate%22:1%7D').respond(200, {name: 'pageConfig2'});
+        $httpBackend.when('GET', '/users/1234567890/timesheets').respond(200, [{name: 'testTimesheet'}]);
       });
 
       describe('during setup', function () {
         it('should be able to instantiate the controller and request a page of timesheets', function () { 
           expect(controller).to.be.ok; 
           // $scope.requestTimesheets is called upon controller creation
-          // TODO : Set an expectation for requesting timesheets during setup and flush httpBackend
+          $httpBackend.expect('GET', '/users/1234567890/timesheets');
+          $httpBackend.flush();
         });
       }); 
 
       describe('requesting timesheets', function () {
-        // TODO : verify it should set the result to the pageConfig object
+        it('should set the result to the timesheets', function () {
+          $httpBackend.expect('GET', '/users/1234567890/timesheets');
+          $scope.requestTimesheets();
+          $httpBackend.flush();
+          expect($scope.timesheets[0].name).to.equal("testTimesheet");
+        });
       });
 
       describe('showing timesheet detail', function () {
