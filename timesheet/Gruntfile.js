@@ -143,7 +143,6 @@ module.exports = function (grunt) {
           '<%= components %>/select2/select2.css',
           '<%= components %>/nprogress/nprogress.css',
           '<%= components %>/messenger/build/css/messenger.css',
-          //'<%= components %>/messenger/build/css/messenger-theme-future.css',
           '<%= components %>/messenger/build/css/messenger-spinner.css',
           '<%= clientdist %>/assets/css/style.css'
         ],
@@ -186,7 +185,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development'] // TODO : add karma:unit:run to list of tasks
+        tasks: ['development'] 
       },
       debug: {
         files: [
@@ -196,7 +195,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug'] // TODO : add karma:unit:run to list of tasks
+        tasks: ['debug'] 
       },
       production: {
         files: [
@@ -206,7 +205,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production'] // TODO : add karma:unit:run to list of tasks
+        tasks: ['production'] 
       }
     },
 
@@ -367,9 +366,6 @@ module.exports = function (grunt) {
   // *********************************************************************************************
   // New Tasks go below here !!! 
 
-    // TODO : configure the karma grunt task 
-    // 1. use the 'dots' reporter
-    // 2. set it to run in the background
 
   });
 
