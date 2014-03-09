@@ -19,14 +19,14 @@ describe('Authorization', function() {
       'security.services',
       'app.resources',
       'ngResource',
-      'notifications.services',
-      'authorization.services', 
+      // TODO : set notification service as dependency
+      // TODO : set authorization service as dependency
       'assets/templates/security/login.html'
     ));
   
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
-    authorization = $injector.get('authorization');
+    // TODO : inject teh authorization service
     authentication = $injector.get('authentication');
     securityContext = $injector.get('securityContext');
     queue = $injector.get('retryQueue');

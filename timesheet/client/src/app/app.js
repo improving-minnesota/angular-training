@@ -6,11 +6,11 @@ angular.module('app', [
   'app.projects',
   'app.timesheets',
   'app.timesheets.timeunits',
-  'app.security',
-  'authorization.services'
+  'app.security'
+  // TODO : add authorization services as a dependency
 ])
 
-  .config(function ($stateProvider, authorizationProvider) {
+  .config(function ($stateProvider) { // TODO : inject the authorizationProvider
 
     $stateProvider
       .state('app', {
@@ -28,10 +28,8 @@ angular.module('app', [
             controller: 'AppCtrl',
             templateUrl: 'assets/templates/app/index.html'
           }
-        }, 
-        resolve: {
-          authenticatedUser: authorizationProvider.requireAuthenticatedUser
         }
+        // TODO : add a resolve for the authorizationProvider.requireAuthenticatedUser
       });
   });
   

@@ -11,17 +11,17 @@ angular.module('app.timesheets.timeunits.controllers', [])
   )
 
   .controller('TimeunitEditCtrl', 
-    function ($scope, $state, $stateParams, notifications, timeunit) {
+    function ($scope, $state, $stateParams, timeunit) { // TODO : inject the notifications service
       $scope.timeunit = timeunit;
       
       $scope.save = function save () {
         $scope.timeunit.$update()
           .then(function (updated) {
             $scope.timeunit = updated;
-            notifications.success('Timeunit updated.');
+            // TODO : send a success notification using the notifications service
           })
           .catch(function (x) {
-            notifications.error('Error updating timeunit.');
+            // TODO : send an error notification using the notifications service
             $state.reload();
           });
       };
@@ -29,7 +29,7 @@ angular.module('app.timesheets.timeunits.controllers', [])
   )
 
   .controller('TimeunitCreateCtrl', 
-    function ($scope, $state, $stateParams, $control, notifications, dateFilter) {
+    function ($scope, $state, $stateParams, $control, dateFilter) { // TODO : inject the notifications service
       $scope.timeunit = {
         user_id: $stateParams.user_id,
         timesheet_id: $stateParams._id,
@@ -41,10 +41,10 @@ angular.module('app.timesheets.timeunits.controllers', [])
         $control.create('timeunits', $scope.timeunit)
           .then(function (created) {
             $state.go('app.timesheets.detail', $stateParams, {reload: true});
-            notifications.success("Logged Time for " + dateFilter(created.dateWorked));
+            // TODO : send a success notification using the notifications service
           })
           .catch(function (x) {
-            notifications.error("There was an error logging time.");
+            // TODO : send an error notification using the notifications service
           });
       };
 

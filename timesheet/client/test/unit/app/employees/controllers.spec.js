@@ -19,7 +19,7 @@ describe('Employees', function() {
         'ngResource',
         'app.resources',
         'security.services',
-        'notifications.services',
+        // TODO : add notfications services as a dependency
         'app.employees',
         'app.employees.controllers'
       ));
@@ -34,11 +34,10 @@ describe('Employees', function() {
     }));
 
     beforeEach(inject(function ($injector) {
-      var notifications = $injector.get('notifications');
+      // TODO : inject the notifications service
 
       spies = {
-        error: sinon.spy(notifications, 'error'),
-        success: sinon.spy(notifications, 'success'),
+        // TODO : create spies for the notifications service methods
         state: sinon.stub($state)
       };
 
@@ -96,7 +95,7 @@ describe('Employees', function() {
           employee.deleted = true;
           $httpBackend.flush();
           $scope.showDetail(employee);
-          expect(spies.error).to.have.been.calledWith('You cannot edit a deleted employee.');
+          // TODO : verify that an error notification is sent
         });
         it('should transition to the employee detail state', function () {
           $httpBackend.flush();
@@ -136,8 +135,8 @@ describe('Employees', function() {
           it('should notify the user of the deletion', function () {
             $scope.remove(employee);
             $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
+            // TODO : verify success notification was sent
+            // TODO : verify error notification was not sent
           });
         });
 
@@ -155,8 +154,8 @@ describe('Employees', function() {
           it('should notify the user of the error', function () {
             $scope.remove(employee);
             $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
+            // TODO : verify error notification was sent
+            // TODO : verify success notification was not sent
           });
         });
 
@@ -188,8 +187,8 @@ describe('Employees', function() {
           it('should notify the user of the deletion', function () {
             $scope.restore(employee);
             $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
+            // TODO : verify success notification was sent
+            // TODO : verify error notification was not sent
           });
         });
 
@@ -207,8 +206,8 @@ describe('Employees', function() {
           it('should notify the user of the error', function () {
             $scope.restore(employee);
             $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
+            // TODO : verify that error notification was sent
+            // TODO : verify that success notifucation was not sent
           });
         });
       });
@@ -275,8 +274,8 @@ describe('Employees', function() {
           it('should notify the user of the successful update', function () {
             $scope.save();
             $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
+            // TODO : verify that success notification was sent
+            // TODO : verify that error notification was not sent
           });
         });
 
@@ -285,8 +284,8 @@ describe('Employees', function() {
             $httpBackend.when('PUT', '/users/' + employee._id).respond(500);
             $scope.save();
             $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
+            // TODO : verify that error notification was sent
+            // TODO : verify that success notifucation was not sent
           });
         });
 
@@ -342,8 +341,8 @@ describe('Employees', function() {
           it('should notify the user of the successful create', function () {
             $scope.save();
             $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
+            // TODO : verify that success notification was sent
+            // TODO : verify that error notification was not sent
           });
         });
 
@@ -352,8 +351,8 @@ describe('Employees', function() {
             $httpBackend.when('POST', '/users').respond(500);
             $scope.save();
             $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
+            // TODO : verify that error notification was sent
+            // TODO : verify that success notification was not sent
           });
         });
       });
