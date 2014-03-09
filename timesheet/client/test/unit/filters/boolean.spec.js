@@ -1,30 +1,19 @@
 describe('Boolean filters:', function () {
   var expect = chai.expect;
 
-  beforeEach(module('boolean.filters'));
+  beforeEach(module()); // TODO : Add the boolean filters module as a dependency
 
   describe('yesNo', function() {
     var yesNoFilter;
 
     beforeEach(inject(function($injector) {
-      yesNoFilter = $injector.get('yesNoFilter');
+      // TODO : inject the yesNo filter for testing
     }));
 
-    it('should display "Yes" for boolean true', function() {
-      expect(yesNoFilter(true)).to.equal('Yes');
-    });
-
-    it('should display "No" for boolean false', function() {
-      expect(yesNoFilter(false)).to.equal('No');
-    });
-
-    it('should display "N/A" for undefined', function() {
-      expect(yesNoFilter(undefined)).to.equal('N/A');
-    });
-
-    it('should display "N/A" for null', function() {
-      expect(yesNoFilter(null)).to.equal('N/A');
-    });
+    // TODO : verify it should display "Yes" for boolean true
+    // TODO : verify it should display "No" for boolean false
+    // TODO : verify it should display "N/A" for undefined
+    // TODO : verify it should display "N/A" for null
 
   });
 });
