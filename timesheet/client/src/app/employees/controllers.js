@@ -74,7 +74,6 @@ angular.module('app.employees.controllers', [])
   )
 
   .controller('EmployeeCreateCtrl', 
-    // TODO : inject the notifications service
     function ($scope, $state, $stateParams, $control) {
       $scope.saveText = $state.current.data.saveText;
       $scope.employee = {admin: false};
