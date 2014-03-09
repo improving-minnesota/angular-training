@@ -9,7 +9,11 @@ var TimesheetsController = new Controller();
 TimesheetsController.index = function () {
   var controller = this;
   var userId = controller.param('user_id');
-  var query = _.extend({user_id: userId}, controller.req.query);
+  var query = controller.req.query;
+
+  if (userId && userId !== 'all') {
+    query = _.extend({user_id: userId}, query);
+  }
 
   if (query.page) {
     db.page('timesheets', query)
