@@ -13,9 +13,6 @@ angular.module('app.timesheets', [
         templateUrl: 'assets/templates/app/timesheets/index.html',
         data: {
           section: 'Timesheets'
-        }, 
-        resolve: {
-          authenticatedUser: authorizationProvider.requireAuthenticatedUser
         }
       })
 

@@ -6,12 +6,16 @@ angular.module('app.security', [
 
   $stateProvider
     // -------------  Login ----------------
-    .state('app.login', {
+    .state('login', {
       url: '/login?redirect',
-      templateUrl: 'assets/templates/app/security/login/index.html',
-      controller: 'LoginCtrl',
       data: {
         section: 'Please Log In'
+      },
+      views : {
+        'login' : {
+          templateUrl: 'assets/templates/security/login.html',
+          controller: 'LoginCtrl'
+        }
       }
     });
 })

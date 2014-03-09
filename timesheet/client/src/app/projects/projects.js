@@ -12,9 +12,6 @@ angular.module('app.projects', [
       templateUrl: 'assets/templates/app/projects/index.html',
       data: {
         section: 'Projects'
-      }, 
-      resolve: {
-        authenticatedUser: authorizationProvider.requireAuthenticatedUser
       }
     })  
 

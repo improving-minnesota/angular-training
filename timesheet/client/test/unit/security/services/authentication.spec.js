@@ -20,7 +20,7 @@ describe('Authentication', function() {
       'app.resources',
       'app.security',
       'security.services',
-      'assets/templates/app/security/login/index.html',
+      'assets/templates/security/login.html',
       'notifications.services',
       'authentication.services'
     ));

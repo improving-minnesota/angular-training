@@ -13,9 +13,6 @@ angular.module('app.employees', [
       templateUrl: 'assets/templates/app/employees/index.html',
       data: {
         section: 'Employees'
-      }, 
-      resolve: {
-        authenticatedUser: authorizationProvider.requireAuthenticatedUser
       }
     })
 
