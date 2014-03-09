@@ -186,7 +186,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development', 'karma:unit:run']
+        tasks: ['development'] // TODO : add karma:unit:run to list of tasks
       },
       debug: {
         files: [
@@ -196,7 +196,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug', 'karma:unit:run']
+        tasks: ['debug'] // TODO : add karma:unit:run to list of tasks
       },
       production: {
         files: [
@@ -206,7 +206,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production', 'karma:unit:run']
+        tasks: ['production'] // TODO : add karma:unit:run to list of tasks
       }
     },
 
@@ -367,17 +367,9 @@ module.exports = function (grunt) {
   // *********************************************************************************************
   // New Tasks go below here !!! 
 
-    // Starts the karama runner for unit and e2e tests.
-    // Tests are run when the task is re-invoked from the watch task.
-    karma : {
-      unit : {
-        reporters: 'dots',
-        configFile: 'karma.config.js',
-        options: {
-          background: true
-        }
-      }
-    }
+    // TODO : configure the karma grunt task 
+    // 1. use the 'dots' reporter
+    // 2. set it to run in the background
 
   });
 
