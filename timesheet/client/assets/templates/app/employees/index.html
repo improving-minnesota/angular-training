@@ -31,7 +31,8 @@
               <td>{{employee.email}}</td>
               <td>{{employee.firstName}}</td>
               <td>{{employee.lastName}}</td>
-              <td>{{employee.admin | yesNo}}</td>
+              <!-- TODO : add a boolean filter for human readable text -->
+              <td>{{employee.admin}}</td>
               <td>
                 <div ng-switch="employee.deleted">
                   <div ng-switch-when="true">

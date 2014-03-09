@@ -25,13 +25,13 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <div tsz-static-field label="Begin Date" label-col="4" 
-                field-col="8" value="{{timesheet.beginDate | momentLongDate}}"></div>
+                field-col="8" value="{{timesheet.beginDate}"></div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <div tsz-static-field label="End Date" label-col="4" 
-                field-col="8" value="{{timesheet.endDate | momentLongDate}}"></div>
+                field-col="8" value="{{timesheet.endDate}}"></div>
               </div>
             </div>
           </div>
@@ -88,7 +88,8 @@
                 ng-class="{faded: timeunit.deleted}">
                 
                 <td>{{timeunit.project}}</td>
-                <td>{{timeunit.dateWorked | momentShortDate}}</td>
+                <!-- TODO : add a date format filter -->
+                <td>{{timeunit.dateWorked}}</td>
                 <td>{{timeunit.hoursWorked}}</td>
                 <td>
                   <div ng-switch="timeunit.deleted">
