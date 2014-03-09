@@ -1,5 +1,5 @@
 angular.module('app.timesheets.controllers', [
-  'timesheet.directives'
+  // TODO : Register the timesheet directives as a dependency
 ])
 
   .controller('TimesheetCtrl', 
