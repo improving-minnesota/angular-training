@@ -1,7 +1,6 @@
 angular.module('app.timesheets.controllers', [])
 
   .controller('TimesheetCtrl', 
-    // TODO : inject the notifications service
     function ($control, $scope, $state, $stateParams) {
 
       $scope.requestTimesheets = function requestTimesheets (page) {
@@ -18,7 +17,7 @@ angular.module('app.timesheets.controllers', [])
 
       $scope.showDetail = function showDetail (timesheet) {
         if (timesheet.deleted) {
-            // TODO : send an error notification using the notifications service
+          console.log('error : cannot view a deleted timesheet');
           return;
         }
         $state.go('app.timesheets.detail', timesheet);
@@ -32,11 +31,11 @@ angular.module('app.timesheets.controllers', [])
 
         $control.remove('timesheets', timesheet)
           .then(function () {
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {  
             timesheet.deleted = false;
-            // TODO : send an error notification using the notifications service
+            console.log('error ' + x);
           });
       };
 
@@ -44,11 +43,11 @@ angular.module('app.timesheets.controllers', [])
         
         $control.restore('timesheets', timesheet)
           .then(function (restored) {
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
             timesheet.deleted = true;
-            // TODO : send an error notification using the notifications service
+            console.log('error ' + x);
           });
       };
 
@@ -57,7 +56,6 @@ angular.module('app.timesheets.controllers', [])
   )
 
   .controller('TimesheetDetailCtrl', 
-    // TODO : inject the notifications service
     function ($scope, $state, $stateParams, $control, timesheet, timeunits) {
       $scope.timesheet = timesheet;
       $scope.timeunits = timeunits;
@@ -76,7 +74,7 @@ angular.module('app.timesheets.controllers', [])
 
       $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
         if (timeunit.deleted) {
-            // TODO : send an error notification using the notifications service
+            console.log('error ' + x);
           return;
         }
 
@@ -89,11 +87,11 @@ angular.module('app.timesheets.controllers', [])
 
         $control.remove('timeunits', timeunit) 
           .then(function () {
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
             timeunit.deleted = false;
-            // TODO : send an error notification using the notifications service
+            console.log('error ' + x);
           });
 
           console.log("remove");
@@ -104,18 +102,17 @@ angular.module('app.timesheets.controllers', [])
 
         $control.restore('timeunits', timeunit)
           .then(function (restored) {
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
             timeunit.deleted = true;
-            // TODO : send an error notification using the notifications service
+            console.log('error ' + x);
           });
       };
     } 
   )
 
   .controller('TimesheetEditCtrl', 
-    // TODO : inject the notifications service
     function ($scope, $state, $stateParams, $control, timesheet) {
       $scope.saveText = $state.current.data.saveText;
       $scope.timesheet = timesheet;
@@ -124,10 +121,10 @@ angular.module('app.timesheets.controllers', [])
         $scope.timesheet.$update()
           .then(function (updated) {
             $scope.timesheet = updated;
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
-            // TODO : send an error notification using the notifications service
+            console.log('error ' + x);
           });
       };
 
@@ -138,7 +135,6 @@ angular.module('app.timesheets.controllers', [])
   )
 
   .controller('TimesheetCreateCtrl', 
-    // TODO : inject the notifications service
     function ($scope, $state, $stateParams, $control) {
       $scope.saveText = $state.current.data.saveText;
       $scope.timesheet = {};
@@ -149,10 +145,10 @@ angular.module('app.timesheets.controllers', [])
         $control.create('timesheets', timesheet)
           .then(function (created) {
             $state.go('app.timesheets.detail', {user_id: $stateParams.user_id, _id: created._id});
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
-            // TODO : send an error notification using the notifications service
+            console.log('error ' + x);
           });
       };
 

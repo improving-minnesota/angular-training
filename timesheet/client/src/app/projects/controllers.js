@@ -1,7 +1,7 @@
 angular.module('app.projects.controllers', [])
     
   .controller('ProjectCtrl', 
-    function ($control, $scope, $state, $stateParams) { // TODO : inject the notifications service
+    function ($control, $scope, $state, $stateParams) { 
 
       $scope.requestProjects = function requestProjects (page) {
         
@@ -13,7 +13,7 @@ angular.module('app.projects.controllers', [])
 
       $scope.showDetail = function showDetail (project) {
         if (project.deleted) {
-          // TODO : Send a notification to the user that they cannot view a deleted project
+          console.log('cannot view a deleted project');
           return;
         }
         $state.go('app.projects.detail', project);
@@ -26,11 +26,11 @@ angular.module('app.projects.controllers', [])
       $scope.remove = function remove (project) {
         $control.remove('projects', project)
           .then(function (removed) {
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
             project.deleted = false;
-            // TODO : send an error notification using the notifications service
+            console.log('error : ' + x);
           });
       };
 
@@ -38,11 +38,11 @@ angular.module('app.projects.controllers', [])
 
         $control.restore('projects', project) 
           .then(function (restored) {
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
             project.deleted = true;
-            // TODO : send an error notification using the notifications service
+            console.log('error : ' + x);
           });
       };
 
@@ -55,7 +55,6 @@ angular.module('app.projects.controllers', [])
   )
 
   .controller('ProjectDetailCtrl', 
-    // TODO : inject the notifications service
     function ($scope, $state, $stateParams, project) {
       $scope.saveText = $state.current.data.saveText;
       $scope.project = project;
@@ -64,17 +63,16 @@ angular.module('app.projects.controllers', [])
         $scope.project.$update()
           .then(function (updated) {
             $scope.project = updated;
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
-            // TODO : send an error notification using the notifications service
+            console.log('error : ' + x);
           });
       };
     }
   )
 
   .controller('ProjectCreateCtrl', 
-    // TODO : inject the notifications service
     function ($scope, $state, $stateParams, $control) {
       $scope.saveText = $state.current.data.saveText;
       $scope.project = {};
@@ -83,10 +81,10 @@ angular.module('app.projects.controllers', [])
         $control.create('projects', $scope.project) 
           .then(function (created) {
             $state.go('app.projects.detail', {_id: created._id});
-            // TODO : send a success notification using the notifications service
+            console.log('success !');
           })
           .catch(function (x) {
-            // TODO : send an error notification using the notifications service
+            console.log('error : ' + x);
           });
       };
     }

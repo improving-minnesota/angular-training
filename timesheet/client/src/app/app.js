@@ -5,12 +5,10 @@ angular.module('app', [
   'app.employees',
   'app.projects',
   'app.timesheets',
-  'app.timesheets.timeunits',
-  'app.security'
-  // TODO : add authorization services as a dependency
+  'app.timesheets.timeunits'
 ])
 
-  .config(function ($stateProvider) { // TODO : inject the authorizationProvider
+  .config(function ($stateProvider) {
 
     $stateProvider
       .state('app', {
@@ -29,7 +27,6 @@ angular.module('app', [
             templateUrl: 'assets/templates/app/index.html'
           }
         }
-        // TODO : add a resolve for the authorizationProvider.requireAuthenticatedUser
       });
   });
   

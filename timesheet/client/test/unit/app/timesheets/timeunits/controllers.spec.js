@@ -20,7 +20,6 @@ describe('Timeunits', function() {
       module(
         'app.resources',
         'ngResource',
-        'security.services',
         'app.timesheets.timeunits',
         'app.timesheets.timeunits.controllers'
       ));
