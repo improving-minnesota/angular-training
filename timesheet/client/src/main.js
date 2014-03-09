@@ -10,8 +10,6 @@ angular.module('main', [
   'ngSanitize',
   'ngAnimate',
   'ui.router'
-
-  // TODO : set interceptors as dependencies
 ])
 
 .config(function ($urlRouterProvider) {
