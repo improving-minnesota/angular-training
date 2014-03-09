@@ -20,7 +20,6 @@ describe('Timesheets', function() {
       module(
         'app.resources',
         'ngResource',
-        'app.timesheets.timeunits',
         'app.timesheets',
         'app.timesheets.controllers'
       ));
@@ -66,21 +65,21 @@ describe('Timesheets', function() {
           $scope: $scope
         });
 
-        $httpBackend.when('GET', '/users/timesheets').respond(200, [{name: 'testTimesheet'}]);
+        $httpBackend.when('GET', '/users/all/timesheets').respond(200, [{name: 'testTimesheet'}]);
       });
 
       describe('during setup', function () {
         it('should be able to instantiate the controller and request a page of timesheets', function () { 
           expect(controller).to.be.ok; 
           // $scope.requestTimesheets is called upon controller creation
-          $httpBackend.expect('GET', '/users/timesheets');
+          $httpBackend.expect('GET', '/users/all/timesheets');
           $httpBackend.flush();
         });
       }); 
 
       describe('requesting timesheets', function () {
         it('should set the result to the timesheets', function () {
-          $httpBackend.expect('GET', '/users/timesheets');
+          $httpBackend.expect('GET', '/users/all/timesheets');
           $scope.requestTimesheets();
           $httpBackend.flush();
           expect($scope.timesheets[0].name).to.equal("testTimesheet");

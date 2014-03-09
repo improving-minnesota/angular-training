@@ -13,6 +13,7 @@
     "angular-sanitize": "1.2.14",
     "angular-cookies": "1.2.14",
     "angular-animate": "1.2.14",
+    "angular-route": "~1.2.14",
     "angular-ui-bootstrap": "0.10.0",
     "angular-ui-router": "0.2.7",
     "angular-ui-select2": "0.0.5",

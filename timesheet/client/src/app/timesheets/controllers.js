@@ -4,7 +4,9 @@ angular.module('app.timesheets.controllers', [])
     function ($control, $scope) {
 
       $scope.requestTimesheets = function requestTimesheets (page) {
-        var query = {};
+        var query = {
+          user_id: 'all'
+        };
 
         $control.list('timesheets', query)
           .then(function (timesheets) {

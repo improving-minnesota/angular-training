@@ -14,8 +14,22 @@ html(class="no-js", ng-app="main")
 
     body(ng-controller="MainCtrl")
       .tsz-page-container(ng-cloak)
-        div(ui-view="navbar")
-        div(ui-view="content")
-        div(ui-view="login")
+        .navbar.navbar-default.navbar-static-top
+          .container-fluid
+            .navbar-header
+              a.navbar-brand(href="#")
+                i.fa.fa-clock-o.fa-lg
+            ul.nav.navbar-nav.navbar-left
+              li
+                a(ng-href="/#/projects") Projects
+              li
+                a(ng-href="/#/employees") Employees
+              li
+                a(ng-href="/#/timesheets") Timesheets
+
+        .container
+          .row
+            .col-xs-12
+              div(ng-view)
             
     include ../templates/scripts
