@@ -15,13 +15,6 @@ angular.module('authorization.services', [
     }
   ],
 
-  requireAdminUser: [
-    'authorization',
-    function (authorization) {
-      return authorization.requireAdminUser();
-    }
-  ],
-
   $get: function ($injector, authentication, securityContext) {
     
     var service = {
@@ -36,17 +29,6 @@ angular.module('authorization.services', [
               return queue.pushRetryFn('unauthenticated-client', function () {
                 return service.requireAuthenticatedUser();
               });
-            }
-          });
-      },
-
-      requireAdminUser: function () {
-        var queue = $injector.get('retryQueue');
-
-        return authentication.requestCurrentUser()
-          .then(function (userInfo) {
-            if ( !userInfo.user || !userInfo.user.admin ) {
-              return queue.pushRetryFn('unauthorized-client', service.requireAdminUser);
             }
           });
       }
