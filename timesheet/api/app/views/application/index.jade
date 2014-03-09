@@ -1,4 +1,4 @@
-html(class="no-js", ng-app="main")
+html(class="no-js")
   head
     base(href="/")
     title(ng-bind-template="Timesheetz") Timesheetz
@@ -12,8 +12,8 @@ html(class="no-js", ng-app="main")
     - else
       link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
 
-    body(ng-controller="MainCtrl")
-      .tsz-page-container(ng-cloak)
+    body()
+      .tsz-page-container
         .navbar.navbar-default.navbar-static-top
           .container-fluid
             .navbar-header
@@ -21,9 +21,7 @@ html(class="no-js", ng-app="main")
                 i.fa.fa-clock-o.fa-lg
                 |   Angular Training
 
-        .container
-          .row
-            .col-xs-12
-              div(ng-view)
+        .text-center
+          .h1 Welcome to Angular JS !!!
             
     include ../templates/scripts
