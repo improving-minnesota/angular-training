@@ -377,11 +377,7 @@ module.exports = function (grunt) {
           background: true
         }
       }
-    },
-
-    // Starts the protractor e2e tests. 
-
-    // TODO: Configure the protractor runner task here. 
+    }
 
   });
 
@@ -402,8 +398,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-mixtape-run-app');
-
-  // TODO : Load the protractor-runner NPM Grunt task. 
 
 
   // **********************************************************************************************
