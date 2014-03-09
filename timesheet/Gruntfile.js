@@ -356,6 +356,14 @@ module.exports = function (grunt) {
       }
     },
 
+    // Task to add the array-style angular injection to protect against uglifying.
+    ngmin : {
+      app : {
+        src : 'client/src/**/*.js',
+        dest : '<%= clientdist %>/app.js'
+      }
+    },
+
   // *********************************************************************************************
   // New Tasks go below here !!! 
 
@@ -372,28 +380,8 @@ module.exports = function (grunt) {
     },
 
     // Starts the protractor e2e tests. 
-    protractor: {
-      options: {
-        configFile: 'protractor.config.js',
-        keepAlive: true,
-        noColor: false
-      },
-      e2e: {
-      },
-      debug: {
-        options: {
-          debug: true
-        }
-      }
-    },
 
-    // Task to add the array-style angular injection to protect against uglifying.
-    ngmin : {
-      app : {
-        src : 'client/src/**/*.js',
-        dest : '<%= clientdist %>/app.js'
-      }
-    }
+    // TODO: Configure the protractor runner task here. 
 
   });
 
@@ -414,7 +402,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-mixtape-run-app');
-  grunt.loadNpmTasks('grunt-protractor-runner');
+
+  // TODO : Load the protractor-runner NPM Grunt task. 
 
 
   // **********************************************************************************************
