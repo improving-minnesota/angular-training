@@ -7,16 +7,10 @@ angular.module('app.timesheets.controllers', [
 
       $scope.requestTimesheets = function requestTimesheets (page) {
 
-        var query = {
-          user_id: $stateParams.user_id,
-          page: page,
-          sort: {beginDate: 1}
-        };
-
-        $control.page('timesheets', query)
-          .then(function (pageConfig) {
-            $scope.pageConfig = pageConfig;
-          });
+        // TODO : Set up pagination for timesheets
+        // 1. Create a query object (include user_id)
+        // 2. Call the new 'page' function on $control
+        // 3. Set the pageConfig on scope to the returned object
       };
 
       $scope.showDetail = function showDetail (timesheet) {
@@ -113,6 +107,8 @@ angular.module('app.timesheets.controllers', [
             notifications.error('Error restoring the timeunit.');
           });
       };
+
+      // These are the controller methods used by the progress directive !!! 
 
       $scope.hoursRequired = function hoursRequired() {
         var daysInTimesheet = moment($scope.timesheet.endDate).diff(moment($scope.timesheet.beginDate), 'days') + 1,
