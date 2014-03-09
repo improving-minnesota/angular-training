@@ -1,9 +1,7 @@
 <div class="tsz-employee-list">
-  <!-- TODO : set up to only show this container when state is app.employees -->
   <div>
     <div class="row tsz-form-row">
       <div class="col-sm-2 pull-right">
-        <!-- TODO : Add a button that calls createNew when clicked -->
       </div>
     </div>
     <div class="row">
@@ -21,7 +19,6 @@
           </thead>
           <tbody>
 
-            <!-- TODO : set the row to call showDetail(employee) when clicked -->
             <tr ng-repeat="employee in employees" 
               class="fadeable-row"
               ng-class="{faded: employee.deleted}">
@@ -48,6 +45,4 @@
     </div>
 
   </div>
-
-  <!-- TODO : set a ui-view for nested states -->
 </div>

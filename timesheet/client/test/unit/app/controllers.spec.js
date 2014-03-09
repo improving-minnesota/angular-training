@@ -7,7 +7,6 @@ describe('App', function() {
       
     beforeEach(
       module( 
-        // TODO : add ui.router as a dependency
         'app.resources',
         'ngResource',
         'app.controllers'
