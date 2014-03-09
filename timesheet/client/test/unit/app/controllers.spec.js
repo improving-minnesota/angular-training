@@ -7,8 +7,6 @@ describe('App', function() {
       
     beforeEach(
       module( 
-        'app.resources',
-        'ngResource',
         'app.controllers'
       ));
 
