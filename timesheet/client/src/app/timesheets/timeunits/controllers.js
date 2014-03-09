@@ -1,52 +1,35 @@
 angular.module('app.timesheets.timeunits.controllers', [])
 
   .controller('TimeunitCtrl', 
-    function ($scope, $state, $stateParams, projects) {
+    // TODO : inject the $state and $stateParams services
+    function ($scope, projects) {
       $scope.projects = projects; 
 
-      $scope.cancel = function cancel () {
-        $state.go('app.timesheets.detail', $stateParams, {reload: true});
-      };
+      // TODO : implement a function on scope to handle cancels in child states
     }
   )
 
   .controller('TimeunitEditCtrl', 
-    function ($scope, $state, $stateParams, timeunit) {
+    // TODO : inject the $state and $stateParams services
+    function ($scope, timeunit) {
       $scope.timeunit = timeunit;
       
-      $scope.save = function save () {
-        $scope.timeunit.$update()
-          .then(function (updated) {
-            $scope.timeunit = updated;
-            console.log('success !');
-          })
-          .catch(function (x) {
-            console.log('error : ' + x);
-            $state.reload();
-          });
-      };
+      // TODO : implement a function on scope to update the project
     }
   )
 
   .controller('TimeunitCreateCtrl', 
-    function ($scope, $state, $stateParams, $control, dateFilter) {
+    // TODO : inject the $state and $stateParams services
+    function ($scope, $control) {
+      
+      // TODO : initialize the new timeunit with data from $stateParams
+      // 1. user_id = $stateParams.user_id
+      // 2. timesheet_id = $stateParams._id
       $scope.timeunit = {
-        user_id: $stateParams.user_id,
-        timesheet_id: $stateParams._id,
         dateWorked: $scope.timesheet.beginDate
       };
 
-      $scope.save = function save () {
-
-        $control.create('timeunits', $scope.timeunit)
-          .then(function (created) {
-            $state.go('app.timesheets.detail', $stateParams, {reload: true});
-            console.log('success !');
-          })
-          .catch(function (x) {
-            console.log('error : ' + x);
-          });
-      };
+      // TODO : implement a function on scope to update the project and redirect to the detail state
 
     }
   );

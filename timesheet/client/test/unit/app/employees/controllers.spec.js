@@ -22,19 +22,18 @@ describe('Employees', function() {
         'app.employees.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
+    // TODO : inject the $state and $stateParams services and assign them to the spec's variables
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
-      $state = _$state_;
-      $stateParams = _$stateParams_;
       $api = _$api_;
     }));
 
     beforeEach(inject(function ($injector) {
 
       spies = {
-        state: sinon.stub($state)
+        // TODO : set up a sinon test stub on $state service
       };
 
       employee = {
@@ -58,9 +57,9 @@ describe('Employees', function() {
       beforeEach(function() {
         $scope = $rootScope.$new();
         controller = $controller("EmployeeCtrl", { 
-          $scope: $scope,
-          $state: spies.state,
-          $stateParams: $stateParams
+          $scope: $scope
+
+          // TODO : inject spies.state and $stateParams into the test controller
         });
 
         $httpBackend.when('GET', '/users').respond(200, [{username: 'testUser'}]);
@@ -88,19 +87,9 @@ describe('Employees', function() {
 
       describe('showing employee detail', function () {
         
-        it('should transition to the employee detail state', function () {
-          $httpBackend.flush();
-          $scope.showDetail(employee);
-          expect(spies.state.go).to.have.been.calledWith('app.employees.detail');
-        });
-      });
+        // TODO : verify it should transition to the employee detail state
+        // TODO : verify it should transition to the create employee state
 
-      describe('creating a new employee', function () {
-        it('should transition to the create employee state', function () {
-          $httpBackend.flush();
-          $scope.createNew();
-          expect(spies.state.go).to.have.been.calledWith('app.employees.create');
-        });
       });
 
       describe('removing a employee', function () {
@@ -180,11 +169,9 @@ describe('Employees', function() {
       });
 
       describe('cancel', function () {
-        it('should return back to the employee list', function () {
-          $httpBackend.flush();
-          $scope.cancel();
-          expect(spies.state.go).to.have.been.calledWith('app.employees');
-        });
+
+        // TODO : verify it should return back to the employee list
+
       });
 
     });
@@ -192,14 +179,14 @@ describe('Employees', function() {
     describe('EmployeeDetailCtrl', function() {
       
       beforeEach(function() {
-        spies.state.current = {data: {saveText: 'update'}};
+        // TODO : set the saveText on the data of the current state to 'update'
 
         $scope = $rootScope.$new();
         controller = $controller("EmployeeDetailCtrl", {
           $scope: $scope,
-          employee: new $api.employees(employee),
-          $state: spies.state,
-          $stateParams: $stateParams
+          employee: new $api.employees(employee)
+
+          // TODO : inject the spies.state and $stateProvider into the test controller
         });
       });
 
@@ -208,14 +195,9 @@ describe('Employees', function() {
           expect(controller).to.be.ok;
         });
 
-        it('should set saveText to the current state saveText', function () {
-          expect($scope.saveText).to.equal('update');
-        });
+        // TODO : verify it should set saveText to the current state saveText
+        // TODO : verify it should set the employee on scope to the resolved employee
 
-        it('should set the employee on scope to the resolved employee', function () {
-          expect($scope.employee._id).to.equal(employee._id);
-          expect($scope.employee.username).to.equal(employee.username);
-        });
       });
 
       describe('Saving an edited employee', function () {
@@ -232,11 +214,8 @@ describe('Employees', function() {
             $httpBackend.when('PUT', '/users/' + employee._id).respond(200, updatedEmployee);
           });
 
-          it('should set the employee on scope to be the updated employee', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect($scope.employee.username).to.equal(updatedEmployee.username);
-          });
+          // TODO : verify it should set the employee on scope to be the updated employee
+
         });
 
       });
@@ -245,13 +224,14 @@ describe('Employees', function() {
     describe('EmployeeCreateCtrl', function() {
 
       beforeEach(function() {
-        spies.state.current = {data: {saveText: 'create'}};
+        // TODO : set the saveText on the data of the current state to 'create'
 
         $scope = $rootScope.$new();
         controller = $controller("EmployeeCreateCtrl", {
-          $scope: $scope,
-          $state: spies.state,
-          $stateParams: $stateParams
+          $scope: $scope
+
+          // TODO : inject the spies.state and $stateParams into the test controller
+
         });
       });
 
@@ -260,14 +240,9 @@ describe('Employees', function() {
           expect(controller).to.be.ok;
         });
 
-        it('should set saveText to the current state saveText', function () {
-          expect($scope.saveText).to.equal('create');
-        });
-        
-        it('should set the employee on scope to a non admin user', function () {
-          expect($scope.employee.admin).to.be.false;
-          expect($scope.employee.username).to.be.empty;
-        });
+        // TODO : verify it should set saveText to the current state saveText
+        // TODO : verify it should set the employee on scope to a non admin user
+
       }); 
 
       describe('saving a new employee', function () {
@@ -282,11 +257,8 @@ describe('Employees', function() {
             $httpBackend.when('POST', '/users').respond(200, employee);
           });
 
-          it('should transition to the detail page of the created employee', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect(spies.state.go).to.have.been.calledWith('app.employees.detail', {_id: employee._id});
-          });
+          // TODO : verify it should transition to the detail page of the created employee
+          
         });
       });
 
