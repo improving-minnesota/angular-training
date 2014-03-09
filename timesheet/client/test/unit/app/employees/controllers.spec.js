@@ -51,65 +51,49 @@ describe('Employees', function() {
 
       beforeEach(function() {
         $scope = $rootScope.$new();
-        controller = $controller("EmployeeCtrl", { 
+        controller = $controller("EmployeeCtrl", {
           $scope: $scope
         });
+        
+        // TODO : using mock httpBackend, set up a response for calls to get a list of employees
 
-        $httpBackend.when('GET', '/users').respond(200, [{username: 'testUser'}]);
       });
 
       describe('during setup', function () {
-        it('should be able to instantiate the controller and request a page of employees', function () { 
-          expect(controller).to.be.ok; 
-          $httpBackend.expect('GET', '/users');
-          $httpBackend.flush();
-        });
+
+        // TODO : verify it should be able to instantiate the controller and request a page of employees
+
       }); 
 
       describe('requesting employees', function () {
 
-        it('should set the result to the employees', function () {
-          $httpBackend.expect('GET', '/users');
-          $scope.requestEmployees();
-          $httpBackend.flush();
-          expect($scope.employees[0].username).to.equal("testUser");
-        }); 
+        // TODO : verify it should set the result to the employees
 
       });
 
       describe('removing a employee', function () {
 
-        it('should send a remove request for the specified employee', function () {
-          $httpBackend.flush();
-          $httpBackend.expect('PUT', '/users/' + employee._id).respond(200);
-          $scope.remove(employee);
-          $httpBackend.flush();
-        });
+        // TODO : verify it should send a remove request for the specified employee
 
         describe('successfully', function () {
           beforeEach(function () {
             $httpBackend.flush();
-            $httpBackend.when('PUT', '/users/' + employee._id).respond(200);
+
+            // TODO : set up a successful response for when a PUT is sent to soft delete an employee
           });
 
-          it('should set the employee to deleted for the ui', function () {
-            $scope.remove(employee);
-            $httpBackend.flush();
-            expect(employee.deleted).to.be.true;
-          });
+          // TODO : verify it should set the employee to deleted for the ui
+
         });
 
         describe('in error', function () {
           beforeEach(function () {
             $httpBackend.flush();
-            $httpBackend.when('PUT', '/users/' + employee._id).respond(500);
+            
+            // TODO : set up an errored response for a PUT to soft delete an employee
           });
 
-          it('should set deleted to false for the employee in the ui', function () {
-            $scope.remove(employee);
-            $httpBackend.flush();
-            expect(employee.deleted).to.be.false;
-          });
+          // TODO : verify it should set deleted to false for the employee in the ui
         });
 
       });
@@ -119,37 +103,26 @@ describe('Employees', function() {
           employee.deleted = true;
         });
 
-        it('should send a restore request for the specified employee', function () {
-          $httpBackend.flush();
-          $httpBackend.expect('PUT', '/users/' + employee._id).respond(200);
-          $scope.restore(employee);
-          $httpBackend.flush();
-        });
+        // TODO : verify it should send a restore request for the specified employee
 
         describe('successfully', function () {
           beforeEach(function () {
             $httpBackend.flush();
-            $httpBackend.when('PUT', '/users/' + employee._id).respond(200);
+
+            // TODO : set up a successful response for a request to restore an employee
           });
 
-          it('should set the employee to not deleted for the ui', function () {
-            $scope.restore(employee);
-            $httpBackend.flush();
-            expect(employee.deleted).to.be.false;
-          });
+          // TODO : verify it should set the employee to not deleted for the ui
         });
 
         describe('in error', function () {
           beforeEach(function () {
             $httpBackend.flush();
-            $httpBackend.when('PUT', '/users/' + employee._id).respond(500);
+
+            // TODO : set up a 500 response for when a request is sent to restore an employee
           });
 
-          it('should set deleted to true for the employee in the ui', function () {
-            $scope.restore(employee);
-            $httpBackend.flush();
-            expect(employee.deleted).to.be.true;
-          });
+          // TODO : verify it should set deleted to true for the employee in the ui
         });
       });
 
