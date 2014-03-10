@@ -1,4 +1,4 @@
-# Gruntfile.js
+### Gruntfile.js
 
 * line 189
 
@@ -32,7 +32,7 @@ karma : {
 }
 ```
 
-# timesheet/client/test/unit/app/controllers.spec.js
+### timesheet/client/test/unit/app/controllers.spec.js
 
 * line 8
 
@@ -68,6 +68,7 @@ beforeEach(inject(function($rootScope, $controller) {
   });
 }));
 ```
+
 * line 38 
 
 ```
@@ -77,6 +78,7 @@ it('should be able to instantiate the controller', function () {
 ```
 
 * line 46
+
 ```
 beforeEach(inject(function($rootScope, $controller) {
   scope = $rootScope.$new();
@@ -94,14 +96,16 @@ it('should be able to instantiate the controller', function () {
 });
 ```
 
-# timesheet/karma.config.js
+### timesheet/karma.config.js
 
 * line 4
+
 ```
 frameworks: ['jasmine'],
 ```
 
 * line 29
+
 ```
 browsers: ['Chrome'],
 ```
