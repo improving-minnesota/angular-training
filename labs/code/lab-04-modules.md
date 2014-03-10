@@ -1,4 +1,4 @@
-# timesheet/client/assets/templates/app/employees/index.html
+### timesheet/client/assets/templates/app/employees/index.html
 
 * line 22
 
@@ -30,7 +30,7 @@
 </div>
 ```
 
-# timesheet/client/assets/templates/app/projects/index.html
+### timesheet/client/assets/templates/app/projects/index.html
 
 * line 14
 
@@ -56,7 +56,7 @@
  </div>
  ```
 
-# timesheet/client/assets/templates/app/timesheets/index.html
+### timesheet/client/assets/templates/app/timesheets/index.html
 
 * line 16
 
@@ -84,7 +84,7 @@
 </div>
 ```
 
-# timesheet/client/src/app/app.js
+### timesheet/client/src/app/app.js
 
 ```
 $routeProvider
@@ -105,7 +105,7 @@ $routeProvider
    });
 ```
 
-# timesheet/client/src/app/employees/controllers.js
+### timesheet/client/src/app/employees/controllers.js
 
 ```
 $scope.requestEmployees = function requestEmployees (page) 
@@ -140,7 +140,7 @@ $scope.requestEmployees = function requestEmployees (page)
  $scope.requestEmployees(1);
  ```
 
-# timesheet/client/src/app/employees/employees.js
+### timesheet/client/src/app/employees/employees.js
 
 ```
 $api.add({
@@ -149,7 +149,7 @@ $api.add({
 });
 ```
 
-# timesheet/client/src/app/projects/controllers.js
+### timesheet/client/src/app/projects/controllers.js
 
 ```
 $scope.requestProjects = function requestProjects (page) {  
