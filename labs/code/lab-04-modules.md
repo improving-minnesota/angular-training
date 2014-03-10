@@ -1,13 +1,13 @@
-* timesheet/client/assets/templates/app/employees/index.html
+# timesheet/client/assets/templates/app/employees/index.html
 
-# line 22
+* line 22
 
 ```
 <tr ng-repeat="employee in employees" 
     class="fadeable-row"
     ng-class="{faded: employee.deleted}">
 ```
-# line 26
+* line 26
 
 ```
 <td>{{employee.username}}</td>
@@ -17,7 +17,7 @@
 <td>{{employee.admin}}</td>
 ```
 
-# line 32
+* line 32
 
 ```
 <div ng-switch="employee.deleted">
@@ -30,9 +30,9 @@
 </div>
 ```
 
-* timesheet/client/assets/templates/app/projects/index.html
+# timesheet/client/assets/templates/app/projects/index.html
 
-# line 14
+* line 14
 
 ```
 <tr ng-repeat="project in projects" 
@@ -43,7 +43,7 @@
 	 <td>{{project.description}}</td>
  ```
 
-# line 21
+* line 21
 
 ```
  <div ng-switch="project.deleted">
@@ -56,9 +56,9 @@
  </div>
  ```
 
-* timesheet/client/assets/templates/app/timesheets/index.html
+# timesheet/client/assets/templates/app/timesheets/index.html
 
-# line 16
+* line 16
 
 ```
 <tr ng-repeat="timesheet in timesheets" 
@@ -71,7 +71,7 @@
 	<td>{{timesheet.description}}</td>
 ```
 
-# line 25
+* line 25
 
 ```
 <div ng-switch="timesheet.deleted">
@@ -84,7 +84,7 @@
 </div>
 ```
 
-* timesheet/client/src/app/app.js
+# timesheet/client/src/app/app.js
 
 ```
 $routeProvider
@@ -105,7 +105,7 @@ $routeProvider
    });
 ```
 
-* timesheet/client/src/app/employees/controllers.js
+# timesheet/client/src/app/employees/controllers.js
 
 ```
 $scope.requestEmployees = function requestEmployees (page) 
@@ -140,7 +140,7 @@ $scope.requestEmployees = function requestEmployees (page)
  $scope.requestEmployees(1);
  ```
 
-* timesheet/client/src/app/employees/employees.js
+# timesheet/client/src/app/employees/employees.js
 
 ```
 $api.add({
@@ -149,7 +149,7 @@ $api.add({
 });
 ```
 
-* timesheet/client/src/app/projects/controllers.js
+# timesheet/client/src/app/projects/controllers.js
 
 ```
 $scope.requestProjects = function requestProjects (page) {  
@@ -184,7 +184,7 @@ $scope.restore = function restore (project) {
 $scope.requestProjects(1);
 ```
 
-* timesheet/client/src/app/projects/projects.js
+# timesheet/client/src/app/projects/projects.js
 
 ```
 $api.add({
@@ -193,9 +193,9 @@ $api.add({
 });
 ```
 
-* timesheet/client/src/app/timesheets/controllers.js
+# timesheet/client/src/app/timesheets/controllers.js
 
-# line 11
+* line 11
 
 ```
 $control.list('timesheets', query)
@@ -204,7 +204,7 @@ $control.list('timesheets', query)
      });
  ```
 
-# line 17
+* line 17
 
 ```
 $scope.remove = function remove (timesheet) {
@@ -232,7 +232,7 @@ $scope.restore = function restore (timesheet) {
 $scope.requestTimesheets(1);
 ```
 
-* timesheet/client/src/app/timesheets/timesheets.js
+# timesheet/client/src/app/timesheets/timesheets.js
 
 ```
 $api.add({
@@ -244,7 +244,7 @@ $api.add({
 });
 ```
 
-* timesheet/client/test/unit/app/employees/controllers.spec.js
+# timesheet/client/test/unit/app/employees/controllers.spec.js
 
 
 
