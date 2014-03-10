@@ -1,4 +1,4 @@
-* timesheet/client/src/app/controllers.js
+# timesheet/client/src/app/controllers.js
 
 ```
 angular.module('app.controllers', [])
@@ -20,7 +20,7 @@ angular.module('app.controllers', [])
   );
 ```
 
-* timesheet/client/src/main.js
+# timesheet/client/src/main.js
 
 ```
 angular.module('main', [
