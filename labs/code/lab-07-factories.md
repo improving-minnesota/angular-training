@@ -2,7 +2,7 @@
 
 * line 3 
 
-```
+```html
 <div ng-if="authenticated" class="col-xs-12">
 ```
 
@@ -10,19 +10,19 @@
 
 * line 9
 
-```
+```html
 <ul ng-if="authenticated" class="nav navbar-nav navbar-left">
 ```
 
 * line 17
 
-```
+```html
 <a ui-sref="app.timesheets({user_id: loggedInUser._id})">Timesheets</a>
 ```
 
 * line 21
 
-```
+```html
 <ul class="nav navbar-nav navbar-right">
   <li>
     <a class="navbar-brand logout" ng-click="logout()">  
@@ -37,7 +37,7 @@
 
 * line 31
 
-```
+```JavaScript
 resolve: {
   authenticatedUser: authorizationProvider.requireAuthenticatedUser
 }
@@ -47,7 +47,7 @@ resolve: {
 
 * line 5
 
-```
+```JavaScript
 $scope.$watch(function () {
   return securityContext.authenticated;
 },
@@ -83,7 +83,7 @@ notifications service and success message
 
 ### timesheet/client/src/security/services/authorization.js
 
-```
+```JavaScript
 angular.module('authorization.services', [
   'security.services',
   'authentication.services'
@@ -121,7 +121,7 @@ angular.module('authorization.services', [
 
 ### timesheet/client/src/services/notifications.js
 
-```
+```JavaScript
 angular.module('notifications.services', [])
   .factory('notifications', 
     function () {
@@ -170,39 +170,39 @@ inject notifications
 
 * line 22
 
-```
+```JavaScript
 'notifications.services',
 ```
 
 * line 37
 
-```
+```JavaScript
 var notifications = $injector.get('notifications');
 ```
 
 * line 40
 
-```
+```JavaScript
 error: sinon.spy(notifications, 'error'),
 success: sinon.spy(notifications, 'success'),
 ```
 
 * line 99
 
-```
+```JavaScript
 expect(spies.error).to.have.been.called;
 ```
 
 * success notification
 
-```
+```JavaScript
 expect(spies.success).to.have.been.called;
 expect(spies.error).to.not.have.been.called;
 ```
 
 * error notification
 
-```
+```JavaScript
 expect(spies.error).to.have.been.called;
 expect(spies.success).to.not.have.been.called;
 ```
@@ -220,7 +220,7 @@ using $injector to inject authorization service
 
 * line 28
 
-```
+```JavaScript
 it('should set showCloseButton to true on the message', function () {
   var message = {};
   notifications.message(message, {});
@@ -230,7 +230,7 @@ it('should set showCloseButton to true on the message', function () {
 
 * line 34
 
-```
+```JavaScript
 it('extend the message object with the passed in config', function () {
   var message = {};
   notifications.message(message, {config: true});
@@ -240,7 +240,7 @@ it('extend the message object with the passed in config', function () {
 
 * line 40
 
-```
+```JavaScript
 it('should post the message via Messenger', function () {
   notifications.message({message: 'allo'}, {config: true});
   expect(spies.post).to.have.been.called;
@@ -254,7 +254,7 @@ it('should post the message via Messenger', function () {
 
 * line 52
 
-```
+```JavaScript
 it('should post an error message', function () {
   notifications.error('oh noze');
   expect(spies.post).to.have.been.calledWith({
@@ -268,7 +268,7 @@ it('should post an error message', function () {
 
 * line 64
 
-```
+```JavaScript
 it('should post a success message', function () {
   notifications.success('i can haz');
   expect(spies.post).to.have.been.calledWith({
@@ -282,7 +282,7 @@ it('should post a success message', function () {
 
 * line 76
 
-```
+```JavaScript
 it('should post an info message', function () {
   notifications.info('info');
   expect(spies.post).to.have.been.calledWith({
