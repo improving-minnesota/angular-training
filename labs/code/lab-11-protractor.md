@@ -1,6 +1,6 @@
 ### timesheet/Gruntfile.js
 
-```
+```json
 protractor: {
   options: {
     configFile: 'protractor.config.js',
@@ -17,7 +17,7 @@ protractor: {
 },
 ```
 
-```
+```JavaScript
 grunt.loadNpmTasks('grunt-protractor-runner');
 ```
 
@@ -25,7 +25,7 @@ grunt.loadNpmTasks('grunt-protractor-runner');
 
 * line 15
 
-```
+```JavaScript
 it('takes us to the create employee form', function () {
   indexPage.clickNewEmployee();
   expect(formPage.getPageTitle()).toBe("Create Employee");
@@ -34,7 +34,7 @@ it('takes us to the create employee form', function () {
 
 * line 22
 
-```
+```JavaScript
 it('takes us to the employee detail page', function () {
   indexPage.clickFirstEmployee();
   expect(formPage.getPageTitle()).toBe("Update Employee");
@@ -43,7 +43,7 @@ it('takes us to the employee detail page', function () {
 
 * line 30
 
-```
+```JavaScript
 it('should fade the employee row', function () {
   indexPage.deleteFirstEmployee();
   expect(indexPage.firstEmployee.getAttribute('class')).toContain('faded');
@@ -52,7 +52,7 @@ it('should fade the employee row', function () {
 
 * line 35
 
-```
+```JavaScript
 it('should change the action button text', function () {
   expect(indexPage.firstEmployee.element(by.buttonText('Restore')).isPresent()).toBe(true);
 });
@@ -60,7 +60,7 @@ it('should change the action button text', function () {
 
 * line 42
 
-```
+```JavaScript
 it('should set the row back to normal', function () {
   indexPage.restoreFirstEmployee();
   expect(indexPage.firstEmployee.getAttribute('class')).not.toContain('faded');
@@ -69,7 +69,7 @@ it('should set the row back to normal', function () {
 
 * line 47
 
-```
+```JavaScript
 it('should restore the action button text', function () {
   expect(indexPage.firstEmployee.element(by.buttonText('Delete')).isPresent()).toBe(true);
 });
@@ -77,7 +77,7 @@ it('should restore the action button text', function () {
 
 * line 60
 
-```
+```JavaScript
 it('should be able to update the employee', function () {
 
   formPage
@@ -99,7 +99,7 @@ it('should return back to the index page on cancel', function () {
 
 * line 4
 
-```
+```JavaScript
 this.pageTitle = element(by.binding('$state.current.data.section'));
 this.getPageTitle = function () {
   return this.pageTitle.getText();
@@ -108,7 +108,7 @@ this.getPageTitle = function () {
 
 * line 14
 
-```
+```JavaScript
 this.cancelForm = function () {
   this.cancelButton.click();
 };
@@ -118,7 +118,7 @@ this.cancelForm = function () {
 
 * line 13
 
-```
+```JavaScript
 this.clickNewEmployee = function () {
   this.newEmployeeButton.click();
 };
@@ -126,7 +126,7 @@ this.clickNewEmployee = function () {
 
 * line 18
 
-```
+```JavaScript
 this.clickFirstEmployee = function () {
   this.firstEmployee.click();
 };
@@ -140,7 +140,7 @@ this.restoreFirstEmployee = function () {
 
 ### timesheet/client/test/e2e/app/projects/projects.spec.js
 
-```
+```JavaScript
 describe("clicking new project", function () {
     it('takes us to the create project form', function () {
       indexPage.clickNewProject();
@@ -212,13 +212,13 @@ describe('Form Page', function () {
 
 * line 7
 
-```
+```JavaScript
 ptor = protractor.getInstance();
 ```
 
 * line 10
 
-```
+```JavaScript
 it('should be redirected to the login page', function () {
   var loginForm = by.name('loginForm');
   expect(ptor.isElementPresent(loginForm)).toBe(true);
@@ -238,7 +238,7 @@ it('should be able to login', function () {
 
 ### timesheet/protractor.config.js
 
-```
+```JavaScript
 'client/test/e2e/security/security.spec.js',
 'client/test/e2e/app/employees/*.spec.js',
 'client/test/e2e/app/projects/*.spec.js'
