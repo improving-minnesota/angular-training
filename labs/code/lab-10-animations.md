@@ -1,6 +1,6 @@
 ### timesheet/client/assets/less/animation/repeat.less
 
-```
+```css
 .repeated-item.ng-enter, .repeated-item.ng-move {
   -webkit-transition:0.5s linear all;
   -moz-transition:0.5s linear all;
@@ -47,6 +47,6 @@
 ### timesheet/client/assets/templates/app/timesheets/detail.html
 ### timesheet/client/assets/templates/app/timesheets/index.html
 
-```
+```html
 class="repeated-item fadeable-row"
 ```
