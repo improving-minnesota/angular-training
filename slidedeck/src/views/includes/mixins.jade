@@ -15,7 +15,7 @@ mixin page(title)
         .slides
           block
 
-      script(src="./assets/js/app.js")
+      script(src="/assets/js/app.js")
 
 
 mixin slides-index(title)
@@ -24,43 +24,43 @@ mixin slides-index(title)
     h4 Slides
     ul
       li 
-        a(href="slides/intro.html", target="_blank") Intro
+        a(href="lectures/intro.html", target="_blank") Intro
     ul
       li 
-        a(href="slides/lecture-01.html", target="_blank") Lecture 1
+        a(href="lectures/lecture-01.html", target="_blank") Lecture 1
       li 
-        a(href="slides/lecture-02.html", target="_blank") Lecture 2
+        a(href="lectures/lecture-02.html", target="_blank") Lecture 2
       li 
-        a(href="slides/lecture-03.html", target="_blank") Lecture 3
+        a(href="lectures/lecture-03.html", target="_blank") Lecture 3
       li 
-        a(href="slides/lecture-04.html", target="_blank") Lecture 4
+        a(href="lectures/lecture-04.html", target="_blank") Lecture 4
       li
-        a(href="slides/lecture-05.html", target="_blank") Lecture 5
+        a(href="lectures/lecture-05.html", target="_blank") Lecture 5
       li 
-        a(href="slides/lecture-06.html", target="_blank") Lecture 6
+        a(href="lectures/lecture-06.html", target="_blank") Lecture 6
 
     ul
       li 
-        a(href="slides/lecture-07.html", target="_blank") Lecture 7
+        a(href="lectures/lecture-07.html", target="_blank") Lecture 7
       li 
-        a(href="slides/lecture-08.html", target="_blank") Lecture 8
+        a(href="lectures/lecture-08.html", target="_blank") Lecture 8
       li 
-        a(href="slides/lecture-09.html", target="_blank") Lecture 9
+        a(href="lectures/lecture-09.html", target="_blank") Lecture 9
       li 
-        a(href="slides/lecture-10.html", target="_blank") Lecture 10
+        a(href="lectures/lecture-10.html", target="_blank") Lecture 10
       li
-        a(href="slides/lecture-11.html", target="_blank") Lecture 11
+        a(href="lectures/lecture-11.html", target="_blank") Lecture 11
       li 
-        a(href="slides/lecture-12.html", target="_blank") Lecture 12
+        a(href="lectures/lecture-12.html", target="_blank") Lecture 12
 
 mixin title-page(title)
   section.index-section(data-state="index-slide")
     .sliding-image-container
-      img.animate-logos.angular(src="assets/img/angular.png")
-      img.animate-logos.grunt(src="assets/img/grunt-logo.png")
-      img.animate-logos.yeoman(src="assets/img/yeoman-logo.png")
-      img.animate-logos.node(src="assets/img/node-logo.png")
-      img.animate-logos.bower(src="assets/img/bower-logo.png")
+      img.animate-logos.angular(src="/assets/img/angular.png")
+      img.animate-logos.grunt(src="/assets/img/grunt-logo.png")
+      img.animate-logos.yeoman(src="/assets/img/yeoman-logo.png")
+      img.animate-logos.node(src="/assets/img/node-logo.png")
+      img.animate-logos.bower(src="/assets/img/bower-logo.png")
     .fading-header-container
       h1.animate-headers.angular Angular.js
       h1.animate-headers.grunt Grunt.js
@@ -68,3 +68,6 @@ mixin title-page(title)
       h1.animate-headers.node Node.js
       h1.animate-headers.bower Bower.js
     p=title
+
+
+
