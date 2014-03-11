@@ -75,7 +75,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'src/views',
-            src: ['*.jade'],
+            src: ['**/*.jade'],
             dest: 'dist/',
             ext: '.html'
           }
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
           },
           {
             expand: true,
-            cwd: 'src/assets/js/components/font-awesome/font',
+            cwd: 'src/assets/js/components/font-awesome/fonts',
             src:['**'],
             dest:'dist/assets/font'
           }
@@ -119,7 +119,7 @@ module.exports = function(grunt) {
       },
       src: {
         files: [
-          'src/views/*',
+          'src/views/**/*',
           'src/assets/less/**/*',
           'src/assets/img/**/*'
         ],
