@@ -1,51 +1,51 @@
 ### timesheet/client/assets/templates/app/employees/form.html
 
-```
+```JavaScript
 {{employee.admin | yesNo}}
 ```
 
 ### timesheet/client/assets/templates/app/employees/index.html
 
-```
+```JavaScript
 ng-repeat="employee in pageConfig.data | orderBy:'username'" 
 ```
 
 * line 34
 
-```
+```JavaScript
 <td>{{employee.admin | yesNo}}</td>
 ```
 
 ### timesheet/client/assets/templates/app/projects/index.html
 
-```
+```JavaScript
 ng-repeat="project in pageConfig.data | orderBy:'name'"
 ```
 
 ### timesheet/client/assets/templates/app/timesheets/detail.html
 
-```
+```JavaScript
 {{timesheet.beginDate | momentLongDate}}
 {{timesheet.endDate | momentLongDate}}
 ```
 
-```
+```html
 ng-repeat="timeunit in timeunits | orderBy:'dateWorked'"
 ```
 
-```
+```html
 <td>{{timeunit.dateWorked | momentShortDate}}</td>
 ```
 
 ### timesheet/client/assets/templates/app/timesheets/index.html
 
-```
+```html
 ng-repeat="timesheet in pageConfig.data | orderBy:beginDate"
 ```
 
 * line 29
 
-```
+```html
 <td>{{timesheet.beginDate | date}}</td>
 <td>{{timesheet.endDate | date}}</td>
 ```
@@ -56,7 +56,7 @@ inject boolean filters
 
 ### timesheet/client/src/filters/boolean.js
 
-```
+```JavaScript
 angular.module('boolean.filters', [ ])
 
   .filter('yesNo', function() {
@@ -76,7 +76,7 @@ angular.module('boolean.filters', [ ])
 
 ### timesheet/client/src/filters/date.js
 
-```
+```JavaScript
 angular.module('date.filters', [
   'date.utils.services'
 ])
@@ -104,19 +104,19 @@ inject date.filters
 
 * line 4 
 
-```
+```JavaScript
 beforeEach(module('boolean.filters'));
 ```
 
 * line 10 
 
-```
+```JavaScript
 yesNoFilter = $injector.get('yesNoFilter');
 ```
 
 * line 13
 
-```
+```JavaScript
 it('should display "Yes" for boolean true', function() {
   expect(yesNoFilter(true)).to.equal('Yes');
 });
@@ -138,11 +138,11 @@ it('should display "N/A" for null', function() {
 
 * momentShortDate 
 
-```
+```JavaScript
 momentShortDateFilter = $injector.get('momentShortDateFilter');
 ```
 
-```
+```JavaScript
 it('should display "Nov 15, 2010" for 2010-11-15', function() {
   expect(momentShortDateFilter("2010-11-15")).to.equal('Nov 15, 2010');
 });
@@ -166,11 +166,11 @@ it('should display "Invalid date" for an invalid date', function() {
 
 * momentLongDateFilter tests
 
-```
+```JavaScript
 momentLongDateFilter = $injector.get('momentLongDateFilter');
 ```
 
-```
+```JavaScript
 it('should display "November 15th, 2010" for 2010-11-15', function() {
   expect(momentLongDateFilter("2010-11-15")).to.equal('November 15th, 2010');
 });
