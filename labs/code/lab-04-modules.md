@@ -2,14 +2,14 @@
 
 * line 22
 
-```
+```html
 <tr ng-repeat="employee in employees" 
     class="fadeable-row"
     ng-class="{faded: employee.deleted}">
 ```
 * line 26
 
-```
+```html
 <td>{{employee.username}}</td>
 <td>{{employee.email}}</td>
 <td>{{employee.firstName}}</td>
@@ -19,7 +19,7 @@
 
 * line 32
 
-```
+```html
 <div ng-switch="employee.deleted">
   <div ng-switch-when="true">
     <button class="btn btn-sm btn-default" ng-click="restore(employee); $event.stopPropagation();">Restore</button>
@@ -34,18 +34,18 @@
 
 * line 14
 
-```
+```html
 <tr ng-repeat="project in projects" 
 	 class="fadeable-row"
 	 ng-class="{faded: project.deleted}">
 
 	 <td>{{project.name}}</td>
 	 <td>{{project.description}}</td>
- ```
+```
 
 * line 21
 
-```
+```html
  <div ng-switch="project.deleted">
    <div ng-switch-when="true">
      <button class="btn btn-sm btn-default" ng-click="restore(project); $event.stopPropagation();">Restore</button>
@@ -54,13 +54,13 @@
      <button class="btn btn-sm btn-danger" ng-click="remove(project); $event.stopPropagation();">Delete</button>
    </div>
  </div>
- ```
+```
 
 ### timesheet/client/assets/templates/app/timesheets/index.html
 
 * line 16
 
-```
+```html
 <tr ng-repeat="timesheet in timesheets" 
 	class="fadeable-row"
 	ng-class="{faded: timesheet.deleted}">
@@ -73,7 +73,7 @@
 
 * line 25
 
-```
+```html
 <div ng-switch="timesheet.deleted">
 	<div ng-switch-when="true">
 	  <button class="btn btn-sm btn-default" ng-click="restore(timesheet); $event.stopPropagation();">Restore</button>
@@ -86,7 +86,7 @@
 
 ### timesheet/client/src/app/app.js
 
-```
+```javascript
 $routeProvider
   .when('/projects', {
      templateUrl: 'assets/templates/app/projects/index.html',
@@ -107,7 +107,7 @@ $routeProvider
 
 ### timesheet/client/src/app/employees/controllers.js
 
-```
+```javascript
 $scope.requestEmployees = function requestEmployees (page) 
     $control.list('employees')
       .then(function (employees) {
@@ -138,11 +138,11 @@ $scope.requestEmployees = function requestEmployees (page)
   };
 
  $scope.requestEmployees(1);
- ```
+```
 
 ### timesheet/client/src/app/employees/employees.js
 
-```
+```javascript
 $api.add({
 	resource: 'employees',
 	url: '/users'
@@ -151,7 +151,7 @@ $api.add({
 
 ### timesheet/client/src/app/projects/controllers.js
 
-```
+```javascript
 $scope.requestProjects = function requestProjects (page) {  
   $control.list('projects')
     .then(function (projects) {
@@ -186,7 +186,7 @@ $scope.requestProjects(1);
 
 ### timesheet/client/src/app/projects/projects.js
 
-```
+```javascript
 $api.add({
   resource: 'projects',
   url: '/projects'
@@ -197,16 +197,16 @@ $api.add({
 
 * line 11
 
-```
+```javascript
 $control.list('timesheets', query)
      .then(function (timesheets) {
        $scope.timesheets = timesheets;
      });
- ```
+```
 
 * line 17
 
-```
+```javascript
 $scope.remove = function remove (timesheet) {
 	$control.remove('timesheets', timesheet)
 	  .then(function () {
@@ -234,7 +234,7 @@ $scope.requestTimesheets(1);
 
 ### timesheet/client/src/app/timesheets/timesheets.js
 
-```
+```javascript
 $api.add({
   resource: 'timesheets',
   url: '/users/:user_id/timesheets',
@@ -248,13 +248,13 @@ $api.add({
 
 * line 58
 
-```
+```javascript
 $httpBackend.when('GET', '/users').respond(200, [{username: 'testUser'}]);
 ```
 
 * line 62
 
-```
+```javascript
 it('should be able to instantiate the controller and request a page of employees', function () { 
   expect(controller).to.be.ok; 
   $httpBackend.expect('GET', '/users');
@@ -264,7 +264,7 @@ it('should be able to instantiate the controller and request a page of employees
 
 * line 71
 
-```
+```javascript
 it('should set the result to the employees', function () {
   $httpBackend.expect('GET', '/users');
   $scope.requestEmployees();
@@ -275,7 +275,7 @@ it('should set the result to the employees', function () {
 
 * line 82
 
-```
+```javascript
 it('should send a remove request for the specified employee', function () {
   $httpBackend.flush();
   $httpBackend.expect('PUT', '/users/' + employee._id).respond(200);
@@ -286,13 +286,13 @@ it('should send a remove request for the specified employee', function () {
 
 * line 92
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/' + employee._id).respond(200);
 ```
 
 * line 95
 
-```
+```javascript
 it('should set the employee to deleted for the ui', function () {
   $scope.remove(employee);
   $httpBackend.flush();
@@ -302,40 +302,40 @@ it('should set the employee to deleted for the ui', function () {
 
 * line 105
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/' + employee._id).respond(500);
 ```
 
 * line 108
 
-```
+```javascript
 it('should set deleted to false for the employee in the ui', function () {
   $scope.remove(employee);
   $httpBackend.flush();
   expect(employee.deleted).to.be.false;
 });
- ```
+```
 
 * line 122
 
-```
+```javascript
 it('should send a restore request for the specified employee', function () {
   $httpBackend.flush();
   $httpBackend.expect('PUT', '/users/' + employee._id).respond(200);
   $scope.restore(employee);
   $httpBackend.flush();
 });
- ```
+```
 
 * line 132
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/' + employee._id).respond(200);
 ```
 
 * line 135
 
-```
+```javascript
 it('should set the employee to not deleted for the ui', function () {
   $scope.restore(employee);
   $httpBackend.flush();
@@ -345,13 +345,13 @@ it('should set the employee to not deleted for the ui', function () {
 
 * line 145
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/' + employee._id).respond(500);
 ```
 
 * line 148
 
-```
+```javascript
 it('should set deleted to true for the employee in the ui', function () {
    $scope.restore(employee);
    $httpBackend.flush();
@@ -363,13 +363,13 @@ it('should set deleted to true for the employee in the ui', function () {
 
 * line 54
 
-```
+```javascript
 $httpBackend.when('GET', '/projects').respond(200, [{name: 'project1'}]);
 ```
 
 * line 58
 
-```
+```javascript
 it('should be able to instantiate the controller and request a page of projects', function () { 
   expect(controller).to.be.ok; 
   $httpBackend.expect('GET', '/projects');
@@ -379,7 +379,7 @@ it('should be able to instantiate the controller and request a page of projects'
 
 * line 66
 
-```
+```javascript
 it('should set the result to the projects', function () {
   $httpBackend.expect('GET', '/projects');
   $scope.requestProjects();
@@ -390,7 +390,7 @@ it('should set the result to the projects', function () {
 
 * line 76
 
-```
+```javascript
 it('should send a remove request for the specified project', function () {
   $httpBackend.flush();
   $httpBackend.expect('PUT', '/projects/' + project._id).respond(200);
@@ -401,13 +401,13 @@ it('should send a remove request for the specified project', function () {
 
 * line 86
 
-```
+```javascript
 $httpBackend.when('PUT', '/projects/' + project._id).respond(200);
 ```
 
 * line 89
 
-```
+```javascript
 it('should set the project to deleted for the ui', function () {
   $scope.remove(project);
   $httpBackend.flush();
@@ -417,13 +417,13 @@ it('should set the project to deleted for the ui', function () {
 
 * line 99
 
-```
+```javascript
 $httpBackend.when('PUT', '/projects/' + project._id).respond(500);
 ```
 
 * line 102
 
-```
+```javascript
 it('should set deleted to false for the project in the ui', function () {
   $scope.remove(project);
   $httpBackend.flush();
@@ -433,7 +433,7 @@ it('should set deleted to false for the project in the ui', function () {
 
 * line 116
 
-```
+```javascript
 it('should send a restore request for the specified project', function () {
   $httpBackend.flush();
   $httpBackend.expect('PUT', '/projects/' + project._id).respond(200);
@@ -444,13 +444,13 @@ it('should send a restore request for the specified project', function () {
 
 * line 126
 
-```
+```javascript
 $httpBackend.when('PUT', '/projects/' + project._id).respond(200);
 ```
 
 * line 129
 
-```
+```javascript
 it('should set the project to not deleted for the ui', function () {
   $scope.restore(project);
   $httpBackend.flush();
@@ -460,13 +460,13 @@ it('should set the project to not deleted for the ui', function () {
 
 * line 139
 
-```
+```javascript
 $httpBackend.when('PUT', '/projects/' + project._id).respond(500);
 ```
 
 * line 142
 
-```
+```javascript
 it('should set deleted to true for the project in the ui', function () {
   $scope.restore(project);
   $httpBackend.flush();
@@ -478,13 +478,13 @@ it('should set deleted to true for the project in the ui', function () {
 
 * line 68
 
-```
+```javascript
 $httpBackend.when('GET', '/users/all/timesheets').respond(200, [{name: 'testTimesheet'}]);
 ```
 
 * line 72
 
-```
+```javascript
 it('should be able to instantiate the controller and request a page of timesheets', function () { 
   expect(controller).to.be.ok; 
   $httpBackend.expect('GET', '/users/all/timesheets');
@@ -494,7 +494,7 @@ it('should be able to instantiate the controller and request a page of timesheet
 
 * line 81
 
-```
+```javascript
 it('should set the result to the timesheets', function () {
   $httpBackend.expect('GET', '/users/all/timesheets');
   $scope.requestTimesheets();
@@ -505,7 +505,7 @@ it('should set the result to the timesheets', function () {
 
 * line 91
 
-```
+```javascript
 it('should send a remove request for the specified timesheet', function () {
   $httpBackend.flush();
   $httpBackend.expect('PUT', '/users/1234567890/timesheets/' + timesheet._id).respond(200);
@@ -516,13 +516,13 @@ it('should send a remove request for the specified timesheet', function () {
 
 * line 101
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/1234567890/timesheets/' + timesheet._id).respond(200);
 ```
 
 * line 104
 
-```
+```javascript
 it('should set the timesheet to deleted for the ui', function () {
   $scope.remove(timesheet);
   $httpBackend.flush();
@@ -532,13 +532,13 @@ it('should set the timesheet to deleted for the ui', function () {
 
 * line 114
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/1234567890/timesheets/' + timesheet._id).respond(500);
 ```
 
 * line 117
 
-```
+```javascript
 it('should set deleted to false for the timesheet in the ui', function () {
   $scope.remove(timesheet);
   $httpBackend.flush();
@@ -548,7 +548,7 @@ it('should set deleted to false for the timesheet in the ui', function () {
 
 * line 131
 
-```
+```javascript
 it('should send a restore request for the specified timesheet', function () {
   $httpBackend.flush();
   $httpBackend.expect('PUT', '/users/1234567890/timesheets/' + timesheet._id).respond(200);
@@ -559,13 +559,13 @@ it('should send a restore request for the specified timesheet', function () {
 
 * line 141
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/1234567890/timesheets/' + timesheet._id).respond(200);
 ```
 
 * line 144
 
-```
+```javascript
 it('should set the timesheet to not deleted for the ui', function () {
   $scope.restore(timesheet);
   $httpBackend.flush();
@@ -575,13 +575,13 @@ it('should set the timesheet to not deleted for the ui', function () {
 
 * line 154
 
-```
+```javascript
 $httpBackend.when('PUT', '/users/1234567890/timesheets/' + timesheet._id).respond(500);
 ```
 
 * line 157
 
-```
+```javascript
 it('should set deleted to true for the timesheet in the ui', function () {
   $scope.restore(timesheet);
   $httpBackend.flush();
