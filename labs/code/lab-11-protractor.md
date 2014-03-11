@@ -1,6 +1,6 @@
 ### timesheet/Gruntfile.js
 
-```json
+```JavaScript
 protractor: {
   options: {
     configFile: 'protractor.config.js',
