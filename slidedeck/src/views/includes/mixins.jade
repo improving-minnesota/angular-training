@@ -1,0 +1,73 @@
+mixin page(title)
+  html(class="no-js")
+    head
+      meta(charset="utf-8")
+      title=title
+      meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+      meta(name="apple-mobile-web-app-capable", content="yes")
+      meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
+      meta(name="description", content=title)
+      link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
+
+    body
+      .reveal
+        .opi-logo
+        .slides
+          block
+
+      script(src="/assets/js/app.js")
+
+
+mixin slides-index(title)
+  section.index-page
+    h2 AngularJS Training
+    h4 Slides
+    ul
+      li 
+        a(href="lectures/intro.html", target="_blank") Intro
+    ul
+      li 
+        a(href="lectures/lecture-01.html", target="_blank") Lecture 1
+      li 
+        a(href="lectures/lecture-02.html", target="_blank") Lecture 2
+      li 
+        a(href="lectures/lecture-03.html", target="_blank") Lecture 3
+      li 
+        a(href="lectures/lecture-04.html", target="_blank") Lecture 4
+      li
+        a(href="lectures/lecture-05.html", target="_blank") Lecture 5
+      li 
+        a(href="lectures/lecture-06.html", target="_blank") Lecture 6
+
+    ul
+      li 
+        a(href="lectures/lecture-07.html", target="_blank") Lecture 7
+      li 
+        a(href="lectures/lecture-08.html", target="_blank") Lecture 8
+      li 
+        a(href="lectures/lecture-09.html", target="_blank") Lecture 9
+      li 
+        a(href="lectures/lecture-10.html", target="_blank") Lecture 10
+      li
+        a(href="lectures/lecture-11.html", target="_blank") Lecture 11
+      li 
+        a(href="lectures/lecture-12.html", target="_blank") Lecture 12
+
+mixin title-page(title)
+  section.index-section(data-state="index-slide")
+    .sliding-image-container
+      img.animate-logos.angular(src="/assets/img/angular.png")
+      img.animate-logos.grunt(src="/assets/img/grunt-logo.png")
+      img.animate-logos.yeoman(src="/assets/img/yeoman-logo.png")
+      img.animate-logos.node(src="/assets/img/node-logo.png")
+      img.animate-logos.bower(src="/assets/img/bower-logo.png")
+    .fading-header-container
+      h1.animate-headers.angular Angular.js
+      h1.animate-headers.grunt Grunt.js
+      h1.animate-headers.yeoman Yeoman
+      h1.animate-headers.node Node.js
+      h1.animate-headers.bower Bower.js
+    p=title
+
+
+
