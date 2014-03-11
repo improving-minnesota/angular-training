@@ -3,7 +3,10 @@ include ../includes/mixins
 - var title = "Introduction to AngularJS Training"
 
 +page(title)
-  +title-page(title)
+  section.index-section(data-state="index-slide")
+    +animated-header()
+    h3 Introduction to AngularJS Training
+
   section
     h1
       i.fa.fa-github

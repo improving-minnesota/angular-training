@@ -53,21 +53,28 @@ mixin slides-index(title)
       li 
         a(href="lectures/lecture-12.html", target="_blank") Lecture 12
 
-mixin title-page(title)
+
+mixin animated-header()
+  .sliding-image-container
+    img.animate-logos.angular(src="/assets/img/angular.png")
+    img.animate-logos.grunt(src="/assets/img/grunt-logo.png")
+    img.animate-logos.yeoman(src="/assets/img/yeoman-logo.png")
+    img.animate-logos.node(src="/assets/img/node-logo.png")
+    img.animate-logos.bower(src="/assets/img/bower-logo.png")
+  .fading-header-container
+    h1.animate-headers.angular Angular.js
+    h1.animate-headers.grunt Grunt.js
+    h1.animate-headers.yeoman Yeoman
+    h1.animate-headers.node Node.js
+    h1.animate-headers.bower Bower.js
+  block
+
+
+mixin lecture-title-page(title, subtitle)
   section.index-section(data-state="index-slide")
-    .sliding-image-container
-      img.animate-logos.angular(src="/assets/img/angular.png")
-      img.animate-logos.grunt(src="/assets/img/grunt-logo.png")
-      img.animate-logos.yeoman(src="/assets/img/yeoman-logo.png")
-      img.animate-logos.node(src="/assets/img/node-logo.png")
-      img.animate-logos.bower(src="/assets/img/bower-logo.png")
-    .fading-header-container
-      h1.animate-headers.angular Angular.js
-      h1.animate-headers.grunt Grunt.js
-      h1.animate-headers.yeoman Yeoman
-      h1.animate-headers.node Node.js
-      h1.animate-headers.bower Bower.js
-    p=title
+    +animated-header()
+    h3=title
+    h4=subtitle
 
 
 
