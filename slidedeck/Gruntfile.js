@@ -119,7 +119,9 @@ module.exports = function(grunt) {
       },
       src: {
         files: [
-        'src/**/*'
+          'src/views/*',
+          'src/assets/less/**/*',
+          'src/assets/img/**/*'
         ],
         tasks: ['assemble']
       }
