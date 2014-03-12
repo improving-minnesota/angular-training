@@ -999,7 +999,7 @@ it('should return back to the timesheet list', function () {
 * line 37
 
 ```
- $stateParams.user_id = "1234567890";
+$stateParams.user_id = "1234567890";
 $stateParams._id = "asdfghjklqwerty";
 ```
 

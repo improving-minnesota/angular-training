@@ -1,6 +1,6 @@
 ### timesheet/client/src/app/controllers.js
 
-```
+```JavaScript
 angular.module('app.controllers', [])
 
   .controller('MainCtrl', function ($scope) {
@@ -22,7 +22,7 @@ angular.module('app.controllers', [])
 
 ### timesheet/client/src/main.js
 
-```
+```JavaScript
 angular.module('main', [
   'templates-main',
   'templates-lib',
