@@ -46,11 +46,10 @@ bower install
 grunt runapp:development
 ```
 
-* In a separate console window, run:
-```
-grunt development
-```
+* This kicks of a Node server and serves up our `index.html` page.
 
 * Open your browser and navigate to [http://localhost:3000] the application home page.
 
 * Verify that you see the welcome page.
+
+* Now let's check out our project's structure so we know what goes where. 
