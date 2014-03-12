@@ -37,3 +37,5 @@ angular.module('main', [
   $log.info("Application running.");
 });
  ```
+hello
+hello
