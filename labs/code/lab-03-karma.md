@@ -2,25 +2,25 @@
 
 * line 189
 
-```
+```javascript
 tasks: ['development', 'karma:unit:run']
 ```
 
 * line 199
 
-```
+```javascript
 tasks: ['debug', 'karma:unit:run']
 ```
 
 * line 209
 
-```
+```javascript
 tasks: ['production', 'karma:unit:run']
 ```
 
 * line 370
 
-```
+```javascript
 karma : {
   unit : {
     reporters: 'dots',
@@ -36,7 +36,7 @@ karma : {
 
 * line 8
 
-```
+```javascript
 beforeEach(
  module( 
    'app.controllers'
@@ -60,7 +60,7 @@ describe('MainCtrl', function() {
 
 * line 30 
 
-```
+```javascript
 beforeEach(inject(function($rootScope, $controller) {
   scope = $rootScope.$new();
   controller = $controller("AppCtrl", { 
@@ -71,7 +71,7 @@ beforeEach(inject(function($rootScope, $controller) {
 
 * line 38 
 
-```
+```javascript
 it('should be able to instantiate the controller', function () { 
 	expect(controller).to.be.ok;
 });
@@ -79,7 +79,7 @@ it('should be able to instantiate the controller', function () {
 
 * line 46
 
-```
+```javascript
 beforeEach(inject(function($rootScope, $controller) {
   scope = $rootScope.$new();
   controller = $controller("NavCtrl", { 
@@ -90,7 +90,7 @@ beforeEach(inject(function($rootScope, $controller) {
 
 * line 54
 
-```
+```javascript
 it('should be able to instantiate the controller', function () { 
   expect(controller).to.be.ok;
 });
@@ -100,13 +100,13 @@ it('should be able to instantiate the controller', function () {
 
 * line 4
 
-```
+```javascript
 frameworks: ['jasmine'],
 ```
 
 * line 29
 
-```
+```javascript
 browsers: ['Chrome'],
 ```
 

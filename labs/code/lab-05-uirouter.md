@@ -8,7 +8,7 @@ ng-click and ui-view directives
 
 * line 5
 
-```
+```html
 <button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
   <i class="icon-plus"></i>
   New Employee
@@ -21,7 +21,7 @@ ui-view directive
 
 * line 4
 
-```
+```html
 <h2>{{$state.current.data.section}}</h2>
 ```
 
@@ -29,21 +29,21 @@ ui-view directive
 
 * line 10
 
-```
+```html
 <li ng-class="{active: $state.includes('app.projects')}">
 	<a ui-sref="app.projects">Projects</a>
 ```
 
 * line 13
 
-```
+```html
 <li ng-class="{active: $state.includes('app.employees')}">
 	<a ui-sref="app.employees">Employees</a>
 ```
 
 * line 16
 
-```
+```html
 <li ng-class="{active: $state.includes('app.timesheets')}">
 	<a ui-sref="app.timesheets({user_id: 'all'})">Timesheets</a>
 ```
@@ -58,13 +58,13 @@ ng-click and ui-view directives
 
 * line 2
 
-```
+```html
 <div ng-show="$state.is('app.projects')">
 ```
 
 * line 5
 
-```
+```html
 <button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
   <i class="icon-plus"></i>
   New Project
@@ -77,7 +77,7 @@ ng-click, ng-model, bindings, and ui-view directives
 
 * line 2
 
-```
+```html
 <div ng-show="$state.is('app.timesheets.detail')">
 ```
 
@@ -91,13 +91,13 @@ ng-click and ui-view directives
 
 * line 2
 
-```
+```html
 <div ng-show="$state.is('app.timesheets')">
 ```
 
 * line 5
 
-```
+```html
 <button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
   <i class="icon-plus"></i>
   New Timesheet
@@ -110,13 +110,13 @@ ng-model and ng-click directives
 
 * line 13
 
-```
+```html
 <option ng-repeat="project in projects" value="{{project.name}}">{{project.name}}</option>
 ```
 
 * line 21
 
-```
+```html
 <input type="text" class="form-control" 
    datepicker-popup="MM/dd/yyyy"
    ng-model="timeunit.dateWorked"  
@@ -132,7 +132,7 @@ ng-model and ng-click directives
 
 * line 11
 
-```
+```JavaScript
 .config(function ($stateProvider) {
   $stateProvider
     .state('app', {
@@ -159,7 +159,7 @@ ng-model and ng-click directives
 
 * line 14
 
-```
+```JavaScript
 $scope.showDetail = function showDetail (employee) {
   if (employee.deleted) {
      console.log('cannot view a deleted employee');
@@ -175,7 +175,7 @@ $scope.createNew = function createNew () {
 
 * line 50 
 
-```
+```JavaScript
 $scope.cancel = function cancel () {
   $state.go('app.employees', {}, {reload: true});
 };
@@ -183,7 +183,7 @@ $scope.cancel = function cancel () {
 
 * line 63
 
-```
+```JavaScript
 $scope.save = function save () {
   $scope.employee.$update()
     .then(function (updated) {
@@ -198,7 +198,7 @@ $scope.save = function save () {
 
 * line 81
 
-```
+```JavaScript
 $scope.save = function save () {
   $control.create('employees', $scope.employee)
     .then(function (created) {
@@ -215,7 +215,7 @@ $scope.save = function save () {
 
 * line 6
 
-```
+```JavaScript
 .config(function ($stateProvider) {
 
   $stateProvider
@@ -262,7 +262,7 @@ $scope.save = function save () {
 
 * line 14
 
-```
+```JavaScript
 $scope.showDetail = function showDetail (project) {
   if (project.deleted) {
     console.log('cannot view a deleted project');
@@ -278,7 +278,7 @@ $scope.createNew = function createNew () {
 
 * line 49
 
-```
+```JavaScript
 $scope.cancel = function cancel () {
   $state.go('app.projects', {}, {reload: true});
 };
@@ -286,7 +286,7 @@ $scope.cancel = function cancel () {
 
 * line 62
 
-```
+```JavaScript
 $scope.save = function save () {
   $scope.project.$update()
     .then(function (updated) {
@@ -301,7 +301,7 @@ $scope.save = function save () {
 
 * line 80
 
-```
+```JavaScript
 $scope.save = function save () {
   $control.create('projects', $scope.project) 
     .then(function (created) {
@@ -318,7 +318,7 @@ $scope.save = function save () {
 
 * line 5
 
-```
+```JavaScript
 .config(function ($stateProvider) {
   
  $stateProvider
@@ -365,7 +365,7 @@ $scope.save = function save () {
 
 * line 8
 
-```
+```JavaScript
 var query = {
   user_id: $stateParams.user_id
 };
@@ -373,7 +373,7 @@ var query = {
 
 * line 18
 
-```
+```JavaScript
 $scope.showDetail = function showDetail (timesheet) {
   if (timesheet.deleted) {
     console.log('error : cannot view a deleted timesheet');
@@ -389,7 +389,7 @@ $scope.createNew = function createNew () {
 
 * line 63
 
-```
+```JavaScript
 $scope.edit = function edit (timesheet) {
   $state.go('app.timesheets.detail.edit', $stateParams);
 };
@@ -415,13 +415,13 @@ $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
 
 * line 117
 
-```
+```JavaScript
 $scope.saveText = $state.current.data.saveText;
 ```
 
 * line 120
 
-```
+```JavaScript
 $scope.save = function save () {
   $scope.timesheet.$update()
     .then(function (updated) {
@@ -436,7 +436,7 @@ $scope.save = function save () {
 
 * line 131
 
-```
+```JavaScript
 $scope.cancel = function cancel () {
   $state.go('app.timesheets.detail', $stateParams, {reload: true});
 };
@@ -444,7 +444,7 @@ $scope.cancel = function cancel () {
 
 * line 142
 
-```
+```JavaScript
 $scope.save = function save () {
   var timesheet = angular.extend({user_id: $stateParams.user_id}, $scope.timesheet);
 
@@ -467,7 +467,7 @@ $scope.cancel = function cancel () {
 
 * line 6 
 
-```
+```JavaScript
 .config(function ($stateProvider) {
   $stateProvider
     .state('app.timesheets', {
@@ -527,7 +527,7 @@ $scope.cancel = function cancel () {
 
 * line 7
 
-```
+```JavaScript
 $scope.cancel = function cancel () {
   $state.go('app.timesheets.detail', $stateParams, {reload: true});
 };
@@ -535,7 +535,7 @@ $scope.cancel = function cancel () {
 
 * line 17
 
-```
+```JavaScript
 $scope.save = function save () {
   $scope.timeunit.$update()
     .then(function (updated) {
@@ -551,7 +551,7 @@ $scope.save = function save () {
 
 * line 34
 
-```
+```JavaScript
 $scope.timeunit = {
   user_id: $stateParams.user_id,
   timesheet_id: $stateParams._id,
@@ -561,7 +561,7 @@ $scope.timeunit = {
 
 * line 39
 
-```
+```JavaScript
 $scope.save = function save () {
   $control.create('timeunits', $scope.timeunit)
     .then(function (created) {
@@ -578,7 +578,7 @@ $scope.save = function save () {
 
 * line 6 
 
-```
+```JavaScript
 .config(function ($stateProvider) {
   $stateProvider
     .state('app.timesheets.detail.timeunits', {
@@ -625,20 +625,20 @@ $scope.save = function save () {
 
 * line 37
 
-```
+```JavaScript
 state: sinon.stub($state)
 ```
 
 * line 62
 
-```
+```JavaScript
 $state: spies.state,
   $stateParams: $stateParams
 ```
 
 * line 91
 
-```
+```JavaScript
 it('should transition to the employee detail state', function () {
   $httpBackend.flush();
   $scope.showDetail(employee);
@@ -648,7 +648,7 @@ it('should transition to the employee detail state', function () {
 
 * line 98
 
-```
+```JavaScript
 it('should transition to the create employee state', function () {
   $httpBackend.flush();
   $scope.createNew();
@@ -658,7 +658,7 @@ it('should transition to the create employee state', function () {
 
 * line 183
 
-```
+```JavaScript
 it('should return back to the employee list', function () {
   $httpBackend.flush();
   $scope.cancel();
@@ -668,13 +668,13 @@ it('should return back to the employee list', function () {
 
 * line 195
 
-```
+```JavaScript
 spies.state.current = {data: {saveText: 'update'}};
 ```
 
 * line 211
 
-```
+```JavaScript
 it('should set saveText to the current state saveText', function () {
   expect($scope.saveText).to.equal('update');
 });
@@ -682,7 +682,7 @@ it('should set saveText to the current state saveText', function () {
 
 * line 215
 
-```
+```JavaScript
 it('should set the employee on scope to the resolved employee', function () {
   expect($scope.employee._id).to.equal(employee._id);
   expect($scope.employee.username).to.equal(employee.username);
@@ -691,7 +691,7 @@ it('should set the employee on scope to the resolved employee', function () {
 
 * line 235
 
-```
+```JavaScript
 it('should set the employee on scope to be the updated employee', function () {
   $scope.save();
   $httpBackend.flush();
@@ -701,13 +701,13 @@ it('should set the employee on scope to be the updated employee', function () {
 
 * line 248
 
-```
+```JavaScript
 spies.state.current = {data: {saveText: 'create'}};
 ```
 
 * line 263
 
-```
+```JavaScript
 it('should set saveText to the current state saveText', function () {
   expect($scope.saveText).to.equal('create');
 });
@@ -720,7 +720,7 @@ it('should set the employee on scope to a non admin user', function () {
 
 * line 285
 
-```
+```JavaScript
 it('should transition to the detail page of the created employee', function () {
   $scope.save();
   $httpBackend.flush();
@@ -732,20 +732,20 @@ it('should transition to the detail page of the created employee', function () {
 
 * line 37
 
-```
+```JavaScript
 state: sinon.stub($state)
 ```
 
 * line 58
 
-```
+```JavaScript
 $state: spies.state,
   $stateParams: $stateParams
 ```
 
 * line 84
 
-```
+```JavaScript
 it('should transition to the project detail state', function () {
   $httpBackend.flush();
   $scope.showDetail(project);
@@ -756,7 +756,7 @@ it('should transition to the project detail state', function () {
 
 * line 92
 
-```
+```JavaScript
 it('should transition to the create project state', function () {
   $httpBackend.flush();
   $scope.createNew();
@@ -766,7 +766,7 @@ it('should transition to the create project state', function () {
 
 * line 176
 
-```
+```JavaScript
 it('should return back to the project list', function () {
   $httpBackend.flush();
   $scope.cancel();
@@ -776,13 +776,13 @@ it('should return back to the project list', function () {
 
 * line 188
 
-```
+```JavaScript
 $state.current = {data: {saveText: 'update'}};
 ```
 
 * line 204
 
-```
+```JavaScript
 it('should set saveText to the current state saveText', function () {
   expect($scope.saveText).to.equal('update');
 });
@@ -790,7 +790,7 @@ it('should set saveText to the current state saveText', function () {
 
 * line 208
 
-```
+```JavaScript
 it('should set the project on scope to the resolved project', function () {
   expect($scope.project._id).to.equal(project._id);
   expect($scope.project.name).to.equal(project.name);
@@ -799,7 +799,7 @@ it('should set the project on scope to the resolved project', function () {
 
 * line 228
 
-```
+```JavaScript
 it('should set the project on scope to be the updated project', function () {
   $scope.save();
   $httpBackend.flush();
@@ -809,13 +809,13 @@ it('should set the project on scope to be the updated project', function () {
 
 * line 241
 
-```
+```JavaScript
 $state.current = {data: {saveText: 'create'}};
 ```
 
 * line 256
 
-```
+```JavaScript
 it('should set saveText to the current state saveText', function () {
   expect($scope.saveText).to.equal('create');
 });
@@ -827,7 +827,7 @@ it('should set the project on scope to an empy object', function () {
 
 * line 277
 
-```
+```JavaScript
 it('should transition to the detail page of the created project', function () {
   $scope.save();
   $httpBackend.flush();
@@ -839,20 +839,20 @@ it('should transition to the detail page of the created project', function () {
 
 * line 38
 
-```
+```JavaScript
 $stateParams.user_id = "1234567890";
 ```
 
 * line 73
 
-```
+```JavaScript
 $state: spies.state,
 $stateParams: $stateParams 
 ```
 
 * line 100
 
-```
+```JavaScript
 it('should transition to the timesheet detail state', function () {
   $httpBackend.flush();
   $scope.showDetail(timesheet);
@@ -862,7 +862,7 @@ it('should transition to the timesheet detail state', function () {
 
 * line 108
 
-```
+```JavaScript
 it('should transition to the create timesheet state', function () {
   $httpBackend.flush();
   $scope.createNew();
@@ -872,14 +872,14 @@ it('should transition to the create timesheet state', function () {
 
 * line 203
 
-```
+```JavaScript
 $state: spies.state,
 $stateParams: $stateParams
 ```
 
 * line 215
 
-```
+```JavaScript
 it('should set the timesheet on scope to the resolved timesheet', function () {
   expect($scope.timesheet._id).to.equal(timesheet._id);
   expect($scope.timesheet.name).to.equal(timesheet.name);
@@ -888,7 +888,7 @@ it('should set the timesheet on scope to the resolved timesheet', function () {
 
 * line 222
 
-```
+```JavaScript
 it('should transition to the edit state', function () {
   $scope.edit(timesheet);
   expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail.edit', $stateParams);
@@ -897,7 +897,7 @@ it('should transition to the edit state', function () {
 
 * line 229
 
-```
+```JavaScript
 it('should return back to the timesheet list', function () {
   $scope.cancel();
   expect(spies.state.go).to.have.been.calledWith('app.timesheets');
@@ -906,7 +906,7 @@ it('should return back to the timesheet list', function () {
 
 * line 236
 
-```
+```JavaScript
 it('should transition to the create timeunits state', function () {
   $scope.logTime();
   expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail.timeunits.create', $stateParams);
@@ -915,7 +915,7 @@ it('should transition to the create timeunits state', function () {
 
 * line 243
 
-```
+```JavaScript
 it('should set the timeunit_id on state params and transistion to the edit timeunits state', function () {
   $scope.showTimeunitDetail({_id: 'abc'});
   expect($stateParams.timeunit_id).to.equal('abc');
@@ -925,13 +925,13 @@ it('should set the timeunit_id on state params and transistion to the edit timeu
 
 * line 321
 
-```
+```JavaScript
 spies.state.current = {data: {saveText: 'update'}};
 ```
 
 * line 336
 
-```
+```JavaScript
 it('should set saveText to the current state saveText', function () {
   expect($scope.saveText).to.equal('update');
 });
@@ -944,7 +944,7 @@ it('should set the timesheet on scope to the resolved timesheet', function () {
 
 * line 360 
 
-```
+```JavaScript
 it('should set the timesheet on scope to be the updated timesheet', function () {
   $scope.save();
   $httpBackend.flush();
@@ -954,7 +954,7 @@ it('should set the timesheet on scope to be the updated timesheet', function () 
 
 * line 370
 
-```
+```JavaScript
 it('should return back to the timesheet detail', function () {
   $scope.cancel();
   expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail');
@@ -963,13 +963,13 @@ it('should return back to the timesheet detail', function () {
 
 * line 380
 
-```
+```JavaScript
 spies.state.current = {data: {saveText: 'create'}};
 ```
 
 * line 395
 
-```
+```JavaScript
 it('should set saveText to the current state saveText', function () {
   expect($scope.saveText).to.equal('create');
 });
@@ -977,7 +977,7 @@ it('should set saveText to the current state saveText', function () {
 
 * line 416
 
-```
+```JavaScript
 it('should transition to the detail page of the created timesheet', function () {
   $scope.save();
   $httpBackend.flush();
@@ -987,7 +987,7 @@ it('should transition to the detail page of the created timesheet', function () 
 
 * line 425
 
-```
+```JavaScript
 it('should return back to the timesheet list', function () {
   $scope.cancel();
   expect(spies.state.go).to.have.been.calledWith('app.timesheets');
@@ -998,26 +998,26 @@ it('should return back to the timesheet list', function () {
 
 * line 37
 
-```
+```JavaScript
 $stateParams.user_id = "1234567890";
 $stateParams._id = "asdfghjklqwerty";
 ```
 
 * line 54
 
-```
+```JavaScript
 "user_id": $stateParams.user_id
 ```
 
 * line 58
 
-```
+```JavaScript
 state: sinon.stub($state)
 ```
 
 * line 82
 
-```
+```JavaScript
 it('should set the resolved list of projects on scope', function () {
   expect($scope.projects).to.equal(projects);
 });
@@ -1026,7 +1026,7 @@ it('should set the resolved list of projects on scope', function () {
 
 * line 88
 
-```
+```JavaScript
 it('should return back to the timesheet detail', function () {
   $scope.cancel();
   expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail');
@@ -1035,7 +1035,7 @@ it('should return back to the timesheet detail', function () {
 
 * line 111
 
-```
+```JavaScript
 it('should attach the resolved timeunit onto scope', function () {
   expect($scope.timeunit._id).to.equal(timeunit._id);
 });
@@ -1043,7 +1043,7 @@ it('should attach the resolved timeunit onto scope', function () {
 
 * line 130
 
-```
+```JavaScript
 it('should set the timeunit on scope to be the updated timeunit', function () {
   $scope.save();
   $httpBackend.flush();
@@ -1053,7 +1053,7 @@ it('should set the timeunit on scope to be the updated timeunit', function () {
 
 * line 155
 
-```
+```JavaScript
 it('should initialize a new timeunit with user and timesheet ids', function () {
   expect($scope.timeunit.user_id).to.equal($stateParams.user_id);
   expect($scope.timeunit.timesheet_id).to.equal($stateParams._id);
@@ -1062,7 +1062,7 @@ it('should initialize a new timeunit with user and timesheet ids', function () {
 
 * line 175
 
-```
+```JavaScript
 it('should set the timeunit on scope to be the updated timeunit', function () {
   $scope.save();
   $httpBackend.flush();
