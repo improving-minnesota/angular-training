@@ -1,6 +1,9 @@
 module.exports = function(config) {
   config.set({
 
+    background: true,
+    autoWatch: true,
+
     frameworks: ['jasmine'],
 
     files: [
@@ -13,8 +16,8 @@ module.exports = function(config) {
       'src/**/*.js',
 
       'assets/js/components/angular-mocks/angular-mocks.js',
-      
-      'test/unit/**/*.spec.js', 
+
+      'test/unit/**/*.spec.js',
 
       'assets/templates/**/*.html'
     ],
