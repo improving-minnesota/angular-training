@@ -1,19 +1,15 @@
 function EmployeesFormPage() {
   var self = this;
 
-  this.pageTitle = element(by.binding('$state.current.data.section'));
-  this.getPageTitle = function () {
-    return this.pageTitle.getText();
-  };
+  // TODO : Create a function to return the section page title
 
   this.getSaveButton = function (buttonText) {
     return element(by.buttonText(buttonText));
   };
 
   this.cancelButton = element(by.buttonText('Cancel'));
-  this.cancelForm = function () {
-    this.cancelButton.click();
-  };
+  
+  // TODO : Create a function to click the cancel button 
 
   this.saveForm = function (saveButtonText) {
     this.getSaveButton(saveButtonText).click();
