@@ -13,10 +13,36 @@ include ../includes/mixins
     section
       h1 E2E Testing
     section
-      h2
+      h2 What is E2E?
+      p E2E stands for End-to-End
+      p E2E testing is a methodology used to test whether the flow of an application is performing as designed from start to finish.
+      p They test the functionality of the application as a whole as opposed the individual parts and peices (unit testing).
+
+    section
+      h2 E2E for Web Applications
+      p Typically, E2E testing in web applications is the automation of an end user
+      p The preffered tool used to acomplish this testing in AngularJS applications is Protractor.
 
   section
     section
       h1 Protractor
     section
-      h2
+      h2 What is Protractor?
+      p
+        | Protractor is an end to end test framework for AngularJS applications built on top of WebDriverJS.
+        | Protractor runs tests against your application running in a real browser, interacting with it as a user would.
+      p Protractor is a wrapper around WebDriverJS which is a JavaScript API for Selenium
+
+    section
+      h2 What is Selenium?
+      p Selenium is a tool that automates browsers
+      p It runs as a background server
+      p Think of it as an end user
+
+    section
+      h2 What is WebDriverJS?
+      p WebDriverJS is a JavaScript API for Selenium
+      p We use WebDriverJS to send instructions to a Selenium server running in the background
+
+    section
+      img.no-style(src="/assets/img/lecture-11/protractor-flow.png")
