@@ -1,0 +1,14 @@
+doctype html
+include ../includes/mixins
+- var title = "Introduction to AngularJS Training"
+
++page(title)
+  section.index-section(data-state="index-slide")
+    +animated-header()
+    h3 Introduction to AngularJS Training
+
+  section
+    h1
+      i.fa.fa-github
+    p These slides are up on GitHub!
+    a(href="https://github.com/objectpartners/angular-training", target="_blank") objectpartners/angular-training
