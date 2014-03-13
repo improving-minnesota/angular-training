@@ -71,21 +71,15 @@ module.exports = function(grunt) {
             debug: true
           }
         },
-        files: {
-          'dist/intro.html'     : ['src/views/intro.jade'],
-          'dist/lecture_01.html': ['src/views/lecture_01.jade'],
-          'dist/lecture_02.html': ['src/views/lecture_02.jade'],
-          'dist/lecture_03.html': ['src/views/lecture_03.jade'],
-          'dist/lecture_04.html': ['src/views/lecture_04.jade'],
-          'dist/lecture_05.html': ['src/views/lecture_05.jade'],
-          'dist/lecture_06.html': ['src/views/lecture_06.jade'],
-          'dist/lecture_07.html': ['src/views/lecture_07.jade'],
-          'dist/lecture_08.html': ['src/views/lecture_08.jade'],
-          'dist/lecture_09.html': ['src/views/lecture_09.jade'],
-          'dist/lecture_10.html': ['src/views/lecture_10.jade'],
-          'dist/lecture_11.html': ['src/views/lecture_11.jade'],
-          'dist/lecture_12.html': ['src/views/lecture_12.jade']
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'src/views',
+            src: ['**/*.jade'],
+            dest: 'dist/',
+            ext: '.html'
+          }
+        ]
       }
     },
 
@@ -100,7 +94,7 @@ module.exports = function(grunt) {
           },
           {
             expand: true,
-            cwd: 'src/assets/js/components/font-awesome/font',
+            cwd: 'src/assets/js/components/font-awesome/fonts',
             src:['**'],
             dest:'dist/assets/font'
           }
@@ -125,7 +119,9 @@ module.exports = function(grunt) {
       },
       src: {
         files: [
-        'src/**/*'
+          'src/views/**/*',
+          'src/assets/less/**/*',
+          'src/assets/img/**/*'
         ],
         tasks: ['assemble']
       }
