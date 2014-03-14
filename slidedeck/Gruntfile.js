@@ -87,6 +87,10 @@ module.exports = function(grunt) {
       vendor : {
         files: [
           {
+            src:'src/assets/js/components/angular/angular.js',
+            dest:'dist/assets/js/components/angular/angular.js'
+          },
+          {
             expand: true,
             cwd: 'src/assets/js/components/reveal.js/lib/font',
             src:['**'],
