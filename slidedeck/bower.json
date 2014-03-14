@@ -13,6 +13,7 @@
     "jquery.classList": "*",
     "headjs": "1.0.3",
     "lesshat": "~2.0.15",
-    "font-awesome": "4.0.3"
+    "font-awesome": "4.0.3",
+    "highlight.js": "components/highlightjs"
   }
 }

@@ -5,12 +5,41 @@ include ../includes/mixins
   +lecture-title-page("Filters", "Lecture 09")
 
   section
-    section
-      h1 Lab 08
-      h2 Solution
+    h1 Lab 08
+    h2 Solution
 
   section
-    section
-      h1 Filters
-    section
-      h2
+    h1 Filters
+
+  section
+    h2 Two Types
+    p There are two types of filters in AngularJS
+    ul
+      li Filtering values
+      li Filtering arrays
+
+  section
+    h2 Filtering values
+    p
+      | Filters, when used with values, are an easy way to create expressions that
+      | modify a model value for display.
+
+  section
+    p In templates, simply use a pipe to apply a particular filter.
+    br
+    .text-center
+      pre.
+        <code data-trim>
+        {{ model.booleanValue | yesNo }}
+
+        </code>
+
+  section
+    p Filters can also be chained
+    img.no-style(src="/assets/img/lecture-09/filter-chain.png")
+    .text-center
+      pre.
+        <code data-trim>
+        {{ model.booleanValue | yesNo | uppercase }}
+
+        </code>
