@@ -513,4 +513,4 @@ describe('progress bar > 100%', function() {
 - To see what these functions do, open the `controllers.js` in src/app/timesheets and check it out.
 
 - Now you're ready to refresh the page, navigate to the timesheet view, and see your handywork in action!!
-- Try deleting/restoring timeunits and see what happens!!
+- Try deleting/restoring timeunits and see what happens!! Only dynamic awesomeness!! No big deal!!
