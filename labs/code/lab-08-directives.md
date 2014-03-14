@@ -284,14 +284,21 @@ $compile(element)($scope);
 $scope.$digest();
 $scope.$apply();
 ```
-#### HERE
-- line 42
+
+###### Test the header is set
+- Look for the `TODO` near line #42.
+- Add the below test to check that the directive adds a `<h4>` tag.
 
 ```javascript
 it('should set the header content within the directive template', function () {
   expect(element.find('h4').text()).to.equal('My Header');
 });
+```
 
+###### Test the directive responds to changes on the model
+- Directly below, add this test that changes the `headerName` on scope and checks the result.
+
+```javascript
 it('should respond to changes', function () {
   expect(element.find('h4').text()).to.equal('My Header');
   $scope.$apply(function() {
@@ -300,37 +307,32 @@ it('should respond to changes', function () {
   expect(element.find('h4').text()).to.equal('My Updated Header');
 });
 ```
+- Run `grunt karma:unit` and verify that these both pass.
 
-- line 55
+###### Test the transclusion
+
+- Now we want to verify that any DOM elements that we wrap with our directive appear in the second column.
+- Find the `TODO` near line #55 and add this test.
 
 ```javascript
 it('should transclude the directive element contents', function () {
   expect(element.find('p').text()).to.equal('My Content');
 });
-it('should respond to changes', function () {
-  expect(element.find('p').text()).to.equal('My Content');
-  $scope.$apply(function() {
-    $scope.content = 'My Updated Content';
-  });
-  expect(element.find('p').text()).to.equal('My Updated Content');
-});
 ```
+- Now run all of the tests and verify that we are 'all green'.
 
+###### See the directive at work
 
-### timesheet/client/assets/templates/app/timesheets/detail.html
-- line 7
+- Let's add some headers to our Timesheet and Timeunits forms.
+
+- Open **client/assets/templates/app/timesheets/detail.html**
+- Find the `TODO` near line #7 and add the following:
 
 ```xml
 <div tsz-form-section-header header="Timesheet Details"></div>
 ```
 
-- line 39
-
-```xml
-<div tsz-form-section-header header="Timesheet Progress"></div>
-```
-
-- line 65
+- Next, look for the `TODO` near line #65 and add a wrapped version:
 
 ```xml
 <div tsz-form-section-header header="Time Units">
@@ -340,38 +342,33 @@ it('should respond to changes', function () {
     </div>
 </div>
 ```
+- Now you can refresh the page, navigate to a Timsheet detail and see your work.
+- Do you see your new headers? Is the `Log Time` Button displayed in the same row as the `Time Units` header?
 
-
+&nbsp;
 ## Create a Timesheet Progress Indicator
 
-### timesheet/client/assets/templates/app/timesheets/detail.html
+###### The Situation
+- Our wonderful product owners have now decided that we need a visual representation of the percentage of completion for each timecard.
+- After some research, we discover *Bootstrap* provides us with a *progress bar* widget, but we need a way to dynamically provide it with data.
+- We decide this is a perfect case to write our own directive!
 
-- line 41
+###### Write the directive
 
-```xml
-<div class="row">
-  <div class="col-xs-12">
-    <div tsz-weekly-progress-bar hours-worked="hoursWorked()"
-      hours-required="hoursRequired()" report="reportStatus(percentComplete)"></div>
-  </div>
-</div>
-```
-
-### timesheet/client/assets/templates/directives/timesheet/progress-bar.html
-
-```xml
-<div class="progress" ng-click="progressClicked()">
-  <div class="progress-bar" style="width: {{percentComplete > 100 ? 100 : percentComplete}}%;">
-    {{percentComplete | number:0}}%
-  </div>
-</div>
-```
+- Open **client/src/directives/timesheet.js**
+- Notice that your teammates have already created the module for you. Aren't they awesome?
+- Our directive's requirements are:
+  - The directive will replace the DOM elements that call it.
+  - We need an isolate scope with the following properties.
+    - `hoursWorked` : Needs to be bound to the expression in the `hours-worked` attribute.
+    - `hoursRequired` : Needs to be bound to the expression in the `hours-required` attribute.
+    - `report` : Needs to be bound to the evaluation of the `report` attribute, so that we can call it like a callback.
+  - It will use a template, `progress-bar.html`.
+  - We need to watch for changes to `hoursWorked` and `hoursRequired` so that a new percentage calculation can be performed.
+  - It also needs a function on scope to handle a click event and call our callback, `report`.
 
 
-
-### timesheet/client/src/directives/timesheet.js
-
-- line 3
+- Find the `TODO` near line #3 and register your `tszWeeklyProgressBar` directive.
 
 ```javascript
 .directive('tszWeeklyProgressBar', function () {
@@ -389,7 +386,6 @@ it('should respond to changes', function () {
       }, function(percentComplete) {
         scope.percentComplete = percentComplete;
       });
-
       scope.progressClicked = function progressClicked() {
         scope.report({percentComplete: Math.round(scope.percentComplete) + "%"});
       };
@@ -398,9 +394,29 @@ it('should respond to changes', function () {
 });
 ```
 
-### timesheet/client/test/unit/directives/timesheet.spec.js
+- Now, let's add our template
+- Open **client/assets/templates/directives/timesheet/progress-bar.html**
+- Add the following markup:
 
-- line 11
+
+```xml
+<div class="progress" ng-click="progressClicked()">
+  <div class="progress-bar" style="width: {{percentComplete > 100 ? 100 : percentComplete}}%;">
+    {{percentComplete | number:0}}%
+  </div>
+</div>
+```
+
+- Did you notice?
+  - We registered a click handler and bound `progressClicked()` from our isolate scope.
+  - We also bound `percentComplete` from scope to the width and display text.
+    - Remember `percentComplete` is a calculation that happens if either `hoursWorked` or `hoursRequired` changes on scope.
+
+###### Test the directive
+
+- Now that we have the directive, let's make sure it behaves as expected.
+- Open **client/test/unit/directives/timesheet.spec.js**
+- Look for the `TODO` near line #11 and register the dependencies for our Jasmine spec:
 
 ```javascript
 'timesheet.directives',
@@ -408,7 +424,8 @@ it('should respond to changes', function () {
 'assets/templates/directives/timesheet/progress-bar.html'
 ```
 
-- line 24
+- Before each test runs, we need to build up a DOM element that calls the directive and provides it with the attributes that it needs.
+- Find the `TODO` near line #24 and complete the `beforeEach`:
 
 ```javascript
 beforeEach(function () {
@@ -427,7 +444,11 @@ beforeEach(function () {
   $scope.$digest();
   $scope.$apply();
 });
+```
 
+- First we need to test how it behaves if progress is less than 100%
+
+```javascript
 describe('progress bar <= 100%', function() {
   it('should set the progress bar width to the percent complete', function () {
     expect(element.find('.progress-bar').css('width')).to.equal('40%');
@@ -437,7 +458,10 @@ describe('progress bar <= 100%', function() {
     expect(element.find('.progress-bar').text().trim()).to.equal('40%');
   });
 });
+```
+- What happens if progress is over 100% ?
 
+```javascript
 describe('progress bar > 100%', function() {
   beforeEach(function() {
     $scope.$apply(function() {
@@ -455,4 +479,38 @@ describe('progress bar > 100%', function() {
   });
 });
 ```
-########################################################
+- Notice in the `beforeEach` of the above tests we are calling `$scope.$apply`
+  - This forces Angular to process the changes on scope.
+  - Which will, in turn, set those properties on scope and fire our `$watch` function.
+  - Which will create a new calculation for `percentComplete`
+  - Which is used by our template to set the width of the progress bar.
+  - Got it?
+
+###### Let's use it in our view
+
+- It's finally time to see our directive at work!
+- Open **client/assets/templates/app/timesheets/detail.html**
+
+- Let's first had a header so that our users know what they are seeing.
+- Look for the `TODO` near line #39 and add:
+
+```xml
+<div tsz-form-section-header header="Timesheet Progress"></div>
+```
+
+- Now let's add the directive.
+- Find the `TODO` near line #41 and put in our markup to call the directive.
+
+```xml
+<div class="row">
+  <div class="col-xs-12">
+    <div tsz-weekly-progress-bar hours-worked="hoursWorked()"
+      hours-required="hoursRequired()" report="reportStatus(percentComplete)"></div>
+  </div>
+</div>
+```
+- You probably noticed that your teammates have already implemented the `hoursWorked()` and `hoursRequired()` functions for you in the controller.
+- To see what these functions do, open the `controllers.js` in src/app/timesheets and check it out.
+
+- Now you're ready to refresh the page, navigate to the timesheet view, and see your handywork in action!!
+- Try deleting/restoring timeunits and see what happens!!
