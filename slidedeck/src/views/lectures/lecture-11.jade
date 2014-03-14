@@ -5,148 +5,144 @@ include ../includes/mixins
   +lecture-title-page("E2E Testing with Protractor", "Lecture 11")
 
   section
-    section
-      h1 Lab 10
-      h2 Solution
+    h1 Lab 10
+    h2 Solution
 
   section
-    section
-      h1 E2E Testing
-    section
-      h2 What is E2E?
-      p E2E stands for End-to-End
-      p E2E testing is a methodology used to test whether the flow of an application is performing as designed from start to finish.
-      p They test the functionality of the application as a whole as opposed the individual parts and pieces (unit testing).
-
-    section
-      h2 E2E for Web Applications
-      p Typically, E2E testing in web applications is the automation of an end user.
-      p The preferred tool used to accomplish this testing in AngularJS applications is Protractor.
+    h1 E2E Testing
+  section
+    h2 What is E2E?
+    p E2E stands for End-to-End
+    p E2E testing is a methodology used to test whether the flow of an application is performing as designed from start to finish.
+    p They test the functionality of the application as a whole as opposed the individual parts and pieces (unit testing).
 
   section
-    section
-      h1 Protractor
-    section
-      h2 What is Protractor?
-      p
-        | Protractor is an end to end test framework for AngularJS applications built on top of WebDriverJS.
-        | Protractor runs tests against your application running in a real browser, interacting with it as a user would.
-      p Protractor is a wrapper around WebDriverJS which is a JavaScript API for Selenium.
-
-    section
-      h2 What is Selenium?
-      p Selenium is a tool that automates browsers and it runs as an independent server.
-      p Think of it as an end user
-
-    section
-      h2 What is WebDriverJS?
-      p WebDriverJS is a JavaScript API for Selenium
-      p We use WebDriverJS to send instructions to a Selenium server running in the background
-
-    section
-      img.no-style(src="/assets/img/lecture-11/protractor-flow.png")
+    h2 E2E for Web Applications
+    p Typically, E2E testing in web applications is the automation of an end user.
+    p The preferred tool used to accomplish this testing in AngularJS applications is Protractor.
 
   section
-    section
-      h1 Tests
+    h1 Protractor
+  section
+    h2 What is Protractor?
+    p
+      | Protractor is an end to end test framework for AngularJS applications built on top of WebDriverJS.
+      | Protractor runs tests against your application running in a real browser, interacting with it as a user would.
+    p Protractor is a wrapper around WebDriverJS which is a JavaScript API for Selenium.
 
-    section
-      h2 Page Objects
-      ul
-        li Page Objects are models of the UI you are testing
-        li They reduce the amount of duplications in our tests required to interact with the user interface
-        li Page Objects face in both directions.  You can use them to set or get things like field values.
+  section
+    h2 What is Selenium?
+    p Selenium is a tool that automates browsers and it runs as an independent server.
+    p Think of it as an end user
 
-    section
-      h2 Creating Page Objects
+  section
+    h2 What is WebDriverJS?
+    p WebDriverJS is a JavaScript API for Selenium
+    p We use WebDriverJS to send instructions to a Selenium server running in the background
 
-    section
-      pre.
-        <code data-trim contenteditable>
+  section
+    img.no-style(src="/assets/img/lecture-11/protractor-flow.png")
 
-        function EmployeesIndexPage() {
-          this.get = function () {
-            browser.get('#/app/employees');
-          };
+  section
+    h1 Tests
 
-          this.newEmployeeButton = element(
-            by.buttonText("New Employee")
-          );
+  section
+    h2 Page Objects
+    ul
+      li Page Objects are models of the UI you are testing
+      li They reduce the amount of duplications in our tests required to interact with the user interface
+      li Page Objects face in both directions.  You can use them to set or get things like field values.
 
-          this.firstEmployee = element(
-            by.repeater('employee in pageConfig.data').row(0)
-          );
-        }
+  section
+    h2 Creating Page Objects
 
-        module.exports = new EmployeesIndexPage();
+  section
+    pre.
+      <code data-trim contenteditable>
 
-        </code>
+      function EmployeesIndexPage() {
+        this.get = function () {
+          browser.get('#/app/employees');
+        };
+
+        this.newEmployeeButton = element(
+          by.buttonText("New Employee")
+        );
+
+        this.firstEmployee = element(
+          by.repeater('employee in pageConfig.data').row(0)
+        );
+      }
+
+      module.exports = new EmployeesIndexPage();
+
+      </code>
 
 
-    section
-      h2 Using Page Objects
+  section
+    h2 Using Page Objects
 
-    section
-      p Start by requiring the page object
-      pre.
-        <code data-trim contenteditable>
+  section
+    p Start by requiring the page object
+    pre.
+      <code data-trim contenteditable>
 
-        describe('Employees', function () {
+      describe('Employees', function () {
 
-          var indexPage = require('./index.page.js');
+        var indexPage = require('./index.page.js');
 
+      });
+
+      </code>
+
+  section
+    p Start at a fresh index page before each test
+    pre.
+      <code data-trim contenteditable>
+
+      describe('Employees', function () {
+
+        var indexPage = require('./index.page.js');
+
+        beforeEach (function () {
+          indexPage.get();
         });
 
-        </code>
+      });
 
-    section
-      p Start at a fresh index page before each test
-      pre.
-        <code data-trim contenteditable>
+      </code>
 
-        describe('Employees', function () {
+  section
+    p Use the page object to perform actions and expect results
+    pre.
+      <code data-trim contenteditable>
 
-          var indexPage = require('./index.page.js');
+      describe('Employees', function () {
 
-          beforeEach (function () {
-            indexPage.get();
-          });
+        var indexPage = require('./index.page.js');
 
+        beforeEach (function () {
+          indexPage.get();
         });
 
-        </code>
-
-    section
-      p Use the page object to perform actions and expect results
-      pre.
-        <code data-trim contenteditable>
-
-        describe('Employees', function () {
-
-          var indexPage = require('./index.page.js');
-
-          beforeEach (function () {
-            indexPage.get();
+        describe("clicking new employee", function () {
+          it('takes us to the create employee form', function () {
+            indexPage.clickNewEmployee();
+            expect(formPage.getPageTitle()).toBe("Create Employee");
           });
-
-          describe("clicking new employee", function () {
-            it('takes us to the create employee form', function () {
-              indexPage.clickNewEmployee();
-              expect(formPage.getPageTitle()).toBe("Create Employee");
-            });
-          });
-
         });
 
-        </code>
+      });
 
-    section(data-background="#8c4738")
-      p Yes, it's that easy
-      img.no-style.fragment(style="width: 100%; height: 100%;",
-        src="http://goo.gl/8zajHR")
+      </code>
 
-    section
-      h2 Things to consider
-      ul
-        li Write tests that address the behavior of your application and not the framework (don’t test data binding)
-        li Each test block should test as little as possible.  Typically, that means one expectation per behavior.
+  section(data-background="#8c4738")
+    p Yes, it's that easy
+    img.no-style.fragment(style="width: 100%; height: 100%;",
+      src="http://goo.gl/8zajHR")
+
+  section
+    h2 Things to consider
+    ul
+      li Write tests that address the behavior of your application and not the framework (don’t test data binding)
+      li Each test block should test as little as possible.  Typically, that means one expectation per behavior.

@@ -24,7 +24,7 @@ module.exports = function(grunt) {
       combine : {
         files : {
           'dist/assets/css/style.css':[
-            'src/assets/js/components/reveal.js/lib/css/zenburn.css',
+            'src/assets/js/components/highlight.js/styles/github.css',
             'dist/temp/style.css'
           ]
         }
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
           // Reveal.js Plugins
           'src/assets/js/components/reveal.js/plugin/markdown/marked.js',
           'src/assets/js/components/reveal.js/plugin/markdown/markdown.js',
-          'src/assets/js/components/reveal.js/plugin/highlight/highlight.js',
+          'src/assets/js/components/highlight.js/highlight.pack.js',
           'src/assets/js/components/reveal.js/plugin/zoom-js/zoom.js',
 
           //Presentation init
@@ -86,6 +86,10 @@ module.exports = function(grunt) {
     copy: {
       vendor : {
         files: [
+          {
+            src:'src/assets/js/components/angular/angular.js',
+            dest:'dist/assets/js/components/angular/angular.js'
+          },
           {
             expand: true,
             cwd: 'src/assets/js/components/reveal.js/lib/font',
