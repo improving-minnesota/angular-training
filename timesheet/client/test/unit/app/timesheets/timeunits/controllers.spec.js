@@ -8,14 +8,14 @@ describe('Timeunits', function() {
     $stateParams,
     $scope,
     $api,
-    controller, 
+    controller,
     timeunit,
     timesheet,
     projects,
     spies;
- 
+
   describe('Controllers', function() {
-      
+
     beforeEach(
       module(
         'app.resources',
@@ -37,15 +37,15 @@ describe('Timeunits', function() {
 
       projects = [{
         "_id": "creative_proj_id",
-        "name": "Project1", 
+        "name": "Project1",
         "description": "This is your first project"
       }];
 
       timesheet = {"_id": "asdfghjklqwerty", beginDate: '2014-05-12'};
       timeunit = {
-        "_id": "aaaaaaaaaa", 
-        "dateWorked": "2013-11-18", 
-        "hoursWorked": 8, 
+        "_id": "aaaaaaaaaa",
+        "dateWorked": "2013-11-18",
+        "hoursWorked": 8,
         "project": "Project1",
         "timesheet_id": timesheet._id,
         "project_id": projects[0]._id
@@ -66,7 +66,7 @@ describe('Timeunits', function() {
 
       beforeEach(inject(function($rootScope, $controller) {
         $scope = $rootScope.$new();
-        controller = $controller("TimeunitCtrl", { 
+        controller = $controller("TimeunitCtrl", {
           $scope: $scope,
           projects: projects
           // TODO : inject $stateParams into your test controller
@@ -74,13 +74,13 @@ describe('Timeunits', function() {
       }));
 
       describe('setup', function () {
-        it('should be able to instantiate the controller', function () { 
+        it('should be able to instantiate the controller', function () {
           expect(controller).to.be.ok;
         });
 
         // TODO : verify it should set the resolved list of projects on scope
 
-      }); 
+      });
 
       describe('cancel', function () {
         // TODO : verify it should return back to the timesheet detail
@@ -137,7 +137,7 @@ describe('Timeunits', function() {
         controller = $controller("TimeunitCreateCtrl", {
           $scope: $scope
 
-          // TODO : inject $stateParams into the test controller 
+          // TODO : inject $stateParams into the test controller
         });
       }));
 
@@ -148,7 +148,7 @@ describe('Timeunits', function() {
 
         // TODO : verify it should initialize a new timeunit with user and timesheet ids
 
-      }); 
+      });
 
       describe('Saving a new timeunit', function () {
         var updatedTimeunit;
@@ -164,7 +164,7 @@ describe('Timeunits', function() {
             $httpBackend.when('POST', '/users/1234567890/timesheets/asdfghjklqwerty/timeunits').respond(200, updatedTimeunit);
           });
 
-          // TODO : verify it should set the timeunit on scope to be the updated timeunit
+          // TODO : verify it should set the timeunit on scope to be the new timeunit
 
         });
 
