@@ -406,3 +406,57 @@ include ../includes/mixins
         );
 
       </code>
+
+  section
+    h3 Linking
+
+  section
+    p Directives that want to modify the DOM typically use the link option.
+
+  section
+    p The link property takes a function with the following signature
+    br
+    pre.
+      <code data-trim>
+      function(scope, element, attrs) {
+
+      }
+
+      </code>
+    ul
+      li.
+        <strong>scope</strong> is the Angular scope of the directive (isolate).
+      li.
+        <strong>element</strong> is the jqLite-wrapped element that this directive matches.
+      li.
+        <strong>attrs</strong> is a hash object with key-value pairs of normalized attribute names and their corresponding attribute values.
+
+  section
+    p Inside the link function, you can initialize scope, watch properties, modify element attributes, and etc.
+
+  section
+    p For example
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              scope: {
+                myVar: '='
+              }
+              link: function(scope, element, attrs) {
+                scope.updatedCount = 0;
+                scope.$watch('myVar', function() {
+                  scope.updatedCount += 1;
+                  var contents = 'myVar updated ' +
+                    scope.updatedCount + ' times.';
+                  element.text(contents);
+                });
+              }
+            };
+          }
+        );
+
+      </code>
