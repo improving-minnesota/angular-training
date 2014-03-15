@@ -56,7 +56,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Combines the application templates into a single javascript file that populates 
+    // Combines the application templates into a single javascript file that populates
     // the angular template cache.
     //
     // Also builds the angular ui-bootstrap application specific template overrides
@@ -186,7 +186,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development'] // TODO : add karma:unit:run to list of tasks
+        tasks: ['development']
       },
       debug: {
         files: [
@@ -196,7 +196,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug'] // TODO : add karma:unit:run to list of tasks
+        tasks: ['debug']
       },
       production: {
         files: [
@@ -206,12 +206,12 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production'] // TODO : add karma:unit:run to list of tasks
+        tasks: ['production']
       }
     },
 
     // Stages all the files for running the application.  Each of these
-    // tasks are cumulative where production builds off of debug, debug 
+    // tasks are cumulative where production builds off of debug, debug
     // off of development, and development off of vendor.
     // vendor: All of the 3rd party library files
     // development: All of the files required for development mode
@@ -365,9 +365,9 @@ module.exports = function (grunt) {
     },
 
   // *********************************************************************************************
-  // New Tasks go below here !!! 
+  // New Tasks go below here !!!
 
-    // TODO : configure the karma grunt task 
+    // TODO : configure the karma grunt task
     // 1. use the 'dots' reporter
     // 2. set it to run in the background
 
