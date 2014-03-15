@@ -5,24 +5,178 @@ include ../includes/mixins
   +lecture-title-page("Modules, Controllers, Resources, and Scope", "Lecture 04")
 
   section
-    section
-      h1 Lab 03
-      h2 Solution
+    h1 Lab 03
+    h2 Solution
 
   section
-    section
-      h1 Modules
-    section
-      h2
+    h1 Modules
 
   section
-    section
-      h1 Controllers
-    section
-      h2
+    p You can think of a module as a container for the different parts of your app – controllers, services, filters, directives, etc.
 
   section
-    section
-      h1 Binding
-    section
-      h2
+    p Most applications have a main method that instantiates and wires together the different parts of the application.
+
+  section
+    p Angular apps don't have a main method. Instead modules declaratively specify how an application should be bootstrapped.
+
+  section
+    p There are several advantages to this approach:
+    ul
+      li The declarative process is easier to understand.
+      li You can package code as reusable modules.
+      li The modules can be loaded in any order because modules delay execution.
+
+  section
+    p The AngularJS team recommends you break up modules in the following way
+    ul
+      li A module for each feature
+      li A module for each reusable component (especially directives and filters)
+      li An application level module which depends on the above modules and contains any initialization code
+
+  section
+    p A module is a collection of configuration and run blocks which get applied to the application during the bootstrap process.
+
+  section
+    p In its simplest form the module consist of collection of two kinds of blocks.
+
+  section
+    h2 Configuration Blocks
+
+  section
+    p
+      | Configuration blocks get executed during the provider registrations and configuration phase.
+      | Only providers and constants can be injected into configuration blocks. This is to prevent accidental instantiation
+      | of services before they have been fully configured.
+
+  section
+    p Angular provides convience methods for module configuration that are equivalent to the config block.
+
+  section
+    h2 Run Blocks
+
+  section
+    p
+      | Run blocks get executed after the injector is created and are used to kickstart the application.
+      | Only instances and constants can be injected into run blocks. This is to prevent further system configuration
+      | during application run time.
+
+  section
+    p Run blocks are the closest thing in Angular to the main method.
+
+  section
+    p A run block is the code which needs to run to kickstart the application.
+    p It is executed after all of the service have been configured and the injector has been created.
+
+  section
+    p Example of run and config.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .config(function(injectables) {
+
+        });
+        .run(function(injectables) {
+
+        });
+
+      </code>
+
+  section
+    h2 Dependencies
+
+  section
+    p Modules can list other modules as their dependencies.
+
+  section
+    p Depending on a module implies that required module needs to be loaded before the requiring module is loaded.
+
+  section
+    p Each module can only be loaded once, even if multiple other modules require it.
+
+  section
+    p Below is an example of how to specify a module dependency.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [
+        'dependency1',
+        'dependency2'
+      ])
+        .config(function() {
+          //...
+        });
+
+      </code>
+
+  section
+    h1 Controllers
+
+  section
+    p In Angular, a controller is a JavaScript constructor function that is used to augment the Angular Scope.
+
+  section
+    p You can create controllers on a module.  The first argument is the controller name, and the second is the constructor function.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.controllers', [])
+        .controller('AppContrller', function($scope) {
+          $scope.greeting = 'Hello World!';
+        });
+
+      </code>
+
+  section
+    p You should use controllers to
+    ul
+      li Set up the initial state of the $scope object.
+      li Add behavior to the $scope object.
+
+  section
+    p You should not use controllers to
+    ul
+      li Manipulate DOM.
+      li Share code or state across controllers.
+      li Manage the life-cycle of other components
+      li Format input
+      li Format output
+
+  section
+    p In general, a controller shouldn't try to do too much.
+
+  section
+    p It should contain only the business logic needed for a single view.
+
+  section
+    p When creating a controller you can inject the new scope as well as other dependencies.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.controllers', [])
+        .controller('AppContrller', fucntion($scope, myService) {
+
+        });
+
+      </code>
+
+  section
+    p You can associate Controllers with scope objects implicitly via the ngController directive.
+
+  section
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="AppController" &gt;
+        &lt;p&gt;{{employee.name}}&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>
+
+  section
+
+  section
+
+  section
+
+  section
