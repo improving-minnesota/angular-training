@@ -336,3 +336,73 @@ include ../includes/mixins
 
   section
     h3 Transclude
+
+  section
+    p The transclude option changes the way scopes are nested.
+
+  section
+    p It makes it so that the contents of a transcluded directive have whatever scope is outside the directive, rather than whatever scope is on the inside.
+
+  section
+    p In doing so, it gives the contents access to the outside scope.
+
+  section
+    p Another way to look at transclusion is as a picture frame.
+    img.no-style(src="/assets/img/lecture-08/transclude-frame.png")
+
+  section
+    p First, lets look at using a transclude directive
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;div my-frame-directive &gt;
+        &lt;p&gt;{{outerScopeVariable}}&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>
+
+  section
+    p Now, lets look at the template for a transclusion directive
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;div class="{{isolateScopeVariable}}"&gt;
+        &lt;div ng-transclude &gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      </code>
+    p Angular will place the contents of the directive
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;p&gt;{{outerScopeVariable}}&lt;/p&gt;
+
+        </code>
+    p in the place of the element with the ng-transclude attribute
+
+  section
+    p After compilation, the final DOM will look like
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;div class="{{isolateScopeVariable}}"&gt;
+        &lt;p&gt;{{outerScopeVariable}}&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>
+
+  section
+    p To use transclusion with a directive, just add the transclude option to the directive configuration.
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myFrameDirective',
+          function() {
+            return {
+              transclude: true
+            };
+          }
+        );
+
+      </code>
