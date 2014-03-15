@@ -200,6 +200,71 @@ include ../includes/mixins
     h1 Injection
 
   section
+    p Dependency Injection (DI) is a software design pattern that deals with how code gets hold of its dependencies.
+
+  section
+    p
+       | The Angular injector subsystem is in charge of service instantiation, resolution of dependencies, and
+       | provision of dependencies to components as requested.
+
+  section
+    p
+      | The simplest way to get hold of the dependencies, is to assume that the function parameter names are
+      | the names of the dependencies.
+
+  section
+    p
+      | Given a function, the injector can infer the names of the service to inject by examining the function
+      | declaration and extracting the parameter names.
+
+  section
+    p The example below show how to specify that $scope and myService need to be injected into the function.
+    br
+    pre.
+      <code class="js" data-trim>
+        function($scope, myService) {
+
+        }
+
+      </code>
+
+  section
+    p The argument based DI method doesn't always work, we'll elaborate on the reason in Lecture 12.
+
+  section
+    p Because of this complication, we can also use the array method for specifying dependencies.
+
+  section
+    p Below is the array method for injecting dependencies.
+    br
+    pre.
+      <code class="js" data-trim>
+        [
+          '$scope',
+          'myService'
+          function($scope, myService) {
+
+          }
+        ]
+
+      </code>
+    p If we change the name of the function arguments, will DI still work?
+
+  section
+    p Yes.
+    p
+      | When using the array method, the injector service will use the strings as the dependency names
+      | and inject those dependencies into the function arguments in order.
+
+  section
+    p Where can you use dependency injection in Angular?
+
+  section
+    p
+      | DI is pervasive throughout Angular. You can use it in controllers, services, directives, filters,
+      | animations, and run and config blocks (all of which we will discuss later)
+
+  section
     h1 Controllers
 
   section
@@ -293,46 +358,63 @@ include ../includes/mixins
       </code>
 
   section
-    p Adding functionality to scope.
+    p Lets add some functionality to scope and show off data binding.
+
+  section
+    p The $interval service executes a function on scope in the supplied interval.
     pre.
       <code class="js" data-trim>
-        angular.module('app.controllers', [])
-          .controller('TimeController',
-            function($scope, $interval) {
-              // Set the $scope.time variable to now
-              $scope.updateTime = function updateTime() {
-                $scope.time = new Date();
-              };
+      angular.module('app.controllers', [])
+        .controller('TimeController',
+          function($scope, $interval) {
+            // Set the value of $scope.time to 'now' every 10 ms
+            $interval(function() {
+              $scope.time = new Date();
+            }, 10);
+          }
+        );
 
-              // Run $scope.updateTime() every 20 ms
-              $interval(function() {
-                $scope.updateTime();
-              }, 25);
-            }
-          );
+      </code>
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="TimeController"&gt;
+        &lt;p&gt;{{time}}&lt;/p&gt;
+      &lt;/div&gt;
 
       </code>
 
   section(id="example2", ng-controller="TimeController")
-    h2 {{time | date:'h:mm:ss.sss a'}}
-
-
-  section
+    h2 {{time}}
 
   section
-
-  section
+    p There's no magic happening here.
+    p This demonstrates how changes on scope are reflected in the view once the DOM has been compiled and linked by Angular.
 
   section
 
   section
 
   section
-    h1 Controllers
-  section
-    h2
 
   section
-    h1 Binding
-  section
-    h2
+
+  script.
+    angular.module('lecture02', [])
+      .controller('AppController', [
+        '$scope',
+        function($scope) {
+          $scope.time = new Date();
+        }
+      ])
+      .controller('TimeController', [
+        '$scope',
+        '$interval',
+        function($scope, $interval) {
+          $interval(function() {
+            $scope.time = new Date();
+          }, 10);
+        }
+      ]);
+
+    angular.bootstrap(document.getElementById("example1"), ['lecture02']);
+    angular.bootstrap(document.getElementById("example2"), ['lecture02']);

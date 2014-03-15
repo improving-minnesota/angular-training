@@ -15,7 +15,7 @@ include ../includes/mixins
     p A module is a collection of configuration and run blocks which get applied to the application during the bootstrap process.
 
   section
-    p In its simplest form the module consist of collection of two kinds of blocks.
+    p In its simplest form, the module consists of two kinds of blocks.
 
   section
     h2 Configuration Blocks
@@ -115,28 +115,3 @@ include ../includes/mixins
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-
-  script.
-    angular.module('lecture04', [])
-      .controller('AppController', [
-        '$scope',
-        function($scope) {
-          $scope.time = new Date();
-        }
-      ])
-      .controller('TimeController', [
-        '$scope',
-        '$interval',
-        function($scope, $interval) {
-          $scope.updateTime = function updateTime() {
-            $scope.time = new Date();
-          };
-
-          $interval(function() {
-            $scope.updateTime();
-          }, 25);
-        }
-      ]);
-
-    angular.bootstrap(document.getElementById("example1"), ['lecture04']);
-    angular.bootstrap(document.getElementById("example2"), ['lecture04']);
