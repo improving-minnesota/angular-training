@@ -91,6 +91,10 @@ module.exports = function(grunt) {
             dest:'dist/assets/js/components/angular/angular.js'
           },
           {
+            src:'src/assets/js/components/angular-animate/angular-animate.js',
+            dest:'dist/assets/js/components/angular-animate/angular-animate.js'
+          },
+          {
             expand: true,
             cwd: 'src/assets/js/components/reveal.js/lib/font',
             src:['**'],

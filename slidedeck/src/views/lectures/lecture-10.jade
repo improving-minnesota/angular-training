@@ -4,13 +4,127 @@ include ../includes/mixins
 +page("Lecture 10 - Animations")
   +lecture-title-page("Animations", "Lecture 10")
 
-  section
-    section
-      h1 Lab 09
-      h2 Solution
 
   section
-    section
-      h1 Animations
-    section
-      h2
+    h1 Lab 09
+    h2 Solution
+
+  section
+    h1 Animations
+
+  section
+    p AngularJS provides hooks for animations on common directives such as ngRepeat, ngSwitch, and ngView.
+
+  section
+    p Animation hooks are in place to trigger animations during the life cycle of provided directives.
+
+  section
+    p When they're triggered, they'll attempt to perform a CSS animation or JavaScript callback animation depending on which is defined.
+
+  section
+    h2 Using Angular Animations
+
+  section
+    p Because Angular is designed to be modular, you'll need to import the ngAnimate library.
+    br
+    .text-center
+      pre.
+        <code data-trim>
+        angular.module('app', ['ngAnimate'])
+
+        </code>
+
+  section
+    p Animations can be applied to CSS classes by following a set off CSS class name conventions
+    p An example for ng-show is below
+    br
+    pre.
+      <code class="css" data-trim>
+      .my-class.ng-hide-add, .my-class.ng-hide-remove {
+        -webkit-transition:all linear 1.0s;
+        -moz-transition:all linear 1.0s;
+        -o-transition:all linear 1.0s;
+        transition:all linear 1.0s;
+        display:block!important;
+      }
+
+      .my-class.ng-hide-add.ng-hide-add-active,
+      .my-class.ng-hide-remove {
+        opacity:0;
+      }
+
+      .my-class.ng-hide-add,
+      .my-class.ng-hide-remove.ng-hide-remove-active {
+        opacity:1;
+      }
+      </code>
+
+
+  section
+    p By modifying .my-class with the pre-defined animation classes, we can animate any show/hide by adding .my-class to it.
+    br
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;p class="my-class" ng-show="sayHello"&gt;Hello World!&lt;p&gt;
+
+        </code>
+
+  section(id="example1", ng-controller="Lecture10Controller")
+    button(ng-click="sayHello = !sayHello") Say Hello
+    p.example-1(ng-show="sayHello") Hello World!
+
+  section
+    p If we add the animation classes for ng-repeat, we can animate lists as they change.
+    br
+    pre.
+      <code class="css" data-trim>
+      .repeated-item.ng-enter, .repeated-item.ng-move {
+        -webkit-transition:0.5s linear all;
+        -moz-transition:0.5s linear all;
+        -o-transition:0.5s linear all;
+        transition:0.5s linear all;
+        opacity:0;
+      }
+
+      .repeated-item.ng-enter.ng-enter-active,
+      .repeated-item.ng-move.ng-move-active {
+        opacity:1;
+      }
+
+      .repeated-item.ng-leave {
+        -webkit-animation:0.5s my_animation;
+        -moz-animation:0.5s my_animation;
+        -o-animation:0.5s my_animation;
+        animation:0.5s my_animation;
+      }
+
+      </code>
+
+  section(id="example2", ng-controller="Lecture10Controller")
+    button(ng-click="pushTime()") Push Time
+    button(ng-click="popTime()") Pop Time
+    br
+    br
+    div.repeated-item(ng-repeat="time in times")
+      {{time | date:'h:mm:ss.sss a'}}
+
+
+  script.
+    angular.module('lecture10', ['ngAnimate']).controller('Lecture10Controller', function($scope) {
+      $scope.times = [];
+
+      $scope.pushTime = function() {
+        $scope.times.push(new Date());
+      };
+
+      $scope.popTime = function() {
+        $scope.times.shift();
+      };
+
+
+      $scope.sayHello = false;
+    });
+
+    angular.bootstrap(document.getElementById("example1"), ["lecture10"]);
+    angular.bootstrap(document.getElementById("example2"), ["lecture10"]);
