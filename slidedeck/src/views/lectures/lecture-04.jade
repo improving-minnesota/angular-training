@@ -122,9 +122,11 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       angular.module('app.controllers', [])
-        .controller('AppContrller', function($scope) {
-          $scope.greeting = 'Hello World!';
-        });
+        .controller('AppController',
+          function() {
+
+          }
+        );
 
       </code>
 
@@ -155,9 +157,11 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       angular.module('app.controllers', [])
-        .controller('AppContrller', fucntion($scope, myService) {
+        .controller('AppController',
+          function($scope, $interval) {
 
-        });
+          }
+        );
 
       </code>
 
@@ -165,18 +169,137 @@ include ../includes/mixins
     p You can associate Controllers with scope objects implicitly via the ngController directive.
 
   section
+    p Controller
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.controllers', [])
+        .controller('AppController',
+          function($scope) {
+            $scope.time = new Date();
+          }
+        );
+
+      </code>
+
+    p Template
     pre.
       <code class="html" data-trim>
       &lt;div ng-controller="AppController" &gt;
-        &lt;p&gt;{{employee.name}}&lt;/p&gt;
+        &lt;p&gt;{{time}}&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>
+
+  section(id="example1", ng-controller="AppController")
+    p Final result
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="AppController" &gt;
+        &lt;p&gt;{{time}}&lt;/p&gt;
       &lt;/div&gt;
 
       </code>
 
   section
+    p Adding functionality to scope.
+    pre.
+      <code class="js" data-trim>
+        angular.module('app.controllers', [])
+          .controller('TimeController',
+            function($scope, $interval) {
+              // Set the $scope.time variable to now
+              $scope.updateTime = function updateTime() {
+                $scope.time = new Date();
+              };
+
+              // Run $scope.updateTime() every 20 ms
+              $interval(function() {
+                $scope.updateTime();
+              }, 25);
+            }
+          );
+
+      </code>
+
+  section(id="example2", ng-controller="TimeController")
+    h2 {{time | date:'h:mm:ss.sss a'}}
 
   section
+    h2 Inheritance
 
   section
+    p It is common to attach controllers at different levels of the DOM hierarchy.
 
   section
+    p Since the ng-controller directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
+
+  section
+    p The $scope that each Controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
+
+  section
+    p What would the value of property be for each controller?
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="ParentController" &gt;
+        &lt;p&gt;{{property}}&lt;/p&gt;
+        &lt;div ng-controller="ChildController" &gt;
+          &lt;p&gt;{{property}}&lt;/p&gt;
+          &lt;div ng-controller="GrandChildController" &gt;
+            &lt;p&gt;{{property}}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.controllers', [])
+        .controller('ParentController',function($scope) {
+          $scope.property = 'one';
+        });
+        .controller('ChildController',function($scope) {
+
+        });
+        .controller('GrandChildController',function($scope) {
+          $scope.property = 'two';
+        });
+
+      </code>
+
+  section
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="ParentController" &gt;
+        &lt;p&gt;one&lt;/p&gt;
+        &lt;div ng-controller="ChildController" &gt;
+          &lt;p&gt;one&lt;/p&gt;
+          &lt;div ng-controller="GrandChildController" &gt;
+            &lt;p&gt;two&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+  script.
+    angular.module('lecture04', [])
+      .controller('AppController', [
+        '$scope',
+        function($scope) {
+          $scope.time = new Date();
+        }
+      ])
+      .controller('TimeController', [
+        '$scope',
+        '$interval',
+        function($scope, $interval) {
+          $scope.updateTime = function updateTime() {
+            $scope.time = new Date();
+          };
+
+          $interval(function() {
+            $scope.updateTime();
+          }, 25);
+        }
+      ]);
+
+    angular.bootstrap(document.getElementById("example1"), ['lecture04']);
+    angular.bootstrap(document.getElementById("example2"), ['lecture04']);
