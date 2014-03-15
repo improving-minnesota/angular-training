@@ -6,14 +6,14 @@ angular.module('app.controllers', [])
   .controller('MainCtrl', function ($scope) {
 
   })
-  
-  .controller('AppCtrl', 
+
+  .controller('AppCtrl',
     function ($scope){
       $scope.demo = {};
     }
   )
 
-  .controller('NavCtrl', 
+  .controller('NavCtrl',
     function ($scope) {
 
     }

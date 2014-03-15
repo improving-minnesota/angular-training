@@ -1,3 +1,5 @@
+# Lab Three - Unit Testing with Karma
+
 ### Gruntfile.js
 
 * line 189
@@ -38,41 +40,41 @@ karma : {
 
 ```javascript
 beforeEach(
- module( 
+ module(
    'app.controllers'
  ));
 
 describe('MainCtrl', function() {
  beforeEach(inject(function($rootScope, $controller) {
    scope = $rootScope.$new();
-   controller = $controller("MainCtrl", { 
-     $scope: scope 
+   controller = $controller("MainCtrl", {
+     $scope: scope
    });
  }));
 
  describe('setup', function () {
-   it('should be able to instantiate the controller', function () { 
+   it('should be able to instantiate the controller', function () {
      expect(controller).to.be.ok;
    });
- }); 
+ });
 });
 ```
 
-* line 30 
+* line 30
 
 ```javascript
 beforeEach(inject(function($rootScope, $controller) {
   scope = $rootScope.$new();
-  controller = $controller("AppCtrl", { 
-    $scope: scope 
+  controller = $controller("AppCtrl", {
+    $scope: scope
   });
 }));
 ```
 
-* line 38 
+* line 38
 
 ```javascript
-it('should be able to instantiate the controller', function () { 
+it('should be able to instantiate the controller', function () {
 	expect(controller).to.be.ok;
 });
 ```
@@ -82,8 +84,8 @@ it('should be able to instantiate the controller', function () {
 ```javascript
 beforeEach(inject(function($rootScope, $controller) {
   scope = $rootScope.$new();
-  controller = $controller("NavCtrl", { 
-    $scope: scope 
+  controller = $controller("NavCtrl", {
+    $scope: scope
   });
 }));
 ```
@@ -91,7 +93,7 @@ beforeEach(inject(function($rootScope, $controller) {
 * line 54
 
 ```javascript
-it('should be able to instantiate the controller', function () { 
+it('should be able to instantiate the controller', function () {
   expect(controller).to.be.ok;
 });
 ```
@@ -109,31 +111,3 @@ frameworks: ['jasmine'],
 ```javascript
 browsers: ['Chrome'],
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
