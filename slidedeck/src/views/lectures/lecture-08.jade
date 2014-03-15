@@ -5,12 +5,334 @@ include ../includes/mixins
   +lecture-title-page("Directives", "Lecture 08")
 
   section
-    section
-      h1 Lab 07
-      h2 Solution
+    h1 Lab 07
+    h2 Solution
 
   section
-    section
-      h1 Directives
-    section
-      h2
+    h1 Directives
+
+  section
+    p
+      | At a high level, directives are markers on a DOM element (such as an attribute, element name, or CSS class)
+      | that tell AngularJS's HTML compiler ($compile) to attach a specified behavior to that DOM element.
+
+  section
+    p Before we can write a directive, we need to know how Angular's HTML compiler determines when to use a given directive.
+
+  section
+    h2 Matching Directives
+
+  section
+    p In the following example, we say that the &lt;input&gt; element matches the ngModel directive.
+    br
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;input ng-model="myModel" /&gt;
+
+        </code>
+
+  section
+    p Angular normalizes an element's tag and attribute name to determine which elements match which directives.
+
+  section
+    p
+      | Directives are typically declared in camelCase form.  Since HTML is case insensitive, directives are referred to in their
+      | lower-case-dash-delimited form when attached to elements.
+
+  section
+    p Below is an example of declaring a directive and reffering to it in HTML.
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective', [
+          //...
+        ]);
+
+      </code>
+    pre.
+      <code class="html" data-trim>
+      &lt;div my-cool-directive&gt;&lt;/div&gt;
+
+      </code>
+
+  section
+    p $compile can match directives based on element names,
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;my-cool-directive&gt; &lt;/my-cool-directive&gt;
+
+        </code>
+    p attributes,
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;div my-cool-directive&gt; &lt;/div&gt;
+
+        </code>
+    p class names,
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;div class="my-cool-directive"&gt; &lt;/div&gt;
+
+        </code>
+    p and html comments.
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;!-- directive: my-cool-directive --&gt;
+
+        </code>
+
+  section
+    h4 So which should you use?
+    p For best browser support, the attribute method is preferred (old version of IE).
+    p Otherwise, for newer browsers, the tag method is preferred.
+
+  section
+    h2 Creating directives
+
+  section
+    p Like controllers, directives are registered on modules.
+
+  section
+    p
+      | To register a directive, you use the module.directive API. module.directive takes the normalized
+      | directive name followed by a factory function.
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective', [
+          'dependency',
+          function(dependency) {
+            return {
+              //...
+            };
+          }
+        ]);
+
+      </code>
+
+  section
+    p
+      | This factory function should return an object with the different options to tell $compile how
+      | the directive should behave when matched.
+
+  section
+    h2 Directive Configuration
+
+  section
+    h3 Template
+
+  section
+    p You can use templates to set the contents of your directive in two ways.
+
+  section
+    p You can add inline templates for very small templates.
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              template: '&lt;div&gt;{{helloWorld}}&lt;/div&gt;'
+            };
+          }
+        );
+
+      </code>
+
+  section
+    p More often that not, your templates will be large.  In this case, it's better to use the templateUrl option.
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              templateUrl: 'my-cool-directive.html'
+            };
+          }
+        );
+
+      </code>
+
+  section
+    h3 Restrict
+
+  section
+    p
+      | When you create a directive, it is restricted to attribute only by default. In order to create
+      | directives that are triggered by element or class name, you need to use the restrict option.
+    ul
+      li.
+        <strong>A</strong> - Matches attribute name.
+      li.
+        <strong>E</strong> - Matches element name.
+      li.
+        <strong>C</strong> - Matches class name.
+
+  section
+    p The directive below would match elements, attributes, or CSS class names
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              restrict: 'AEC'
+            };
+          }
+        );
+
+      </code>
+
+  section
+    h3 Scope
+
+  section
+    p By default, a directive uses the parent scope.
+    p This can be problematic because it could set or change values that already exist.
+
+  section
+    p
+      | What we want to be able to do is separate the scope inside a directive from the scope outside, and
+      | then map the outer scope to a directive's inner scope.
+
+  section
+    p We can do this by creating what we call an isolate scope using the directives scope option.
+
+  section
+    p The directive below will have an isloate scope that is not mapped to anything in the parent scope (completely isolated)
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              scope: true
+            };
+          }
+        );
+
+      </code>
+
+  section
+    p When we want to map the outer scope the the directives inner scope, we use a scope configuration object.
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              scope: {
+                // ...
+              }
+            };
+          }
+        );
+
+      </code>
+
+  section
+    p There are multiple ways to map parent scope to the isolate scope.
+    p Lets start with the most common, '=' or two way binding.
+
+  section
+    p This will instruct Angular to bind the value supplied with the element attribute "some-attribute" to the isolate scope.
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              scope: {
+                someAttribute: '='
+              }
+            };
+          }
+        );
+
+      </code>
+    pre.
+      <code class="html" data-trim>
+      &lt;div my-cool-directive some-attribute="myAttribute" &gt;&lt;/div&gt;
+
+      </code>
+
+  section
+    p This will create a two way mapping between the parent scope and the isolate scope.
+    p Changes made in the parent scope are reflected in the isolate scope and visa versa.
+    img.no-style(src="/assets/img/lecture-08/scope.png")
+
+  section
+    p Next, we have function binding or '&'
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              scope: {
+                someCalculation: '&'
+              }
+            };
+          }
+        );
+
+      </code>
+    pre.
+      <code class="html" data-trim>
+      &lt;div my-cool-directive some-calculation="calculateSomeValue()" &gt;&lt;/div&gt;
+
+      </code>
+
+  section
+    p The '&' binding allows a directive to trigger evaluation of an expression in the context of the original scope, at a specific time.
+
+  section
+    p Any legal expression is allowed, including an expression which contains a function call.
+
+  section
+    p The last type of binding in the attribute value or expression binding '@'.
+
+  section
+    p
+      | The '@' binding maps the attribute value (string) in the context of the parent scope to the isolate scope.
+
+  section
+    p If scope.value was 5, the value of attributeValue in the isolate scope would be "11".
+    br
+    pre.
+      <code data-trim>
+      angular.module('directives', [])
+        .directive('myCoolDirective',
+          function() {
+            return {
+              scope: {
+                attributeValue: '@'
+              }
+            };
+          }
+        );
+
+      </code>
+    pre.
+      <code class="html" data-trim>
+      &lt;div my-cool-directive attribute-value="{{ scope.value + 6 }}" &gt;&lt;/div&gt;
+
+      </code>
+
+  section
+    h3 Transclude
