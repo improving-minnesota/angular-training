@@ -86,8 +86,15 @@ grunt watch:development
 
 - .. in two separate console windows.
 
-- Navigate to http://localhost:3000
+- Navigate to http://localhost:3000/#/home
 - What do you see?
+- Try typing in either of the input boxes.
+
+
+- Do you wonder how that is happening?
+  - Open **client/assets/templates/index.html** and look at the model binding in the template.
+  - You'll have many more chances to take advantage of this during the next few days.
+
 
 ### Congratulations on creating your first Angular application. You are now ready to take on the world!!
 - Too much?

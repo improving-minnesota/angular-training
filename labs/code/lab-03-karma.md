@@ -48,10 +48,7 @@ browsers: ['Chrome'],
 karma : {
   unit : {
     reporters: 'dots',
-    configFile: 'karma.config.js',
-    options: {
-      background: true
-    }
+    configFile: 'karma.config.js'
   }
 }
 ```
@@ -72,27 +69,32 @@ grunt karma:unit
 - Open **client/test/unit/app/controllers.spec.js**.
 
 ###### Test the MainCtrl
-- Locate the `TODO` near line #8 and replace it with the following Jasmine tests:
+- Locate the `TODO` near line #9 and replace it the mock module instantiation:
 
 ```javascript
 beforeEach(
  module(
    'app.controllers'
  ));
+```
+- Next follow the instructions from the `TODO` near line 14 and add:
 
-describe('MainCtrl', function() {
- beforeEach(inject(function($rootScope, $controller) {
-   scope = $rootScope.$new();
-   controller = $controller("MainCtrl", {
-     $scope: scope
-   });
- }));
+```javascript
+beforeEach(inject(function($rootScope, $controller) {
+  scope = $rootScope.$new();
+  controller = $controller("MainCtrl", {
+    $scope: scope
+  });
+}));
+```
 
- describe('setup', function () {
-   it('should be able to instantiate the controller', function () {
-     expect(controller).to.be.ok;
-   });
- });
+ - Then find the `TODO` near line #20, to write your first test:
+
+```javascript
+describe('setup', function () {
+  it('should be able to instantiate the controller', function () {
+    expect(controller).to.be.ok;
+  });
 });
 ```
 - So what did we do here?
@@ -116,7 +118,7 @@ grunt watch:development`
 
 - If the `karma` task isn't running, start it now with:
 ```
-grunt karma:unit`
+grunt karma:unit
 ```
 
 - This task will run in the background, wait for the `watch` task to complete, and run the tests for you automatically.
@@ -147,30 +149,23 @@ it('should be able to instantiate the controller', function () {
 - Check that your tests are still all passing!
 
 
-###### Test the NavCtrl
-
-- One last test to complete.
-- Using the remaining `TODO`'s as a guide, instantiate your controller under test and verify it exists.
-- The code below is to help you if you get stuck.
-
-- (near line #46)
-
-```javascript
-beforeEach(inject(function($rootScope, $controller) {
-  scope = $rootScope.$new();
-  controller = $controller("NavCtrl", {
-    $scope: scope
-  });
-}));
-```
-
-- (near line #54)
-
-```javascript
-it('should be able to instantiate the controller', function () {
-  expect(controller).to.be.ok;
-});
-```
-
 ### Verify All Tests are Passing
 - Are all of the tests still passing? Any failures? If not, let's keep moving!!
+
+### Investigate Debug Mode in Chrome
+
+###### Chrome Debug Mode
+- Open the Chrome browser that is currently being controlled by `karma` and click the `Debug` button.
+- Open Chrome dev tools with `ctrl-alt-i` or `cmd-option-i`
+- Open the javascript console and refresh the page.
+- You can see that `karma` is running your unit tests right in the browser.
+
+
+###### Debug your tests
+- Now open the `Sources` tab and open your `controllers.spec.js`.
+- Place a break point in your first test, right at the line : `expect(controller).to.be.ok;`.
+- Refresh the browser again.
+- Notice how the test execution stops at that line of code.
+- This becomes very handy when we start implementing more complicated tests and is a good tool to keep in your belt.
+
+### Stop all consoles with `ctrl-c` and get ready for the next labs. 
