@@ -7,6 +7,8 @@
 ```
 git checkout lab-9-filters
 ```
+&nbsp;
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
 
 &nbsp;
 ## Using an Angular provided filter to sort our tables.

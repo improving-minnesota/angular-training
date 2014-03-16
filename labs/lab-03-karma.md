@@ -42,6 +42,7 @@ browsers: ['Chrome'],
   - Set the NPM package for the `Grunt` task as dependency in `package.json`.
   - Imported the task into your `Grunt` configuration so that it is available.
 
+
 - Locate the `TODO` near line #370 and configure the task:
 
 ```javascript
@@ -60,7 +61,18 @@ grunt karma:unit
 
 - What does the output say? Did it have any tests to run?
 
+```javascript
+Running "karma:unit" (karma) task
+INFO [karma]: Karma v0.12.0 server started at http://localhost:9876/
+INFO [launcher]: Starting browser Chrome
+INFO [Chrome 33.0.1750 (Mac OS X 10.9.2)]: Connected on socket riJgfDa7iGPHvrlcmPhH with id 52138247
+Chrome 33.0.1750 (Mac OS X 10.9.2): Executed 0 of 0 ERROR (0.019 secs / 0 secs)
+```
+
 - Now that we have `karma` up and running, let's write some tests!
+
+##### Leave `karma` running in the console!!
+- This task will run in the background and run the tests for you automatically when you make changes to your source files.
 
 &nbsp;
 ## Writing Your First Tests
@@ -108,20 +120,7 @@ describe('setup', function () {
 
 - The rest of our controller tests will use the same pattern.
 
-###### Set up a development cycle
-- In a new console window, run:
-```
-grunt watch:development`
-```
-
-- This task watches for changes to your source code and runs the `development` task.
-
-- If the `karma` task isn't running, start it now with:
-```
-grunt karma:unit
-```
-
-- This task will run in the background, wait for the `watch` task to complete, and run the tests for you automatically.
+- Did you notice that `karma` automatically ran your tests when you saved?
 
 ##### If you have any test failures at this point, go back and troubleshoot the previous specs.
 
@@ -168,4 +167,4 @@ it('should be able to instantiate the controller', function () {
 - Notice how the test execution stops at that line of code.
 - This becomes very handy when we start implementing more complicated tests and is a good tool to keep in your belt.
 
-### Stop all consoles with `ctrl-c` and get ready for the next labs. 
+### Stop all consoles with `ctrl-c` and get ready for the next labs.
