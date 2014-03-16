@@ -56,7 +56,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Combines the application templates into a single javascript file that populates 
+    // Combines the application templates into a single javascript file that populates
     // the angular template cache.
     //
     // Also builds the angular ui-bootstrap application specific template overrides
@@ -186,7 +186,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development', 'karma:unit:run']
+        tasks: ['development']
       },
       debug: {
         files: [
@@ -196,7 +196,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug', 'karma:unit:run']
+        tasks: ['debug']
       },
       production: {
         files: [
@@ -206,12 +206,12 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production', 'karma:unit:run']
+        tasks: ['production']
       }
     },
 
     // Stages all the files for running the application.  Each of these
-    // tasks are cumulative where production builds off of debug, debug 
+    // tasks are cumulative where production builds off of debug, debug
     // off of development, and development off of vendor.
     // vendor: All of the 3rd party library files
     // development: All of the files required for development mode
@@ -365,19 +365,11 @@ module.exports = function (grunt) {
     },
 
   // *********************************************************************************************
-  // New Tasks go below here !!! 
+  // New Tasks go below here !!!
 
-    // Starts the karama runner for unit and e2e tests.
-    // Tests are run when the task is re-invoked from the watch task.
-    karma : {
-      unit : {
-        reporters: 'dots',
-        configFile: 'karma.config.js',
-        options: {
-          background: true
-        }
-      }
-    }
+    // TODO : configure the karma grunt task
+    // 1. use the 'dots' reporter
+    // 2. set it to run in the background
 
   });
 
