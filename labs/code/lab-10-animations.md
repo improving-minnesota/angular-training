@@ -1,4 +1,10 @@
 # Lab Ten - Animations
+## Checkout the Lab Branch
+- In a console:
+
+```
+git checkout lab-10-animations
+```
 
 &nbsp;
 ## Set up the CSS class for animated items
@@ -10,7 +16,7 @@
 
 * Open **client/assets/templates/app/employees/index.html**
 * Find the table row that has contains the `ng-repeat` and add:
-```html
+```javascript
 class="repeated-item fadeable-row"
 ```
 * Now do this for the other tables in the application located in:
@@ -76,4 +82,4 @@ class="repeated-item fadeable-row"
 
 * Run your server and open the application.
 * Log in and navigate through the app, can you see the fade in/out effect?
-* Try changing the CSS animation and see what kind of results you can get. 
+* Try changing the CSS animation and see what kind of results you can get.
