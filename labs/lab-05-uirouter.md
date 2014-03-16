@@ -9,6 +9,20 @@ git checkout lab-5-uirouter
 ```
 
 &nbsp;
+## Start the Grunt Tasks
+```
+grunt karma:unit
+```
+
+```
+grunt watch:development
+```
+
+```
+grunt runapp:development
+```
+
+&nbsp;
 ## Application States and Review
 
 ### Review main.js and state set up
@@ -65,6 +79,14 @@ git checkout lab-5-uirouter
       - This is also where the main content of the application will be displayed.
 
 - Open **client/src/app/app.js**.
+
+- Locate the `TODO` near line #2 and add the UI Router module as a dependency:
+
+```javascript
+'ui.router',
+```
+
+- With that completed, we now can use the `$stateProvider` service.
 - At the `TODO` near line #11 register the *app* state with the `$stateProvider`.
 
 ```javascript
@@ -90,9 +112,9 @@ git checkout lab-5-uirouter
 });
 ```
 
-- Start the appliation with `grunt runapp:development` and `grunt watch:development`
-- Navigate to http://localhost:3000
-- What do you see? Are the nav bar and content views displaying?
+- Open your browser and navigate to http://localhost:3000
+- What do you see? Are the nav bar and content views displaying? Why not?
+- Think we should implement some states for `Projects`?
 
 &nbsp;
 ## Projects States
@@ -121,8 +143,13 @@ git checkout lab-5-uirouter
      data: {
        section: 'Projects'
      }
-   })
+   });
+ })
 ```
+
+- Did the `karama` and/or `watch` task report an error?
+- If so, do you remember how to fix it? (hint: There's a `TODO` at the top of the page.)
+
 ###### Register the project detail state
 - Most of this will look familiar but here are some new concepts.
 - We are setting up a url parameter of `_id`.
@@ -172,7 +199,6 @@ git checkout lab-5-uirouter
        saveText: 'Create'
      }
    });
- })
 ```
 - Nothing new here, but can you describe what is happening in this configuration?
 
@@ -182,6 +208,16 @@ git checkout lab-5-uirouter
 - Now that we have our states registered, we need to implement our controller methods to manage our projects and transition between states.
 
 - Open **client/src/app/projects/controllers.js**
+
+### ProjectCtrl
+
+###### Inject the service dependencies
+
+- Find the `TODO` near line #4 and inject the `$state` and `$stateParams` services:
+
+```javascript
+function ($scope, project, $state, $stateParams) {
+```
 
 ###### Handle transitioning to detail and create forms
 - Let's add the methods to handle transitioning to the detail and create states.
@@ -203,7 +239,7 @@ $scope.createNew = function createNew () {
 - Notice that we are using the `$state` service's `go()` method, which is a shortcut for the `transition()` method.
 
 
-###### Handle cancelling out of forms
+###### Handle cancel
 - Someone clicked a cancel button? No problemo.
 - Replace the `TODO` near line #49 with:
 
@@ -218,7 +254,22 @@ $scope.cancel = function cancel () {
   - Parent states and their data remain in memory once they are initialized.
   - In order to make the page 'refresh' itself and make sure it has the most recent data, we force it to `reload`.
 
+### ProjectDetailCtrl
+
 ###### Handle saving an updated project
+
+- Before we can add a save method to the `ProjectDetailCtrl`, we need to handle some dependencies.
+- Locate the `TODO` near line #60 and inject the `$state` and `$stateParams` services.
+
+```javascript
+function ($scope, project, $state, $stateParams) {
+```
+
+- And then set the `saveText` on scope to the current state's data:
+
+```javascript
+$scope.saveText = $state.current.data.saveText;
+```
 
 - Now we can implement the functionality to save an updated project.
 - Locate the `TODO` near line #62 and add:
@@ -236,8 +287,16 @@ $scope.save = function save () {
 };
 ```
 
+### ProjectCreateCtrl
+
 ###### Handle saving a new project
 - Next we need to implement the functionality to save a new project.
+
+
+- First use the instructions in the `TODO`'s near lines #82 and 84 to set `saveText` and inject the `$state` and `$stateParams` services.
+  - You just did something similar to this in the previous section.
+
+
 - Locate the `TODO` near line #80 and add:
 
 ```javascript
@@ -258,6 +317,26 @@ $scope.save = function save () {
 ### Testing our new controller methods
 - Open **client/test/unit/app/projects/controllers.spec.js**
 
+### Controllers Module
+
+###### Inject `$state` and `$stateParams`
+
+- Locate the `TODO` near line #25 and inject the two services into our `beforeEach` block:
+
+```javascript
+beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$api_, _$state_, _$stateParams_){
+  $rootScope = _$rootScope_;
+  $httpBackend = _$httpBackend_;
+  $controller = _$controller_;
+  $api = _$api_;
+  $state = _$state_;
+  $stateParams = _$stateParams_;
+}));
+```
+- Did you notice that the injected services in the arguments list were surrounded by underscores? (_)
+- Angular provides us with this syntax to help avoid naming collisions. It's handy, but not required.
+- You can use the normal injection syntax in your `inject()` functions, if you wish.
+
 ###### Stub the $state service
 
 - Locate the `TODO` near line #37 and create a `sinon.stub` of the `$state` service.
@@ -266,6 +345,8 @@ $scope.save = function save () {
 ```javascript
 state: sinon.stub($state)
 ```
+
+### ProjectCtrl
 
 ###### Inject the mocked $state service into our controller
 - In order for us to be able to get the statistics we want from our stubbed `$state` service, we need to make sure that the controller is using it.
@@ -312,8 +393,10 @@ it('should return back to the project list', function () {
 });
 ```
 
-- Run the tests with `grunt karma:unit`. Do they all pass?
+- Check you `karma` console output. Are all tests passing yet? How about just the ones you've written up to now?
 
+&nbsp;
+### ProjectDetailCtrl
 
 ###### Test the update controller methods
 - Now that we have verified the behavior of our `ProjectCtrl` controller, let's tackle the `ProjectDetailCtrl`.
@@ -323,6 +406,13 @@ it('should return back to the project list', function () {
 
 ```javascript
 $state.current = {data: {saveText: 'update'}};
+```
+
+- Locate the `TODO` near line #190 and inject the stubbed `$state` and the `$stateParams` service.
+
+```javascript
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Replace the `TODO` line #204 to verify that `saveText` is set from the current state's data object.
@@ -356,6 +446,8 @@ it('should set the project on scope to be the updated project', function () {
 - Time to run the tests and verify that we are all green!!
 
 &nbsp;
+### ProjectCreateCtrl
+
 ###### Test the create controller methods
 
 - Now we just need to test the `ProjectCreateCtrl` method:
@@ -363,6 +455,12 @@ it('should set the project on scope to be the updated project', function () {
 
 ```javascript
 $state.current = {data: {saveText: 'create'}};
+```
+- Inject the stubbed `$state` and the `$stateParams` services:
+
+```javascript
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Replace the `TODO` near line #256 to test the controller's initialization:
@@ -490,12 +588,22 @@ it('should transition to the detail page of the created project', function () {
 });
 ```
 - Look pretty familiar?
+- Look for other `TODO`'s in the page and follow their instructions. (look a the top)
+
+&nbsp;
+### EmployeeCtrl
 
 ###### Implement the employee controllers
 
-- Just like in Projects, we need to implement similiar functionality in our employee controllers.
+- Just like in Projects, we need to implement similar functionality in our employee controllers.
 
 - Open **client/src/app/employees/controllers.js**
+
+##### First things first: Find the related `TODO`'s and inject `$state` and `$stateParams` into all 3 of our controllers.
+
+```javascript
+function ($scope, project, $state, $stateParams) {
+```
 
 - At the `TODO` near line #14, add the `showDetail` and `createNew` methods:
 
@@ -520,8 +628,16 @@ $scope.cancel = function cancel () {
   $state.go('app.employees', {}, {reload: true});
 };
 ```
+&nbsp;
+### EmployeeDetailCtrl
 
-###### Employee detail controller
+###### Set `saveText`
+
+```javascript
+$scope.saveText = $state.current.data.saveText;
+```
+
+###### Updating an employee
 - Add the saving of an updated employee.
 - Locate the `TODO` near line #63 and add:
 
@@ -537,10 +653,18 @@ $scope.save = function save () {
     });
 };
 ```
+&nbsp;
+### EmployeeCreateCtrl
+
+###### Set `saveText`
+
+```javascript
+$scope.saveText = $state.current.data.saveText;
+```
 
 ###### Employee create controller
 - Add the saving of a newly created employee.
-- Find the `TODO1 near line #81 and add:
+- Find the `TODO` near line #81 and add:
 
 ```javascript
 $scope.save = function save () {
@@ -556,16 +680,36 @@ $scope.save = function save () {
 ```
 - Are you beginning to notice any patterns?
 
+&nbsp;
 ### Unit test the Controllers
 
 - Now that we have implemented our employee controllers, let's test the behavior!
-
 - Open **client/test/unit/app/employees/controllers.spec.js**
+
+###### Test setup
+- Just like you did in `Project`'s Jasmine tests, inject the `$state` and `$stateParams` services into your mock module:
+- Locate the `TODO` near line #25 and inject the two services into our `beforeEach` block:
+
+```javascript
+beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$api_, _$state_, _$stateParams_){
+  $rootScope = _$rootScope_;
+  $httpBackend = _$httpBackend_;
+  $controller = _$controller_;
+  $api = _$api_;
+  $state = _$state_;
+  $stateParams = _$stateParams_;
+}));
+```
 - Stub the `$state` service by replacing the `TODO` near line #37 with:
 
 ```javascript
 state: sinon.stub($state)
 ```
+
+&nbsp;
+### EmployeeCtrl
+
+###### Write the tests
 
 - Let's inject our stubbed services into our controller under test:
 - Around line #62, replace the `TODO` with:
@@ -574,8 +718,6 @@ state: sinon.stub($state)
 $state: spies.state,
 $stateParams: $stateParams
 ```
-
-###### Write the tests
 
 - Test the detail transition by replacing the `TODO` near line #91 with:
 
@@ -607,12 +749,23 @@ it('should return back to the employee list', function () {
 });
 ```
 
+&nbsp;
+### EmployeeDetailCtrl
+
 ###### Test the employee detail controller
 
 - Locate the `TODO` near line #195 and set up the current state's data:
 
 ```javascript
 spies.state.current = {data: {saveText: 'update'}};
+```
+
+- Next, Let's inject our stubbed services into our controller under test:
+- Replace the `TODO` with:
+
+```javascript
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Test that `saveText` was added to scope from the current state's date by replacing the `TODO` near line #211 with:
@@ -642,6 +795,8 @@ it('should set the employee on scope to be the updated employee', function () {
   expect($scope.employee.username).to.equal(updatedEmployee.username);
 });
 ```
+&nbsp;
+### EmployeeCreateCtrl
 
 ###### Test the create employee controller
 
@@ -650,6 +805,14 @@ it('should set the employee on scope to be the updated employee', function () {
 
 ```javascript
 spies.state.current = {data: {saveText: 'create'}};
+```
+
+- Next, Let's inject our stubbed services into our controller under test:
+- Replace the `TODO` with:
+
+```javascript
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Test that the controller is initialized as expected.
@@ -676,7 +839,7 @@ it('should transition to the detail page of the created employee', function () {
 });
 ```
 
-- If you haven't already, run `grunt karma:unit` and verify that all of your wonderful tests are passing.
+- If you haven't already, check your `karma` console and verify that all of your wonderful tests are passing.
 
 ### Add all the things to our views
 
@@ -717,6 +880,24 @@ it('should transition to the detail page of the created employee', function () {
 - Can you update existing projects?
 
 - Only two more modules to go and we will have the basis for our application!!
+
+&nbsp;
+## Development Help
+
+- You may have noticed, and if not you will soon, that because of how these labs are set up, there are several `karma` tests failing way before you get to the implementation.
+- That is what is great about the `karma.config.js` file.
+- You can alter the configuration to only run the Jasmine specs that you are working on at that time by changing the test configuration from :
+
+```javascript
+'test/unit/**/*.spec.js',
+```
+
+- to something more specific, like:
+
+```javascript
+'test/unit/employees/controllers.spec.js',
+```
+- This would tell `karma` to only run the Employees' controller tests. Food for thought.
 
 &nbsp;
 ## Timesheets and Timeunits States
@@ -786,11 +967,14 @@ it('should transition to the detail page of the created employee', function () {
 ```
 - This should be all very familiar to you by now, but notice that in the `app.timesheets.detail` state's resolve, we are injecting both a `timesheet` and a list of `timeunits`.
 
-### Implement the Timesheet Controllers
+&nbsp;
+### TimesheetCtrl
 
-###### Main timesheet controller
+###### Open the controller file
 
 - Open **client/src/app/timesheets/controllers.js**
+
+##### First things first: Find the related `TODO`'s and inject `$state` and `$stateParams` into all 4 of the Timesheet controllers.
 
 - Locate the `TODO` near line #8 and register the query object with the help of `$stateParams` service:
 
@@ -816,7 +1000,10 @@ $scope.createNew = function createNew () {
 };
 ```
 
-###### Timsheet detail controller
+&nbsp;
+### TimesheetDetailCtrl
+
+###### Timesheet detail controller
 
 - Add the additional methods needed by replacing the `TODO` near line #63:
 
@@ -843,6 +1030,8 @@ $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
   $state.go('app.timesheets.detail.timeunits.edit', $stateParams);
 };
 ```
+&nbsp;
+### TimesheetEditCtrl
 
 ###### Timesheet edit controller
 
@@ -876,7 +1065,16 @@ $scope.cancel = function cancel () {
 };
 ```
 
+&nbsp;
+### TimesheetCreateCtrl
+
 ###### Create timesheet controller
+
+- Locate the `TODO` and set `saveText` to the current state's:
+
+```javascript
+$scope.saveText = $state.current.data.saveText;
+```
 
 - Implement the required methods by replacing the `TODO` near line 142:
 
@@ -898,6 +1096,8 @@ $scope.cancel = function cancel () {
   $state.go('app.timesheets', $stateParams, {reload: true});
 };
 ```
+
+&nbsp;
 ### Configure the Time Unit States
 
 - Now let's configure the states for Timeunits.
@@ -946,10 +1146,17 @@ $scope.cancel = function cancel () {
     });
 })
 ```
+
+&nbsp;
 ### Implement the Timeunit Controllers
 
 - Now it's time to implement the behavior to the timeunit controllers.
 - Open **client/src/app/timesheets/timeunits/controllers.js**
+
+##### Dont forget to inject the $state and $stateParams services!!
+
+&nbsp;
+### TimeunitCtrl
 
 ###### Timeunit controller
 - Add cancel functionality by replacing the `TODO` near line #7 with:
@@ -959,6 +1166,9 @@ $scope.cancel = function cancel () {
   $state.go('app.timesheets.detail', $stateParams, {reload: true});
 };
 ```
+
+&nbsp;
+### TimeunitEditCtrl
 
 ###### Timeunit detail controller
 - Add the ability to update an existing timeunit by replacing the `TODO` near line #17:
@@ -976,6 +1186,9 @@ $scope.save = function save () {
     });
 };
 ```
+
+&nbsp;
+### TimeunitCreateCtrl
 
 ###### Timeunit create controller
 
@@ -1005,7 +1218,7 @@ $scope.save = function save () {
 };
 ```
 
-
+&nbsp;
 ### Test the Timesheet Controllers
 
 - Now that the controllers and states are implemented, we get the priviledge of testing them!! Woot!
@@ -1014,10 +1227,18 @@ $scope.save = function save () {
 
 - Open **client/test/unit/app/timesheets/controllers.spec.js**
 
+### Test setup
+- As in previous tests, add the `$state` and `$stateParams` to our `beforeEach(inject())` block.
+
 - Set the `user_id` on our test `$stateParams` (line #38)
 
 ```javascript
 $stateParams.user_id = "1234567890";
+```
+- Find the `TODO` and create a test stub for the `$state` service:
+
+```javascript
+state: sinon.stub($state)
 ```
 
 - Inject our test stubs into the test controller (near line #73)
@@ -1026,6 +1247,16 @@ $stateParams.user_id = "1234567890";
 $state: spies.state,
 $stateParams: $stateParams
 ```
+
+- Set up a response for a GET for timesheets that includes the `user_id` from `$stateParams`:
+- Find the `TODO` near line #80 and replace the previous `$httpBackend` config with:
+
+```javascript
+$httpBackend.when('GET', '/users/' + $stateParams.user_id + '/timesheets').respond(200, [{name: 'testTimesheet'}]);
+```
+
+&nbsp;
+### TimesheetCtrl
 
 - Test navigation to the timesheet detail (near line #100)
 
@@ -1046,6 +1277,9 @@ it('should transition to the create timesheet state', function () {
   expect(spies.state.go).to.have.been.calledWith('app.timesheets.create');
 });
 ```
+
+&nbsp;
+### TimesheetDetailCtrl
 
 ###### Timesheet detail controller
 - Inject the stubbed services into our test controller (near line #203)
@@ -1101,11 +1335,21 @@ it('should set the timeunit_id on state params and transition to the edit timeun
 });
 ```
 
+&nbsp;
+### TimesheetEditCtrl
+
 ###### Timesheet edit controller
 - Set up the current state's data (near line #321)
 
 ```javascript
 spies.state.current = {data: {saveText: 'update'}};
+```
+
+- Inject the stubbed services into our test controller (near line #203)
+
+```javascript
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Test controller initialization (near line #336)
@@ -1140,11 +1384,21 @@ it('should return back to the timesheet detail', function () {
 });
 ```
 
+&nbsp;
+### TimesheetCreateCtrl
+
 ###### Create timesheet controller
 - Set current state's data (near line #380)
 
 ```javascript
 spies.state.current = {data: {saveText: 'create'}};
+```
+
+- Inject the stubbed services into our test controller
+
+```javascript
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Test controller initialization (near line #395)
@@ -1173,12 +1427,7 @@ it('should return back to the timesheet list', function () {
   expect(spies.state.go).to.have.been.calledWith('app.timesheets');
 });
 ```
-###### Run the tests
-- If, for some reason, you haven't been running the tests as you go, now is a great time to kick off `karma`.
-- I know that you are awesome and all the tests are passing. Time to move on.
-- If your tests are not all passing, it doesn't mean your are not awesome, just that you get to be awesome while fixing your tests.
-
-
+&nbsp;
 ### Test the Timeunit Controllers
 - With the Timsheet controllers all tested, it is time to test the Timeunits controllers behavior.
 
@@ -1205,6 +1454,13 @@ $stateParams._id = "asdfghjklqwerty";
 
 ```javascript
 state: sinon.stub($state)
+```
+
+- Inject the stubbed services into our test controller
+
+```javascript
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Test a list of timeunits is resolved during the state transition (near line #82)
@@ -1355,4 +1611,4 @@ it('should set the timeunit on scope to be the new timeunit', function () {
 - If you haven't already, start your application and test it out.
 - Try going to a timesheet's detail and logging time.
 - Try updating a timesheet or timeunit.
-- Does it all work? Are you ready for a break? Me too, whew. 
+- Does it all work? Are you ready for a break? Me too, whew.

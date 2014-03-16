@@ -5,7 +5,7 @@
 - Checkout project from Github
 
 ```
-git clone https://github.com/objectpartners/angular-training.git
+git clone https://github.com/objectpartners/angular-timesheet.git
 ```
 
 - You should get output similar to below:
@@ -23,7 +23,7 @@ Checking connectivity... done.
 - Change directories to the lab main directory.
 
 ```
-cd angular-training/timesheet
+cd angular-timesheet
 ```
 
 - Now let's checkout the `lab-1-setup` branch.

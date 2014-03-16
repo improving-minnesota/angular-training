@@ -52,6 +52,22 @@ $control.list('employees');
 - This returns a promise that will return an array of objects when resolved.
 
 &nbsp;
+## Run the Watch and Karma Tasks
+- Before we get started, we always want to have our `watch` task running in the background.
+  - This will run `JSHint` for us (amongst other things) which checks for issues that are known to cause errors.
+  - Since this is a long running task, it needs to run in its own console window.
+
+```
+grunt watch:development
+```
+
+- We also want to have `karma` running in the background so that it will run our tests when our source files change and give us immediate feedback:
+
+```
+grunt karma:unit
+```
+
+&nbsp;
 ## Application Routing
 
 - The first item we need to set up for our application is our routing to different areas of the application.
@@ -116,7 +132,7 @@ $api.add({
 - Inside the controller declaration replace the `TODO`'s with the following code:
 
 ```javascript
-$scope.requestEmployees = function requestEmployees (page)
+$scope.requestEmployees = function requestEmployees (page) {
     $control.list('employees')
       .then(function (employees) {
         $scope.employees = employees;
@@ -313,10 +329,11 @@ it('should set deleted to true for the employee in the ui', function () {
 });
 ```
 
-### Run the Tests
-- In a console, run `grunt karma:unit` and see your results.
+### Check the Tests
+- Have you been watching as `karma` ran each of your tests when you saved the file? Pretty cool, huh?
 - Are all your tests passing? If not, see if you can troubleshoot your issues and get to green.
 
+&nbsp;
 ### Create Employee Views
 
 - Now that we have our employee resources and controllers created and tested, it's time to instruct our templates on how to behave.
@@ -380,7 +397,7 @@ it('should set deleted to true for the employee in the ui', function () {
 ### Run the Application
 - It's time to run the application and view your hard work!!
 - If you haven't already, start the appication via `grunt runapp:development` and `grunt watch:development` in separate consoles.
-- Open your Chrome browser and navigate to http://localhost:3000/#/app/employees
+- Open your Chrome browser and navigate to http://localhost:3000/#/employees
 
 - Do you see your table of employees?
 - Can you delete and restore them? Does the CSS change when you do?
@@ -610,7 +627,7 @@ it('should set deleted to true for the project in the ui', function () {
 
 ### Run the Application
 - If the application is not still running from the employees lab, start it again and navigate to the home page.
-- Did you notice that the browser automatically went to the `/app/projects` url? Remember setting that up at the beginning of the lab?
+- Did you notice that the browser automatically went to the `/projects` url? Remember setting that up at the beginning of the lab?
 - Try switching between employees and projects.
 
 - We've only got one more module to implement, so let's get started!!

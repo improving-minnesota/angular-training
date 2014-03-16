@@ -3,9 +3,12 @@
 &nbsp;
 ## Checkout the lab branch
 * In your console:
+
 ```
 git checkout lab-8-directives
 ```
+&nbsp;
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
 
 &nbsp;
 ## Form Validation

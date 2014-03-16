@@ -5,6 +5,8 @@
 ```
 git checkout lab-10-animations
 ```
+&nbsp;
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
 
 &nbsp;
 ## Set up the CSS class for animated items

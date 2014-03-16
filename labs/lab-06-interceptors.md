@@ -7,6 +7,8 @@
 ```
 git checkout lab-6-interceptors
 ```
+&nbsp;
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
 
 &nbsp;
 ## Create a Progress Bar for API Calls
@@ -211,8 +213,18 @@ it('should reject the promise with the rejection config', function () {
 - Run and verify your tests...are you noticing a pattern?
 
 &nbsp;
+### Set the Interceptor Module as a Dependency for the Application
+- Now all we have to do is make sure that the module is loaded when Angular is booting up.
+
+- Open **client/src/main.js** and set our new module as a dependency:
+
+```javascript
+  'progresss.interceptors',
+```
+
+&nbsp;
 ## See Your Interceptor in Action
 
-- Run the application via `grunt runapp:development` and `grunt watch:development` in separate console windows.
+- Open your browser and navigate to : http://localhost:3000
 - Navigate to the different list pages and watch for your spinner and progress bar.
 - Do you see it working now?
