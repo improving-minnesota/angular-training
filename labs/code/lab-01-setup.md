@@ -20,16 +20,16 @@ Resolving deltas: 100% (1413/1413), done.
 Checking connectivity... done.
 ```
 
-- Now let's checkout the `lab-1-setup` branch.
-
-```
-git checkout lab-1-setup
-```
-
 - Change directories to the lab main directory.
 
 ```
 cd angular-training/timesheet
+```
+
+- Now let's checkout the `lab-1-setup` branch.
+
+```
+git checkout lab-1-setup
 ```
 
 ### Install the application dependencies
@@ -45,6 +45,11 @@ npm install
 ```
 bower install
 ```
+- Compile the `less` and template files.
+
+```
+grunt development
+```
 
 ### Run the application and view the start screen
 
@@ -54,7 +59,7 @@ bower install
 grunt runapp:development
 ```
 
-- This kicks of a Node server and serves up our `index.html` page.
+- This kicks off a Node server and serves up our `index.html` page.
 
 - Open your browser and navigate to http://localhost:3000.
 
