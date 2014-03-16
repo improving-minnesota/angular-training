@@ -172,6 +172,127 @@ include ../includes/mixins
     h1 Resources
 
   section
+    p A resource is an abstract term for the data returned by some RESTful endpoint.
+
+  section
+    p Since REST has an established pattern, we can use that pattern to simplify how we send and receive data with our RESTful API.
+
+  section
+    p Angular provides the $resource service to help us with that.
+
+  section
+    p The $resource service is a factory which creates a resource object that lets you interact with RESTful server-side data sources.
+
+  section
+    p The returned resource object has action methods which provide high-level behaviors without the need to interact with the low level $http service.
+
+  section
+    p By default, the $resource class object is configured with the following methods.
+    br
+    pre.
+      <code class="js" data-trim>
+      {
+        'get':    {method:'GET'},
+        'save':   {method:'POST'},
+        'query':  {method:'GET', isArray:true},
+        'remove': {method:'DELETE'},
+        'delete': {method:'DELETE'}
+      }
+
+      </code>
+
+  section
+    p Calling these methods invoke an $http with the specified http method, destination and parameters.
+
+  section
+    p When the data is returned from the server then the object is an instance of the resource class.
+
+  section
+    p The actions save, remove and delete are available on it as methods with the $ prefix.
+
+  section
+    p Let's create a resource.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .controller(function($resource) {
+          var Employee = $resource(
+            '/employee/:employeeId',
+            {employeeId:'@id'}
+          );
+        });
+
+      </code>
+
+  section
+    p The first argument specifies the URL of the resource.  You can use parameters to substitute variables in those URL's.
+    br
+    pre.
+      <code class="js" data-trim>
+      var Employee = $resource('/employee/:employeeId');
+
+      </code>
+
+  section
+    p The second argument specifies how $resource should substitute those URL variable with the options passed in.
+    br
+    pre.
+      <code class="js" data-trim>
+      var Employee = $resource(
+        '/employee/:employeeId',
+        {employeeId:'@id'}
+      );
+
+      </code>
+    p Here, the 'id' property in the options object will be substituted in the place of :employeeId in the resource URL.
+
+  section
+    p It's important to note here that Employee is a resource class.  We will use the resource class to create new instances of the resource.
+
+  section
+    p Now that we've defined our resource, we can use the Employee resource class to get an instance of an employee
+    br
+    pre.
+      <code class="js" data-trim>
+      $scope.employee = Employee.get({id: 23});
+
+      </code>
+    p What will the HTTP request look like for this action?
+
+  section
+    p GET /employee/23
+
+  section
+    p It is important to realize that invoking a $resource object method immediately returns an empty reference.
+
+  section
+    p Once the data is returned from the server the existing reference is populated with the actual data.
+
+  section
+    p We can supply a callback function to be executed once the reference is populated with data.
+
+  section
+    p One we have a populated instance of the employee resource, we can change is and call action methods on it.
+    br
+    pre.
+      <code class="js" data-trim>
+      $scope.employee = Employee.get({id: 23}, function() {
+        $scope.employee.name = 'Mike';
+        $scope.employee.$save();
+      });
+
+      </code>
+    p What will the HTTP request look like for $scope.employee.$save()?
+
+  section
+    p POST /employee/23
+
+  section
+    p
+      | In Lab 4, we've wrapped the $resource service with an $api and $control service to even further simplify
+      | how you will communicate with our RESTful API.
     
 
   //- section
