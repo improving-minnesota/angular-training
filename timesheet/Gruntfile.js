@@ -56,7 +56,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Combines the application templates into a single javascript file that populates 
+    // Combines the application templates into a single javascript file that populates
     // the angular template cache.
     //
     // Also builds the angular ui-bootstrap application specific template overrides
@@ -211,7 +211,7 @@ module.exports = function (grunt) {
     },
 
     // Stages all the files for running the application.  Each of these
-    // tasks are cumulative where production builds off of debug, debug 
+    // tasks are cumulative where production builds off of debug, debug
     // off of development, and development off of vendor.
     // vendor: All of the 3rd party library files
     // development: All of the files required for development mode
@@ -365,17 +365,14 @@ module.exports = function (grunt) {
     },
 
   // *********************************************************************************************
-  // New Tasks go below here !!! 
+  // New Tasks go below here !!!
 
     // Starts the karama runner for unit and e2e tests.
     // Tests are run when the task is re-invoked from the watch task.
     karma : {
       unit : {
         reporters: 'dots',
-        configFile: 'karma.config.js',
-        options: {
-          background: true
-        }
+        configFile: 'karma.config.js'
       }
     }
 
