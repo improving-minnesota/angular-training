@@ -5,12 +5,144 @@ include ../includes/mixins
   +lecture-title-page("Filters", "Lecture 09")
 
   section
-    section
-      h1 Lab 08
-      h2 Solution
+    h1 Lab 08
+    h2 Solution
 
   section
-    section
-      h1 Filters
-    section
-      h2
+    h1 Filters
+
+  section
+    p When used in expressions, filters are an easy way to convert model values to display values.
+    p Inside an expression, just "pipe" the model value to a particular filter.
+    br
+    .text-center
+      pre.
+        <code data-trim>
+        {{ model.booleanValue | yesNo }}
+
+        </code>
+
+  section
+    p Filters can accept optional arguments separated by a colon.
+    br
+    .text-center
+      pre.
+        <code data-trim>
+        {{ model.booleanValue | yesNo:arg1:arg2 }}
+
+        </code>
+
+  section
+    p They can also be chained to perform sequential modifications.
+    br
+    .text-center
+      pre.
+        <code data-trim>
+        {{ model.booleanValue | yesNo | uppercase }}
+
+        </code>
+
+  section(id="example1")
+    p Filters in action
+    br
+    input(ng-model="myValue")
+    p {{myValue | uppercase}}
+
+  section
+    h2 Creating Custom Filters
+
+  section
+    p To create a filter, just register a new filter factory function with your module.
+    p Internally, this with use the filterProvider (provided by AngularJS).
+    br
+    pre.
+      <code data-trim>
+      angular.module('boolean.filters', [ ])
+        .filter('yesNo', function() {
+
+        });
+
+      </code>
+
+  section
+    p This factory function should return a new filter function which takes the input value as the first argument.
+    br
+    pre.
+      <code data-trim>
+      angular.module('boolean.filters', [ ])
+        .filter('yesNo', function() {
+          return function(value) {
+            if (value) {
+              return 'Yes';
+            } else {
+              return 'No';
+            }
+          };
+        });
+
+      </code>
+
+  section
+    p Filter arguments are passed in as additional arguments to the filter function.
+    br
+    pre.
+      <code data-trim>
+      angular.module('boolean.filters', [ ])
+        .filter('yesNo', function() {
+          return function(value, arg) {
+            if (value) {
+              return arg === 'casual' ? 'Yep' : 'Yes';
+            } else {
+              return arg === 'casual' ? 'Nope' : 'No';
+            }
+          };
+        });
+
+      </code>
+
+  section
+    p Filter's aren't limited to primative types. They can manipulate any type of object.
+    br
+    pre.
+      <code data-trim>
+      angular.module('date.filters', [ ])
+        .filter('momentShortDate', function () {
+          return function (date) {
+            return moment(date).format("MMM D, YYYY");
+          };
+        })
+
+      </code>
+
+  section
+    h2 Filtering Arrays
+
+  section
+    p Since filters can be used with any type of object, we can also use them to filter lists.
+
+  section
+    p To use a filter with ng-repeat, simply "pipe" the source array through a filter.
+    p This will take the source array and return a new filtered array to ng-repeat.
+    br
+    pre.
+      <code data-trim>
+      &lt;tr ng-repeat="employee in employees | filter:myFilter"&gt;
+        &lt;td&gt;{{employee.name}}&lt;/td&gt;
+      &lt;/tr&gt;
+
+      </code>
+
+  section(id="example2", ng-controller="Lecture9Controller")
+    h2 Filtering arrays in action
+    input.form-control(ng-model="myFilter")
+    div(ng-repeat="employee in employees | filter:myFilter")
+      {{employee.name}}
+
+
+  script.
+    angular.module('lecture09', []).controller('Lecture9Controller', function($scope) {
+      $scope.employees = [{name: 'Bob'}, {name: 'Jane'}, {name: 'Jim'}, {name: 'Mary'}, {name: 'Bruce'}, {name: 'Jill'}];
+    });
+
+    angular.bootstrap(document.getElementById("example1"), ["lecture09"]);
+    angular.bootstrap(document.getElementById("example2"), ["lecture09"]);

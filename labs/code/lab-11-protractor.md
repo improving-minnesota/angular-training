@@ -1,6 +1,14 @@
 # Lab Eleven - End to End testing using Protractor
 
 &nbsp;
+## Checkout the Lab Branch
+- In a console:
+
+```
+git checkout lab-11-protractor
+```
+
+&nbsp;
 ## Grunt configuration
 
 ### Configure the `grunt-protractor-runner` task.
