@@ -9,10 +9,11 @@ include ../includes/mixins
     h2 Solution
 
   section
-    h1 Modules Cont.
+    h1 Modules
+    h2 Continued
 
   section
-    p A module is a collection of configuration and run blocks which get applied to the application during the bootstrap process.
+    p A module is has a of configuration and run blocks which get applied to the application during the bootstrap process.
 
   section
     p In its simplest form, the module consists of two kinds of blocks.
@@ -21,29 +22,34 @@ include ../includes/mixins
     h2 Configuration Blocks
 
   section
-    p
-      | Configuration blocks get executed during the provider registrations and configuration phase.
-      | Only providers and constants can be injected into configuration blocks. This is to prevent accidental instantiation
-      | of services before they have been fully configured.
+    p Configuration blocks get executed during the provider registrations and configuration phase.
 
   section
-    p Angular provides convience methods for module configuration that are equivalent to the config block.
+    p Only providers and constants can be injected into configuration blocks.
+
+  section
+    p This is to prevent accidental instantiation of services before they have been fully configured.
 
   section
     h2 Run Blocks
 
   section
-    p
-      | Run blocks get executed after the injector is created and are used to kickstart the application.
-      | Only instances and constants can be injected into run blocks. This is to prevent further system configuration
-      | during application run time.
+    p Run blocks get executed after the injector is created and are used to kickstart the application.
 
   section
-    p Run blocks are the closest thing in Angular to the main method.
+    p Only instances and constants can be injected into run blocks.
+
+  section
+    p This is to prevent further system configuration during application run time.
 
   section
     p A run block is the code which needs to run to kickstart the application.
+
+  section
     p It is executed after all of the service have been configured and the injector has been created.
+
+  section
+    p Run blocks are the closest thing in Angular to the main method.
 
   section
     p Example of run and config.
@@ -60,58 +66,165 @@ include ../includes/mixins
 
       </code>
 
+  section
+    h1 Application Routing
 
   section
-    h2 Inheritance
+    p Everyone is familiar with typical web page development.  When you click a link, it takes you to a new page.
 
   section
-    p It is common to attach controllers at different levels of the DOM hierarchy.
+    p When building single page applications, like ours, this presents a problem.
 
   section
-    p Since the ng-controller directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
+    p The process of reloading a page adds significant overhead espcially considering we already have everything we need to display every page.
 
   section
-    p The $scope that each Controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
+    p This is where the Angular $route service comes into play.
 
   section
-    p What would the value of property be for each controller?
-    pre.
-      <code class="html" data-trim>
-      &lt;div ng-controller="ParentController" &gt;
-        &lt;p&gt;{{property}}&lt;/p&gt;
-        &lt;div ng-controller="ChildController" &gt;
-          &lt;p&gt;{{property}}&lt;/p&gt;
-          &lt;div ng-controller="GrandChildController" &gt;
-            &lt;p&gt;{{property}}&lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+    p The $route service is used for deep-linking URLs to controllers and views (HTML partials).
 
-      </code>
+  section
+    p It watches $location.url() and tries to map the path to an existing route definition.
+
+  section
+    p When the location changes, the $route service will load the HTML partial for the page and then compile and link the associated controller to it.
+
+  section
+    p We use the $routeProvider in our modules configuration block to instruct the $route service which URL's are matched to which templates and controllers.
+
+  section
+    p Lets configure some routes.
+
+  section
+    p This configures the $route service so that when the browser URL is /projects, load the template and compile and link the project controller on it.
+    br
     pre.
       <code class="js" data-trim>
-      angular.module('app.controllers', [])
-        .controller('ParentController',function($scope) {
-          $scope.property = 'one';
-        });
-        .controller('ChildController',function($scope) {
-
-        });
-        .controller('GrandChildController',function($scope) {
-          $scope.property = 'two';
+      angular.module('app', [])
+        .config(function($routeProvider) {
+          $routeProvider
+            .when('/projects', {
+               templateUrl: 'assets/templates/app/projects/index.html',
+               controller: 'ProjectCtrl'
+            });
         });
 
       </code>
 
   section
+    p We can add additional configurations by chaining 'when' statements.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .config(function($routeProvider) {
+          $routeProvider
+            .when('/projects', {
+               templateUrl: 'assets/templates/app/projects/index.html',
+               controller: 'ProjectCtrl'
+            })
+            .when('/employees', {
+               templateUrl: 'assets/templates/app/employees/index.html',
+               controller: 'EmployeeCtrl'
+            });
+        });
+
+      </code>
+
+  section
+    p What about when a user enters a URL that's not in the configuration?
+
+  section
+    p Simply add an 'otherwise' statement to the configuration change to redirect the user to a default page.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .config(function($routeProvider) {
+          $routeProvider
+            .when('/projects', {
+               templateUrl: 'assets/templates/app/projects/index.html',
+               controller: 'ProjectCtrl'
+            })
+            .otherwise({
+               redirectTo: '/projects'
+            });
+        });
+
+      </code>
+
+  section
+    p Now that we've configured the $route service, we need to give it direction on where to put our templates in the page DOM.
+
+  section
+    p For this, we'll use the ngView directive.
+    br
     pre.
       <code class="html" data-trim>
-      &lt;div ng-controller="ParentController" &gt;
-        &lt;p&gt;one&lt;/p&gt;
-        &lt;div ng-controller="ChildController" &gt;
-          &lt;p&gt;one&lt;/p&gt;
-          &lt;div ng-controller="GrandChildController" &gt;
-            &lt;p&gt;two&lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+      &lt;body&gt;
+        &lt;div ng-view&gt;&lt;/div&gt
+      &lt;/body&gt;
+
+      </code>
+
+  section
+    h1 Resources
+
+  section
+    
+
+  //- section
+  //-   h1 Inheritance
+  //-
+  //- section
+  //-   p It is common to attach controllers at different levels of the DOM hierarchy.
+  //-
+  //- section
+  //-   p Since the ng-controller directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
+  //-
+  //- section
+  //-   p The $scope that each Controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
+  //-
+  //- section
+  //-   p What would the value of property be for each controller?
+  //-   pre.
+  //-     <code class="html" data-trim>
+  //-     &lt;div ng-controller="ParentController" &gt;
+  //-       &lt;p&gt;{{property}}&lt;/p&gt;
+  //-       &lt;div ng-controller="ChildController" &gt;
+  //-         &lt;p&gt;{{property}}&lt;/p&gt;
+  //-         &lt;div ng-controller="GrandChildController" &gt;
+  //-           &lt;p&gt;{{property}}&lt;/p&gt;
+  //-         &lt;/div&gt;
+  //-       &lt;/div&gt;
+  //-     &lt;/div&gt;
+  //-
+  //-     </code>
+  //-   pre.
+  //-     <code class="js" data-trim>
+  //-     angular.module('app.controllers', [])
+  //-       .controller('ParentController',function($scope) {
+  //-         $scope.property = 'one';
+  //-       });
+  //-       .controller('ChildController',function($scope) {
+  //-
+  //-       });
+  //-       .controller('GrandChildController',function($scope) {
+  //-         $scope.property = 'two';
+  //-       });
+  //-
+  //-     </code>
+  //-
+  //- section
+  //-   pre.
+  //-     <code class="html" data-trim>
+  //-     &lt;div ng-controller="ParentController" &gt;
+  //-       &lt;p&gt;one&lt;/p&gt;
+  //-       &lt;div ng-controller="ChildController" &gt;
+  //-         &lt;p&gt;one&lt;/p&gt;
+  //-         &lt;div ng-controller="GrandChildController" &gt;
+  //-           &lt;p&gt;two&lt;/p&gt;
+  //-         &lt;/div&gt;
+  //-       &lt;/div&gt;
+  //-     &lt;/div&gt;
