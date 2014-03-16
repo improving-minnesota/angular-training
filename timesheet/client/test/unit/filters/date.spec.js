@@ -3,66 +3,6 @@ describe('Date filters:', function () {
 
   beforeEach(module('date.filters'));
 
-  describe('momentFromNowAgo', function() {
-    var momentFromNowAgoFilter;
-
-    beforeEach(inject(function($injector) {
-      momentFromNowAgoFilter = $injector.get('momentFromNowAgoFilter');
-    }));
-
-    it('should display "a month ago" for a date at least 25 days ago', function() {
-      var date = moment().subtract('days', 25);
-      expect(momentFromNowAgoFilter(date.format())).to.equal(date.fromNow());
-    });
-
-    it('should display "a year ago" for a date at least 345 days ago', function() {
-      var date = moment().subtract('days', 345);
-      expect(momentFromNowAgoFilter(date.format())).to.equal(date.fromNow());
-    });
-
-    it('should display "None" for a null date', function() {
-      expect(momentFromNowAgoFilter(null)).to.equal('None');
-    });
-
-    it('should display "None" for a undefined date', function() {
-      expect(momentFromNowAgoFilter(undefined)).to.equal('None');
-    });
-
-    it('should display "Invalid date" for an invalid date', function() {
-      expect(momentFromNowAgoFilter("not a date")).to.equal('Invalid date');
-    });
-
-  });
-
-  describe('momentCalendar', function () {
-    var momentCalendarFilter;
-
-    beforeEach(inject(function($injector) {
-      momentCalendarFilter = $injector.get('momentCalendarFilter');
-    }));
-
-    it('should display "Nov 15, 2010" for 2010-11-15', function() {
-      expect(momentCalendarFilter("2010-11-15")).to.equal('11/15/2010');
-    });
-
-    it('should display "Jan 30, 2013" for 2013-01-30', function() {
-      expect(momentCalendarFilter("2013-01-30")).to.equal('01/30/2013');
-    });
-
-    it('should display "None" for a null date', function() {
-      expect(momentCalendarFilter(null)).to.equal('None');
-    });
-
-    it('should display "None" for a undefined date', function() {
-      expect(momentCalendarFilter(undefined)).to.equal('None');
-    });
-
-    it('should display "Invalid date" for an invalid date', function() {
-      expect(momentCalendarFilter("not a date")).to.equal('Invalid date');
-    });
-
-  });
-
   describe('momentShortDate', function () {
     var momentShortDateFilter;
 
