@@ -106,8 +106,7 @@ include ../includes/mixins
     button(ng-click="popTime()") Pop Time
     br
     br
-    div.repeated-item(ng-repeat="time in times")
-      {{time | date:'h:mm:ss.sss a'}}
+    div.repeated-item(ng-repeat="time in times") {{time | date:'h:mm:ss.sss a'}}
 
 
   script.

@@ -4,29 +4,129 @@ include ../includes/mixins
 +page("Lecture 01 - Project Layout and Development Tools")
   +lecture-title-page("Project Layout and Development Tools", "Lecture 01")
 
+  section
+    h1 NPM
 
+  section
+    p NPM is the official package manager for Node.js
+
+  section
+    p NPM runs through the command line and manages dependencies for an application.
+
+  section
+    p It also allows users to install Node.js applications that are available on the npm registry.
+
+  section
+    p For those who are familiar with dependency management tools and artifact repositories like Maven and Maven Central, NPM is similar.
+
+  section
+    p One key distinguishement between the two is that NPM does not manange build processes like Maven does.  Only dependency management.
+
+  section
+    p Most, if not all, node projects contain a package.json file in the root project.
+
+  section
+    p This file exposes metadata about your application as well as it's dependencies.
+
+  section
+    pre.
+      <code class="json" data-trim>
+      {
+        "name": "my-project",
+        "version": "0.0.1",
+        "description": "My Cool Node Project",
+        "main": "index.js",
+        "author": "Mike Kelly",
+        "dependencies": {
+          "grunt": "0.4.2"
+        }
+      }
+
+      </code>
+
+  section
+    p When checking out a fresh project from GitHub, simply run 'npm install' to install all the dependencies required to run the project.
+
+  section
+    h4 Fun Fact
+    p Contrary to the belief of many, "npm" is not in fact an abbreviation for "Node Package Manager." It is a recursive bacronymic abbreviation for "npm is not an acronym."
+
+  section
+    h1 Bower
+
+  section
+    p Bower is a package manager for front end dependencies.
+
+  section
+    p We'll be using Bower in our project to manage libraries that we use in our Angular application, such as Angular itself.
+
+  section
+    p Like NPM, bower requires a bower.json file in the root of the project that specifies metadata about our project as well as its dependencies.
+
+  section
+    pre.
+      <code class="json" data-trim>
+      {
+        "name": "my-project",
+        "version": "0.0.1",
+        "description": "My Cool Node Project",
+        "author": "Mike Kelly",
+        "dependencies": {
+          "angular": "~1.2.14"
+        }
+      }
+
+      </code>
+
+  section
+    p When checking out a fresh project from GitHub, simply run 'bower install' to install all the client side dependencies required by the client application.
+
+  section
+    p Aside from using NPM and Bower to install our dependencies, we wont focus much on NPM or Bower in this training class.
+
+  section
+    p You can visit the NPM and Bower websites to learn more about them.
+    p
+      a(href="http://bower.io") bower.io
+    p
+      a(href="https://www.npmjs.org") npmjs.org
+
+  section
+    h1 Grunt
+
+  section
+    p Grunt is a JavaScript Task Runner.
+
+  section
+    p We'll be using Grunt to automate a lot of the project build tasks assosiated with a web application.
+
+  section
+    p
+      | The less work we have to do when performing repetitive tasks like minification, compilation, unit
+      | testing, linting, and etc, the easier our becomes.
+
+  section
+    p
+      | Grunt, by itself, is a framework for designed for running tasks.  It also provides a lot of common
+      | utilities needed for performing things like filesystem operations.
 
 
   section
-    section
-      h1 NPM
-    section
-      h2
+    p
+      | We'll be using Grunt plugins created by individuals and the community that help automate tasks that are
+      | specific to our application.
 
   section
-    section
-      h1 Bower
-    section
-      h2
+    p We'll go into more detail about Grunt and how to use it to automate our development process in the last lecture of this training class.
 
   section
-    section
-      h1 Grunt
-    section
-      h2
+    h1 Project Layout
 
   section
-    section
-      h1 Project Layout
-    section
-      h2
+    p In this training class, you'll be building a Angular application that tracks employee timesheets across different projects.
+
+  section
+    p To help speed things along so we can focus on the really important parts like Angular, we've created the base project structure for you.
+
+  section
+    p Lets take a look.

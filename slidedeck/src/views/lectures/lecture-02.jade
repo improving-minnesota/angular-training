@@ -102,7 +102,7 @@ include ../includes/mixins
     p Instead of using ng-bind, we can use the shorthand {{ }}
 
   section
-    p The linker will the expression inside {{ }} on scope and replace it with the result.
+    p The linker will execute the expression inside {{ }} on scope and replace it with the result.
 
   section
     pre.
@@ -134,10 +134,10 @@ include ../includes/mixins
     p Most applications have a main method that instantiates and wires together the different parts of the application.
 
   section
-    p Angular apps don't have a main method. Instead modules declaratively specify how an application should be bootstrapped.
+    p Angular apps don't have a main method. Instead, modules declaratively specify how an application should be bootstrapped.
 
   section
-    p There are several advantages to this approach:
+    p There are several advantages to this approach
     ul
       li The declarative process is easier to understand.
       li You can package code as reusable modules.
@@ -155,6 +155,7 @@ include ../includes/mixins
 
   section
     p The code below creates a new module named 'app'
+    br
     pre.
       <code class="js" data-trim>
       angular.module('app', []);
@@ -192,7 +193,7 @@ include ../includes/mixins
   section
     p Yes.
     p
-      | Because modules do nothing at load time they can be loaded into the VM in any order and thus script
+      | Because modules do nothing at load time, they can be loaded into the VM in any order and thus script
       | loaders can take advantage of this property and parallelize the loading process.
 
   section
@@ -293,8 +294,8 @@ include ../includes/mixins
   section
     p You should not use controllers to
     ul
-      li Manipulate DOM.
-      li Share code or state across controllers.
+      li Manipulate DOM
+      li Share code or state across controllers
       li Manage the life-cycle of other components
       li Format input
       li Format output
@@ -323,7 +324,7 @@ include ../includes/mixins
       </code>
 
   section
-    p You can associate Controllers with scope objects implicitly via the ngController directive.
+    p You can associate controllers with scope objects implicitly via the ngController directive.
 
   section
     p Controller
@@ -384,19 +385,34 @@ include ../includes/mixins
       </code>
 
   section(id="example2", ng-controller="TimeController")
-    h2 {{time}}
+    h2(style="font-family: monospace;") {{time}}
 
   section
     p There's no magic happening here.
     p This demonstrates how changes on scope are reflected in the view once the DOM has been compiled and linked by Angular.
 
   section
+    h1 Bootstrapping
 
   section
+    p
+      | Angular initializes automatically upon DOMContentLoaded event or when the angular.js script is evaluated if at that
+      | time document.readyState is set to 'complete'.
 
   section
+    p At this point Angular looks for the ng-app directive which designates your application root.
 
   section
+    p Typically the ng-app directive is used on the root html or body elements so that the entire document is traversed and linked by the compiler.
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;html ng-app="app"&gt;
+
+      &lt;/html&gt;
+
+      </code>
+
 
   script.
     angular.module('lecture02', [])
