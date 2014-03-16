@@ -36,7 +36,7 @@ include ../includes/mixins
         "version": "0.0.1",
         "description": "My Cool Node Project",
         "main": "index.js",
-        "author": "Michael Kelly",
+        "author": "Mike Kelly",
         "dependencies": {
           "grunt": "0.4.2"
         }
@@ -49,13 +49,76 @@ include ../includes/mixins
 
   section
     h4 Fun Fact
-    quote Contrary to the belief of many, "npm" is not in fact an abbreviation for "Node Package Manager." It is a recursive bacronymic abbreviation for "npm is not an acronym."
+    p Contrary to the belief of many, "npm" is not in fact an abbreviation for "Node Package Manager." It is a recursive bacronymic abbreviation for "npm is not an acronym."
 
   section
     h1 Bower
 
   section
+    p Bower is a package manager for front end dependencies.
+
+  section
+    p We'll be using Bower in our project to manage libraries that we use in our Angular application, such as Angular itself.
+
+  section
+    p Like NPM, bower requires a bower.json file in the root of the project that specifies metadata about our project as well as its dependencies.
+
+  section
+    pre.
+      <code class="json" data-trim>
+      {
+        "name": "my-project",
+        "version": "0.0.1",
+        "description": "My Cool Node Project",
+        "author": "Mike Kelly",
+        "dependencies": {
+          "angular": "~1.2.14"
+        }
+      }
+
+      </code>
+
+  section
+    p When checking out a fresh project from GitHub, simply run 'bower install' to install all the client side dependencies required by the client application.
+
+  section
+    p Aside from using NPM and Bower to install our dependencies, we wont focus much on NPM or Bower in this training class.
+
+  section
+    p You can visit the NPM and Bower websites to learn more about them.
+    p
+      a(href="http://bower.io") bower.io
+    p
+      a(href="https://www.npmjs.org") npmjs.org
+
+  section
     h1 Grunt
+
+  section
+    p Grunt is a JavaScript Task Runner.
+
+  section
+    p We'll be using Grunt to automate a lot of the project build tasks assosiated with a web application.
+
+  section
+    p
+      | The less work we have to do when performing repetitive tasks like minification, compilation, unit
+      | testing, linting, and etc, the easier our becomes.
+
+  section
+    p
+      | Grunt, by itself, is a framework for designed for running tasks.  It also provides a lot of common
+      | utilities needed for performing tasks like filesystem operations.
+
+
+  section
+    p
+      | We'll be using Grunt plugins created by individuals or the community that help automate tasks that are
+      | specific to our application.
+
+  section
+
+  section
 
   section
     h1 Project Layout
