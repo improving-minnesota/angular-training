@@ -186,7 +186,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['development', 'karma:unit:run']
+        tasks: ['development']
       },
       debug: {
         files: [
@@ -196,7 +196,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['debug', 'karma:unit:run']
+        tasks: ['debug']
       },
       production: {
         files: [
@@ -206,7 +206,7 @@ module.exports = function (grunt) {
           '<%= assets %>/less/**/*.less',
           'app/views/**/*.jade'
         ],
-        tasks: ['production', 'karma:unit:run']
+        tasks: ['production']
       }
     },
 
