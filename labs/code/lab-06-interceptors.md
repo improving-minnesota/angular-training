@@ -1,5 +1,14 @@
 # Lab Six - Interceptors
 
+&nbsp;
+## Checkout the Lab Branch
+- In a console:
+
+```
+git checkout lab-6-interceptors
+```
+
+&nbsp;
 ## Create a Progress Bar for API Calls
 
 ### The Situation
@@ -201,6 +210,7 @@ it('should reject the promise with the rejection config', function () {
 
 - Run and verify your tests...are you noticing a pattern?
 
+&nbsp;
 ## See Your Interceptor in Action
 
 - Run the application via `grunt runapp:development` and `grunt watch:development` in separate console windows.

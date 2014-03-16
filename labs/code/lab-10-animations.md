@@ -1,4 +1,10 @@
 # Lab Ten - Animations
+## Checkout the Lab Branch
+- In a console:
+
+```
+git checkout lab-10-animations
+```
 
 &nbsp;
 ## Set up the CSS class for animated items

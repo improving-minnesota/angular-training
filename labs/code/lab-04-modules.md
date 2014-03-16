@@ -1,5 +1,11 @@
 # Lab Four - Modules, Controllers, Resources, and Scope
 
+## Checkout the Lab Branch
+- In a console:
+
+```
+git checkout lab-4-modules
+```
 &nbsp;
 ## Resources via `$resource`
 
@@ -832,4 +838,4 @@ it('should set deleted to true for the timesheet in the ui', function () {
 
 ### Run the Application
 - Time to run or refresh the application again and see it in action.
-- You have already mastered this, so I won't bore you with further instructions. 
+- You have already mastered this, so I won't bore you with further instructions.
