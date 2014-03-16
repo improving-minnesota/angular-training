@@ -2,12 +2,15 @@
 
 ### Checkout the Github repository
 
-* Checkout project from Github
+- Checkout project from Github
+
 ```
 git clone https://github.com/objectpartners/angular-training.git
 ```
-* You should get output similar to below:
-```
+
+- You should get output similar to below:
+
+```javascript
 Cloning into 'angular-training'...
 remote: Counting objects: 3003, done.
 remote: Compressing objects: 100% (1458/1458), done.
@@ -17,39 +20,44 @@ Resolving deltas: 100% (1413/1413), done.
 Checking connectivity... done.
 ```
 
-* Now let's checkout the `lab-1-setup` branch.
+- Now let's checkout the `lab-1-setup` branch.
+
 ```
 git checkout lab-1-setup
 ```
 
-* Change directories to the lab main directory.
+- Change directories to the lab main directory.
+
 ```
 cd angular-training/timesheet
 ```
 
 ### Install the application dependencies
 
-* Install the NPM dependencies
+- Install the NPM dependencies
+
 ```
 npm install
 ```
 
-* Install the Bower dependencies
+- Install the Bower dependencies
+
 ```
 bower install
 ```
 
 ### Run the application and view the start screen
 
-* In a console window, run:
+- In a console window, run:
+
 ```
 grunt runapp:development
 ```
 
-* This kicks of a Node server and serves up our `index.html` page.
+- This kicks of a Node server and serves up our `index.html` page.
 
-* Open your browser and navigate to [http://localhost:3000] the application home page.
+- Open your browser and navigate to http://localhost:3000.
 
-* Verify that you see the welcome page.
+- Verify that you see the welcome page.
 
-* Now let's check out our project's structure so we know what goes where. 
+- Now let's check out our project's structure so we know what goes where.
