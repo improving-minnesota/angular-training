@@ -135,8 +135,7 @@ include ../includes/mixins
   section(id="example2", ng-controller="Lecture9Controller")
     h2 Filtering arrays in action
     input.form-control(ng-model="myFilter")
-    div(ng-repeat="employee in employees | filter:myFilter")
-      {{employee.name}}
+    div(ng-repeat="employee in employees | filter:myFilter") {{employee.name}}
 
 
   script.

@@ -95,7 +95,7 @@ include ../includes/mixins
       });
 
       </code
-  
+
   section
     p You can nest describe blocks to elaborate on what is being tested.
 
@@ -147,3 +147,176 @@ include ../includes/mixins
       </code>
 
   section
+    h1 Angular Mocks
+
+  section
+    p
+      | Instead of our tests talking to real services, it will often suffice to speak to the 'mock' versions
+      | of the services, which will respond to calls accurately, but rather unintelligently.
+
+  section
+    p
+      | We use mocks because if we relyed on a real service writing real data, then it may interfere with the
+      | execution of our test runner in its own potentially sandboxed environment.
+
+  section
+    p Lets use the $location service as an example.
+
+  section
+    p
+      | If one of of our tests changes the location of the address bar during testing, this could potentially disrupt
+      | the entire test process.
+
+  section
+    p Angular provides tools and services to mock different kinds of components when testing.
+
+  section
+    p Lets start by mocking a module that we'll be testing.
+
+  section
+    p Angular provides angular.mock.module (aliased as 'module' on window) to mock Angular modules
+
+  section
+    pre.
+      <code class="js" data-trim>
+      beforeEach(module(
+        'app.controllers'
+      ));
+
+      </code>
+
+    p Why do we mock the app.controllers module inside a beforeEach statement?
+
+  section
+    p We want to make sure that we're starting with a blank slate so that changes made by other tests don't interfere with the current test.
+
+  section
+    p Now that we've mocked the module that contains the component we wish to test, we need to mock the component itself.
+
+  section
+    p More than likely, our component will have dependencies that are required to test it.
+
+  section
+    p We use the angular.mock.inject (aliased as 'inject' on window) to inject mock dependencies.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      var controller, scope;
+
+      beforeEach(module(
+        'app.controllers'
+      ));
+
+      beforeEach(
+        inject(
+          function($rootScope, $controller) {
+            scope = $rootScope.$new();
+            controller = $controller("MainCtrl", {
+              $scope: scope
+            });
+          }
+        )
+      );
+
+      </code>
+
+    p Notice that we use another before each here to make sure each test has a fresh controller.
+
+  section
+    p Lets break this down and discuss what's going on in each step.
+
+  section
+    p To instanciate our controller for testing, we'll need to the $controller service and $rootScope service.
+
+  section
+    p The inject function is going to inject $rootScope and the $controller services that we need to build an instance of our controller.
+    br
+    pre.
+      <code class="js" data-trim>
+        inject(
+          function($rootScope, $controller) {
+
+          }
+        );
+
+      </code>
+
+  section
+    p Now, we're going to create a new scope from the root scope that we'll supply to our controller.
+    br
+    pre.
+      <code class="js" data-trim>
+      inject(
+        function($rootScope, $controller) {
+          scope = $rootScope.$new();
+        }
+      );
+
+      </code>
+
+  section
+    p Then, we'll use the $controller service to instanciate our controller and supply the dependencies it needs.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('MainCtrl', function($scope) {
+
+      });
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      inject(
+        function($rootScope, $controller) {
+          scope = $rootScope.$new();
+          controller = $controller("MainCtrl", {
+            $scope: scope
+          });
+        }
+      )
+
+      </code>
+
+  section
+    p If we needed to supply additional mock dependencies, we could do that here as well.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('MainCtrl', function($scope, person) {
+        $scope.person = person;
+      });
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      inject(
+        function($rootScope, $controller) {
+          scope = $rootScope.$new();
+          controller = $controller("MainCtrl", {
+            $scope: scope
+            person: [{id: 1, name:'Mike'}]
+          });
+        }
+      )
+
+      </code>
+
+  section
+    p Questions?
+
+  section
+    p Now that we have and instance of our controller, we can start testing it.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      it('should be able to instantiate the controller', function () {
+        expect(controller).to.be.ok;
+      });
+
+      it('should have person on scope', function () {
+        expect(scope.person).to.be.ok;
+      });
+
+      </code>
