@@ -1,7 +1,10 @@
 module.exports = function(config) {
   config.set({
 
-    // TODO : regiger the jasmine framework
+    background: true,
+    autoWatch: true,
+
+    // TODO : register the jasmine framework
 
     files: [
       // inject chai matchers and sinon test spy library... cuz they are awesome.
@@ -16,11 +19,11 @@ module.exports = function(config) {
 
       // include the angular mocks libraray
       'assets/js/components/angular-mocks/angular-mocks.js',
-      
-      // serve all specs
-      'test/unit/**/*.spec.js', 
 
-      // have karma serve the templates so they are available 
+      // serve all specs
+      'test/unit/**/*.spec.js',
+
+      // have karma serve the templates so they are available
       'assets/templates/**/*.html'
     ],
 
