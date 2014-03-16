@@ -48,7 +48,10 @@ include ../includes/mixins
     h1 Jasmine
 
   section
-    p Jasmine is a behavior-driven development framework for testing JavaScript code.
+    p Jasmine is a behavior-driven development (BDD) framework for testing JavaScript code.
+
+  section
+    p Behavior driven development uses examples to illustrate behavior.
 
   section
     h2 Suites
@@ -62,8 +65,85 @@ include ../includes/mixins
       | that implements the suite.
 
   section
-    
+    pre.
+      <code class="js" data-trim>
+      describe("Some feature", function() {
+
+      });
+
+      </code>
 
   section
+    h2 Specs
+
+  section
+    p A spec contains one or more expectations that test the state of the code.
+
+  section
+    p Specs are defined by calling the global Jasmine function 'it', which, like describe takes a string and a function.
+
+  section
+    p The string is the title of the spec and the function is the spec, or test.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      describe("Some feature", function() {
+        it('should behave in a certain way', function() {
+
+        });
+      });
+
+      </code
+  
+  section
+    p You can nest describe blocks to elaborate on what is being tested.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      describe("Some feature", function() {
+        it('should behave in a certain way', function() {
+
+        });
+        describe("component", function() {
+          it('should do what we expect', function() {
+
+          });
+        });
+      });
+
+      </code>
+
+    p Some feature should behave a certain way.
+    p Some feature component should do what we expect.
+
+
+  section
+    h2 Expectations
+
+  section
+    p Expectations are built with the function 'expect' which takes a value, called the actual.
+
+  section
+    p It is chained with a Matcher function, which takes the expected value.
+
+  section
+    p Each matcher implements a boolean comparison between the actual value and the expected value.
+
+  section
+    p The matcher is responsible for reporting to Jasmine if the expectation is true or false.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      describe("Some feature", function() {
+        it('should behave in a certain way', function() {
+          expect(true).to.equal(true);
+          expect({}).to.be.ok; // Ok checks if the actual is defined
+        });
+      });
+
+      </code>
 
   section
