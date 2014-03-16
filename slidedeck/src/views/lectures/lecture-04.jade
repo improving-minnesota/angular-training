@@ -136,7 +136,7 @@ include ../includes/mixins
     p What about when a user enters a URL that's not in the configuration?
 
   section
-    p Simply add an 'otherwise' statement to the configuration change to redirect the user to a default page.
+    p Simply add an 'otherwise' statement to the configuration chain to redirect the user to a default page.
     br
     pre.
       <code class="js" data-trim>
@@ -155,7 +155,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Now that we've configured the $route service, we need to give it direction on where to put our templates in the page DOM.
+    p Now that we've configured the $route service, we need to give it direction on where to put our templates in the DOM.
 
   section
     p For this, we'll use the ngView directive.
@@ -202,13 +202,13 @@ include ../includes/mixins
       </code>
 
   section
-    p Calling these methods invoke an $http with the specified http method, destination and parameters.
+    p Calling these methods invoke an $http request with the specified http method, destination and parameters.
 
   section
-    p When the data is returned from the server then the object is an instance of the resource class.
+    p When the data is returned from the server, the object is then an instance of the resource class.
 
   section
-    p The actions save, remove and delete are available on it as methods with the $ prefix.
+    p The actions save, remove and delete are available on the resource instance as methods with the $ prefix.
 
   section
     p Let's create a resource.
@@ -229,11 +229,12 @@ include ../includes/mixins
   section
     p The first argument specifies the URL of the resource.  You can use parameters to substitute variables in those URL's.
     br
-    pre.
-      <code class="js" data-trim>
-      var Employee = $resource('/employee/:employeeId');
+    .text-center
+      pre.
+        <code class="js" data-trim>
+        var Employee = $resource('/employee/:employeeId');
 
-      </code>
+        </code>
 
   section
     p The second argument specifies how $resource should substitute those URL variable with the options passed in.
@@ -254,11 +255,12 @@ include ../includes/mixins
   section
     p Now that we've defined our resource, we can use the Employee resource class to get an instance of an employee
     br
-    pre.
-      <code class="js" data-trim>
-      $scope.employee = Employee.get({id: 23});
+    .text-center
+      pre.
+        <code class="js" data-trim>
+        $scope.employee = Employee.get({id: 23});
 
-      </code>
+        </code>
     p What will the HTTP request look like for this action?
 
   section
@@ -274,7 +276,7 @@ include ../includes/mixins
     p We can supply a callback function to be executed once the reference is populated with data.
 
   section
-    p One we have a populated instance of the employee resource, we can change is and call action methods on it.
+    p One we have a populated instance of the employee resource, we can change its data and call actions on it.
     br
     pre.
       <code class="js" data-trim>
@@ -291,61 +293,116 @@ include ../includes/mixins
 
   section
     p
-      | In Lab 4, we've wrapped the $resource service with an $api and $control service to even further simplify
-      | how you will communicate with our RESTful API.
-    
+      | In Lab 4, we've wrapped the $resource service with an $api and $control service to even further simplify how
+      | you will communicate with the API.
 
-  //- section
-  //-   h1 Inheritance
-  //-
-  //- section
-  //-   p It is common to attach controllers at different levels of the DOM hierarchy.
-  //-
-  //- section
-  //-   p Since the ng-controller directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
-  //-
-  //- section
-  //-   p The $scope that each Controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
-  //-
-  //- section
-  //-   p What would the value of property be for each controller?
-  //-   pre.
-  //-     <code class="html" data-trim>
-  //-     &lt;div ng-controller="ParentController" &gt;
-  //-       &lt;p&gt;{{property}}&lt;/p&gt;
-  //-       &lt;div ng-controller="ChildController" &gt;
-  //-         &lt;p&gt;{{property}}&lt;/p&gt;
-  //-         &lt;div ng-controller="GrandChildController" &gt;
-  //-           &lt;p&gt;{{property}}&lt;/p&gt;
-  //-         &lt;/div&gt;
-  //-       &lt;/div&gt;
-  //-     &lt;/div&gt;
-  //-
-  //-     </code>
-  //-   pre.
-  //-     <code class="js" data-trim>
-  //-     angular.module('app.controllers', [])
-  //-       .controller('ParentController',function($scope) {
-  //-         $scope.property = 'one';
-  //-       });
-  //-       .controller('ChildController',function($scope) {
-  //-
-  //-       });
-  //-       .controller('GrandChildController',function($scope) {
-  //-         $scope.property = 'two';
-  //-       });
-  //-
-  //-     </code>
-  //-
-  //- section
-  //-   pre.
-  //-     <code class="html" data-trim>
-  //-     &lt;div ng-controller="ParentController" &gt;
-  //-       &lt;p&gt;one&lt;/p&gt;
-  //-       &lt;div ng-controller="ChildController" &gt;
-  //-         &lt;p&gt;one&lt;/p&gt;
-  //-         &lt;div ng-controller="GrandChildController" &gt;
-  //-           &lt;p&gt;two&lt;/p&gt;
-  //-         &lt;/div&gt;
-  //-       &lt;/div&gt;
-  //-     &lt;/div&gt;
+  section
+    h1 Unit Testing
+    h2 Continued
+
+  section
+    p
+      | During unit testing, we want our unit tests to run quickly and have no external dependencies so we don’t want
+      | to send network requests to a real server.
+
+  section
+    p All we really need is to verify whether a certain request has been sent or not.
+
+  section
+    p Or alternatively just let the application make requests, respond with pre-trained responses, and assert that the end result is what we expect it to be.
+
+  section
+    p To help with this, Angular provides the $httpBackend mock service.
+
+  section
+    p The $httpBackend mock service is a fake HTTP backend implementation suitable for unit testing applications that use the $http service.
+
+  section
+    p There are two ways to specify what test data should be returned as http responses by the mock backend:
+    ul
+      li.
+        <strong>$httpBackend.expect</strong> - specifies a request expectation
+      li.
+        <strong>$httpBackend.when</strong> - specifies a backend definition
+
+  section
+    h3 Expectations
+    p Request expectations provide a way to make assertions about requests made by the application and define responses for those requests.
+
+  section
+    p The test will fail if the expected requests are not made or they're made in the wrong order.
+
+  section
+    h3 Backend definitions
+    p Backend definitions allow you to define a fake backend for your application which doesn't assert if a particular request was made or not, it just returns a trained response if a request is made.
+
+  section
+    p The test will pass whether or not the request gets made during testing.
+
+  section
+    p The $httpBackend used in production always responds to requests asynchronously.
+
+  section
+    p  If we preserved this behavior in unit testing, we'd have to create asyncronous unit tests.
+
+  section
+    p Asyncronous unit tests are hard to write, follow, and maintain.
+
+  section
+    p The mock can't respond synchronously either, that would change the execution of the code being tested.
+
+  section
+    p For this reason, the mock $httpBackend service has a flush method.
+
+  section
+    p The flush method allows you to explicitly flush pending requests.
+
+  section
+    p Lets write a test that uses the mock $httpBackend service.
+
+  section
+    p For brevity, the test setup has been omitted.
+    br
+    pre.
+      <code class="js" data-trim>
+      describe('a controller that uses $http', function() {
+        it('should be able to make a network request', function () {
+          $httpBackend.expect('GET', '/users');
+          scope.getUsers();
+          $httpBackend.flush();
+        });
+      });
+
+      </code>
+
+  section
+    p We can also specify responses for our mock network requests.
+    br
+    pre.
+      <code class="js" data-trim>
+      describe('a controller that uses $http', function() {
+        it('should be able to handle errors', function () {
+          $httpBackend.expect('GET', '/users').respond(500);
+          scope.getUsers();
+          $httpBackend.flush();
+          // expectations for handling errors
+        });
+      });
+
+      </code>
+
+  section
+    p Last, we can provide mock responses to our network requests.
+    br
+    pre.
+      <code class="js" data-trim>
+      describe('a controller that uses $http', function() {
+        it('should put the users on scope', function () {
+          $httpBackend.expect('GET', '/users').respond(200, [{id:5}]);
+          scope.getUsers();
+          $httpBackend.flush();
+          expect(scope.users[0].id).to.equal(5);
+        });
+      });
+
+      </code>
