@@ -5,24 +5,69 @@ include ../includes/mixins
   +lecture-title-page("UI Router", "Lecture 05")
 
   section
-    section
-      h1 Lab 04
-      h2 Solution
+    h1 Lab 04
+    h2 Solution
 
   section
-    section
-      h1 Routing
-    section
-      h2
+    h1 Routing
 
   section
-    section
-      h1 States
-    section
-      h2
+    h1 States
 
   section
-    section
-      h1 Controller Interitance
-    section
-      h2
+    h1 Controller
+    h2 Interitance
+
+  section
+    p It's common to attach controllers at different levels of the DOM hierarchy.
+
+  section
+    p Since the ng-controller directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
+
+  section
+    p The $scope that each controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
+
+  section
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="ParentController" &gt;
+        &lt;p&gt;{{property}}&lt;/p&gt;
+        &lt;div ng-controller="ChildController" &gt;
+          &lt;p&gt;{{property}}&lt;/p&gt;
+          &lt;div ng-controller="GrandChildController" &gt;
+            &lt;p&gt;{{property}}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.controllers', [])
+        .controller('ParentController',function($scope) {
+          $scope.property = 'one';
+        });
+        .controller('ChildController',function($scope) {
+
+        });
+        .controller('GrandChildController',function($scope) {
+          $scope.property = 'two';
+        });
+
+      </code>
+    p What would the value of property be for each controller?
+
+  section
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="ParentController" &gt;
+        &lt;p&gt;one&lt;/p&gt;
+        &lt;div ng-controller="ChildController" &gt;
+          &lt;p&gt;one&lt;/p&gt;
+          &lt;div ng-controller="GrandChildController" &gt;
+            &lt;p&gt;two&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    </code>
