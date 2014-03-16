@@ -5,6 +5,8 @@
 ```
 git checkout lab-7-factories
 ```
+&nbsp;
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
 
 &nbsp;
 ## Resources services
