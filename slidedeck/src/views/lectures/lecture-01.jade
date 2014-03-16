@@ -4,29 +4,58 @@ include ../includes/mixins
 +page("Lecture 01 - Project Layout and Development Tools")
   +lecture-title-page("Project Layout and Development Tools", "Lecture 01")
 
-
-
+  section
+    h1 NPM
 
   section
-    section
-      h1 NPM
-    section
-      h2
+    p NPM is the official package manager for Node.js
 
   section
-    section
-      h1 Bower
-    section
-      h2
+    p NPM runs through the command line and manages dependencies for an application.
 
   section
-    section
-      h1 Grunt
-    section
-      h2
+    p It also allows users to install Node.js applications that are available on the npm registry.
 
   section
-    section
-      h1 Project Layout
-    section
-      h2
+    p For those who are familiar with dependency management tools and artifact repositories like Maven and Maven Central, NPM is similar.
+
+  section
+    p One key distinguishement between the two is that NPM does not manange build processes like Maven does.  Only dependency management.
+
+  section
+    p Most, if not all, node projects contain a package.json file in the root project.
+
+  section
+    p This file exposes metadata about your application as well as it's dependencies.
+
+  section
+    pre.
+      <code class="json" data-trim>
+      {
+        "name": "my-project",
+        "version": "0.0.1",
+        "description": "My Cool Node Project",
+        "main": "index.js",
+        "author": "Michael Kelly",
+        "dependencies": {
+          "grunt": "0.4.2"
+        }
+      }
+
+      </code>
+
+  section
+    p When checking out a fresh project from GitHub, simply run 'npm install' to install all the dependencies required to run the project.
+
+  section
+    h4 Fun Fact
+    quote Contrary to the belief of many, "npm" is not in fact an abbreviation for "Node Package Manager." It is a recursive bacronymic abbreviation for "npm is not an acronym."
+
+  section
+    h1 Bower
+
+  section
+    h1 Grunt
+
+  section
+    h1 Project Layout
