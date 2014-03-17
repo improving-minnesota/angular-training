@@ -791,26 +791,47 @@ include ../includes/mixins
     h2 Continued
 
   section
-
-
-  section
+    p Now that we've added AngularUI Router to our application, we need to make sure that we can test state transistions.
 
   section
-
-
-  section
-
+    p Instead of injecting the router, we can test everything we need to by simply stubbing out the $state service.
 
   section
+    p First, we'll stub the state service during our test initialization and save it.
+    br
+    pre.
+      <code class="js" data-trim>
+      spies = {
+        state: sinon.stub($state)
+      };
 
+      </code>
 
   section
+    p Now, when we instanciate our controller for testing, we'll make sure that we inject our stub in the $state dependency.
+    br
+    pre.
+      <code class="js" data-trim>
+      beforeEach(function() {
+        $scope = $rootScope.$new();
+        controller = $controller("MyCtrl", {
+          $scope: $scope,
+          $state: spies.state,
+        });
+      });
 
+      </code>
 
   section
+    p Then we can verify state transitions by checking that the stub was called with our expected parameters
+    br
+    pre.
+      <code class="js" data-trim>
+      describe('MyCtrl', function () {
+        it('should transition to another state', function () {
+          $scope.goToAnotherState();
+          expect(spies.state.go).to.have.been.calledWith('app.another.state');
+        });
+      });
 
-
-  section
-
-
-  section
+      </code>
