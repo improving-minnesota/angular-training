@@ -9,12 +9,6 @@ include ../includes/mixins
     h2 Solution
 
   section
-    h1 Routing
-
-  section
-    h1 States
-
-  section
     h1 Controller
     h2 Interitance
 
@@ -70,4 +64,214 @@ include ../includes/mixins
         &lt;/div&gt;
       &lt;/div&gt;
 
-    </code>
+      </code>
+
+  section
+    p This behavior is very useful in applications with complex user interfaces.
+
+  section
+    p We can use parents scopes and controllers as a means to communicate between child scopes and controllers.
+
+  section
+    p Unfortunately the url routing service provided by Angular doesn't allow for this complex view design and controller inheritance.
+
+  section
+    p This is where the community, specifically the AngularUI team, has stepped in to provide a better solution.
+
+  section
+    h1 UI Router
+
+  section
+    p AngularUI Router is a routing framework for AngularJS, which allows you to organize the parts of your interface into a state machine.
+
+  section
+    p  Unlike the $route service in Angular core, which is organized around URL routes, UI-Router is organized around states.
+
+  section
+    p  These state may optionally have routes, as well as other behavior attached.
+
+  section
+    p States are bound to named, nested and parallel views, allowing you to powerfully manage your application's interface.
+
+  section
+    h2 State Manager
+
+  section
+    p The Angular UI Router $stateProvider works similar to Angular's router, but it focuses purely on state.
+
+  section
+    p A state corresponds to a "place" in the application in terms of the overall UI and navigation.
+
+  section
+    p A state describes (via the controller / template / view properties) what the UI looks like and does at that place.
+
+  section
+    p States often have things in common, and the primary way of factoring out these commonalities in this model is via the state hierarchy (parent/child states or nested states).
+
+  section
+    p A state in its simplest form can be added like this
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;body&gt;
+        &lt;div ui-view&gt;&lt;/div&gt;
+      &lt;/body&gt;
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      angular.module('app'[])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app', {
+                template: '&lt;h1&gt;My App&lt;/h1&gt;'
+              });
+        });
+
+      </code>
+
+  section
+    p When a state is activated, its templates are automatically inserted into the ui-view of its parent state's template.
+
+  section
+    p This is what the DOM will look like when the app state is active.
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;body&gt;
+        &lt;div ui-view&gt;
+          &lt;h1&gt;My App&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/body&gt;
+
+      </code>
+
+  section
+    h2 Templates
+
+  section
+    p There are several methods for configuring a state's template.
+
+  section
+    p The simplest way to set your template is via the template config property.
+
+  section
+    p In our applciation, most of our templates will be fairly large so we'll use the templateUrl property.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      angular.module('app'[])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app', {
+                templateUrl: 'assets/app/index.html'
+              });
+        });
+
+      </code>
+
+  section
+    h2 Controllers
+
+  section
+    p You can assign a controller to your template for a particular state in several ways.
+
+  section
+    p In our application, we'll use the controller name and allow the DI service to inject that controller.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app'[])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app', {
+                templateUrl: 'assets/app/index.html',
+                controller: 'AppCtrl'
+              });
+        });
+
+      </code>
+
+  section
+    h2 Resolve
+
+  section
+    p You can use resolve to provide your controller with content or data that is custom to the state.
+
+  section
+    p The resolve property is an optional map of dependencies which should be injected into the controller.
+
+  section
+    p If any of these dependencies are promises, they will be resolved and converted to a value before the controller is instantiated.
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+  
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
