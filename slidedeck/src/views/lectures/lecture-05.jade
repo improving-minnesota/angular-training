@@ -719,10 +719,81 @@ include ../includes/mixins
       </code>
 
   section
+    h2 Multiple Named Views
 
+  section
+    p You can name your views so that you can have more than one ui-view per template.
+
+  section
+    p When setting multiple views, you need to use the views property on state.
+
+  section
+    p The view property is an object that allows you to specify state properties for the view.
+
+  section
+    p You can specify most of the same configurations on the named views as you can in the state.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app', {
+          views : {
+            'navbar' : {
+              controller: 'NavCtrl',
+              templateUrl: 'assets/templates/app/navbar.html'
+            },
+            'content' : {
+              controller: 'AppCtrl',
+              templateUrl: 'assets/templates/app/index.html'
+            }
+          }
+        })
+
+      </code>
+
+  section
+    p Now lets take a look at how we would layout the ui-view directives.
+
+  section
+    p Where would child views of app be rendered?
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;body&gt;
+        &lt;div ui-view="navbar"&gt;&lt;/div&gt;
+        &lt;div ui-view="content"&gt;&lt;/div&gt;
+      &lt;/body&gt;
+
+      </code>
+
+  section
+    p Child views will be rendered in the first unamed ui-view encountered in the app template or view templates.
+
+  section
+    p With great power comes great responsibility.
+
+  section
+    p Using this functionality without purpose can greatly complicate your application instead of simplifying it.
+
+  section
+    h2 Documentation
+
+  section
+    p Angular UI Router provides more functionality than mentioned in this lecture.
+
+  section
+    p.
+      We recommend that as you go through this labs, you utilize the
+      <a href="href="http://angular-ui.github.io/ui-router/site/#/api">AngularUI Router documentation</a>.
+
+  section
+    h1 Unit Testing
+    h2 Continued
 
   section
 
+
+  section
 
   section
 
