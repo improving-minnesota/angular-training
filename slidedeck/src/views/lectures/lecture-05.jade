@@ -360,7 +360,6 @@ include ../includes/mixins
 
       </code>
 
-
   section
     p If any of these promises are not resolved (rejected), then the state will not load.
 
@@ -375,7 +374,7 @@ include ../includes/mixins
           templateUrl: 'assets/app/index.html',
           controller: 'AppCtrl',
           resolve: {
-            authenticatedUser: authorizationProvider.requireAuthenticatedUser
+            authenticatedUser: authProvider.requireAuthenticatedUser
           }
         });
 
@@ -403,6 +402,110 @@ include ../includes/mixins
           .state('app.projects', {});
 
       </code>
+
+  section
+    h3 Registering States
+
+  section
+    p You can register states in any order across multiple modules.
+
+  section
+    p You can also register child states before the parent state exists.
+
+  section
+    p The $stateProvider will queue each state up as it's configured.
+
+  section
+    p Once a parent state is registered, the children of that state will then be registered.
+
+  section
+    p This will allow us to scope our state configurations to the modules that use them.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', ['ui.router', 'app.projects', '...'])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app');
+        });
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.projects', [])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app.projects');
+        });
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.employees', [])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app.employees');
+        });
+
+      </code>
+
+  section
+    h3 State Inheritance
+
+  section
+    p When the application is in a particular state all of its ancestor states are implicitly active as well.
+
+  section
+    p First, lest consider how this property affects $scope.
+
+  section
+    p Given the app state and AppCtrl
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', ['app.projects'])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app');
+        });
+
+      </code>
+
+    pre.
+      <code class="js" data-trim>
+      controller(function($scope) {
+        $scope.myProperty = "My Property";
+      });
+
+      </code>
+
+  section
+    p And the the app.projects state and ProjectsCtrl
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.projects', [])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app');
+        });
+
+      </code>
+
+    pre.
+      <code class="js" data-trim>
+      controller(function($scope) {
+        $scope.myProperty = "My Property";
+      });
+
+      </code>
+
+  section
+
+
+  section
+
 
   section
 
