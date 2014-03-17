@@ -467,14 +467,16 @@ include ../includes/mixins
       angular.module('app', ['app.projects'])
         .config(function($stateProvider) {
             $stateProvider
-              .state('app');
+              .state('app', {
+                controller: 'AppCtrl'
+              });
         });
 
       </code>
 
     pre.
       <code class="js" data-trim>
-      controller(function($scope) {
+      controller('AppCtrl', function($scope) {
         $scope.myProperty = "My Property";
       });
 
@@ -488,20 +490,172 @@ include ../includes/mixins
       angular.module('app.projects', [])
         .config(function($stateProvider) {
             $stateProvider
-              .state('app');
+              .state('app.projects', {
+                controller: 'ProjectCtrl'
+              });
         });
 
       </code>
 
     pre.
       <code class="js" data-trim>
-      controller(function($scope) {
-        $scope.myProperty = "My Property";
+      controller('ProjectCtrl', function($scope) {
+        console.log($scope.myProperty);
       });
 
       </code>
 
   section
+    p What will be printed out to the console when the app.projects state is active?
+
+  section
+    p "My Property"
+    p This is because as states are nested, their controllers and scopes are as well.
+
+  section
+    p Now we have controller and scope inheritance without using the ng-controller directive.
+
+  section
+    p What about nesting views?
+
+  section
+    p Child states will load their templates into their parent's template element with the ui-view directive.
+
+  section
+    p For these views, what will the resulting DOM look like when the app.projects state is active?
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;!-- index.html --&gt;
+      &lt;body&gt;
+        &lt;div ui-view&gt;&lt;/div&gt;
+      &lt;/body&gt;
+
+      </code>
+
+    pre.
+      <code class="html" data-trim>
+      &lt;!-- app state template --&gt;
+      &lt;h1&gt;My Application&lt;/h1&gt;
+      &lt;div ui-view&gt;&lt;/div&gt;
+
+      </code>
+
+    pre.
+      <code class="html" data-trim>
+      &lt;!-- app.projects state template --&gt;
+      &lt;h2&gt;Projects&lt;/h2&gt;
+
+      </code>
+
+  section
+    pre.
+      <code class="html" data-trim>
+      &lt;!-- index.html --&gt;
+      &lt;body&gt;
+        &lt;div ui-view&gt;
+          &lt;!-- app state template --&gt;
+          &lt;h1&gt;My Application&lt;/h1&gt;
+          &lt;div ui-view&gt;
+            &lt;!-- app.projects state template --&gt;
+            &lt;h2&gt;Projects&lt;/h2&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/body&gt;
+
+      </code>
+
+  section
+    p What else do child states inherit from parent states?
+
+  section
+    p Child states inherit a parent states resolved dependencies.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app.projects', {
+          controller: 'ProjectsCtrl',
+          resolve: {
+            projects: function ($control) {
+              return $control.get('projects');
+            }
+          }
+        })
+          .state('app.projects.detail', {
+            controller: 'ProjectsDetailCtrl',
+          });
+
+      </code>
+
+    pre.
+      <code class="js" data-trim>
+      controller('ProjectDetailCtrl', function(projects) {
+        // Here we can inject projects which was resolved
+        // in the parent state.
+      });
+
+      </code>
+
+  section
+    p Child states inherit a parent states data properties.
+
+  section
+    p What will the value of $scope.title and $scope.section be in ProjectDetailCtrl?
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app.projects', {
+          controller: 'ProjectsCtrl',
+          data: {
+            title: 'Projects',
+            section: 'Projects'
+          }
+        })
+          .state('app.projects.detail', {
+            controller: 'ProjectsDetailCtrl',
+            data: {
+              title: 'Project Detail',
+            }
+          });
+
+      </code>
+
+    pre.
+      <code class="js" data-trim>
+      controller('ProjectDetailCtrl', function($scope, $state) {
+        $scope.title = $state.data.title;
+        $scope.section = $state.data.section;
+      });
+
+      </code>
+
+  section
+    p $scope.title would be "Project Detail"
+    p $scope.section would be "Projects"
+    p Even though data is inherited, we can still override parts of that data in child states.
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
 
 
   section
@@ -515,6 +669,8 @@ include ../includes/mixins
 
   section
 
+
+  section
 
   section
 
