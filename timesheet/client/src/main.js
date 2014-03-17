@@ -3,7 +3,6 @@ angular.module('main', [
   'templates-lib',
   'app',
   'form.directives',
-  'progress.interceptors',
   'ui.select2',
   'ui.bootstrap.datepicker',
   'ui.bootstrap.pagination',
@@ -11,6 +10,8 @@ angular.module('main', [
   'ngSanitize',
   'ngAnimate',
   'ui.router'
+
+  // TODO : set interceptors as dependencies
 ])
 
 .config(function ($urlRouterProvider) {

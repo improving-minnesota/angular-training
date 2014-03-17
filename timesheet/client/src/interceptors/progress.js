@@ -3,27 +3,10 @@ angular.module('progress.interceptors', [])
   
       return {
 
-        request : function (config) {
-          // I love it when...
-          NProgress.start();
-          return $q.when(config);
-        },
-
-        requestError: function (rejection) {
-          NProgress.done();
-          return $q.reject(rejection);
-        },
-
-        response : function (response) {
-          // People make their software easy to use
-          NProgress.done();
-          return $q.when(response);
-        },
-
-        responseError: function (rejection) {
-          NProgress.done();
-          return $q.reject(rejection);
-        }
+        // TODO : Start the progress bar and continue the promise on request
+        // TODO : Stop the progress bar and reject the promise on requestError
+        // TODO : Stop the progress bar and continue the promise on response
+        // TODO : Stop the progress bar and reject the promise on responseError
 
       };
     }
@@ -32,5 +15,7 @@ angular.module('progress.interceptors', [])
 // We have to add the interceptor to the queue as a string because the interceptor 
 // depends upon service instances that are not available in the config block.
 .config(function ($httpProvider) {
-  $httpProvider.interceptors.push('nProgressInterceptor');
+
+  // TODO : Register the interceptor with the http provider
+  
 });
