@@ -94,10 +94,28 @@ include ../includes/mixins
     p States are bound to named, nested and parallel views, allowing you to powerfully manage your application's interface.
 
   section
+    p Since the AngularUI Router is a module, we need to include it as a module dependency.
+
+  section
+    p Notice that the $stateProvider is configured within the module config block.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', ['ui.router'])
+        .config(function($stateProvider) {
+            $stateProvider
+              .state('app', {
+                template: '&lt;h1&gt;My App&lt;/h1&gt;'
+              });
+        });
+
+      </code>
+
+  section
     h2 State Manager
 
   section
-    p The Angular UI Router $stateProvider works similar to Angular's router, but it focuses purely on state.
+    p The AngularUI Router $stateProvider works similar to Angular's router, but it focuses purely on state.
 
   section
     p A state corresponds to a "place" in the application in terms of the overall UI and navigation.
@@ -120,13 +138,12 @@ include ../includes/mixins
       </code>
     pre.
       <code class="js" data-trim>
-      angular.module('app'[])
-        .config(function($stateProvider) {
-            $stateProvider
-              .state('app', {
-                template: '&lt;h1&gt;My App&lt;/h1&gt;'
-              });
-        });
+      .config(function($stateProvider) {
+          $stateProvider
+            .state('app', {
+              template: '&lt;h1&gt;My App&lt;/h1&gt;'
+            });
+      });
 
       </code>
 
@@ -147,7 +164,7 @@ include ../includes/mixins
       </code>
 
   section
-    h2 Templates
+    h3 Templates
 
   section
     p There are several methods for configuring a state's template.
@@ -156,23 +173,20 @@ include ../includes/mixins
     p The simplest way to set your template is via the template config property.
 
   section
-    p In our applciation, most of our templates will be fairly large so we'll use the templateUrl property.
+    p In our application, most of our templates will be fairly large so we'll use the templateUrl property.
 
   section
     pre.
       <code class="js" data-trim>
-      angular.module('app'[])
-        .config(function($stateProvider) {
-            $stateProvider
-              .state('app', {
-                templateUrl: 'assets/app/index.html'
-              });
+      $stateProvider
+        .state('app', {
+          templateUrl: 'assets/app/index.html'
         });
 
       </code>
 
   section
-    h2 Controllers
+    h3 Controllers
 
   section
     p You can assign a controller to your template for a particular state in several ways.
@@ -182,19 +196,125 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      angular.module('app'[])
-        .config(function($stateProvider) {
-            $stateProvider
-              .state('app', {
-                templateUrl: 'assets/app/index.html',
-                controller: 'AppCtrl'
-              });
+      $stateProvider
+        .state('app', {
+          url: '/app',
+          templateUrl: 'assets/app/index.html',
+          controller: 'AppCtrl'
         });
 
       </code>
 
   section
-    h2 Resolve
+    h3 URLS
+
+  section
+    p Most states in our application will have a url associated with them.
+
+  section
+    p Here's how you set a basic url.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app', {
+          url: '/app',
+          templateUrl: 'assets/app/index.html',
+          controller: 'AppCtrl'
+        });
+
+      </code>
+
+  section
+    p When the user accesses /app then the 'app' state would become active.
+
+  section
+    p Often, URLs have dynamic parts to them which are called parameters.
+
+  section
+    p Here's how you set a basic basic parameter in your URL.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app', {
+          url: '/app/:myParameter',
+          templateUrl: 'assets/app/index.html',
+          controller: 'AppCtrl'
+        });
+
+      </code>
+
+  section
+    p These parameters can be injected into the controller using the $stateParams service.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('AppCtrl',
+        function($scope, $stateParams) {
+          $scope.myParameter = $stateParams.myParameter;
+        }
+      );
+
+      </code>
+
+  section
+    p There are other advanced configurations of URL parameters provided by AngularUI Router.
+
+  section
+    p These include
+    ul
+      li.
+        <strong>Regex Parameters</strong> /projects/{projectId:[0-9]{1,8}}
+      li.
+        <strong>Query Parameters</strong> /projects?myParam1&myParam2
+
+  section
+    p We wont be using these in our project but, they are available if you ever need to use them.
+
+  section
+    h3 Custom Data
+
+  section
+    p You can also attach custom data to the $state object.
+
+  section
+    p The $state object can be injected, making it available to controllers and thus, templates.
+
+  section
+    p This can be very useful when defining properties like a page title.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app', {
+          url: '/app',
+          templateUrl: 'assets/app/index.html',
+          controller: 'AppCtrl',
+          data : {
+            title : 'My Application'
+          }
+        });
+
+      </code>
+
+  section
+    p The $state object is specific to the state that instanciated the controller.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('AppCtrl',
+        function($scope, $state) {
+          $scope.pageTitle = $state.data.title;
+        }
+      );
+
+      </code>
+
+    p You will need to take this into consideration if you share controllers between states.
+
+  section
+    h3 Resolve
 
   section
     p You can use resolve to provide your controller with content or data that is custom to the state.
@@ -206,41 +326,84 @@ include ../includes/mixins
     p If any of these dependencies are promises, they will be resolved and converted to a value before the controller is instantiated.
 
   section
+    p This is ideal when we need to load data required to display the view.
+
+  section
+    p By placing API requests in the states resolve configuration, we can make sure we have the data required to render the view before the view is actually rendered.
+
+  section
+    p Notice that we can use DI in our resolve configurations.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app', {
+          url: '/app',
+          templateUrl: 'assets/app/index.html',
+          controller: 'AppCtrl',
+          resolve: {
+            projects: function ($control) {
+              return $control.get('projects');
+            }
+          }
+        });
+
+      </code>
+
+    pre.
+      <code class="js" data-trim>
+      controller('AppCtrl',
+        function($scope, $state, projects) {
+          $scope.projects = projects;
+        }
+      );
+
+      </code>
 
 
   section
-
-
-  section
-
+    p If any of these promises are not resolved (rejected), then the state will not load.
 
   section
+    p This behavior is particularly important when we need to verify that a user has permissions to activate/view a state.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app', {
+          url: '/app',
+          templateUrl: 'assets/app/index.html',
+          controller: 'AppCtrl',
+          resolve: {
+            authenticatedUser: authorizationProvider.requireAuthenticatedUser
+          }
+        });
 
-
-  section
-
-
-  section
-
-
-  section
-
-
-  section
-
-
-  section
-
-
-  section
-
+      </code>
 
   section
-
+    h2 Nested States
 
   section
+    p With AngularUI Router, states can be nested within each other.
 
-  
+  section
+    p There are several ways to nest states.
+
+  section
+    p For our project, we'll be using the dot notation method to signify nested states.
+
+  section
+    p In this example, the projects state is nested within the app state.
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app', {})
+          .state('app.projects', {});
+
+      </code>
+
   section
 
 
