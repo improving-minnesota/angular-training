@@ -58,7 +58,7 @@ include ../includes/mixins
 
   section
     pre.
-      <code data-trim contenteditable>
+      <code data-trim>
       function EmployeesIndexPage() {
         this.get = function () {
           browser.get('#/app/employees');
@@ -85,7 +85,7 @@ include ../includes/mixins
     p Start by requiring the page object
     br
     pre.
-      <code data-trim contenteditable>
+      <code data-trim>
       describe('Employees', function () {
 
         var indexPage = require('./index.page.js');
@@ -98,7 +98,7 @@ include ../includes/mixins
     p Start at a fresh index page before each test
     br
     pre.
-      <code data-trim contenteditable>
+      <code data-trim>
       describe('Employees', function () {
 
         var indexPage = require('./index.page.js');
@@ -115,7 +115,7 @@ include ../includes/mixins
     p Use the page object to perform actions and expect results
     br
     pre.
-      <code data-trim contenteditable>
+      <code data-trim>
       describe('Employees', function () {
 
         var indexPage = require('./index.page.js');

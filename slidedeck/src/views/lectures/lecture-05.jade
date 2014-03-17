@@ -10,7 +10,7 @@ include ../includes/mixins
 
   section
     h1 Controller
-    h2 Interitance
+    h2 Inheritance
 
   section
     p It's common to attach controllers at different levels of the DOM hierarchy.
@@ -299,7 +299,7 @@ include ../includes/mixins
       </code>
 
   section
-    p The $state object is specific to the state that instanciated the controller.
+    p The $state object is specific to the state that instantiated the controller.
     br
     pre.
       <code class="js" data-trim>
@@ -651,7 +651,7 @@ include ../includes/mixins
     p Rather, a child state's URL is appended to the parent state's URL unless otherwise defined.
 
   section
-    p Which state would be loaded when the user acesses /projects/12?
+    p Which state would be loaded when the user accesses /projects/12?
     br
     pre.
       <code class="js" data-trim>
@@ -767,7 +767,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Child views will be rendered in the first unamed ui-view encountered in the app template or view templates.
+    p Child views will be rendered in the first unnamed ui-view encountered in the app template or view templates.
 
   section
     p With great power comes great responsibility.
@@ -791,7 +791,7 @@ include ../includes/mixins
     h2 Continued
 
   section
-    p Now that we've added AngularUI Router to our application, we need to make sure that we can test state transistions.
+    p Now that we've added AngularUI Router to our application, we need to make sure that we can test state transitions.
 
   section
     p Instead of injecting the router, we can test everything we need to by simply stubbing out the $state service.
@@ -808,7 +808,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Now, when we instanciate our controller for testing, we'll make sure that we inject our stub in the $state dependency.
+    p Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the $state dependency.
     br
     pre.
       <code class="js" data-trim>
