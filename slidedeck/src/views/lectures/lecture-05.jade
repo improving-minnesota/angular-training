@@ -457,7 +457,7 @@ include ../includes/mixins
     p When the application is in a particular state all of its ancestor states are implicitly active as well.
 
   section
-    p First, lest consider how this property affects $scope.
+    h4 Scope
 
   section
     p Given the app state and AppCtrl
@@ -510,13 +510,16 @@ include ../includes/mixins
 
   section
     p "My Property"
-    p This is because as states are nested, their controllers and scopes are as well.
+    p Do you think think this inheritance happens at the state or view?
 
   section
-    p Now we have controller and scope inheritance without using the ng-controller directive.
+    p Inheritance of scope properties has nothing to do with the nesting of your states.
 
   section
-    p What about nesting views?
+    p Inheritance of scope properties has everything to do with the nesting of your views (templates).
+
+  section
+    h4 Views
 
   section
     p Child states will load their templates into their parent's template element with the ui-view directive.
@@ -566,7 +569,7 @@ include ../includes/mixins
       </code>
 
   section
-    p What else do child states inherit from parent states?
+    h4 Resolved Dependencies
 
   section
     p Child states inherit a parent states resolved dependencies.
@@ -596,6 +599,9 @@ include ../includes/mixins
       });
 
       </code>
+
+  section
+    h4 Data Properties
 
   section
     p Child states inherit a parent states data properties.
@@ -636,41 +642,81 @@ include ../includes/mixins
     p Even though data is inherited, we can still override parts of that data in child states.
 
   section
-
-
-  section
-
+   h4 URLs
 
   section
-
-
-  section
+    p Child states don't inherit their parent state's URL.
 
   section
-
-
-  section
-
+    p Rather, a child state's URL is appended to the parent state's URL unless otherwise defined.
 
   section
+    p Which state would be loaded when the user acesses /projects/12?
+    br
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app.projects', {
+          url: '/projects'
+          controller: 'ProjectsCtrl'
+        })
+          .state('app.projects.detail', {
+            url: '/:projectId',
+            controller: 'ProjectsDetailCtrl'
+          });
 
+      </code>
 
   section
-
-
-  section
-
+    p The app.projects.detail state.
+    p That being said, there is one special thing to note with the $stateParams service
 
   section
-
-
-  section
-
+    p In state controllers, the $stateParams object will only contain the params that were registered with that state.
 
   section
-
+    p Controllers and templates are not inherited in nested states.
 
   section
+    h2 Abstract States
+
+  section
+    p An abstract state can have child states but can not get activated itself.
+
+  section
+    p Abstract states are activated implicitly when one of their descendants are activated.
+
+  section
+    p Some examples of how you might use an abstract state
+    ul
+      li To prepend a url to all child state urls.
+      li To insert a template with its own ui-view(s) that its child states will populate.
+      li To provide resolved dependencies via resolve for use by child states.
+      li To provide inherited custom data via data for use by child states or an event listener.
+
+  section
+    p One important thing to note is that abstract states still need their own &lt;div ui-view&gt;&lt;/div&gt; for their children to plug into.
+
+  section
+    pre.
+      <code class="js" data-trim>
+      $stateProvider
+        .state('app.projects', {
+          abstract: true,
+          url: '/projects',
+          controller: 'ProjectsCtrl',
+          template: '&lt;div ui-view&gt;&lt;/div&gt;'
+        })
+          .state('app.projects.list', {
+            url: '/list',
+            controller: 'ProjectsListCtrl'
+          })
+          .state('app.projects.detail', {
+            url: '/detail',
+            controller: 'ProjectsDetailCtrl'
+          });
+
+      </code>
 
   section
 
