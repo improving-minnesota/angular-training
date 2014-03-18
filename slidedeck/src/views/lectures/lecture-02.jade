@@ -20,7 +20,8 @@ include ../includes/mixins
       | elements or attributes with custom behavior.
 
   section
-    p Angular calls these behavior extensions directives.
+    p Angular calls these behavior extensions
+      strong  directives.
 
   section
     p Angular comes pre-bundled with common directives which are useful for building any app.
@@ -82,7 +83,7 @@ include ../includes/mixins
     pre.
       <code class="html" data-trim>
       &lt;div ng-init="myVar = 1 + 2;"&gt;
-        &lt;p ng-bing="myVar"&gt;&lt;/p&gt;
+        &lt;p ng-bind="myVar"&gt;&lt;/p&gt;
       &lt;/div&gt;
 
       </code>
@@ -169,7 +170,7 @@ include ../includes/mixins
     p Depending on a module implies that required module needs to be loaded before the requiring module is loaded.
 
   section
-    p Each module can only be loaded once, even if multiple other modules require it.
+    p Each module will only be loaded once, even if multiple other modules require it.
 
   section
     p Below is an example of how to specify a module dependency.
@@ -219,7 +220,7 @@ include ../includes/mixins
       | declaration and extracting the parameter names.
 
   section
-    p The example below show how to specify that $scope and myService need to be injected into the function.
+    p The example below shows how to specify that $scope and myService need to be injected into the function.
     br
     pre.
       <code class="js" data-trim>
@@ -413,6 +414,9 @@ include ../includes/mixins
 
       </code>
 
+  section
+    h1 Lab Two
+    h2 Angular Quickstart
 
   script.
     angular.module('lecture02', [])
