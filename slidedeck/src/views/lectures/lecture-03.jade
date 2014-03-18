@@ -27,14 +27,18 @@ include ../includes/mixins
 
   section
     p You'll more than likely spend half of your time in labs testing your solutions.
+    p .. and this is a good thing.
 
   section
     h1 Karma
 
   section
-    p
-      | Karma is essentially a tool which spawns a web server that executes source code against test
-      | code for each of the browsers connected.
+    h2 Karma
+    ul
+      li Essentially a tool that spawns a web server to ..
+      li Execute your source code
+      li Against your test code
+      li Within each of the browsers you configure.
 
   section
     p
@@ -57,7 +61,9 @@ include ../includes/mixins
     h2 Suites
 
   section
-    p A test suite begins with a call to the global Jasmine function describe with two parameters: a string and a function.
+    p A test suite begins with a call to the global Jasmine function
+      strong  describe()
+    | with two parameters: a string and a function.
 
   section
     p
@@ -80,7 +86,9 @@ include ../includes/mixins
     p A spec contains one or more expectations that test the state of the code.
 
   section
-    p Specs are defined by calling the global Jasmine function 'it', which, like describe takes a string and a function.
+    p Specs are defined by calling the global Jasmine function
+      strong  it()
+    | which, like describe(), takes a string and a function.
 
   section
     p The string is the title of the spec and the function is the spec, or test.
@@ -118,6 +126,9 @@ include ../includes/mixins
     p Some feature should behave a certain way.
     p Some feature component should do what we expect.
 
+  section
+    p Jasmine also provides us with test life-cycle functions that we can use to set up and/or tear down our test environment:
+      strong  beforeEach() and afterEach()
 
   section
     h2 Expectations
@@ -160,7 +171,7 @@ include ../includes/mixins
       | execution of our test runner in its own potentially sandboxed environment.
 
   section
-    p Lets use the $location service as an example.
+    p Let us use the $location service as an example.
 
   section
     p
@@ -221,13 +232,13 @@ include ../includes/mixins
 
       </code>
 
-    p Notice that we use another before each here to make sure each test has a fresh controller.
+    p Notice that we use an additional before each here to make sure each test has a fresh controller.
 
   section
     p Lets break this down and discuss what's going on in each step.
 
   section
-    p To instanciate our controller for testing, we'll need to the $controller service and $rootScope service.
+    p To instantiate our controller for testing, we'll need to inject the $controller service and $rootScope service.
 
   section
     p The inject function is going to inject $rootScope and the $controller services that we need to build an instance of our controller.
@@ -256,7 +267,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Then, we'll use the $controller service to instanciate our controller and supply the dependencies it needs.
+    p Then, we'll use the $controller service to instantiate our controller and supply the dependencies it needs.
     br
     pre.
       <code class="js" data-trim>
@@ -295,7 +306,7 @@ include ../includes/mixins
           scope = $rootScope.$new();
           controller = $controller("MainCtrl", {
             $scope: scope
-            person: [{id: 1, name:'Mike'}]
+            person: [{id: 1, name:'Cyril'}]
           });
         }
       )
@@ -306,7 +317,7 @@ include ../includes/mixins
     p Questions?
 
   section
-    p Now that we have and instance of our controller, we can start testing it.
+    p Now that we have an instance of our controller, we can start testing it.
 
   section
     pre.
@@ -320,3 +331,7 @@ include ../includes/mixins
       });
 
       </code>
+
+  section
+    h1 Lab Three
+    h2 Karma Karma Karma Chameleon
