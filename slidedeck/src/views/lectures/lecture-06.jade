@@ -5,24 +5,199 @@ include ../includes/mixins
   +lecture-title-page("Promises and Interceptors", "Lecture 06")
 
   section
-    section
-      h1 Lab 05
-      h2 Solution
+    h1 Lab 05
+    h2 Solution
 
   section
-    section
-      h1 Promises
-    section
-      h2
+    h1 Promises
 
   section
-    section
-      h1 Deferred  
-    section
-      h2
+    p
+      | Promises provide a well-defined interface for interacting with an object that represents the result
+      | of an asynchronous action.
 
   section
-    section
-      h1 Interceptors
-    section
-      h2
+    p That action may or may not be finished at any given point in time.
+
+  section
+    img.no-style(style="width: 75%;", src="/assets/img/lecture-06/wat_grande.jpg")
+
+  section
+    p To understand why we use promises, lets look at one big problem that promises can mitigate.
+
+  section
+    h3 The
+    h1 Pyramid
+    h1 of Doom
+
+  section
+    p The "Pyramid of Doom" a situation where code marches to the right faster than it marches forward.
+    br
+    pre.
+      <code class="js" data-trim>
+      step1(function (value1) {
+        step2(value1, function(value2) {
+          step3(value2, function(value3) {
+            step4(value3, function(value4) {
+              step5(value4, function(value5) {
+                step6(value5, function(value6) {
+                  // Do something with value6
+                });
+              });
+            });
+          });
+        });
+      });
+
+      </code>
+
+  section
+    p We also call this "callback hell" because we're nesting a callback, within a callback, within a callback to perform a sequence of tasks.
+    br
+    pre.
+      <code class="js" data-trim>
+      // step1() executes a callback when it's finished
+      // and supplies the result
+      step1(function (value1) {
+        // step2() uses the result from step1(),
+        // does something with it,
+        // and executes a callback with the result when it's done.
+        step2(value1, function(value2) {
+          // please, make it stop...
+        });
+      });
+
+      </code>
+
+  section
+    p With a promise library, you can flatten the pyramid.
+    br
+    pre.
+      <code class="js" data-trim>
+      promisedStep1()
+        .then(promisedStep2)
+        .then(promisedStep3)
+        .then(promisedStep4)
+        .then(promisedStep5)
+        .then(promisedStep6)
+        .then(function (value6) {
+          // Do something with value6
+        })
+        .catch(function (error) {
+          // Handle any error from all above steps
+        })
+        .done();
+
+      </code>
+
+  section
+    p With this approach, you also get implicit error propagation, just like try, catch, and finally.
+
+  section
+    p An error in promisedStep1 will flow all the way to the catch function, where it’s caught and handled.
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+    h2
+
+  section
+    h1 Deferred
+
+  section
+    h2
+
+  section
+    h1 Interceptors
+
+  section
+    h2
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
+
+
+  section
