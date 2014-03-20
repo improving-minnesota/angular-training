@@ -85,10 +85,10 @@ include ../includes/mixins
     p AngularUI Router is a routing framework for AngularJS, which allows you to organize the parts of your interface into a state machine.
 
   section
-    p  Unlike the $route service in Angular core, which is organized around URL routes, UI-Router is organized around states.
+    p Unlike the $route service in Angular core, which is organized around URL routes, UI Router is organized around states.
 
   section
-    p  These state may optionally have routes, as well as other behavior attached.
+    p These states may optionally have routes, as well as other behavior attached to them.
 
   section
     p States are bound to named, nested and parallel views, allowing you to powerfully manage your application's interface.
@@ -343,7 +343,7 @@ include ../includes/mixins
           controller: 'AppCtrl',
           resolve: {
             projects: function ($control) {
-              return $control.get('projects');
+              return $control.list('projects');
             }
           }
         });
@@ -379,6 +379,8 @@ include ../includes/mixins
         });
 
       </code>
+
+    p We'll address this when we implement security in lab 7.
 
   section
     h2 Nested States
@@ -454,7 +456,10 @@ include ../includes/mixins
     h3 State Inheritance
 
   section
-    p When the application is in a particular state all of its ancestor states are implicitly active as well.
+    p When the application is in a particular state, all of its ancestor states are implicitly active as well.
+
+  section
+    p Let's go over what child states inherit from their parent state.
 
   section
     h4 Scope
@@ -483,7 +488,7 @@ include ../includes/mixins
       </code>
 
   section
-    p And the the app.projects state and ProjectsCtrl
+    p Then, given the app.projects state and ProjectsCtrl
     br
     pre.
       <code class="js" data-trim>
@@ -506,11 +511,10 @@ include ../includes/mixins
       </code>
 
   section
-    p What will be printed out to the console when the app.projects state is active?
+    p "My Property" will be printed out to the console when the app.projects state is active because it's inherited from the parent state.
 
   section
-    p "My Property"
-    p Do you think think this inheritance happens at the state or view?
+    p Where does scope inheritance happen?  In the state configuration or the view?
 
   section
     p Inheritance of scope properties has nothing to do with the nesting of your states.
@@ -594,7 +598,7 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       controller('ProjectDetailCtrl', function(projects) {
-        // Here we can inject projects which was resolved
+        // Here we can inject projects because it was resolved
         // in the parent state.
       });
 
@@ -681,7 +685,7 @@ include ../includes/mixins
     h2 Abstract States
 
   section
-    p An abstract state can have child states but can not get activated itself.
+    p An abstract state can have child states, but can not get activated itself.
 
   section
     p Abstract states are activated implicitly when one of their descendants are activated.
@@ -692,7 +696,7 @@ include ../includes/mixins
       li To prepend a url to all child state urls.
       li To insert a template with its own ui-view(s) that its child states will populate.
       li To provide resolved dependencies via resolve for use by child states.
-      li To provide inherited custom data via data for use by child states or an event listener.
+      li To provide inherited custom data via data for use by child states.
 
   section
     p One important thing to note is that abstract states still need their own &lt;div ui-view&gt;&lt;/div&gt; for their children to plug into.
@@ -808,7 +812,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the $state dependency.
+    p Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the $state service.
     br
     pre.
       <code class="js" data-trim>
@@ -835,3 +839,7 @@ include ../includes/mixins
       });
 
       </code>
+
+  section
+    h1 Lab Five
+    h2 UI Router
