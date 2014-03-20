@@ -4,7 +4,9 @@
 - In a console:
 
 ```
+git reset --hard
 git checkout lab-4-modules
+git pull
 ```
 &nbsp;
 ## Resources via `$resource`

@@ -3,7 +3,9 @@
 &nbsp;
 ## Checkout the lab branch
 ```
+git reset --hard
 git checkout lab-7-factories
+git pull
 ```
 &nbsp;
 ##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
