@@ -5,24 +5,317 @@ include ../includes/mixins
   +lecture-title-page("Promises and Interceptors", "Lecture 06")
 
   section
-    section
-      h1 Lab 05
-      h2 Solution
+    h1 Lab Five
+    h2 Solution
 
   section
-    section
-      h1 Promises
-    section
-      h2
+    h1 Promises
 
   section
-    section
-      h1 Deferred  
-    section
-      h2
+    p
+      | Promises provide a well-defined interface for interacting with an object that represents the result
+      | of an asynchronous action.
 
   section
-    section
-      h1 Interceptors
-    section
-      h2
+    p That action may or may not be finished at any given point in time.
+
+  section
+    img.no-style(style="width: 75%;", src="/assets/img/lecture-06/wat_grande.jpg")
+
+  section
+    p To understand why we use promises, lets look at one big problem that promises can mitigate.
+
+  section
+    h3 The
+    h1 Pyramid
+    h1 of Doom
+
+  section
+    p The "Pyramid of Doom" a situation where code marches to the right faster than it marches forward.
+    br
+    pre.
+      <code class="js" data-trim>
+      step1(function (value1) {
+        step2(value1, function(value2) {
+          step3(value2, function(value3) {
+            step4(value3, function(value4) {
+              step5(value4, function(value5) {
+                step6(value5, function(value6) {
+                  // Do something with value6
+                });
+              });
+            });
+          });
+        });
+      });
+
+      </code>
+
+  section
+    p We also refer to this as "callback hell" because we're nesting a callback, within a callback, within a callback just to perform tasks sequentially.
+    br
+    pre.
+      <code class="js" data-trim>
+      // step1() executes a callback when it's finished
+      // and supplies the result
+      step1(function (value1) {
+        // step2() uses the result from step1(),
+        // does something with it,
+        // and executes a callback with it's result when it's done.
+        step2(value1, function(value2) {
+          // please, make it stop...
+        });
+      });
+
+      </code>
+
+  section
+    p With a promise library, you can flatten the pyramid.
+    br
+    pre.
+      <code class="js" data-trim>
+      promisedStep1()
+        .then(promisedStep2)
+        .then(promisedStep3)
+        .then(promisedStep4)
+        .then(promisedStep5)
+        .then(promisedStep6)
+        .then(function (value6) {
+          // Do something with value6
+        })
+        .catch(function (error) {
+          // Handle any error from all above steps
+        })
+        .done();
+
+      </code>
+
+  section
+    p With this approach, you also get implicit error propagation, just like try, catch, and finally.
+
+  section
+    p An error in promisedStep1 will flow all the way to the catch function, where it’s caught and handled.
+
+  section
+    p Using the callback method, you would have to provide error handling for each individual step.
+
+  section
+    p Our original definition of a promise was:
+    p
+      | Promises provide a well-defined interface for interacting with an object that represents the result
+      | of an asynchronous action.
+
+  section
+    p What do we use as the "object that represents the result of an asynchronous action"?
+
+  section
+    h3 Deferred
+    p The "Deferred" object represents a task which will finish in the future.
+
+  section
+    p AngularJS provides the $q service which you can use to create deferred objects.
+
+  section
+    p Let's create a promise chain with the $q service.
+
+  section
+    p First, lets create an asynchronous function that returns a promise.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+        $scope.myAsyncTask = function() {
+          // Create the deferred object
+          var deferred = $q.defer();
+
+          // After 2 seconds
+          $timeout(function() {
+            // Fulfill the promise with a result
+            deferred.resolve("My Result");
+          }, 2000);
+
+          // Return the promise for a result immediately
+          // This function returns before we resolve the promise
+          return deferred.promise;
+        };
+      });
+
+      </code>
+
+  section
+    p Now, lets use the promise to execute a task after our asynchronous function completes.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+
+        // $scope.myAsyncTask = ...
+
+        $scope.myAsyncTask()         // call myAsyncTask
+          .then(function(result) {   // then,
+            $scope.result = result;  // save the result on scope
+          });
+
+      });
+
+      </code>
+
+  section
+    p You've seen this before...
+
+  section
+    p The $control service methods return promises to the response data from the server.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('EmployeeCtrl', function($scope, $q, $timeout) {
+
+        $control.list('employees')
+          .then(function (employees) {
+            $scope.employees = employees;
+          });
+
+      });
+
+      </code>
+
+  section
+    p What happens when you can't fulfill the promise?
+
+  section
+    p When you can't resolve a promise, reject it.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+        $scope.myAsyncTask = function() {
+          var deferred = $q.defer();
+
+          $timeout(function() {
+            // Reject the promise with a reason
+            deferred.reject("Nope.");
+          }, 2000);
+
+          return deferred.promise;
+        };
+      });
+
+      </code>
+
+  section
+    p We reject promises so that we handle the error's appropriately
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+
+        $scope.myAsyncTask()         // call myAsyncTask (fails)
+          .then(function(result) {   // then,
+            $scope.result = result;  // this will never happen
+          })
+          .catch(function(error) {   // because we're catching failures
+            console.log('Error!', error);
+          });
+
+      });
+
+      </code>
+
+
+  section
+    p  What if you don't know if the object you're dealing with is an object or not?
+
+  section
+    p You can use the $q.when(), when you're dealing with an object that might or might not be a promise.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($q) {
+        // Try to use a promise from some async task
+        $q.when($scope.myAsyncTask())
+          .then(function(result) {    // then,
+            $scope.result = result;   // do something with the result
+          });
+
+      });
+
+      </code>
+
+  section
+    h1 Interceptors
+
+  section
+    p
+      | For purposes of global error handling, authentication, or other request processing, it is desirable to be able to
+      | intercept those requests and perform actions before they reach their destination.
+
+  section
+    p For that reason, AngularJS provides interceptors.
+
+  section
+    p The interceptors are service factories that are registered with the $httpProvider by adding them to the $httpProvider.interceptors array.
+
+  section
+    p The factory is called and injected with dependencies (if any) and returns the interceptor.
+
+  section
+    p Lets start by creating a factory that intercepts requests.
+
+  section
+    p Interceptors are free to modify the the object passed into them and then return them as an object or a promise to the object.
+    br
+    pre.
+      <code class="js" data-trim>
+      .factory('myHttpInterceptor', function($q) {
+        return {
+          // The request before it's sent to the server
+          'request': function(config) {
+            // do something on success
+            return $q.when(config);
+          },
+          // The response from the server
+          'response': function(response) {
+            // do something on success
+            return $q.when(response);
+          },
+        };
+      });
+
+      </code>
+
+  section
+    p We can also intercept the errors for requests and responses.
+
+  section
+    p Error interceptors gets called when a previous interceptor threw an error or resolved with a rejection.
+    br
+    pre.
+      <code class="js" data-trim>
+      .factory('myHttpInterceptor', function($q) {
+        return {
+          'requestError': function(rejection) {
+            // do something on error
+            if (canRecover(rejection)) {
+              return responseOrNewPromise;
+            }
+            return $q.reject(rejection);
+          },
+
+          'responseError': function(rejection) {
+            // do something on error
+            if (canRecover(rejection)) {
+              return responseOrNewPromise;
+            }
+            return $q.reject(rejection);
+          }
+        };
+      });
+
+      </code>
+
+  section
+    p   We'll use interceptors in the next lab to notify the user on the progress of async requests.
+
+  section
+    h1 Lab Six
+    h2 Interceptors
