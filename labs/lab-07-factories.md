@@ -40,7 +40,7 @@ git pull
 
 
 - We have been tasked with the actual authorization process to guard access to the application.
-- Since the resolve block runs before dependency injection happens, we'll use a **Provider** so that we have access to it during resolve.
+- Since the resolve block runs before dependency injection happens, we'll use a **Provider** so that we have access to it in our configuration block.
 
 ###### Register the module
 - Open **client/src/security/services/authorization.js**
