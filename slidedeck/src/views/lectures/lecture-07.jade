@@ -9,7 +9,158 @@ include ../includes/mixins
     h2 Solution
 
   section
-    h1 Factories
+    h1 Providers
 
   section
-    h1 Providers
+    p The AngularJS injector creates two types of objects, services and specialized objects.
+
+  section
+    h3 Services
+    p Services are objects whose API is defined by the developer writing the service.
+
+  section
+    h3 Specialized Objects
+    p Specialized objects conform to a specific Angular framework API. These objects are one of controllers, directives, filters or animations.
+
+  section
+    p The injector needs to know how to create these objects.
+
+  section
+    p You tell the injector by registering a "recipe" for creating your object. There are five recipe types.
+
+  section
+    h2 Value Recipe
+
+  section
+    p You can use the Value recipe to create named Values that are injectable.
+
+  section
+    p You cannot inject dependencies into a Value recipe.
+
+  section
+    p The Value recipe is often used for specifying configuration values.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .value('apiUrl', '/api')
+        .controller('MyCtrl', function(apiUrl) {
+          // Do something with the apiUrl
+        });
+
+      </code>
+
+  section
+    h2 Factory Recipe
+
+  section
+    p The Factory recipe builds on top of the Value recipe but, adds the following abilities
+    ul
+      li the ability to use other services (have dependencies)
+      li service initialization
+      li delayed/lazy initialization
+
+  section
+    p The Factory recipe constructs a new service using a function with zero or more arguments (these are dependencies on other services).
+
+  section
+    p We can use the Factory recipe to provide utility functions that have other dependencies.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .factory('authentication', function(myDependency) {
+          var authentication = {
+            login : function(username, password) {
+              // Perform login functionality with myDependency
+            },
+            logout : function(username, password) {
+              // Perform logout functionality with myDependency
+            },
+          };
+          return authentication;
+        });
+
+      </code>
+
+  section
+    h2 Service Recipe
+
+  section
+    p The Service recipe produces a service just like the Value or Factory recipes, but it does so by invoking a constructor with the new operator.
+
+  section
+    p First, lets see how we can implement a service recipe with a factory
+    br
+    pre.
+      <code class="js" data-trim>
+      function AuthenticationService(myDependency) {
+        this.loginAttempts = 0;
+
+        this.login = function(username, password) {
+          this.loginAttempts++;
+          // Perform login functionality with myDependency
+        };
+
+        this.logout = function(username, password) {
+          this.loginAttempts = 0;
+          // Perform logout functionality with myDependency
+        };
+      };
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .factory('authentication', function(myDependency) {
+          // The service recipe does this for you
+          return new AuthenticationService(myDependency);
+        });
+
+      </code>
+
+  section
+    p Using the service recipe, we can accomplish the same thing with less code.
+    br
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .factory('authentication', AuthenticationService);
+
+      </code>
+    pre.
+      <code class="js" data-trim>
+      angular.module('app', [])
+        .factory('authentication', function(myDependency) {
+          this.loginAttempts = 0;
+
+          this.login = function(username, password) {
+            this.loginAttempts++;
+            // Perform login functionality with myDependency
+          };
+
+          this.logout = function(username, password) {
+            this.loginAttempts = 0;
+            // Perform logout functionality with myDependency
+          };
+        });
+
+      </code>
+
+  section
+    p Service recipes follow a design pattern called constructor injection.
+
+  section
+    h2 Providers
+
+  section
+    p The Provider recipe is the core recipe type and all the other recipe types are just syntactic sugar on top of it.
+
+  section
+    p It is the most verbose recipe with the most abilities, but for most services it's overkill.
+
+  section
+    p You should use the Provider recipe only when you want to expose an API for application-wide configuration before the application starts.
+
+  section
+    p
