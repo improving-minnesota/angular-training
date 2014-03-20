@@ -221,7 +221,7 @@ it('should reject the promise with the rejection config', function () {
 - Open **client/src/main.js** and set our new module as a dependency:
 
 ```javascript
-  'progresss.interceptors',
+  'progress.interceptors',
 ```
 
 &nbsp;
