@@ -5,7 +5,9 @@
 - In your console:
 
 ```
+git reset --hard
 git checkout lab-5-uirouter
+git pull
 ```
 
 &nbsp;

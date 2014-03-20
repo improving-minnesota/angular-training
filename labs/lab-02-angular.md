@@ -4,7 +4,9 @@
 - In a console:
 
 ```
+git reset --hard
 git checkout lab-2-angular
+git pull
 ```
 &nbsp;
 ## Review index.jade

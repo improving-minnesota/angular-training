@@ -5,7 +5,9 @@
 - In a console:
 
 ```
+git reset --hard
 git checkout lab-11-protractor
+git pull
 ```
 
 &nbsp;

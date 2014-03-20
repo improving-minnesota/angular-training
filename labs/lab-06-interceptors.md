@@ -5,7 +5,9 @@
 - In a console:
 
 ```
+git reset --hard
 git checkout lab-6-interceptors
+git pull
 ```
 &nbsp;
 ##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
