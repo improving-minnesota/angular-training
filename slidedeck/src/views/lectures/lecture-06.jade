@@ -5,7 +5,7 @@ include ../includes/mixins
   +lecture-title-page("Promises and Interceptors", "Lecture 06")
 
   section
-    h1 Lab 05
+    h1 Lab Five
     h2 Solution
 
   section
@@ -52,7 +52,7 @@ include ../includes/mixins
       </code>
 
   section
-    p We also call this "callback hell" because we're nesting a callback, within a callback, within a callback to perform a sequence of tasks.
+    p We also refer to this as "callback hell" because we're nesting a callback, within a callback, within a callback just to perform tasks sequentially.
     br
     pre.
       <code class="js" data-trim>
@@ -100,9 +100,6 @@ include ../includes/mixins
     p Using the callback method, you would have to provide error handling for each individual step.
 
   section
-    p AngularJS provides the $q service which you can use to create your own promises.
-
-  section
     p Our original definition of a promise was:
     p
       | Promises provide a well-defined interface for interacting with an object that represents the result
@@ -116,13 +113,13 @@ include ../includes/mixins
     p The "Deferred" object represents a task which will finish in the future.
 
   section
-    p AngularJS provides the $q service which you can use to create deferreds and chain promises.
+    p AngularJS provides the $q service which you can use to create deferred objects.
 
   section
     p Let's create a promise chain with the $q service.
 
   section
-    p First, lets create an asyncronous function that returns a promise for a result.
+    p First, lets create an asynchronous function that returns a promise.
     br
     pre.
       <code class="js" data-trim>
@@ -146,7 +143,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Now, lets use the promise to execute a task after our asyncronous function completes.
+    p Now, lets use the promise to execute a task after our asynchronous function completes.
     br
     pre.
       <code class="js" data-trim>
@@ -183,71 +180,142 @@ include ../includes/mixins
       </code>
 
   section
-    p  In this lab, you'll use a promise for an authenticated user with AngularUI Router to implement client side security.
+    p What happens when you can't fulfill the promise?
+
+  section
+    p When you can't resolve a promise, reject it.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+        $scope.myAsyncTask = function() {
+          var deferred = $q.defer();
+
+          $timeout(function() {
+            // Reject the promise with a reason
+            deferred.reject("Nope.");
+          }, 2000);
+
+          return deferred.promise;
+        };
+      });
+
+      </code>
+
+  section
+    p We reject promises so that we handle the error's appropriately
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+
+        $scope.myAsyncTask()         // call myAsyncTask (fails)
+          .then(function(result) {   // then,
+            $scope.result = result;  // this will never happen
+          })
+          .catch(function(error) {   // because we're catching failures
+            console.log('Error!', error);
+          });
+
+      });
+
+      </code>
+
+
+  section
+    p  What if you don't know if the object you're dealing with is an object or not?
+
+  section
+    p You can use the $q.when(), when you're dealing with an object that might or might not be a promise.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($q) {
+        // Try to use a promise from some async task
+        $q.when($scope.myAsyncTask())
+          .then(function(result) {    // then,
+            $scope.result = result;   // do something with the result
+          });
+
+      });
+
+      </code>
 
   section
     h1 Interceptors
 
   section
-
-
-  section
-
-
-  section
-
+    p
+      | For purposes of global error handling, authentication, or other request processing, it is desirable to be able to
+      | intercept those requests and perform actions before they reach their destination.
 
   section
-
-
-  section
-
+    p For that reason, AngularJS provides interceptors.
 
   section
-
-
-  section
-
+    p The interceptors are service factories that are registered with the $httpProvider by adding them to the $httpProvider.interceptors array.
 
   section
-
-
-  section
-
+    p The factory is called and injected with dependencies (if any) and returns the interceptor.
 
   section
-
-
-  section
-
+    p Lets start by creating a factory that intercepts requests.
 
   section
+    p Interceptors are free to modify the the object passed into them and then return them as an object or a promise to the object.
+    br
+    pre.
+      <code class="js" data-trim>
+      .factory('myHttpInterceptor', function($q) {
+        return {
+          // The request before it's sent to the server
+          'request': function(config) {
+            // do something on success
+            return $q.when(config);
+          },
+          // The response from the server
+          'response': function(response) {
+            // do something on success
+            return $q.when(response);
+          },
+        };
+      });
+
+      </code>
 
   section
-
-
-  section
-
+    p We can also intercept the errors for requests and responses.
 
   section
+    p Error interceptors gets called when a previous interceptor threw an error or resolved with a rejection.
+    br
+    pre.
+      <code class="js" data-trim>
+      .factory('myHttpInterceptor', function($q) {
+        return {
+          'requestError': function(rejection) {
+            // do something on error
+            if (canRecover(rejection)) {
+              return responseOrNewPromise;
+            }
+            return $q.reject(rejection);
+          },
 
+          'responseError': function(rejection) {
+            // do something on error
+            if (canRecover(rejection)) {
+              return responseOrNewPromise;
+            }
+            return $q.reject(rejection);
+          }
+        };
+      });
+
+      </code>
 
   section
-
-
-  section
-
+    p   We'll use interceptors in the next lab to notify the user on the progress of async requests.
 
   section
-
-
-  section
-
-
-  section
-
-
-  section
-
-
-  section
+    h1 Lab Six
+    h2 Interceptors
