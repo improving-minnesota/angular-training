@@ -61,7 +61,7 @@ include ../includes/mixins
       step1(function (value1) {
         // step2() uses the result from step1(),
         // does something with it,
-        // and executes a callback with the result when it's done.
+        // and executes a callback with it's result when it's done.
         step2(value1, function(value2) {
           // please, make it stop...
         });
@@ -97,52 +97,102 @@ include ../includes/mixins
     p An error in promisedStep1 will flow all the way to the catch function, where it’s caught and handled.
 
   section
-
-
-  section
-
+    p Using the callback method, you would have to provide error handling for each individual step.
 
   section
-
-
-  section
-
+    p AngularJS provides the $q service which you can use to create your own promises.
 
   section
-
-
-  section
-
-
-  section
-
+    p Our original definition of a promise was:
+    p
+      | Promises provide a well-defined interface for interacting with an object that represents the result
+      | of an asynchronous action.
 
   section
-
-
-  section
-
+    p What do we use as the "object that represents the result of an asynchronous action"?
 
   section
-
-
-  section
-
+    h3 Deferred
+    p The "Deferred" object represents a task which will finish in the future.
 
   section
-    h2
+    p AngularJS provides the $q service which you can use to create deferreds and chain promises.
 
   section
-    h1 Deferred
+    p Let's create a promise chain with the $q service.
 
   section
-    h2
+    p First, lets create an asyncronous function that returns a promise for a result.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+        $scope.myAsyncTask = function() {
+          // Create the deferred object
+          var deferred = $q.defer();
+
+          // After 2 seconds
+          $timeout(function() {
+            // Fulfill the promise with a result
+            deferred.resolve("My Result");
+          }, 2000);
+
+          // Return the promise for a result immediately
+          // This function returns before we resolve the promise
+          return deferred.promise;
+        };
+      });
+
+      </code>
+
+  section
+    p Now, lets use the promise to execute a task after our asyncronous function completes.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('PromiseCtrl', function($scope, $q, $timeout) {
+
+        // $scope.myAsyncTask = ...
+
+        $scope.myAsyncTask()         // call myAsyncTask
+          .then(function(result) {   // then,
+            $scope.result = result;  // save the result on scope
+          });
+
+      });
+
+      </code>
+
+  section
+    p You've seen this before...
+
+  section
+    p The $control service methods return promises to the response data from the server.
+    br
+    pre.
+      <code class="js" data-trim>
+      controller('EmployeeCtrl', function($scope, $q, $timeout) {
+
+        $control.list('employees')
+          .then(function (employees) {
+            $scope.employees = employees;
+          });
+
+      });
+
+      </code>
+
+  section
+    p  In this lab, you'll use a promise for an authenticated user with AngularUI Router to implement client side security.
 
   section
     h1 Interceptors
 
   section
-    h2
+
+
+  section
+
 
   section
 
