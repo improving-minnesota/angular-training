@@ -148,7 +148,7 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       angular.module('app', [])
-        .factory('authentication', function(myDependency) {
+        .service('authentication', function(myDependency) {
           this.loginAttempts = 0;
 
           this.login = function(username, password) {
