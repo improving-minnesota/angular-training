@@ -52,7 +52,7 @@ include ../includes/mixins
       </code>
 
   section
-    p We also refer to this as "callback hell" because we're nesting a callback, within a callback, within a callback just to perform tasks sequentially.
+    p This is really difficult to maintain because we're nesting a callback, within a callback, within a callback just to perform tasks sequentially.
     br
     pre.
       <code class="js" data-trim>
@@ -61,7 +61,7 @@ include ../includes/mixins
       step1(function (value1) {
         // step2() uses the result from step1(),
         // does something with it,
-        // and executes a callback with it's result when it's done.
+        // and executes a callback with its result when it's done.
         step2(value1, function(value2) {
           // please, make it stop...
         });

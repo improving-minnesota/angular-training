@@ -4,7 +4,6 @@ include ../includes/mixins
 +page("Lecture 10 - Animations")
   +lecture-title-page("Animations", "Lecture 10")
 
-
   section
     h1 Lab Nine
     h2 Solution
@@ -35,7 +34,7 @@ include ../includes/mixins
         </code>
 
   section
-    p Animations can be applied to CSS classes by following a set off CSS class name conventions.
+    p Animations can be applied to CSS classes by following a set of CSS class name conventions.
     p An example for ng-show is below
     br
     pre.
@@ -108,6 +107,12 @@ include ../includes/mixins
     br
     div.repeated-item(ng-repeat="time in times") {{time | date:'h:mm:ss.sss a'}}
 
+  section
+    h1 Lab Ten
+    h2 Animations
+
+  section
+    p In this lab, you're going to add animations to the employee, timesheet, and project lists.
 
   script.
     angular.module('lecture10', ['ngAnimate']).controller('Lecture10Controller', function($scope) {

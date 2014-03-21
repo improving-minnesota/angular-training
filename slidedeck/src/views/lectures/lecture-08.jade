@@ -177,9 +177,11 @@ include ../includes/mixins
         <strong>E</strong> - Matches element name.
       li.
         <strong>C</strong> - Matches class name.
+      li.
+        <strong>M</strong> - Matches HTML comment.
 
   section
-    p The directive below would match elements, attributes, or CSS class names
+    p The directive below would match elements, attributes, CSS class names, or HTML comments.
     br
     pre.
       <code data-trim>
@@ -187,7 +189,7 @@ include ../includes/mixins
         .directive('myCoolDirective',
           function() {
             return {
-              restrict: 'AEC'
+              restrict: 'AECM'
             };
           }
         );
