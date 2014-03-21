@@ -105,7 +105,7 @@ Done, without errors.
 * We need to set up the Chrome web driver for Protractor to run our tests.
 * In a console window, within the `timesheet` home directory, run:
 ```
-./node_modules/protractor/bin/webdriver-manager
+./node_modules/protractor/bin/webdriver-manager update
 ```
 * You should see output in your console that the chromedriver zip file was dowloaded.
 
