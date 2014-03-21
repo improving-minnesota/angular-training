@@ -149,7 +149,7 @@ grunt runapp:development
  })
 ```
 
-- Did the `karama` and/or `watch` task report an error?
+- Did the `karma` and/or `watch` task report an error?
 - If so, do you remember how to fix it? (hint: There's a `TODO` at the top of the page.)
 
 ###### Register the project detail state
