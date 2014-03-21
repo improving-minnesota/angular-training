@@ -18,7 +18,7 @@ include ../includes/mixins
     .text-center
       pre.
         <code data-trim>
-        {{ model.booleanValue | yesNo }}
+        {{ booleanValue | yesNo }}
 
         </code>
 
@@ -28,7 +28,7 @@ include ../includes/mixins
     .text-center
       pre.
         <code data-trim>
-        {{ model.booleanValue | yesNo:arg1:arg2 }}
+        {{ booleanValue | yesNo:arg1:arg2 }}
 
         </code>
 
@@ -38,7 +38,7 @@ include ../includes/mixins
     .text-center
       pre.
         <code data-trim>
-        {{ model.booleanValue | yesNo | uppercase }}
+        {{ booleanValue | yesNo | uppercase }}
 
         </code>
 
@@ -52,11 +52,16 @@ include ../includes/mixins
     h2 Creating Custom Filters
 
   section
+    p Filters are specialized objects which means their API is defined by AngularJS.
+
+  section
     p To create a filter, just register a new filter factory function with your module.
+
+  section
     p Internally, this with use the filterProvider (provided by AngularJS).
     br
     pre.
-      <code data-trim>
+      <code class="js" data-trim>
       angular.module('boolean.filters', [ ])
         .filter('yesNo', function() {
 
@@ -68,7 +73,7 @@ include ../includes/mixins
     p This factory function should return a new filter function which takes the input value as the first argument.
     br
     pre.
-      <code data-trim>
+      <code class="js" data-trim>
       angular.module('boolean.filters', [ ])
         .filter('yesNo', function() {
           return function(value) {
@@ -86,14 +91,14 @@ include ../includes/mixins
     p Filter arguments are passed in as additional arguments to the filter function.
     br
     pre.
-      <code data-trim>
+      <code class="js" data-trim>
       angular.module('boolean.filters', [ ])
         .filter('yesNo', function() {
-          return function(value, arg) {
+          return function(value, casual) {
             if (value) {
-              return arg === 'casual' ? 'Yep' : 'Yes';
+              return casual ? 'Yep' : 'Yes';
             } else {
-              return arg === 'casual' ? 'Nope' : 'No';
+              return casual ? 'Nope' : 'No';
             }
           };
         });
@@ -101,10 +106,10 @@ include ../includes/mixins
       </code>
 
   section
-    p Filter's aren't limited to primitive types. They can manipulate any type of object.
+    p Filter's aren't limited to simple values. They can manipulate any type of object.
     br
     pre.
-      <code data-trim>
+      <code class="js" data-trim>
       angular.module('date.filters', [ ])
         .filter('momentShortDate', function () {
           return function (date) {
@@ -118,29 +123,79 @@ include ../includes/mixins
     h2 Filtering Arrays
 
   section
-    p Since filters can be used with any type of object, we can also use them to filter lists.
+    p Since filters can be used with any type of object, we can also use them to filter arrays.
 
   section
     p To use a filter with ng-repeat, simply "pipe" the source array through a filter.
+
+  section
     p This will take the source array and return a new filtered array to ng-repeat.
     br
     pre.
-      <code data-trim>
-      &lt;tr ng-repeat="employee in employees | filter:myFilter"&gt;
+      <code class="html" data-trim>
+      &lt;tr ng-repeat="employee in employees | filter:myFilter | orderBy:'name'"&gt;
         &lt;td&gt;{{employee.name}}&lt;/td&gt;
       &lt;/tr&gt;
 
       </code>
 
-  section(id="example2", ng-controller="Lecture9Controller")
-    h2 Filtering arrays in action
-    input.form-control(ng-model="myFilter")
-    div(ng-repeat="employee in employees | filter:myFilter") {{employee.name}}
+    p The "filter" and "orderBy" filters are provided by AngularJS.
 
+  section(id="example2", ng-controller="Lecture9Controller")
+    p Filtering arrays in action
+    br
+    input.form-control(ng-model="myFilter")
+    br
+    div(ng-repeat="isisEmployee in isisEmployees | filter:myFilter | orderBy:'name'") {{isisEmployee.name}}
+
+  section
+    h1 Unit Testing
+    h2 Continued
+
+  section
+    p To test our filters, we'll first use the injector service to get our filter.
+    br
+    pre.
+      <code class="js" data-trim>
+      var yesNoFilter;
+
+      beforeEach(function() {
+        yesNoFilter = $injector.get('yesNoFilter');
+      });
+
+      </code>
+
+    p Notice that "Filter" is appended to the actual name of our filter.
+
+  section
+    p Then, we'll pass values into it and test that the output meets our expectations.
+    br
+    pre.
+      <code class="js" data-trim>
+      describe('yesNo Filter', function() {
+        it('should display Yes for true', function() {
+          expect(yesNoFilter(true)).to.equal('Yes');
+        });
+      });
+
+      </code>
+
+  section
+    h1 Lab Nine
+    h2 Filters
+
+  section
+    p In this lab you'll use the "orderBy" filter on employee, timesheet, and project lists and create some of your own filters.
 
   script.
     angular.module('lecture09', []).controller('Lecture9Controller', function($scope) {
-      $scope.employees = [{name: 'Bob'}, {name: 'Jane'}, {name: 'Jim'}, {name: 'Mary'}, {name: 'Bruce'}, {name: 'Jill'}];
+      $scope.isisEmployees = [
+        {name: 'Sterling Archer'},
+        {name: 'Lana Kane'},
+        {name: 'Malory Archer'},
+        {name: 'Cyril Figgis'},
+        {name: 'Pam Poovey'},
+        {name: 'Krieger'}];
     });
 
     angular.bootstrap(document.getElementById("example1"), ["lecture09"]);
