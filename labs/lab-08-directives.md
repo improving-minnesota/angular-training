@@ -345,7 +345,7 @@ it('should transclude the directive element contents', function () {
     <div class="col-sm-4 col-sm-offset-8 pull-right">
       <button type="button" class="btn btn-primary btn-block" ng-click="logTime()">Log Time</button>
     </div>
-  </div
+  </div>
 </div>
 ```
 - Now you can refresh the page, navigate to a Timsheet detail and see your work.
