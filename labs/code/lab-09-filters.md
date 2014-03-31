@@ -155,13 +155,13 @@ it('should display "N/A" for null', function() {
 - Open **client/assets/templates/app/employees/form.html**
 - Find the field that is bound to the admin property and change the binding to:
 
-```html
+```xml
 {{employee.admin | yesNo}}
 ```
 - Now open **client/assets/templates/app/employees/index.html**
 - Find the `<td>` with the admin binding and change it to:
 
-```html
+```xml
 <td>{{employee.admin | yesNo}}</td>
 ```
 - Now refresh the application page and navigate to the employee pages.
@@ -274,14 +274,14 @@ it('should display "Invalid date" for an invalid date', function() {
 - Open **client/assets/templates/app/timesheets/detail.html**
 - Find the table cell that is bound to the `timeunit.dateWorked`.
 
-```html
+```xml
 <td>{{timeunit.dateWorked | momentShortDate}}</td>
 ```
 
 - Open **client/assets/templates/app/timesheets/index.html**
 - Change the below bindings to use the new `momentShortDate` filter:
 
-```html
+```xml
 <td>{{timesheet.beginDate | momentShortDate}}</td>
 <td>{{timesheet.endDate | momentShortDate}}</td>
 ```

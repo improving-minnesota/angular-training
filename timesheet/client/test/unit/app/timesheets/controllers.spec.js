@@ -88,18 +88,12 @@ describe('Timesheets', function() {
         it('should be able to instantiate the controller and request a page of timesheets', function () { 
           expect(controller).to.be.ok; 
           // $scope.requestTimesheets is called upon controller creation
-          $httpBackend.expect('GET', '/users/1234567890/timesheets?page=1&sort=%7B%22beginDate%22:1%7D');
-          $httpBackend.flush();
+          // TODO : Set an expectation for requesting timesheets during setup and flush httpBackend
         });
       }); 
 
       describe('requesting timesheets', function () {
-        it('should set the result to the pageConfig object', function () {
-          $httpBackend.expect('GET', '/users/1234567890/timesheets?page=2&sort=%7B%22beginDate%22:1%7D');
-          $scope.requestTimesheets(2);
-          $httpBackend.flush();
-          expect($scope.pageConfig.name).to.equal("pageConfig2");
-        }); 
+        // TODO : verify it should set the result to the pageConfig object
       });
 
       describe('showing timesheet detail', function () {

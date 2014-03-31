@@ -4,7 +4,7 @@
       <div class="col-xs-12">
         <form name="systemCategoryEdit" novalidate class="form-horizontal">
         
-          <div tsz-form-section-header header="Timesheet Details"></div>
+          <!-- TODO : Set a header for Timesheet Details -->
 
           <div class="row">
             <div class="col-sm-6">
@@ -36,14 +36,13 @@
             </div>
           </div>
 
-          <div tsz-form-section-header header="Timesheet Progress"></div>
+          <!-- TODO : Set a header for Timesheet Progress -->
 
-          <div class="row">
-            <div class="col-xs-12">
-              <div tsz-weekly-progress-bar hours-worked="hoursWorked()" 
-                hours-required="hoursRequired()" report="reportStatus(percentComplete)"></div>
-            </div>
-          </div>
+          <!-- TODO : Place the progress bar directive here
+            1. hours-worked attribute calls the hoursWorked controller function
+            2. hours-required attribute calls the hoursRequired controller function
+            3. report attribute passes in percentComplete to the reportStatus controller function
+          -->
 
           <div class="row">
             <div class="col-sm-2 col-sm-offset-8">
@@ -62,11 +61,11 @@
       <hr/>
     </div>
 
-    <div tsz-form-section-header header="Time Units">
-      <div class="row">
-        <div class="col-sm-4 col-sm-offset-8 pull-right">
-          <button type="button" class="btn btn-primary btn-block" ng-click="logTime()">Log Time</button>
-        </div>
+    <!-- Place a Time Units section header here that also wraps the button for logging time -->
+    
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-8 pull-right">
+        <button type="button" class="btn btn-primary btn-block" ng-click="logTime()">Log Time</button>
       </div>
     </div>
 
