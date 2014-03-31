@@ -1,10 +1,9 @@
 angular.module('app.timesheets.timeunits', [
     'app.timesheets.timeunits.controllers',
-    'ui.router',
-    'authorization.services'
+    'ui.router'
   ])
   
-  .config(function ($stateProvider, authorizationProvider) {
+  .config(function ($stateProvider) {
 
     $stateProvider
       .state('app.timesheets.detail.timeunits', {

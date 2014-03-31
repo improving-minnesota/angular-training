@@ -21,7 +21,6 @@ describe('Timesheets', function() {
         'app.resources',
         'ngResource',
         'security.services',
-        'notifications.services',
         'app.timesheets.timeunits',
         'app.timesheets',
         'app.timesheets.controllers'
@@ -56,11 +55,7 @@ describe('Timesheets', function() {
         {"_id": "eeeeeeeeee", "dateWorked": "2013-11-22", "hoursWorked": 8, "project": "Project1"}
       ];
 
-      var notifications = $injector.get('notifications');
-
       spies = {
-        error: sinon.spy(notifications, 'error'),
-        success: sinon.spy(notifications, 'success'),
         state: sinon.stub($state)
       };
     }));
@@ -102,12 +97,7 @@ describe('Timesheets', function() {
       });
 
       describe('showing timesheet detail', function () {
-        it('should notify the user if the timesheet is deleted', function () {
-          timesheet.deleted = true;
-          $httpBackend.flush();
-          $scope.showDetail(timesheet);
-          expect(spies.error).to.have.been.calledWith('You cannot edit a deleted timesheet.');
-        });
+        
         it('should transition to the timesheet detail state', function () {
           $httpBackend.flush();
           $scope.showDetail(timesheet);
@@ -143,12 +133,6 @@ describe('Timesheets', function() {
             $httpBackend.flush();
             expect(timesheet.deleted).to.be.true;
           });
-          it('should notify the user of the deletion', function () {
-            $scope.remove(timesheet);
-            $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
-          });
         });
 
         describe('in error', function () {
@@ -161,12 +145,6 @@ describe('Timesheets', function() {
             $scope.remove(timesheet);
             $httpBackend.flush();
             expect(timesheet.deleted).to.be.false;
-          });
-          it('should notify the user of the error', function () {
-            $scope.remove(timesheet);
-            $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
           });
         });
 
@@ -195,12 +173,6 @@ describe('Timesheets', function() {
             $httpBackend.flush();
             expect(timesheet.deleted).to.be.false;
           });
-          it('should notify the user of the deletion', function () {
-            $scope.restore(timesheet);
-            $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
-          });
         });
 
         describe('in error', function () {
@@ -213,12 +185,6 @@ describe('Timesheets', function() {
             $scope.restore(timesheet);
             $httpBackend.flush();
             expect(timesheet.deleted).to.be.true;
-          });
-          it('should notify the user of the error', function () {
-            $scope.restore(timesheet);
-            $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
           });
         });
       });
@@ -299,12 +265,6 @@ describe('Timesheets', function() {
             $httpBackend.flush();
             expect(timeunit.deleted).to.be.true;
           });
-          it('should notify the user of the deletion', function () {
-            $scope.removeTimeunit(timeunit);
-            $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
-          });
         });
 
         describe('in error', function () {
@@ -316,12 +276,6 @@ describe('Timesheets', function() {
             $scope.removeTimeunit(timeunit);
             $httpBackend.flush();
             expect(timeunit.deleted).to.be.false;
-          });
-          it('should notify the user of the error', function () {
-            $scope.removeTimeunit(timeunit);
-            $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
           });
         });
       });
@@ -347,12 +301,6 @@ describe('Timesheets', function() {
             $httpBackend.flush();
             expect(timeunit.deleted).to.be.false;
           });
-          it('should notify the user of the deletion', function () {
-            $scope.restoreTimeunit(timeunit);
-            $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
-          });
         });
 
         describe('in error', function () {
@@ -364,12 +312,6 @@ describe('Timesheets', function() {
             $scope.restoreTimeunit(timeunit);
             $httpBackend.flush();
             expect(timeunit.deleted).to.be.true;
-          });
-          it('should notify the user of the error', function () {
-            $scope.restoreTimeunit(timeunit);
-            $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
           });
         });
       });
@@ -420,23 +362,6 @@ describe('Timesheets', function() {
             $scope.save();
             $httpBackend.flush();
             expect($scope.timesheet.name).to.equal(updatedTimesheet.name);
-          });
-
-          it('should notify the user of the successful update', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
-          });
-        });
-
-        describe('in error', function () {
-          it('should notify the user of the error', function () {
-            $httpBackend.when('PUT', '/users/1234567890/timesheets/' + timesheet._id).respond(500);
-            $scope.save();
-            $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
           });
         });
 
@@ -493,23 +418,6 @@ describe('Timesheets', function() {
             $scope.save();
             $httpBackend.flush();
             expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail', {user_id: $stateParams.user_id, _id: timesheet._id});
-          });
-
-          it('should notify the user of the successful create', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect(spies.success).to.have.been.called;
-            expect(spies.error).to.not.have.been.called;
-          });
-        });
-
-        describe('in error', function () {
-          it('should notify the user of the error', function () {
-            $httpBackend.when('POST', '/users/1234567890/timesheets').respond(500);
-            $scope.save();
-            $httpBackend.flush();
-            expect(spies.error).to.have.been.called;
-            expect(spies.success).to.not.have.been.called;
           });
         });
       });

@@ -4,11 +4,11 @@ describe('Notifications services:', function() {
     spies;
 
   beforeEach(module(
-    'notifications.services'
+    // TODO : set notifications.services as a dependency
   ));
 
   beforeEach(inject(function($injector) {
-    notifications = $injector.get('notifications');
+    // TODO : inject notifications service
 
     spies = {
       post: sinon.spy()
@@ -25,62 +25,22 @@ describe('Notifications services:', function() {
   }));
 
   describe('posting a message', function () {
-    it('should set showCloseButton to true on the message', function () {
-      var message = {};
-      notifications.message(message, {});
-      expect(message.showCloseButton).to.be.true;
-    });
 
-    it('extend the message object with the passed in config', function () {
-      var message = {};
-      notifications.message(message, {config: true});
-      expect(message.config).to.be.true;
-    });
+    // TODO : verify it should set showCloseButton to true on the message
+    // TODO : verify it extends the message object with the passed in config
+    // TODO : verify it should post the message via Messenger
 
-    it('should post the message via Messenger', function () {
-      notifications.message({message: 'allo'}, {config: true});
-      expect(spies.post).to.have.been.called;
-      expect(spies.post).to.have.been.calledWith({
-        message: 'allo', 
-        config: true, 
-        showCloseButton: true
-      });
-    });
   });
 
   describe('posting an error', function () {
-    it('should post an error message', function () {
-      notifications.error('oh noze');
-      expect(spies.post).to.have.been.calledWith({
-        message: 'oh noze', 
-        type: 'error', 
-        showCloseButton: true, 
-        id: 'error-message'
-      });
-    });
+    // TODO : verify it should post an error message
   });
 
   describe('success', function () {
-    it('should post a success message', function () {
-      notifications.success('i can haz');
-      expect(spies.post).to.have.been.calledWith({
-        message: 'i can haz', 
-        type: 'success', 
-        showCloseButton: true, 
-        id: 'success-message'
-      });
-    });
+    // TODO : verify it should post a success message'
   });
 
   describe('info', function () {
-    it('should post an info message', function () {
-      notifications.info('info');
-      expect(spies.post).to.have.been.calledWith({
-        message: 'info', 
-        type: 'info', 
-        showCloseButton: true,
-        id: 'info-message'
-      });
-    });
+    // TODO : verify it should post an info message
   });
 });

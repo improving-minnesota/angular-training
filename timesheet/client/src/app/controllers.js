@@ -2,13 +2,8 @@ angular.module('app.controllers', [])
 
   .controller('MainCtrl', function ($scope, securityContext){
     
-    $scope.$watch(function () {
-      return securityContext.authenticated;
-    },
-    function (authenticated) {
-      $scope.authenticated = authenticated;
-      $scope.loggedInUser = securityContext.user;
-    });
+    // TODO : Watch securityContext for changes and update 
+    // authenticated and loggedInUser on scope
 
   })
   

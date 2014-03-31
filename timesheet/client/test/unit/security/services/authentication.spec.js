@@ -21,7 +21,7 @@ describe('Authentication', function() {
       'app.security',
       'security.services',
       'assets/templates/security/login.html',
-      'notifications.services',
+      // TODO : set notifications as a dependency
       'authentication.services'
     ));
 
@@ -112,11 +112,12 @@ describe('Authentication', function() {
       expect(securityContext.authenticated).to.be.false;
       $httpBackend.expect('GET', '/login');
 
-      authentication.requestCurrentUser().then(function(data) {
-        resolved = true;
-        expect(securityContext.authenticated).to.be.true;
-      expect(securityContext.user._id).to.equal(userInfo._id);
-      });
+      authentication.requestCurrentUser()
+        .then(function(data) {
+          resolved = true;
+          expect(securityContext.authenticated).to.be.true;
+          expect(securityContext.user._id).to.equal(userInfo._id);
+        });
       
       $httpBackend.flush();
       expect(resolved).to.be.true;

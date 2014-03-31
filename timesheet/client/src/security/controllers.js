@@ -1,12 +1,14 @@
 angular.module('app.security.controllers', [
   'authentication.services',
-  'authorization.services',
+  // TODO : Set authorization service as a dependency
   'security.services'
 ])
 
 // The LoginCtrl provides the behaviour behind a reusable form to allow users to authenticate.
 .controller('LoginCtrl', 
-  function ($scope, $location, $stateParams, authentication, authorization, securityContext) {
+
+  // TODO : inject the authorization service
+  function ($scope, $location, $stateParams, authentication, securityContext) {
 
     // Request the current user, this will wait until the current user
     // promise is resolved.

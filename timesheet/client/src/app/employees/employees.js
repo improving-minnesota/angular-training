@@ -1,10 +1,9 @@
 angular.module('app.employees', [
   'app.employees.controllers',
-  'ui.router',
-  'authorization.services'
+  'ui.router'
 ])
 
-.config(function ($stateProvider, authorizationProvider) {
+.config(function ($stateProvider) {
 
   $stateProvider
     .state('app.employees', {
