@@ -1,7 +1,8 @@
 angular.module('app.employees.controllers', [])
   
   .controller('EmployeeCtrl', 
-    function ($control, $scope, $state, $stateParams) {
+    // TODO : inject $state and $stateParams
+    function ($control, $scope) {
 
       $scope.requestEmployees = function requestEmployees (page) {
 
@@ -11,17 +12,9 @@ angular.module('app.employees.controllers', [])
           });
       };
 
-      $scope.showDetail = function showDetail (employee) {
-        if (employee.deleted) {
-          console.log('cannot view a deleted employee');
-          return;
-        }
-        $state.go('app.employees.detail', employee);
-      };  
-
-      $scope.createNew = function createNew () {
-        $state.go('app.employees.create', $stateParams);
-      };
+      // TODO : implement a function on scope to show the detail of an employee
+      // TODO : implement a function on scope to navigate to the create employee state
+      // TODO : implement a function on scope to handle cancel for child states
 
       $scope.remove = function remove (employee) {
 
@@ -47,46 +40,28 @@ angular.module('app.employees.controllers', [])
           });
       };
 
-      $scope.cancel = function cancel () {
-        $state.go('app.employees', {}, {reload: true});
-      };
-
       $scope.requestEmployees(1);
     }
   )
 
   .controller('EmployeeDetailCtrl', 
-    function ($scope, $state, $stateParams, employee) {
-      $scope.saveText = $state.current.data.saveText;
+    // TODO : inject $state and $stateParams
+    function ($scope, employee) {
+      // TODO : set saveText on scope to the saveText assigned to the data of the current state
+
       $scope.employee = employee;
 
-      $scope.save = function save () {
-        $scope.employee.$update()
-          .then(function (updated) {
-            $scope.timesheet = updated;
-            console.log('success!');
-          })
-          .catch(function (x) {
-            console.log('error : ' + x);
-          });
-      };
+      // TODO : implement a function on scope to update the employee
     }
   )
 
   .controller('EmployeeCreateCtrl', 
-    function ($scope, $state, $stateParams, $control) {
-      $scope.saveText = $state.current.data.saveText;
+    // TODO : inject $state and $stateParams
+    function ($scope, $control) {
+      // TODO : set saveText on scope to the saveText assigned to the data of the current state
+
       $scope.employee = {admin: false};
 
-      $scope.save = function save () {
-        $control.create('employees', $scope.employee)
-          .then(function (created) {
-            console.log('success!');
-            $state.go('app.employees.detail', {_id: created._id});
-          })
-          .catch(function (x) {
-            console.log('error : ' + x);
-          });
-      };
+      // TODO : implement a function on scope to update the employee and redirect to the detail state
     }
   );

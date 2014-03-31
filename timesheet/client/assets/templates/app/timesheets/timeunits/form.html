@@ -8,9 +8,13 @@
             <select ui-select2="projectSelect"
               name="timeunit-project"
               ng-model="timeunit.project" 
-              data-placeholder="Select Project..." required>
+              data-placeholder="Select Project...">
+
+              <!-- TODO : set the repeater for this select's options
+                1. set the repeater to project in projects
+                2. set the value and display text bound to project.name -->
               <option value=""></option>
-              <option ng-repeat="project in projects" value="{{project.name}}">{{project.name}}</option>
+
             </select>
           </div>
         </div>
@@ -18,15 +22,18 @@
         <div class="form-group">
           <div tsz-field-wrap input-id="timeunit-dateWorked" label="Date">
             <div class="input-group">
-              <input type="text" class="form-control" 
-                datepicker-popup="MM/dd/yyyy"
-                ng-model="timeunit.dateWorked"  
-                show-weeks="false"
-                show-button-bar="false"
-                min="timesheet.beginDate"
-                max="timesheet.endDate"
-                ng-required="true" 
-                close-text="Close" />
+
+              <!-- TODO : use a ui datepicker to display and edit timeunit's dateWorked
+                1. Set these attributes: 
+                  a. datepicker-popup="MM/dd/yyyy"
+                  b. show-weeks="false"
+                  c. show-button-bar="false"
+                  d. min="timesheet.beginDate"
+                  e. max="timesheet.endDate"
+                  f. close-text="Close" 
+                2. Set the input's model to timeunit.dateWorked 
+              -->
+              <input type="text" class="form-control" />
               <span class="input-group-btn">
                 <button class="btn btn-default">
                   <i class="fa fa-fw fa-calendar"></i>
@@ -38,9 +45,10 @@
 
         <div class="form-group">
           <div tsz-field-wrap input-id="timeunit-hoursWorked" label="Hours">
+
+            <!-- TODO : set this input's model to timeunit.hoursWorked -->
             <input type="number" class="form-control" 
-              name="timeunit-hoursWorked" placeholder="Hours Worked"
-              ng-model="timeunit.hoursWorked">
+              name="timeunit-hoursWorked" placeholder="Hours Worked">
           </div>
         </div>
 
@@ -50,11 +58,14 @@
 
         <div class="row">
           <div class="col-sm-2 col-sm-offset-8">
-            <button class="btn btn-primary btn-block" 
-              ng-click="save()">Save</button>
+
+            <!-- TODO : set the button to call save when clicked -->
+            <button class="btn btn-primary btn-block">Save</button>
           </div>
           <div class="col-sm-2">
-            <button class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
+
+            <!-- TODO : set the button to call cancel when clicked -->
+            <button class="btn btn-danger btn-block">Cancel</button>
           </div>
         </div>
       </form>

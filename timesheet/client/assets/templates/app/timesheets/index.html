@@ -1,11 +1,10 @@
 <div class="tsz-timesheet-list">
-  <div ng-show="$state.is('app.timesheets')">
+
+  <!-- TODO : set the below container div to only show when state is app.timesheets -->
+  <div>
     <div class="row tsz-form-row">
       <div class="col-sm-2 pull-right">
-        <button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
-          <i class="icon-plus"></i>
-          New Timesheet
-        </button>
+        <!-- TODO : add a button that calls createNew when clicked -->
       </div>
     </div>
     <div class="row">
@@ -21,10 +20,11 @@
             </tr>
           </thead>
           <tbody>
+
+            <!-- TODO : set the row to show the timesheet's detail when clicked  -->
             <tr ng-repeat="timesheet in timesheets" 
               class="fadeable-row"
-              ng-class="{faded: timesheet.deleted}"
-              ng-click="showDetail(timesheet)">
+              ng-class="{faded: timesheet.deleted}">
 
               <td>{{timesheet.beginDate}}</td>
               <td>{{timesheet.endDate}}</td>
@@ -48,5 +48,5 @@
 
   </div>
   
-  <div ui-view></div>
+  <!-- TODO : set a ui-view for nested states -->
 </div>

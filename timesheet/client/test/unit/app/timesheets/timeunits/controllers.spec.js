@@ -8,14 +8,14 @@ describe('Timeunits', function() {
     $stateParams,
     $scope,
     $api,
-    controller, 
+    controller,
     timeunit,
     timesheet,
     projects,
     spies;
- 
+
   describe('Controllers', function() {
-      
+
     beforeEach(
       module(
         'app.resources',
@@ -24,38 +24,36 @@ describe('Timeunits', function() {
         'app.timesheets.timeunits.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
+    // TODO : inject the $state and $stateParams services and assign them to the spec's variables
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
-      $state = _$state_;
-      $stateParams = _$stateParams_;
       $api = _$api_;
     }));
 
     beforeEach(inject(function ($injector) {
-      $stateParams.user_id = "1234567890";
-      $stateParams._id = "asdfghjklqwerty";
+      // TODO : set user_id and _id on $stateParams
 
       projects = [{
         "_id": "creative_proj_id",
-        "name": "Project1", 
+        "name": "Project1",
         "description": "This is your first project"
       }];
 
       timesheet = {"_id": "asdfghjklqwerty", beginDate: '2014-05-12'};
       timeunit = {
-        "_id": "aaaaaaaaaa", 
-        "dateWorked": "2013-11-18", 
-        "hoursWorked": 8, 
+        "_id": "aaaaaaaaaa",
+        "dateWorked": "2013-11-18",
+        "hoursWorked": 8,
         "project": "Project1",
         "timesheet_id": timesheet._id,
-        "project_id": projects[0]._id,
-        "user_id": $stateParams.user_id
+        "project_id": projects[0]._id
+        // TODO : set user_id to $stateParams.user_id for this test timeunit
       };
 
       spies = {
-        state: sinon.stub($state)
+        // TODO : set up a sinon test stub on $state service
       };
     }));
 
@@ -68,27 +66,24 @@ describe('Timeunits', function() {
 
       beforeEach(inject(function($rootScope, $controller) {
         $scope = $rootScope.$new();
-        controller = $controller("TimeunitCtrl", { 
+        controller = $controller("TimeunitCtrl", {
           $scope: $scope,
-          projects: projects,
-          $stateParams: $stateParams
+          projects: projects
+          // TODO : inject $stateParams into your test controller
         });
       }));
 
       describe('setup', function () {
-        it('should be able to instantiate the controller', function () { 
+        it('should be able to instantiate the controller', function () {
           expect(controller).to.be.ok;
         });
-        it('should set the resolved list of projects on scope', function () {
-          expect($scope.projects).to.equal(projects);
-        });
-      }); 
+
+        // TODO : verify it should set the resolved list of projects on scope
+
+      });
 
       describe('cancel', function () {
-        it('should return back to the timesheet detail', function () {
-          $scope.cancel();
-          expect(spies.state.go).to.have.been.calledWith('app.timesheets.detail');
-        });
+        // TODO : verify it should return back to the timesheet detail
       });
     });
 
@@ -98,9 +93,9 @@ describe('Timeunits', function() {
         $scope  = $rootScope.$new();
         controller = $controller("TimeunitEditCtrl", {
           $scope: $scope,
-          $state: spies.state,
-          $stateParams: $stateParams,
           timeunit: new $api.timeunits(timeunit)
+
+          // TODO : inject the spies.state and $stateParams into the test controller
         });
       }));
 
@@ -108,9 +103,9 @@ describe('Timeunits', function() {
         it('should be able to instantiate the controller', function () {
           expect(controller).to.be.ok;
         });
-        it('should attach the resolved timeunit onto scope', function () {
-          expect($scope.timeunit._id).to.equal(timeunit._id);
-        });
+
+        // TODO : verify it should attach the resolved timeunit onto scope
+
       });
 
       describe('Saving an edited timeunit', function () {
@@ -127,11 +122,8 @@ describe('Timeunits', function() {
             $httpBackend.when('PUT', '/users/1234567890/timesheets/asdfghjklqwerty/timeunits/aaaaaaaaaa').respond(200, updatedTimeunit);
           });
 
-          it('should set the timeunit on scope to be the updated timeunit', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect($scope.timeunit.name).to.equal(updatedTimeunit.name);
-          });
+          // TODO : verify it should set the timeunit on scope to be the updated timeunit
+
         });
 
       });
@@ -143,8 +135,9 @@ describe('Timeunits', function() {
         $scope  = $rootScope.$new();
         $scope.timesheet = {"_id": "asdfghjklqwerty", beginDate: '2014-05-12'};
         controller = $controller("TimeunitCreateCtrl", {
-          $scope: $scope,
-          $stateParams: $stateParams 
+          $scope: $scope
+
+          // TODO : inject $stateParams into the test controller
         });
       }));
 
@@ -152,11 +145,10 @@ describe('Timeunits', function() {
         it('should be able to instantiate the controller', function () {
           expect(controller).to.be.ok;
         });
-        it('should initialize a new timeunit with user and timesheet ids', function () {
-          expect($scope.timeunit.user_id).to.equal($stateParams.user_id);
-          expect($scope.timeunit.timesheet_id).to.equal($stateParams._id);
-        });
-      }); 
+
+        // TODO : verify it should initialize a new timeunit with user and timesheet ids
+
+      });
 
       describe('Saving a new timeunit', function () {
         var updatedTimeunit;
@@ -172,11 +164,8 @@ describe('Timeunits', function() {
             $httpBackend.when('POST', '/users/1234567890/timesheets/asdfghjklqwerty/timeunits').respond(200, updatedTimeunit);
           });
 
-          it('should set the timeunit on scope to be the updated timeunit', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect($scope.timeunit.name).to.equal(updatedTimeunit.name);
-          });
+          // TODO : verify it should set the timeunit on scope to be the new timeunit
+
         });
 
       });

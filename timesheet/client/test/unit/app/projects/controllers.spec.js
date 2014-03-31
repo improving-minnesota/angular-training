@@ -22,19 +22,18 @@ describe('Projects', function() {
         'app.projects.controllers'
       ));
 
-    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_, _$api_){
+    // TODO : inject the $state and $stateParams services and assign them to the spec's variables
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$api_){
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
-      $state = _$state_;
-      $stateParams = _$stateParams_;
       $api = _$api_;
     }));
 
     beforeEach(inject(function ($injector) {
 
       spies = {
-        state: sinon.stub($state)
+        // TODO : create a test stub for the $state service
       };
 
       project = {
@@ -54,9 +53,9 @@ describe('Projects', function() {
       beforeEach(function() {
         $scope = $rootScope.$new();
         controller = $controller("ProjectCtrl", { 
-          $scope: $scope,
-          $state: spies.state,
-          $stateParams: $stateParams 
+          $scope: $scope
+
+          // TODO : inject the spies.state and $stateParams into the test controller 
         });
         
         $httpBackend.when('GET', '/projects').respond(200, [{name: 'project1'}]);
@@ -72,7 +71,7 @@ describe('Projects', function() {
       }); 
 
       describe('requesting projects', function () {
-        it('should set the result to the pageConfig object', function () {
+        it('should set the result to the projects', function () {
           $httpBackend.expect('GET', '/projects');
           $scope.requestProjects();
           $httpBackend.flush();
@@ -81,19 +80,15 @@ describe('Projects', function() {
       });
 
       describe('showing project detail', function () {
-        it('should transition to the project detail state', function () {
-          $httpBackend.flush();
-          $scope.showDetail(project);
-          expect(spies.state.go).to.have.been.calledWith('app.projects.detail', project);
-        });
+
+        // TODO : verify it should transition to the project detail state
+
       });
 
       describe('creating a new project', function () {
-        it('should transition to the create project state', function () {
-          $httpBackend.flush();
-          $scope.createNew();
-          expect(spies.state.go).to.have.been.calledWith('app.projects.create');
-        });
+
+        // TODO : verify it should transition to the create project state
+
       });
 
       describe('removing a project', function () {
@@ -173,11 +168,9 @@ describe('Projects', function() {
       });
 
       describe('cancel', function () {
-        it('should return back to the project list', function () {
-          $httpBackend.flush();
-          $scope.cancel();
-          expect(spies.state.go).to.have.been.calledWith('app.projects');
-        });
+
+        // TODO : verify it should return back to the project list
+
       });
 
     });
@@ -185,14 +178,14 @@ describe('Projects', function() {
     describe('ProjectDetailCtrl', function() {
       
       beforeEach(function() {
-        $state.current = {data: {saveText: 'update'}};
+        // TODO : set the saveText on the data of the current state to 'update'
 
         $scope = $rootScope.$new();
         controller = $controller("ProjectDetailCtrl", {
           $scope: $scope,
-          project: new $api.projects(project),
-          $state: spies.state,
-          $stateParams: $stateParams
+          project: new $api.projects(project)
+
+          // TODO : inject the spies.state and $stateProvider into the test controller
         });
       });
 
@@ -201,14 +194,9 @@ describe('Projects', function() {
           expect(controller).to.be.ok;
         });
 
-        it('should set saveText to the current state saveText', function () {
-          expect($scope.saveText).to.equal('update');
-        });
+        // TODO : verify it should set saveText to the current state saveText
+        // TODO : verify it should set the project on scope to the resolved project
 
-        it('should set the project on scope to the resolved project', function () {
-          expect($scope.project._id).to.equal(project._id);
-          expect($scope.project.name).to.equal(project.name);
-        });
       });
 
       describe('Saving an edited project', function () {
@@ -225,11 +213,8 @@ describe('Projects', function() {
             $httpBackend.when('PUT', '/projects/' + project._id).respond(200, updatedProject);
           });
 
-          it('should set the project on scope to be the updated project', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect($scope.project.name).to.equal(updatedProject.name);
-          });
+          // TODO : verify it should set the project on scope to be the updated project
+
         });
 
       });
@@ -238,13 +223,13 @@ describe('Projects', function() {
     describe('ProjectCreateCtrl', function() {
 
       beforeEach(function() {
-        $state.current = {data: {saveText: 'create'}};
+        // TODO : set the saveText on the data of the current state to 'create'
 
         $scope = $rootScope.$new();
         controller = $controller("ProjectCreateCtrl", {
-          $scope: $scope,
-          $state: spies.state,
-          $stateParams: $stateParams
+          $scope: $scope
+
+          // TODO : inject spies.state and $stateParams into the test controller
         });
       });
 
@@ -253,13 +238,9 @@ describe('Projects', function() {
           expect(controller).to.be.ok;
         });
 
-        it('should set saveText to the current state saveText', function () {
-          expect($scope.saveText).to.equal('create');
-        });
-        
-        it('should set the project on scope to an empy object', function () {
-          expect($scope.project).to.be.empty;
-        });
+        // TODO : verify it should set saveText to the current state saveText
+        // TODO : verify it should set the project on scope to an empy object
+
       }); 
 
       describe('saving a new project', function () {
@@ -274,11 +255,8 @@ describe('Projects', function() {
             $httpBackend.when('POST', '/projects').respond(200, project);
           });
 
-          it('should transition to the detail page of the created project', function () {
-            $scope.save();
-            $httpBackend.flush();
-            expect(spies.state.go).to.have.been.calledWith('app.projects.detail', {_id: project._id});
-          });
+          // TODO : verify it should transition to the detail page of the created project
+          
         });
       });
 

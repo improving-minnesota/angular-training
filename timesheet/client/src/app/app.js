@@ -1,32 +1,15 @@
 angular.module('app', [
-  'ui.router',
+  // TODO : add ui.router as a dependency
   'app.resources',
   'app.controllers',
   'app.employees',
   'app.projects',
   'app.timesheets',
   'app.timesheets.timeunits'
-])
-
-  .config(function ($stateProvider) {
-
-    $stateProvider
-      .state('app', {
-        abstract: true,
-        url: '/app',
-        data: {
-          title: 'The Timesheet App'
-        },
-        views : {
-          'navbar' : {
-            controller: 'NavCtrl',
-            templateUrl: 'assets/templates/app/navbar.html'
-          },
-          'content' : {
-            controller: 'AppCtrl',
-            templateUrl: 'assets/templates/app/index.html'
-          }
-        }
-      });
-  });
+]);
+ 
+// TODO : create a config block to register the app state
+// 1. inject the $stateProvider
+// 2. register the app state with the state provider
+// 3. app state has multiple views: navbar and content
   
