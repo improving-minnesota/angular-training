@@ -180,7 +180,7 @@ include ../includes/mixins
   section
     h4 Nope!
     p HTML comments are elements which means this template violates the one root element rule.
-    
+
   section
     h3 Restrict
 
@@ -614,6 +614,104 @@ include ../includes/mixins
       li
         strong Linking Function
         |  - You're directly manipulating DOM.
+
+  section
+    h1 Unit Testing
+    h2 Continued
+
+  section
+    p Now that we've learned about how to create our own directives, we'll need to learn how we can test them.
+
+  section
+    p First, we'll need to make sure that we inject the $compile service, our directive module, and any templates used by the directive.
+    br
+    pre.
+      <code data-trim>
+      beforeEach(module(
+        'app.directives',
+        'assets/templates/directives/my-cool-directive.html'
+      ));
+
+      beforeEach(inject(function($rootScope, _$compile_) {
+        $compile = _$compile_;
+        $scope = $rootScope.$new();
+      }));
+
+      </code>
+
+  section
+    p Then, we'll create our mock $scope, element, and finally use the $compile service to compile and link our directive.
+    br
+    pre.
+      <code data-trim>
+      beforeEach(function () {
+        // Notice that we can use properties
+        // on our mock scope with the directive below
+        $scope.myColor = 'red';
+
+        // Create a jqLite element with our directive
+        element = angular.element(
+          '&lt;div my-cool-directive color="myColor"&gt;' +
+          '&lt;/div&gt;'
+        );
+
+        // This will compile the element with our mock scope
+        $compile(element)($scope);
+      });
+
+      </code>
+
+  section
+    p In a real browser, scope digests are automatically triggered by AngularJS in reaction to various events.
+
+  section
+    p There are no such events during automated testing so we'll need to force a scope digest.
+
+  section
+    p The forced digest cycle will propagate changes between the parent scope and isolate scope.
+    br
+    pre.
+      <code data-trim>
+      beforeEach(function () {
+        $scope.myColor = 'red';
+
+        element = angular.element(
+          '&lt;div my-cool-directive color="myColor"&gt;' +
+          '&lt;/div&gt;'
+        );
+
+        $compile(element)($scope);
+
+        // This propagate the value of $scope.myColor with the
+        // directive's scope.color
+        $scope.$digest();
+      });
+
+      </code>
+
+  section
+    p Now we're ready to start testing the expected behavior of the directive.
+
+  section
+    p Lets assume that our directive sets the CSS attribute  "color" on the element based on myColor.
+    br
+    pre.
+      <code data-trim>
+      describe('my cool directive', function() {
+        it('should set the element color', function () {
+          expect(element.css('color')).to.equal('red');
+        });
+
+        it('should respond to changes', function () {
+          // Notice that we're forcing a digest by using apply
+          $scope.$apply(function() {
+            $scope.myColor = 'blue';
+          });
+          expect(element.css('color')).to.equal('blue');
+        });
+      });
+
+      </code>
 
   section
     h2 Lab 8 - Directives
