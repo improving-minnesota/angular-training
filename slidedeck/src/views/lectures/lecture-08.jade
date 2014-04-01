@@ -640,7 +640,12 @@ include ../includes/mixins
       </code>
 
   section
-    p Then, we'll create our mock $scope, element, and finally use the $compile service to compile and link our directive.
+    p
+      | Then, we'll create our mock 
+      code $scope
+      | , element, and finally use the 
+      code $compile
+      |  service to compile and link our directive.
     br
     pre.
       <code data-trim>
@@ -693,7 +698,7 @@ include ../includes/mixins
     p Now we're ready to start testing the expected behavior of the directive.
 
   section
-    p Lets assume that our directive sets the CSS attribute  "color" on the element based on myColor.
+    p Lets assume that myCoolDirective sets the CSS attribute  "color" on the element based on myColor.
     br
     pre.
       <code data-trim>
@@ -708,6 +713,38 @@ include ../includes/mixins
             $scope.myColor = 'blue';
           });
           expect(element.css('color')).to.equal('blue');
+        });
+      });
+
+      </code>
+
+  section
+    p What if we want to test something that's not directly accessable through the DOM?
+
+  section
+    p AngularJS provides jqLite functions that expose the parent scope and isolate scope of a particular element
+
+  section
+    p
+      | The non-isolate scope can be accessed by calling
+      code element.scope()
+
+  section
+    p
+      | The isolate scope can be accessed by calling
+      code element.isolateScope()
+
+  section
+    p Here, we can validate the binding between the parent and isolate scope.
+    br
+    pre.
+      <code data-trim>
+      describe('my cool directive', function() {
+        it('should have bound scopes', function () {
+          $scope.$apply(function() {
+            $scope.myColor = 'blue';
+          });
+          expect(element.isolateScope().color).to.equal('blue');
         });
       });
 
