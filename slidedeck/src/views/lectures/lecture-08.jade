@@ -45,7 +45,7 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
+      angular.module('app.directives', [])
         .directive('myCoolDirective', [
           //...
         ]);
@@ -105,7 +105,7 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
+      angular.module('app.directives', [])
         .directive('myCoolDirective', [
           'dependency',
           function(dependency) {
@@ -136,14 +136,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              template: '&lt;div&gt;{{helloWorld}}&lt;/div&gt;'
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            template: '&lt;div&gt;{{helloWorld}}&lt;/div&gt;'
+          };
+        });
 
       </code>
 
@@ -152,14 +150,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              templateUrl: 'my-cool-directive.html'
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            templateUrl: 'my-cool-directive.html'
+          };
+        });
 
       </code>
 
@@ -185,14 +181,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              restrict: 'AECM'
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            restrict: 'AECM'
+          };
+        });
 
       </code>
 
@@ -216,14 +210,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: true
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: true
+          };
+        });
 
       </code>
 
@@ -232,16 +224,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                // ...
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective',function() {
+          return {
+            scope: {
+              // ...
+            }
+          };
+        });
 
       </code>
 
@@ -254,16 +244,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                someAttribute: '='
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: {
+              someAttribute: '='
+            }
+          };
+        });
 
       </code>
     pre.
@@ -282,16 +270,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                someCalculation: '&'
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: {
+              someCalculation: '&'
+            }
+          };
+        });
 
       </code>
     pre.
@@ -318,16 +304,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                attributeValue: '@'
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective',function() {
+          return {
+            scope: {
+              attributeValue: '@'
+            }
+          };
+        });
 
       </code>
     pre.
@@ -398,14 +382,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myFrameDirective',
-          function() {
-            return {
-              transclude: true
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myFrameDirective', function() {
+          return {
+            transclude: true
+          };
+        });
 
       </code>
 
