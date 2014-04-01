@@ -123,7 +123,7 @@ module.exports = function(grunt) {
 
     watch : {
       options : {
-        livereload: true
+        livereload: 35729
       },
       src: {
         files: [
@@ -138,7 +138,7 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: 8000,
+          port: 8001,
           base: 'dist'
         }
       }
