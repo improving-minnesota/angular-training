@@ -1,60 +1,60 @@
-# Lab Four - Modules, Controllers, Resources, and Scope
+# Lab Four - Modules, Routing, and Resources
 
 ## Checkout the Lab Branch
 - In a console:
 
 ```
-git reset --hard
 git checkout lab-4-modules
 git pull
 ```
 &nbsp;
 ## Resources via `$resource`
 
-- For this lab, we will be using the `$api` and `$control` services that were supplied to you by your teammates.
+- For this lab, we will be using the `api` and `data` services that were written with loving care for you by your teammates.
 - These services use the `$resource` service from the `ngResource` Angular module, but provide you with a simple syntax to declare your resources and API routes.
 - As an example, we will be registering an `employees` resource later in this lab.
 
-###### $api service
-- Using the `$api` service, the syntax would be:
+###### api service
+- Using the `api` service, the syntax would be:
 
 ```javascript
-$api.add({
+api.add({
   resource: 'employees',
   url: '/users'
 });
 ```
 - This registration automatically give you:
-  - a POST to `/users` with a JSON request body via `$control.create()`.
-  - a GET to `/users` with parameters via `$control.list()`
-  - a GET to `/users` with a JSON request body (used for pagination) via `$control.page()`.
-  - a GET to `/users/:_id` via `$control.get()`.
-  - a PUT to `/users/:_id` with a JSON request body via `$control.update()`
-  - a PUT to `/users/:_id` with the model's deleted flag set to `true` via `$control.restore()`
-  - a PUT to `/users/:_id` with the model's deleted flag set to `false` via `$control.restore()`
+  - a POST to `/users` with a JSON request body via `data.create()`.
+  - a GET to `/users` with parameters via `data.list()`
+  - a GET to `/users` with a JSON request body (used for pagination) via `data.page()`.
+  - a GET to `/users/:_id` via `data.get()`.
+  - a PUT to `/users/:_id` with a JSON request body via `data.update()`
+  - a PUT to `/users/:_id` with the model's deleted flag set to `true` via `data.restore()`
+  - a PUT to `/users/:_id` with the model's deleted flag set to `false` via `data.restore()`
 
 
 - Not bad for 4 lines of code, amiright?
 - There are also ways to configure your resource for corner cases, but we will address that when needed in later labs.
 
-###### $control service
+###### data service
 
-- The second service supplied by your teammates is the `$control` service.
-- This is a service that provides you with convenience methods to send request to your server according to your `$api` configurations.
-- All of `$control`'s methods return promises so that they can be handled consistently throughout the application.
-- Each `$control` service method expects up to 2 parameters:
+- The second service supplied by your teammates is the `data` service.
+- This is a service that provides you with convenience methods to send requests to your server according to your `api` configurations.
+- All of `data`'s methods return promises so that they can be handled consistently throughout the application.
+- Each `data` service method expects up to 2 parameters:
   - The name of the resource
   - Either the model object or a query object (depending on the request type).
+
 
 - For example to request a list of the employees resource:
 
 ```javascript
-$control.list('employees');
+data.list('employees');
 ```
 - This returns a promise that will return an array of objects when resolved.
 
 &nbsp;
-## Run the Watch and Karma Tasks
+## Run the Server, Watch and Karma Tasks
 - Before we get started, we always want to have our `watch` task running in the background.
   - This will run `JSHint` for us (amongst other things) which checks for issues that are known to cause errors.
   - Since this is a long running task, it needs to run in its own console window.
@@ -74,7 +74,7 @@ grunt karma:unit
 
 - The first item we need to set up for our application is our routing to different areas of the application.
 - Since AngularJS applications are SPA's (Single Page Applications), Angular provides us with the `$routeProvider` service to handle navigation.
-  - The main responsibility of the `$routProvider` service is to match a url with a controller and template.
+  - The main responsibility of the `$routeProvider` service is to match a url with a controller and template.
 
 - Let's register some routes with their respective controllers and templates.
 - Open **client/src/app/app.js**
@@ -101,7 +101,22 @@ $routeProvider
 - Did you notice the `otherwise()` registered at the end?
 - This tells the `$routeProvider` that if it is unable to match a url, to navigate to the `/projects` route as a default.
 
-##### Let's start writing some controllers and templates so that we can see our app!!
+### Adding the links to our ***index.html***
+
+- Now we need to add our menu buttons that link to the routes we just created.
+- Open **client/assets/html/index.html**
+- Find the `TODO` and add the below `<li>`'s that use the `ng-href` directive to link to our registered routes.
+
+```xml
+<li><a ng-href="/#/projects">Projects</a></li>
+<li><a ng-href="/#/employees">Employees</a></li>
+<li><a ng-href="/#/timesheets">Timesheets</a></li>
+```
+
+&nbsp;
+### Let's start writing some controllers and templates so that we can see our app!!
+
+> The Project Module has already been implemented for you. Please feel free to use it as a reference if you get stuck.
 
 &nbsp;
 ## Employees Module
@@ -119,7 +134,7 @@ $routeProvider
 - Locate the `TODO` to register the resource and add:
 
 ```javascript
-$api.add({
+api.add({
   resource: 'employees',
   url: '/users'
 });
@@ -135,54 +150,54 @@ $api.add({
 
 ```javascript
 $scope.requestEmployees = function requestEmployees (page) {
-    $control.list('employees')
-      .then(function (employees) {
-        $scope.employees = employees;
-      });
-  };
+  data.list('employees')
+    .then(function (employees) {
+      $scope.employees = employees;
+    });
+};
 
- $scope.remove = function remove (employee) {
-    $control.remove('employees', employee)
-      .then(function () {
-        console.log('success!');
-      })
-      .catch(function (x) {
-        employee.deleted = false;
-        console.log('error : ' + x);
-      });
-  };
+$scope.remove = function remove (employee) {
+  data.remove('employees', employee)
+    .then(function () {
+      console.log('success!');
+    })
+    .catch(function (x) {
+      employee.deleted = false;
+      console.log('error : ' + x);
+    });
+};
 
- $scope.restore = function restore (employee) {  
-   $control.restore('employees', employee)
-      .then(function (restored) {
-        console.log('success!');
-      })
-      .catch(function (x) {
-        employee.deleted = true;
-        console.log('error : ' + x);
-      });
-  };
+$scope.restore = function restore (employee) {  
+  data.restore('employees', employee)
+    .then(function (restored) {
+      console.log('success!');
+    })
+    .catch(function (x) {
+      employee.deleted = true;
+      console.log('error : ' + x);
+    });
+};
 
- $scope.requestEmployees(1);
+$scope.requestEmployees(1);
 ```
 
 - What have we created here?
   - A `requestEmployees` function and added it to the controller's scope.
-    - This function calls the `list()` function of the `$control` service for the `employees` resource.
+    - This function calls the `list()` function of the `data` service for the `employees` resource.
     - The result of the list is then assigned to the `employees` variable on `$scope`.
   - A `remove` function on `$scope` that takes an `employee` object as a param.
-    - This function calls the `remove` function of the `$control` service and logs to the console upon success.
+    - This function calls the `remove` function of the `data` service and logs to the console upon success.
     - If there is an error, it sets the deleted flag on the employee back to false and logs the error.
-  - A `restore` function on `$scope` that in turn calls the `restore()` function of the `$control` service.
+  - A `restore` function on `$scope` that in turn calls the `restore()` function of the `data` service.
     - If the restore is a success, we log it to console.
     - If there is an error, we reset the employee's deleted flag back to true and log the error.
 
 
-- The final line of code calls `$scope.requestEmployees(1)` to initialize the list of employees when the controller is iniitialized.
+- The final line of code calls `$scope.requestEmployees(1)` to initialize the list of employees when the controller is initialized.
 
 ### Test Our Employee Controller
 
-- Now that we have our controller created, we need to test its behaior to make sure it acts as expected.
+- Now that we have our controller created, we need to test its behavior to make sure it acts as expected.
 - To do this, we'll use the testing framework we set up in lab 3.
 
 - Open **client/test/unit/app/employees/controllers.spec.js**
@@ -218,7 +233,11 @@ it('should be able to instantiate the controller and request a list of employees
 
 ###### Test that employees is populated on scope
 
-- Locate the `TODO` near line #71 and replace it with:
+- Locate the `TODO` near line #71 and replace it a test that :
+  - Sets an expectation on the `$httpBackend` service for a GET request to ***/users***.
+  - Calls `$scope.requestEmployees()`
+  - Flushes the `$httpBackend` service
+  - Tests that the result of the requesting employees is set on the controller's `$scope` object.
 
 ```javascript
 it('should set the result to the employees', function () {
@@ -231,7 +250,12 @@ it('should set the result to the employees', function () {
 
 ###### Test removing an employee sends a PUT request
 
-- Locate the `TODO` near line #82 and replace it with:
+- Locate the `TODO` near line #82 and replace it a test that :
+  - Flushes the `$httpBackend` service immediately so that the original request to get the employee list doesn't corrupt our test.
+  - Sets an expectation of a PUT request to the url for the `employee` test object.
+    - Respond with a `200` status.
+  - Calls `$scope.remove(employee)`
+  - Flush the http backend.
 
 ```javascript
 it('should send a remove request for the specified employee', function () {
@@ -254,6 +278,9 @@ $httpBackend.when('PUT', '/users/' + employee._id).respond(200);
 ###### Test the behavior of a calling `$scope.remove()`
 
 - Near line #95, replace the `TODO` with the following test:
+  - Call the remove function on `$scope`.
+  - Flush the mock http backend.
+  - Test that the `deleted` flag is set to true on the `employee`.
 
 ```javascript
 it('should set the employee to deleted for the ui', function () {
@@ -273,7 +300,9 @@ $httpBackend.when('PUT', '/users/' + employee._id).respond(500);
 
 ###### Test the remove request that has errors
 
-- Find the `TODO` near line #108 and replace it with:
+- Find the `TODO` near line #108 and replace it with a test that:
+  - Calls the remove function on scope.
+  - Flushes the backend and tests that the `employee.deleted` flag was not set to `true`.
 
 ```javascript
 it('should set deleted to false for the employee in the ui', function () {
@@ -285,7 +314,12 @@ it('should set deleted to false for the employee in the ui', function () {
 
 ###### Test restoring an employee sends a PUT request
 
-- Locate the `TODO` near line #122 and replace it with:
+- Locate the `TODO` near line #122 and replace it with a test that:
+  - Flushes the backend immediately to clear the `$httpBackend` service.
+  - Sets an expectation for a PUT request to the url corresponding to the `employee` object.
+    - Respond with a status of `200`.
+  - Calls the `restore()` function on scope and passes in the `employee`.
+  - Flushes the backend in order to run expectations.
 
 ```javascript
 it('should send a restore request for the specified employee', function () {
@@ -298,12 +332,15 @@ it('should send a restore request for the specified employee', function () {
 
 ###### Test restoring an employee with success
 
-- Locate the `TODO` near line #132 and configure a successful reponse:
+- Locate the `TODO` near line #132 and configure a successful response:
 
 ```javascript
 $httpBackend.when('PUT', '/users/' + employee._id).respond(200);
 ```
 - Now locate the `TODO` near line #135 and test that the employee is restored:
+  - Call the `restore` function on scope
+  - Flush the http backend service.
+  - Test that the `employee.deleted` flag was set to `false`.
 
 ```javascript
 it('should set the employee to not deleted for the ui', function () {
@@ -322,6 +359,9 @@ $httpBackend.when('PUT', '/users/' + employee._id).respond(500);
 ```
 
 - Next, find the `TODO` near line #148 and test the error:
+  - Call the `restore()` function on scope.
+  - Flush the http backend.
+  - Test that the `employee.deleted` flag was set to `true`.
 
 ```javascript
 it('should set deleted to true for the employee in the ui', function () {
@@ -346,9 +386,11 @@ it('should set deleted to true for the employee in the ui', function () {
 - This is our list page for our employees module.
 - You'll notice that the design team has already set up the layout of the page, we just need to add the functionality to display the employee list and react to actions.
 
+
 - Let's first set up a `ng-repeat` directive to loop through our `$scope.employees` array that gets set up in our `requestEmployees()` controller function.
   - As Angular is iterating through our array, it assigns a variable, `employee` on scope for any of the child elements or `<td>`'s in this case.
   - We can then use the `employee` variable to bind to its properties.
+
 
 - Locate the `TODO` near line #22 and add the following to the `<tr>` tag:
 
@@ -357,9 +399,11 @@ it('should set deleted to true for the employee in the ui', function () {
     class="fadeable-row"
     ng-class="{faded: employee.deleted}">
 ```
+
 - You'll notice that we've also added a `ng-class` directive that takes a javascript object as a parameter.
   - This asks Angular to interpret the value of `employee.deleted`.
   - If it is `true` (or truthy), the class, `faded` will be added to the `<tr>`.
+
 
 - Now we need to bind the data of the `employee` to the table's data cells.
 - Find the `TODO` near line #26 and add the data bindings to the `<td>`'s.
@@ -375,6 +419,7 @@ it('should set deleted to true for the employee in the ui', function () {
   - If the employee is deleted, we want to show the 'Restore' button that calls the controller's `restore()` method.
   - If the employee is not deleted, we want to show the 'Delete' button that calls the controller's `remove()` method.
 
+
 - To do this find the `TODO` located near line #32 and insert the below code in the `<td>`:
 
 ```xml
@@ -388,252 +433,33 @@ it('should set deleted to true for the employee in the ui', function () {
 </div>
 ```
 - Wow, that's a lot of new stuff. Let's look at what we did.
+
 - In our outer `<div>`, we added the `ng-switch` directive that evaluates `employee.deleted`.
+
+
 - Within the `ng-switch` directive, we have two tests: `ng-switch-when="true"` and `ng-switch-default`.
   - The `ng-switch-when` tells Angular to only show the Restore button if `employee.deleted` is "true".
   - The `ng-switch-default` tells Angular to show the Delete button when no other `ng-switch-when` resolves to truthy.
+
+
 - We have also added a `ng-click` directive to each of the buttons.
   - This directive tells Angular what to do when the element is clicked.
   - We are also using Angular's `$event` service, which captures the event, and telling it to not let the click event bubble up to surrounding DOM elements.
 
 ### Run the Application
 - It's time to run the application and view your hard work!!
-- If you haven't already, start the appication via `grunt runapp:development` and `grunt watch:development` in separate consoles.
+- If you haven't already, start the application via:
+
+```
+grunt shell:server
+```
+
 - Open your Chrome browser and navigate to http://localhost:3000/#/employees
 
 - Do you see your table of employees?
 - Can you delete and restore them? Does the CSS change when you do?
 
-- Well now that you are all experts, let's implement the Projects module!!
-
-&nbsp;
-## Projects Module
-
-### Register the Projects Resource
-
-- Open **client/src/app/projects/projects.js** and register the `projects` resource via the `$api` service in the config block:
-
-```javascript
-$api.add({
-  resource: 'projects',
-  url: '/projects'
-});
-```
-### Create the Projects Controller
-
-- Open **client/src/app/projects/controllers.js**
-- Replace the `TODO`'s with the controller implementation:
-
-```javascript
-$scope.requestProjects = function requestProjects (page) {  
-  $control.list('projects')
-    .then(function (projects) {
-      $scope.projects = projects;
-    });
-};
-
-$scope.remove = function remove (project) {
-  $control.remove('projects', project)
-    .then(function (removed) {
-      console.log('success !');
-    })
-    .catch(function (x) {
-      project.deleted = false;
-      console.log('error : ' + x);
-    });
-};
-
-$scope.restore = function restore (project) {
-  $control.restore('projects', project)
-    .then(function (restored) {
-      console.log('success !');
-    })
-    .catch(function (x) {
-      project.deleted = true;
-      console.log('error : ' + x);
-    });
-};
-
-$scope.requestProjects(1);
-```
-- Nothing really new here, the controller's implementation is very similar to the employee controller.
-
-### Test the Project Controller
-
-- Now that we have the Project module's resource configured and controller implemented, we need to test its behavior:
-
-- Open **client/test/unit/app/projects/controllers.spec.js**
-
-###### Test controller instantiation
-
-- Locate the `TODO` near line #54 and set a response for a request for a list of projects:
-
-```javascript
-$httpBackend.when('GET', '/projects').respond(200, [{name: 'project1'}]);
-```
-
-- Locate the `TODO` near line #58 and test the controller's instantiation works as expected:
-
-```javascript
-it('should be able to instantiate the controller and request a page of projects', function () {
-  expect(controller).to.be.ok;
-  $httpBackend.expect('GET', '/projects');
-  $httpBackend.flush();
-});
-```
-
-###### Test requesting a list of projects
-
-- Locate the `TODO` near line #66 and replace with the following test:
-
-```javascript
-it('should set the result to the projects', function () {
-  $httpBackend.expect('GET', '/projects');
-  $scope.requestProjects();
-  $httpBackend.flush();
-  expect($scope.projects[0].name).to.equal("project1");
-});
-```
-
-###### Test that the controller's remove function sends a PUT request
-
-- Locate the `TODO` near line #76 and replace it with the following test:
-
-```javascript
-it('should send a remove request for the specified project', function () {
-  $httpBackend.flush();
-  $httpBackend.expect('PUT', '/projects/' + project._id).respond(200);
-  $scope.remove(project);
-  $httpBackend.flush();
-});
-```
-
-###### Test a successful remove request
-
-- Find the `TODO` near line #86 and set a success response for the remove request:
-
-```javascript
-$httpBackend.when('PUT', '/projects/' + project._id).respond(200);
-```
-
-- Find the `TODO` near line #89 and test the successful remove:
-
-```javascript
-it('should set the project to deleted for the ui', function () {
-  $scope.remove(project);
-  $httpBackend.flush();
-  expect(project.deleted).to.be.true;
-});
-```
-
-###### Test a remove request that responds with an error
-
-- Replace the `TODO` near line #99 with a error response:
-
-```javascript
-$httpBackend.when('PUT', '/projects/' + project._id).respond(500);
-```
-- Locate the `TODO` near line #102 and test the error behavior:
-
-```javascript
-it('should set deleted to false for the project in the ui', function () {
-  $scope.remove(project);
-  $httpBackend.flush();
-  expect(project.deleted).to.be.false;
-});
-```
-
-###### Test restore requests make a PUT to the server
-
-- Test that a request is sent by replacing the `TODO` near line #116 with:
-
-```javascript
-it('should send a restore request for the specified project', function () {
-  $httpBackend.flush();
-  $httpBackend.expect('PUT', '/projects/' + project._id).respond(200);
-  $scope.restore(project);
-  $httpBackend.flush();
-});
-```
-
-###### Test a successful restore request
-
-- Set up a success response by replacing the `TODO` near line #126:
-
-```javascript
-$httpBackend.when('PUT', '/projects/' + project._id).respond(200);
-```
-
-- Locate the `TODO` near line #129 and replace it with:
-
-```javascript
-it('should set the project to not deleted for the ui', function () {
-  $scope.restore(project);
-  $httpBackend.flush();
-  expect(project.deleted).to.be.false;
-});
-```
-
-###### Test a restore request that results in an error
-
-- Find the `TODO` near line #139 and configure an error response:
-
-```javascript
-$httpBackend.when('PUT', '/projects/' + project._id).respond(500);
-```
-
-- Locate the `TODO` near line #142 and test the error response:
-
-```javascript
-it('should set deleted to true for the project in the ui', function () {
-  $scope.restore(project);
-  $httpBackend.flush();
-  expect(project.deleted).to.be.true;
-});
-```
-### Run the Tests
-- If you haven't left the `karma` runner running, now is the time to run your tests.
-- In a console, run `grunt karma:unit` and verify all tests are passing.
-
-- Way to go!! Let's set up our views so that we can see our handywork in the browser!!
-
-### Project View Templates
-
-- Open **client/assets/templates/app/projects/index.html**
-- This is the list view for our projects and is very similar to the employees' view.
-
-- Locate the `TODO` near line #14 and set up our repeater for the table rows and bind the `<td>`'s to the model:
-
-```xml
-<tr ng-repeat="project in projects"
-   class="fadeable-row"
-   ng-class="{faded: project.deleted}">
-
-   <td>{{project.name}}</td>
-   <td>{{project.description}}</td>
-```
-
-- Now let's set up the delete and restore buttons.
-- Locate the `TODO` near line #21 and add our `ng-switch` like in employees.
-
-```xml
- <div ng-switch="project.deleted">
-   <div ng-switch-when="true">
-     <button class="btn btn-sm btn-default" ng-click="restore(project); $event.stopPropagation();">Restore</button>
-   </div>
-   <div ng-switch-default>
-     <button class="btn btn-sm btn-danger" ng-click="remove(project); $event.stopPropagation();">Delete</button>
-   </div>
- </div>
-```
-
-### Run the Application
-- If the application is not still running from the employees lab, start it again and navigate to the home page.
-- Did you notice that the browser automatically went to the `/projects` url? Remember setting that up at the beginning of the lab?
-- Try switching between employees and projects.
-
-- We've only got one more module to implement, so let's get started!!
-
+- Well now that you are all experts, let's implement the Timesheets module!!
 
 &nbsp;
 ## Timesheets Module
@@ -645,7 +471,7 @@ it('should set deleted to true for the project in the ui', function () {
 - Open **client/src/app/timesheets/timesheets.js** and configure the resource:
 
 ```javascript
-$api.add({
+api.add({
   resource: 'timesheets',
   url: '/users/:user_id/timesheets',
   params: {
@@ -656,7 +482,7 @@ $api.add({
 
 - Wait a minute, what is the extra `params` configuration to this resource?
 - If you notice, the url requires an additional `user_id` path variable because our server API needs that information.
-- The `params` let's `$resource` know to get that variable from the query object and create our url with it.
+- The `params` config object lets `$resource` know to get that variable from the query object and create our url with it.
 
 ### Implement the Timesheet Controller
 
@@ -668,17 +494,17 @@ $api.add({
 - (near line #11)
 
 ```javascript
-$control.list('timesheets', query)
-   .then(function (timesheets) {
-     $scope.timesheets = timesheets;
-   });
+data.list('timesheets', query)
+ .then(function (timesheets) {
+   $scope.timesheets = timesheets;
+ });
 ```
 
 - (near line #17)
 
 ```javascript
 $scope.remove = function remove (timesheet) {
-  $control.remove('timesheets', timesheet)
+  data.remove('timesheets', timesheet)
     .then(function () {
       console.log('success !');
     })
@@ -689,7 +515,7 @@ $scope.remove = function remove (timesheet) {
 };
 
 $scope.restore = function restore (timesheet) {
-  $control.restore('timesheets', timesheet)
+  data.restore('timesheets', timesheet)
     .then(function (restored) {
       console.log('success !');
     })
@@ -708,8 +534,10 @@ $scope.requestTimesheets(1);
 
 - Open **client/test/unit/app/timesheets/controllers.spec.js**
 - Follow the instructions in each of the `TODO`'s to test your controller.
-- Once again, the code below is here to help if you get stuck.
+- If you get stuck, use the **project** or **employee** modules to help you.
 
+&nbsp;
+###### Once again, the code below is here to help if you need it.
 - (near line #68)
 
 ```javascript
@@ -858,3 +686,9 @@ it('should set deleted to true for the timesheet in the ui', function () {
 ### Run the Application
 - Time to run or refresh the application again and see it in action.
 - You have already mastered this, so I won't bore you with further instructions.
+
+### Commit your changes and get ready for the next lab!
+```
+git add .
+git commit -m 'Modules and tests are complete'
+```
