@@ -11,6 +11,17 @@ git pull
 ```
 
 &nbsp;
+## Install ChromeWebDriver
+
+### Set up web driver to manipulate the browser for us
+* We need to set up the Chrome web driver for Protractor to run our tests.
+* In a console window, within the `timesheet` home directory, run:
+```
+./node_modules/protractor/bin/webdriver-manager update
+```
+* You should see output in your console that the chromedriver zip file was dowloaded.
+
+&nbsp;
 ## Grunt configuration
 
 ### Configure the `grunt-protractor-runner` task.
@@ -100,15 +111,6 @@ Finished in 0.004 seconds
 
 Done, without errors.
 ```
-
-### Set up web driver to manipulate the browser for us
-* We need to set up the Chrome web driver for Protractor to run our tests.
-* In a console window, within the `timesheet` home directory, run:
-```
-./node_modules/protractor/bin/webdriver-manager update
-```
-* You should see output in your console that the chromedriver zip file was dowloaded.
-
 &nbsp;
 ## Security Tests
 
