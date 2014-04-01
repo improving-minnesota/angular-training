@@ -125,6 +125,11 @@ grunt watch:development
   - Open **client/assets/templates/index.html** and look at the model binding in the template.
   - You'll have many more chances to take advantage of this during the next few days.
 
+### Commit your changes to Git
+```
+git add .
+git commit -m 'First Angular app completed..huzzah'
+```
 
 ### Congratulations on creating your first Angular application. You are now ready to take on the world!!
 - Too much?

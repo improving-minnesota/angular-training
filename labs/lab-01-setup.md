@@ -72,6 +72,8 @@ grunt shell:server
 
 - Verify that you see the welcome page.
 
+![](img/lab01/indexResult.png)
+
 ### Commit your changes to Git
 
 ```
