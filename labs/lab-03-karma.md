@@ -5,7 +5,6 @@
 - In a console:
 
 ```
-git reset --hard
 git checkout lab-3-karma
 git pull
 ```
@@ -23,6 +22,7 @@ git pull
 ```javascript
 frameworks: ['jasmine'],
 ```
+- This instructs **karma** to use the Jasmine testing framework to run our tests.
 
 ### Configure Chrome
 
@@ -73,17 +73,22 @@ Chrome 33.0.1750 (Mac OS X 10.9.2): Executed 0 of 0 ERROR (0.019 secs / 0 secs)
 
 - Now that we have `karma` up and running, let's write some tests!
 
-##### Leave `karma` running in the console!!
+&nbsp;
+> Leave `karma` running in the console!!
 - This task will run in the background and run the tests for you automatically when you make changes to your source files.
 
 &nbsp;
 ## Writing Your First Tests
 
 - We're going to write a couple of tests to verify that we can instantiate the application's main controllers.
+- First open **client/src/app/controllers.js** and look over its controllers.
+   - Not much going on here yet, so we just need to test that we can instantiate the controllers.
+
+
 - Open **client/test/unit/app/controllers.spec.js**.
 
 ###### Test the MainCtrl
-- Locate the `TODO` near line #9 and replace it the mock module instantiation:
+- Locate the `TODO` near line #9 and replace it with the mock module instantiation:
 
 ```javascript
 beforeEach(
@@ -91,6 +96,9 @@ beforeEach(
    'app.controllers'
  ));
 ```
+- This sets up our `app.controllers` module and gets it ready for testing.
+
+
 - Next follow the instructions from the `TODO` near line 14 and add:
 
 ```javascript
@@ -102,7 +110,14 @@ beforeEach(inject(function($rootScope, $controller) {
 }));
 ```
 
- - Then find the `TODO` near line #20, to write your first test:
+- What did we just do?
+  - The beforeEach tells Jasmine to run the inclosed function before every test within the enclosing `describe`.
+  - We then call `inject`, which instructs Angular that we are needing dependencies injected.
+  - We inject the `$rootScope` and use it to construct a new `$scope` object for our test controller.
+  - Using the `$controller` service, we instantiate a `MainCtrl` and inject our newly created `$scope` into it.
+
+
+ - Find the `TODO` near line #20 and write your first test:
 
 ```javascript
 describe('setup', function () {
@@ -112,20 +127,18 @@ describe('setup', function () {
 });
 ```
 - So what did we do here?
-  - In our first `beforeEach` block, we ask Angular to set up a mock module of `app.controllers`.
-  - Inside the `beforeEach` block of our "MainCtrl" test:
-    - We ask Angular to inject `$rootScope` and `$controller` via the `inject()` function.
-    - We create a new `scope` object by calling `$rootScope.$new()`
-    - Then we use that `scope` object to construct our test controller via the `$controller` service.
   - In our test, we verify that we can actually create an instance of "MainCtrl"
+  - By using `chai` matchers, we verify that our `controller` is defined and no error was thrown.
 
 
 - The rest of our controller tests will use the same pattern.
 
 - Did you notice that `karma` automatically ran your tests when you saved?
 
-##### If you have any test failures at this point, go back and troubleshoot the previous specs.
+&nbsp;
+> If you have any test failures at this point, go back and troubleshoot the previous specs.
 
+&nbsp;
 ###### Test the AppCtrl
 
 - Find the `TODO` near line #30 and set up the controller for testing:
@@ -157,16 +170,32 @@ it('should be able to instantiate the controller', function () {
 
 ###### Chrome Debug Mode
 - Open the Chrome browser that is currently being controlled by `karma` and click the `Debug` button.
+
+![](img/lab03/chromeDebugButton.png)
+
+- This should open a **new** tab that you can use to debug your tests.
 - Open Chrome dev tools with `ctrl-alt-i` or `cmd-option-i`
 - Open the javascript console and refresh the page.
 - You can see that `karma` is running your unit tests right in the browser.
+
+![](img/lab03/debugConsole.png)
 
 
 ###### Debug your tests
 - Now open the `Sources` tab and open your `controllers.spec.js`.
 - Place a break point in your first test, right at the line : `expect(controller).to.be.ok;`.
+
+![](img/lab03/breakpoint.png)
+
 - Refresh the browser again.
 - Notice how the test execution stops at that line of code.
 - This becomes very handy when we start implementing more complicated tests and is a good tool to keep in your belt.
 
 ### Stop all consoles with `ctrl-c` and get ready for the next labs.
+
+### Commit your work to Git
+
+```
+git add .
+git commit -m 'Karma is set up and ready to go!'
+```

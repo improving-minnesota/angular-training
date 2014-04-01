@@ -1,5 +1,12 @@
 # Lab one - Setup and install dependencies
 
+### Ensure all global dependencies have been installed
+
+* [Grunt](https://github.com/cowboy/grunt) `npm install -g grunt-cli`
+* [Bower](http://twitter.github.com/bower/) `npm install -g bower`
+* [Docco](http://jashkenas.github.io/docco/) `npm install -g docco`
+* [Karma](https://github.com/karma-runner/karma/) `npm install -g karma`
+
 ### Checkout the Github repository
 
 - Checkout project from Github
@@ -56,7 +63,7 @@ grunt development
 - In a console window, run:
 
 ```
-grunt runapp:development
+grunt shell:server
 ```
 
 - This kicks off a Node server and serves up our `index.html` page.
@@ -65,4 +72,13 @@ grunt runapp:development
 
 - Verify that you see the welcome page.
 
-- Now let's check out our project's structure so we know what goes where.
+![](img/lab01/indexResult.png)
+
+### Commit your changes to Git
+
+```
+git add .
+git commit -m 'Project started successfully'
+```
+
+##### Now let's check out our project's structure so we know what goes where.
