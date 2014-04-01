@@ -45,7 +45,7 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
+      angular.module('app.directives', [])
         .directive('myCoolDirective', [
           //...
         ]);
@@ -105,7 +105,7 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
+      angular.module('app.directives', [])
         .directive('myCoolDirective', [
           'dependency',
           function(dependency) {
@@ -136,14 +136,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              template: '&lt;div&gt;{{helloWorld}}&lt;/div&gt;'
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            template: '&lt;div&gt;{{helloWorld}}&lt;/div&gt;'
+          };
+        });
 
       </code>
 
@@ -152,17 +150,37 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              templateUrl: 'my-cool-directive.html'
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            templateUrl: 'my-cool-directive.html'
+          };
+        });
 
       </code>
 
+  section
+    p One important thing to note about directive templates is that they can only have one root element.
+
+  section
+    p If a directive template has more than one root element, the $compile service will throw an error.
+
+  section
+    p Is the following directive template valid?
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;!-- TODO: Do something meaningful --&gt;
+      &lt;div class="text-center"&gt;
+        &lt;p&gt;Hello World!&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>
+
+  section
+    h4 Nope!
+    p HTML comments are elements which means this template violates the one root element rule.
+    
   section
     h3 Restrict
 
@@ -185,14 +203,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              restrict: 'AECM'
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            restrict: 'AECM'
+          };
+        });
 
       </code>
 
@@ -216,14 +232,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: true
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: true
+          };
+        });
 
       </code>
 
@@ -232,16 +246,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                // ...
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective',function() {
+          return {
+            scope: {
+              // ...
+            }
+          };
+        });
 
       </code>
 
@@ -254,16 +266,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                someAttribute: '='
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: {
+              someAttribute: '='
+            }
+          };
+        });
 
       </code>
     pre.
@@ -282,16 +292,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                someCalculation: '&'
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: {
+              someCalculation: '&'
+            }
+          };
+        });
 
       </code>
     pre.
@@ -318,16 +326,14 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                attributeValue: '@'
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective',function() {
+          return {
+            scope: {
+              attributeValue: '@'
+            }
+          };
+        });
 
       </code>
     pre.
@@ -398,14 +404,12 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myFrameDirective',
-          function() {
-            return {
-              transclude: true
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myFrameDirective', function() {
+          return {
+            transclude: true
+          };
+        });
 
       </code>
 
@@ -441,24 +445,175 @@ include ../includes/mixins
     br
     pre.
       <code data-trim>
-      angular.module('directives', [])
-        .directive('myCoolDirective',
-          function() {
-            return {
-              scope: {
-                myVar: '='
-              }
-              link: function(scope, element, attrs) {
-                scope.updatedCount = 0;
-                scope.$watch('myVar', function() {
-                  scope.updatedCount += 1;
-                  var contents = 'myVar updated ' +
-                    scope.updatedCount + ' times.';
-                  element.text(contents);
-                });
-              }
-            };
-          }
-        );
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: {
+              myVar: '='
+            }
+            link: function(scope, element, attrs) {
+              scope.updatedCount = 0;
+              scope.$watch('myVar', function() {
+                scope.updatedCount += 1;
+                var contents = 'myVar updated ' +
+                  scope.updatedCount + ' times.';
+                element.text(contents);
+              });
+            }
+          };
+        });
 
       </code>
+
+  section
+    h3 Controllers
+
+  section
+    p You can easily attach controllers to directives with the controller option.
+
+  section
+    p There are two ways to specify controllers on directives.
+
+  section
+    p You can declare a controller inline
+    br
+    pre.
+      <code data-trim>
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            scope: {
+              myVar: '='
+            },
+            controller: function($scope) {
+
+            }
+          };
+        });
+
+      </code>
+
+    p The $scope injected into the controller will be the isolate scope of the directive.
+
+  section
+    p Or, you can specify the name of an existing controller
+    br
+    pre.
+      <code data-trim>
+      angular.module('app.directives', [])
+        .controller('MyCoolDirectiveController', function($scope) {
+
+        })
+        .directive('myCoolDirective', function() {
+          return {
+            scope: {
+              myVar: '='
+            },
+            controller: 'MyCoolDirectiveController'
+          };
+        });
+
+      </code>
+
+    p This is very useful if you want to share controllers across directives.
+
+  section
+    h3 Require
+
+  section
+    p In some cases, you'll want to use multiple directives together and have them communicate with each other.
+
+  section
+    p The ngModel and validation directives are a great example of this behavior.
+
+  section
+    p The ngModel directive controls the binding between the input (view) value and model value.
+    p The ng-maxlength directive tells the ngModel directive when the view value is valid and that it should update the model.
+    br
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;input ng-model="myString" ng-maxlength="5" /&gt;
+
+        </code>
+
+  section
+    p For this use case, AngularJS provides the "require" configuration option for directives.
+
+  section
+    p The require option tells the $compile service to find another directive and inject it's controller as the fourth argument to the linking function.
+
+  section
+    p The require option takes a string name (or array of strings) of the directive(s) to pass in.
+
+  section
+    p If no such directive can be found, or if the directive does not have a controller, then an error is raised.
+
+  section
+    p The require names can be prefixed with flags to tell the $compile service how to find another directive's controller.
+
+  section
+    h4 (no prefix)
+    p Locate the required controller on the current element. Throw an error if not found.
+
+  section
+    h4 ?
+    p Attempt to locate the required controller or pass null to the link function if not found.
+
+  section
+    h4 ^
+    p Locate the required controller by searching the element's parents. Throw an error if not found.
+
+  section
+    h4 ?^
+    p Attempt to locate the required controller by searching the element's parents or pass null to the link function if not found.
+
+  section
+    p Lets look at creating a directive that requires the ngModel directive
+
+  section
+    p Since, ngModel and myCoolDirective are siblings (on the same element), we wont need to specify a prefix.
+    br
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;input ng-model="myString" my-cool-directive /&gt;
+
+        </code>
+
+  section
+    p Now that the ngModel controller is injected into our link function, we can interface it's controller.
+    br
+    pre.
+      <code data-trim>
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModel) {
+              console.log("Model Value", ngModel.$modelValue);
+              console.log("View Value", ngModel.$viewValue);
+            }
+          };
+        });
+
+      </code>
+
+    p Here, we're just printing out the model value and view value maintained by the ngModel controller.
+
+  section
+    p So when should you put logic in a controller vs. a linking function?
+    br
+    ul
+      li
+        strong Controller
+        |  - Your logic can be reused across directives.
+      li
+        strong Controller
+        |  - You're providing an API for use by other directives (require).
+      li
+        strong Linking Function
+        |  - You're directly manipulating DOM.
+
+  section
+    h2 Lab 8 - Directives
