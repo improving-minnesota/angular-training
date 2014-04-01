@@ -160,6 +160,28 @@ include ../includes/mixins
       </code>
 
   section
+    p One important thing to note about directive templates is that they can only have one root element.
+
+  section
+    p If a directive template has more than one root element, the $compile service will throw an error.
+
+  section
+    p Is the following directive template valid?
+    br
+    pre.
+      <code class="html" data-trim>
+      &lt;!-- TODO: Do something meaningful --&gt;
+      &lt;div class="text-center"&gt;
+        &lt;p&gt;Hello World!&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>
+
+  section
+    h4 Nope!
+    p HTML comments are elements which means this template violates the one root element rule.
+    
+  section
     h3 Restrict
 
   section
@@ -516,7 +538,7 @@ include ../includes/mixins
         </code>
 
   section
-    p  For this use case, AngularJS provides the "require" configuration option for directives.
+    p For this use case, AngularJS provides the "require" configuration option for directives.
 
   section
     p The require option tells the $compile service to find another directive and inject it's controller as the fourth argument to the linking function.
