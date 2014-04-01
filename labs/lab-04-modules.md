@@ -374,6 +374,11 @@ it('should set deleted to true for the employee in the ui', function () {
 ### Check the Tests
 - Have you been watching as `karma` ran each of your tests when you saved the file? Pretty cool, huh?
 - Are all your tests passing? If not, see if you can troubleshoot your issues and get to green.
+- You should have output similar to:
+
+```
+Chrome 33.0.1750 (Mac OS X 10.9.2): Executed 19 of 19 SUCCESS (0.127 secs / 0.121 secs)
+```
 
 &nbsp;
 ### Create Employee Views
@@ -457,6 +462,10 @@ grunt shell:server
 - Open your Chrome browser and navigate to http://localhost:3000/#/employees
 
 - Do you see your table of employees?
+
+![](img/lab04/employeeList.png)
+
+
 - Can you delete and restore them? Does the CSS change when you do?
 
 - Well now that you are all experts, let's implement the Timesheets module!!
@@ -464,7 +473,7 @@ grunt shell:server
 &nbsp;
 ## Timesheets Module
 
-- Since you've already done this twice, this module should be easy, right?
+- Since you've already done this, this module should be easy, right?
 
 ### Configure the Timesheet Resource
 
@@ -489,6 +498,7 @@ api.add({
 - Open **client/src/app/timesheets/controllers.js**
 - Implement the timesheet controller, by following the instructions in the `TODO`'s.
 - The code below is here to help you if you get stuck, but try to do it yourself first.
+- Don't forget that you have the other modules to use as a reference!!
 
 
 - (near line #11)
@@ -686,6 +696,9 @@ it('should set deleted to true for the timesheet in the ui', function () {
 ### Run the Application
 - Time to run or refresh the application again and see it in action.
 - You have already mastered this, so I won't bore you with further instructions.
+- Navigate to the **Timesheets** tab. Does it look similar to below?
+
+![](img/lab04/timesheetList.png)
 
 ### Commit your changes and get ready for the next lab!
 ```
