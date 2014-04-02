@@ -342,8 +342,8 @@ include ../includes/mixins
           templateUrl: 'assets/app/index.html',
           controller: 'AppCtrl',
           resolve: {
-            projects: function ($control) {
-              return $control.list('projects');
+            projects: function (data) {
+              return data.list('projects');
             }
           }
         });
@@ -584,8 +584,8 @@ include ../includes/mixins
         .state('app.projects', {
           controller: 'ProjectsCtrl',
           resolve: {
-            projects: function ($control) {
-              return $control.get('projects');
+            projects: function (data) {
+              return data.get('projects');
             }
           }
         })

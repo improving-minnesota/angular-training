@@ -174,7 +174,7 @@ it('should be able to instantiate the controller', function () {
 ![](img/lab03/chromeDebugButton.png)
 
 - This should open a **new** tab that you can use to debug your tests.
-- Open Chrome dev tools with `ctrl-alt-i` or `cmd-option-i`
+- Open Chrome dev tools with `ctrl-shift-i` or `cmd-option-i`
 - Open the javascript console and refresh the page.
 - You can see that `karma` is running your unit tests right in the browser.
 

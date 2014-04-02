@@ -67,7 +67,7 @@ var query = {
   sort: {username: 1}
 };
 
-$control.page('employees', query)
+data.page('employees', query)
   .then(function (pageConfig) {
     $scope.pageConfig = pageConfig;
   });
@@ -161,7 +161,7 @@ var query = {
   sort: {beginDate: 1}
 };
 
-$control.page('timesheets', query)
+data.page('timesheets', query)
   .then(function (pageConfig) {
     $scope.pageConfig = pageConfig;
   });

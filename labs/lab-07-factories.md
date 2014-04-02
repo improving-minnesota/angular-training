@@ -13,7 +13,7 @@ git pull
 &nbsp;
 ## Resources services
 - Your teammates have already built a couple of services to make API calls to the server.
-  - **$api** and **$control**
+  - **api** and **data**
 - We've been using them in our previous labs, so let's take a look at the code and see what they do.
 - Open **client/src/app/resources.js** and review the code.
 
