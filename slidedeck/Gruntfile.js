@@ -154,7 +154,7 @@ module.exports = function(grunt) {
           stdout: true,
           stderr: true
         },
-        command: 'git subtree split --branch gh-pages --prefix dist/'
+        command: 'git subtree split --branch gh-pages --prefix slidedeck/dist/'
       }
     }
 
