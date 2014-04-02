@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Lecture 11 - E2E Testing with Protractor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Lecture 11 - E2E Testing with Protractor">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/components/angular/angular.js"></script>
+    <script src="/assets/js/components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript">
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/assets/css/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="opi-logo"></div>
+      <div class="slides">
+        <section data-state="index-slide" class="index-section">
+          <div class="sliding-image-container"><img src="/assets/img/angular.png" class="animate-logos angular"><img src="/assets/img/grunt-logo.png" class="animate-logos grunt"><img src="/assets/img/yeoman-logo.png" class="animate-logos yeoman"><img src="/assets/img/node-logo.png" class="animate-logos node"><img src="/assets/img/bower-logo.png" class="animate-logos bower"></div>
+          <div class="fading-header-container">
+            <h1 class="animate-headers angular">Angular.js</h1>
+            <h1 class="animate-headers grunt">Grunt.js</h1>
+            <h1 class="animate-headers yeoman">Yeoman</h1>
+            <h1 class="animate-headers node">Node.js</h1>
+            <h1 class="animate-headers bower">Bower.js</h1>
+          </div>
+          <h3>E2E Testing with Protractor</h3>
+          <h4>Lecture 11</h4>
+        </section>
+        <section>
+          <h1>Lab Ten</h1>
+          <h2>Solution</h2>
+        </section>
+        <section>
+          <h1>E2E Testing</h1>
+        </section>
+        <section>
+          <h2>What is E2E?</h2>
+        </section>
+        <section>
+          <p>E2E stands for End-to-End</p>
+        </section>
+        <section>
+          <p>E2E testing is a methodology used to test whether the flow of an application is performing as designed from start to finish.</p>
+        </section>
+        <section>
+          <p>E2E tests validate the functionality of the application as a whole instead of the individual parts and pieces (unit testing).</p>
+        </section>
+        <section>
+          <p>Typically, E2E testing in web applications is the automation of an end user.</p>
+        </section>
+        <section>
+          <p>The preferred tool used to accomplish this testing in AngularJS applications is Protractor.</p>
+        </section>
+        <section>
+          <h1>Protractor</h1>
+        </section>
+        <section>
+          <p>What is Protractor?</p>
+        </section>
+        <section>
+          <p>Protractor is an end to end test framework for AngularJS applications thats built on top of WebDriverJS.</p>
+        </section>
+        <section>
+          <p>Protractor runs tests against your application running in a real browser, interacting with it as a user would.</p>
+        </section>
+        <section>
+          <p>Protractor is a wrapper around WebDriverJS which is a JavaScript API for Selenium.</p>
+        </section>
+        <section>
+          <p>What is Selenium?</p>
+        </section>
+        <section>
+          <p>Selenium is a tool that automates browsers and it runs as an independent server.</p>
+        </section>
+        <section>
+          <p>Think think of Selinium as an end user.</p>
+        </section>
+        <section>
+          <p>What is WebDriverJS?</p>
+        </section>
+        <section>
+          <p>WebDriverJS is a JavaScript API for Selenium.</p>
+        </section>
+        <section>
+          <p>We use WebDriverJS to send instructions to a Selenium server running in the background.</p>
+        </section>
+        <section>
+          <h2>ChromeDriver</h2>
+          <p>ChromeDriver allows us to bypass a Selenium installation and "drive" Chrome.</p>
+        </section>
+        <section><img src="/assets/img/lecture-11/protractor-flow.png" class="no-style"></section>
+        <section>
+          <h1>Writing E2E Tests</h1>
+        </section>
+        <section>
+          <p>What are page objects?</p><br>
+          <ul>
+            <li>Page Objects are models of the UI you are testing.</li>
+            <li>They reduce the amount of duplications in our tests required to interact with the user interface.</li>
+            <li>Page Objects face in both directions.  You can use them to set or get things like field values.</li>
+          </ul>
+        </section>
+        <section>
+          <p>Here we're creating a page object that models part of the employees list page.</p><br>
+          <pre><code data-trim>
+function EmployeesIndexPage() {
+  this.get = function () {
+    browser.get('#/app/employees');
+  };
+  
+  this.newEmployeeButton = element(
+    by.buttonText("New Employee")
+  );
+  
+  this.firstEmployee = element(
+    by.repeater('employee in pageConfig.data').row(0)
+  );
+}
+
+module.exports = new EmployeesIndexPage();
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>To start using a page object, just require it.</p><br>
+          <pre><code data-trim>
+describe('Employees', function () {
+
+  var indexPage = require('./index.page.js');
+  
+});
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Then, we'll use a beforeEach to make sure that each of our specs start at the employee index page.</p><br>
+          <pre><code data-trim>
+describe('Employees', function () {
+
+  var indexPage = require('./index.page.js');
+  
+  beforeEach (function () {
+    indexPage.get();
+  });
+  
+});
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Finally, we'll use the page object to perform actions and expect results.</p><br>
+          <pre><code data-trim>
+describe('Employees', function () {
+
+  var indexPage = require('./index.page.js');
+  
+  beforeEach (function () {
+    indexPage.get();
+  });
+  
+  describe("clicking new employee", function () {
+    it('takes us to the create employee form', function () {
+      indexPage.clickNewEmployee();
+      expect(formPage.getPageTitle()).toBe("Create Employee");
+    });
+  });
+  
+});
+
+</code>
+</pre>
+        </section>
+        <section data-background="#8c4738">
+          <p>Yes, it's that easy</p><img style="width: 100%; height: 100%;" src="/assets/img/lecture-11/mind-blown.gif" class="no-style fragment">
+        </section>
+        <section>
+          <h3>Things to consider</h3>
+        </section>
+        <section>
+          <p>Write tests that address the behavior of your application and not the framework (don’t test data binding).</p>
+        </section>
+        <section>
+          <p>Each test block should test as little as possible.</p>
+        </section>
+        <section>
+          <h1>Lab Eleven</h1>
+          <h2>Protractor</h2>
+        </section>
+        <section>
+          <p>In this lab, you'll set up protractor and create some E2E tests.</p>
+        </section>
+      </div>
+    </div>
+    <script src="/assets/js/app.js"></script>
+  </body>
+</html>

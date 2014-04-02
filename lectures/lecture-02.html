@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Lecture 02 - Angular Bootcamp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Lecture 02 - Angular Bootcamp">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/components/angular/angular.js"></script>
+    <script src="/assets/js/components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript">
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/assets/css/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="opi-logo"></div>
+      <div class="slides">
+        <section data-state="index-slide" class="index-section">
+          <div class="sliding-image-container"><img src="/assets/img/angular.png" class="animate-logos angular"><img src="/assets/img/grunt-logo.png" class="animate-logos grunt"><img src="/assets/img/yeoman-logo.png" class="animate-logos yeoman"><img src="/assets/img/node-logo.png" class="animate-logos node"><img src="/assets/img/bower-logo.png" class="animate-logos bower"></div>
+          <div class="fading-header-container">
+            <h1 class="animate-headers angular">Angular.js</h1>
+            <h1 class="animate-headers grunt">Grunt.js</h1>
+            <h1 class="animate-headers yeoman">Yeoman</h1>
+            <h1 class="animate-headers node">Node.js</h1>
+            <h1 class="animate-headers bower">Bower.js</h1>
+          </div>
+          <h3>Angular Bootcamp</h3>
+          <h4>Lecture 02</h4>
+        </section>
+        <section>
+          <h1>Lab One</h1>
+          <h2>Solution</h2>
+        </section>
+        <section>
+          <h1>HTML Compiler</h1>
+        </section>
+        <section>
+          <p>Angular's HTML compiler allows the developer to teach the browser new HTML syntax.</p>
+        </section>
+        <section>
+          <p>
+            It allows you to attach behavior to any HTML element or attribute and even create new HTML
+            elements or attributes with custom behavior.
+          </p>
+        </section>
+        <section>
+          <p>Angular calls these behavior extensions<strong> directives.</strong></p>
+        </section>
+        <section>
+          <p>Angular comes pre-bundled with common directives which are useful for building any app.</p>
+        </section>
+        <section>
+          <p>Later, we'll learn how to create our own directives that are custom to our application.</p>
+        </section>
+        <section>
+          <p>So what does a directive look like?</p><br>
+          <div class="text-center">
+            <pre><code class="html" data-trim>
+&lt;div ng-bind="exp"&gt;&lt;/div&gt;
+
+</code>
+</pre>
+          </div>
+        </section>
+        <section>
+          <p>Now, back to the compiler</p>
+        </section>
+        <section>
+          <p>The compiler is an Angular service which traverses the DOM looking for directives.</p>
+        </section>
+        <section>
+          <p>The compilation process happens in two phases.</p>
+        </section>
+        <section>
+          <h3>Link</h3>
+          <p>Traverse the DOM and collect all of the directives.</p>
+        </section>
+        <section>
+          <h3>Compile</h3>
+          <p>
+            Combine the directives with a scope and produce a live view. Any changes in the scope model are
+            reflected in the view, and any user interactions with the view are reflected in the scope model.
+          </p>
+        </section>
+        <section>
+          <p>This makes the scope model the single source of truth.</p>
+        </section>
+        <section>
+          <h2>Scope</h2>
+        </section>
+        <section>
+          <p>Scope is an object that refers to the application model.  It is an execution context for expressions.</p>
+        </section>
+        <section>
+          <p>Scopes are arranged in hierarchical structure which mimic the DOM structure of the application.</p>
+        </section>
+        <section>
+          <p>We'll discuss directives and scope in detail later.</p>
+        </section>
+        <section>
+          <p>Let's see the HTML compiler in action</p>
+        </section>
+        <section>
+          <p>ng-init evaluates a JavaScript expression on scope.</p>
+          <p>ng-bind takes a variable on scope and sets the content of the element to it.</p><br>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 1 + 2;"&gt;
+  &lt;p ng-bind="myVar"&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+          <p>What will the DOM look like after compilation and linking?</p>
+        </section>
+        <section>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 1 + 2;"&gt;
+  &lt;p ng-bind="myVar"&gt;3&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Instead of using ng-bind, we can use the shorthand {{ }}</p>
+        </section>
+        <section>
+          <p>The linker will execute the expression inside {{ }} on scope and replace it with the result.</p>
+        </section>
+        <section>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 1 + 2;"&gt;
+  &lt;p&gt;{{myVar}}{{myVar + 1}}&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+          <p>What will the DOM look like after compilation and linking?</p>
+        </section>
+        <section>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 1 + 2;"&gt;
+  &lt;p&gt;34&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
+          <h1>Modules</h1>
+        </section>
+        <section>
+          <p>You can think of a module as a container for the different parts of your app.</p>
+        </section>
+        <section>
+          <p>Most applications have a main method that instantiates and wires together the different parts of the application.</p>
+        </section>
+        <section>
+          <p>Angular apps don't have a main method. Instead, modules declaratively specify how an application should be bootstrapped.</p>
+        </section>
+        <section>
+          <p>There are several advantages to this approach</p>
+          <ul>
+            <li>The declarative process is easier to understand.</li>
+            <li>You can package code as reusable modules.</li>
+            <li>The modules can be loaded in any order because modules delay execution.</li>
+          </ul>
+        </section>
+        <section>
+          <p>The AngularJS team recommends you break up modules in the following way</p>
+          <ul>
+            <li>A module for each feature</li>
+            <li>A module for each reusable component</li>
+            <li>An application level module which depends on the above modules and contains any initialization code</li>
+          </ul>
+        </section>
+        <section>
+          <p>What does a module look like?</p>
+        </section>
+        <section>
+          <p>The code below creates a new module named 'app'</p><br>
+          <pre><code class="js" data-trim>
+angular.module('app', []);
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Modules can list other modules as their dependencies.</p>
+        </section>
+        <section>
+          <p>Depending on a module implies that required module needs to be loaded before the requiring module is loaded.</p>
+        </section>
+        <section>
+          <p>Each module will only be loaded once, even if multiple other modules require it.</p>
+        </section>
+        <section>
+          <p>Below is an example of how to specify a module dependency.</p><br>
+          <pre><code class="js" data-trim>
+angular.module('app', [
+  'feature1'
+]);
+
+angular.module('feature1', [
+  'feature1.1'
+]);
+
+angular.module('feature1.1', []);
+
+</code>
+</pre>
+          <p>Notice the order.  Will this work?</p>
+        </section>
+        <section>
+          <p>Yes.</p>
+          <p>
+            Because modules do nothing at load time, they can be loaded into the VM in any order and thus script
+            loaders can take advantage of this property and parallelize the loading process.
+          </p>
+        </section>
+        <section>
+          <h1>Dependency</h1>
+          <h1>Injection</h1>
+        </section>
+        <section>
+          <p>Dependency Injection (DI) is a software design pattern that deals with how code gets hold of its dependencies.</p>
+        </section>
+        <section>
+          <p>
+            The Angular injector subsystem is in charge of service instantiation, resolution of dependencies, and
+            provision of dependencies to components as requested.
+          </p>
+        </section>
+        <section>
+          <p>
+            The simplest way to get hold of the dependencies, is to assume that the function parameter names are
+            the names of the dependencies.
+          </p>
+        </section>
+        <section>
+          <p>
+            Given a function, the injector can infer the names of the service to inject by examining the function
+            declaration and extracting the parameter names.
+          </p>
+        </section>
+        <section>
+          <p>The example below shows how to specify that $scope and myService need to be injected into the function.</p><br>
+          <pre><code class="js" data-trim>
+  function($scope, myService) {
+  
+  }
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <p>The argument based DI method doesn't always work, we'll elaborate on the reason in Lecture 12.</p>
+        </section>
+        <section>
+          <p>Because of this complication, we can also use the array method for specifying dependencies.</p>
+        </section>
+        <section>
+          <p>Below is the array method for injecting dependencies.</p><br>
+          <pre><code class="js" data-trim>
+  [
+    '$scope',
+    'myService',
+    function($scope, myService) {
+    
+    }
+  ]
+  
+</code></pre>
+          <p>If we change the name of the function arguments, will DI still work?</p>
+        </section>
+        <section>
+          <p>Yes.</p>
+          <p>
+            When using the array method, the injector service will use the strings as the dependency names
+            and inject those dependencies into the function arguments in order.
+          </p>
+        </section>
+        <section>
+          <p>Where can you use dependency injection in Angular?</p>
+        </section>
+        <section>
+          <p>
+            DI is pervasive throughout Angular. You can use it in controllers, services, directives, filters,
+            animations, and run and config blocks (all of which we will discuss later)
+          </p>
+        </section>
+        <section>
+          <h1>Controllers</h1>
+        </section>
+        <section>
+          <p>In Angular, a controller is a JavaScript constructor function that is used to augment the Angular Scope.</p>
+        </section>
+        <section>
+          <p>You can create controllers on a module.  The first argument is the controller name, and the second is the constructor function.</p><br>
+          <pre><code class="js" data-trim>
+angular.module('app.controllers', [])
+  .controller('AppController',
+    function() {
+    
+    }
+  );
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <p>You should use controllers to</p>
+          <ul>
+            <li>Set up the initial state of the scope.</li>
+            <li>Add behavior to the scope.</li>
+          </ul>
+        </section>
+        <section>
+          <p>You should not use controllers to</p>
+          <ul>
+            <li>Manipulate DOM</li>
+            <li>Share code or state across controllers</li>
+            <li>Manage the life-cycle of other components</li>
+            <li>Format input</li>
+            <li>Format output</li>
+          </ul>
+        </section>
+        <section>
+          <p>We'll talk about other components that accomplish these functions later.</p>
+        </section>
+        <section>
+          <p>In general, a controller shouldn't try to do too much.</p>
+        </section>
+        <section>
+          <p>It should contain only the business logic needed for a single view.</p>
+        </section>
+        <section>
+          <p>When creating a controller you can inject the new scope as well as other dependencies.</p><br>
+          <pre><code class="js" data-trim>
+angular.module('app.controllers', [])
+  .controller('AppController',
+    function($scope, $interval) {
+    
+    }
+  );
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <p>You can associate controllers with scope objects implicitly via the ngController directive.</p>
+        </section>
+        <section>
+          <p>Controller</p>
+          <pre><code class="js" data-trim>
+angular.module('app.controllers', [])
+  .controller('AppController',
+    function($scope) {
+      $scope.time = new Date();
+    }
+  );
+  
+</code>
+</pre>
+          <p>Template</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-controller="AppController" &gt;
+  &lt;p&gt;{{time}}&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section id="example1" ng-controller="AppController">
+          <p>Final result</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-controller="AppController" &gt;
+  &lt;p&gt;{{time}}&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Lets add some functionality to scope and show off data binding.</p>
+        </section>
+        <section>
+          <p>The $interval service executes a function on scope in the supplied interval.</p>
+          <pre><code class="js" data-trim>
+angular.module('app.controllers', [])
+  .controller('TimeController',
+    function($scope, $interval) {
+      // Set the value of $scope.time to 'now' every 10 ms
+      $interval(function() {
+        $scope.time = new Date();
+      }, 10);
+    }
+  );
+  
+</code></pre>
+          <pre><code class="html" data-trim>
+&lt;div ng-controller="TimeController"&gt;
+  &lt;p&gt;{{time}}&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section id="example2" ng-controller="TimeController">
+          <h2 style="font-family: monospace;">{{time}}</h2>
+        </section>
+        <section>
+          <p>There's no magic happening here.</p>
+          <p>This demonstrates how changes on scope are reflected in the view once the DOM has been compiled and linked by Angular.</p>
+        </section>
+        <section>
+          <h1>Bootstrapping</h1>
+        </section>
+        <section>
+          <p>
+            Angular initializes automatically upon DOMContentLoaded event or when the angular.js script is evaluated if at that
+            time document.readyState is set to 'complete'.
+          </p>
+        </section>
+        <section>
+          <p>At this point Angular looks for the ng-app directive which designates your application root.</p>
+        </section>
+        <section>
+          <p>Typically the ng-app directive is used on the root html or body elements so that the entire document is traversed and linked by the compiler.</p><br>
+          <pre><code class="html" data-trim>
+&lt;html ng-app="app"&gt;
+
+&lt;/html&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
+          <h1>Lab Two</h1>
+          <h2>Angular Quickstart</h2>
+        </section>
+        <script>
+          angular.module('lecture02', [])
+            .controller('AppController', [
+              '$scope',
+              function($scope) {
+                $scope.time = new Date();
+              }
+            ])
+            .controller('TimeController', [
+              '$scope',
+              '$interval',
+              function($scope, $interval) {
+                $interval(function() {
+                  $scope.time = new Date();
+                }, 10);
+              }
+            ]);
+            
+          angular.bootstrap(document.getElementById("example1"), ['lecture02']);
+          angular.bootstrap(document.getElementById("example2"), ['lecture02']);
+        </script>
+      </div>
+    </div>
+    <script src="/assets/js/app.js"></script>
+  </body>
+</html>
