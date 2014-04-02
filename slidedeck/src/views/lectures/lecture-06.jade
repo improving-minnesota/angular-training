@@ -164,13 +164,13 @@ include ../includes/mixins
     p You've seen this before...
 
   section
-    p The $control service methods return promises to the response data from the server.
+    p The data service methods return promises to the response data from the server.
     br
     pre.
       <code class="js" data-trim>
       controller('EmployeeCtrl', function($scope, $q, $timeout) {
 
-        $control.list('employees')
+        data.list('employees')
           .then(function (employees) {
             $scope.employees = employees;
           });
