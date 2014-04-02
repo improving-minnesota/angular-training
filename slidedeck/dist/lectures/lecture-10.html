@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Lecture 10 - Animations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Lecture 10 - Animations">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/components/angular/angular.js"></script>
+    <script src="/assets/js/components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript">
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/assets/css/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="opi-logo"></div>
+      <div class="slides">
+        <section data-state="index-slide" class="index-section">
+          <div class="sliding-image-container"><img src="/assets/img/angular.png" class="animate-logos angular"><img src="/assets/img/grunt-logo.png" class="animate-logos grunt"><img src="/assets/img/yeoman-logo.png" class="animate-logos yeoman"><img src="/assets/img/node-logo.png" class="animate-logos node"><img src="/assets/img/bower-logo.png" class="animate-logos bower"></div>
+          <div class="fading-header-container">
+            <h1 class="animate-headers angular">Angular.js</h1>
+            <h1 class="animate-headers grunt">Grunt.js</h1>
+            <h1 class="animate-headers yeoman">Yeoman</h1>
+            <h1 class="animate-headers node">Node.js</h1>
+            <h1 class="animate-headers bower">Bower.js</h1>
+          </div>
+          <h3>Animations</h3>
+          <h4>Lecture 10</h4>
+        </section>
+        <section>
+          <h1>Lab Nine</h1>
+          <h2>Solution</h2>
+        </section>
+        <section>
+          <h1>Animations</h1>
+        </section>
+        <section>
+          <p>AngularJS provides hooks for animations on common directives such as ngRepeat, ngSwitch, and ngView.</p>
+        </section>
+        <section>
+          <p>Animation hooks are in place to trigger animations during the life cycle of provided directives.</p>
+        </section>
+        <section>
+          <p>When they're triggered, they'll attempt to perform a CSS animation or JavaScript callback animation depending on which is defined.</p>
+        </section>
+        <section>
+          <h2>Using Angular Animations</h2>
+        </section>
+        <section>
+          <p>Since Angular is designed to be modular, you'll need to import the ngAnimate library.</p><br>
+          <div class="text-center">
+            <pre><code data-trim>
+angular.module('app', ['ngAnimate'])
+
+</code>
+</pre>
+          </div>
+        </section>
+        <section>
+          <p>Animations can be applied to CSS classes by following a set of CSS class name conventions.</p>
+          <p>An example for ng-show is below</p><br>
+          <pre><code class="css" data-trim>
+.my-class.ng-hide-add, .my-class.ng-hide-remove {
+  -webkit-transition:all linear 1.0s;
+  -moz-transition:all linear 1.0s;
+  -o-transition:all linear 1.0s;
+  transition:all linear 1.0s;
+  display:block!important;
+}
+
+.my-class.ng-hide-add.ng-hide-add-active,
+.my-class.ng-hide-remove {
+  opacity:0;
+}
+
+.my-class.ng-hide-add,
+.my-class.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}
+</code>
+
+</pre>
+        </section>
+        <section>
+          <p>By modifying .my-class with the pre-defined animation classes, we can animate any show/hide by adding .my-class to it.</p><br>
+          <div class="text-center">
+            <pre><code class="html" data-trim>
+&lt;p class="my-class" ng-show="sayHello"&gt;Hello World!&lt;p&gt;
+
+</code>
+</pre>
+          </div>
+        </section>
+        <section id="example1" ng-controller="Lecture10Controller">
+          <button ng-click="sayHello = !sayHello">Say Hello</button>
+          <p ng-show="sayHello" class="example-1">Hello World!</p>
+        </section>
+        <section>
+          <p>If we add the animation classes for ng-repeat, we can animate lists as they change.</p><br>
+          <pre><code class="css" data-trim>
+.repeated-item.ng-enter, .repeated-item.ng-move {
+  -webkit-transition:0.5s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+.repeated-item.ng-enter.ng-enter-active,
+.repeated-item.ng-move.ng-move-active {
+  opacity:1;
+}
+
+.repeated-item.ng-leave {
+  -webkit-animation:0.5s my_animation;
+  -moz-animation:0.5s my_animation;
+  -o-animation:0.5s my_animation;
+  animation:0.5s my_animation;
+}
+
+</code>
+</pre>
+        </section>
+        <section id="example2" ng-controller="Lecture10Controller">
+          <button ng-click="pushTime()">Push Time</button>
+          <button ng-click="popTime()">Pop Time</button><br><br>
+          <div ng-repeat="time in times" class="repeated-item">{{time | date:'h:mm:ss.sss a'}}</div>
+        </section>
+        <section>
+          <h1>Lab Ten</h1>
+          <h2>Animations</h2>
+        </section>
+        <section>
+          <p>In this lab, you're going to add animations to the employee, timesheet, and project lists.</p>
+        </section>
+        <script>
+          angular.module('lecture10', ['ngAnimate']).controller('Lecture10Controller', function($scope) {
+            $scope.times = [];
+            
+            $scope.pushTime = function() {
+              $scope.times.push(new Date());
+            };
+            
+            $scope.popTime = function() {
+              $scope.times.shift();
+            };
+            
+            
+            $scope.sayHello = false;
+          });
+          
+          angular.bootstrap(document.getElementById("example1"), ["lecture10"]);
+          angular.bootstrap(document.getElementById("example2"), ["lecture10"]);
+        </script>
+      </div>
+    </div>
+    <script src="/assets/js/app.js"></script>
+  </body>
+</html>

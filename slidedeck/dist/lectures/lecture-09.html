@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Lecture 09 - Filters</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Lecture 09 - Filters">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/components/angular/angular.js"></script>
+    <script src="/assets/js/components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript">
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/assets/css/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="opi-logo"></div>
+      <div class="slides">
+        <section data-state="index-slide" class="index-section">
+          <div class="sliding-image-container"><img src="/assets/img/angular.png" class="animate-logos angular"><img src="/assets/img/grunt-logo.png" class="animate-logos grunt"><img src="/assets/img/yeoman-logo.png" class="animate-logos yeoman"><img src="/assets/img/node-logo.png" class="animate-logos node"><img src="/assets/img/bower-logo.png" class="animate-logos bower"></div>
+          <div class="fading-header-container">
+            <h1 class="animate-headers angular">Angular.js</h1>
+            <h1 class="animate-headers grunt">Grunt.js</h1>
+            <h1 class="animate-headers yeoman">Yeoman</h1>
+            <h1 class="animate-headers node">Node.js</h1>
+            <h1 class="animate-headers bower">Bower.js</h1>
+          </div>
+          <h3>Filters</h3>
+          <h4>Lecture 09</h4>
+        </section>
+        <section>
+          <h1>Lab Eight</h1>
+          <h2>Solution</h2>
+        </section>
+        <section>
+          <h1>Filters</h1>
+        </section>
+        <section>
+          <p>When used in expressions, filters are an easy way to convert model values to display values.</p>
+          <p>Inside an expression, just "pipe" the model value to a particular filter.</p><br>
+          <div class="text-center">
+            <pre><code data-trim>
+{{ booleanValue | yesNo }}
+
+</code>
+</pre>
+          </div>
+        </section>
+        <section>
+          <p>Filters can accept optional arguments separated by a colon.</p><br>
+          <div class="text-center">
+            <pre><code data-trim>
+{{ booleanValue | yesNo:arg1:arg2 }}
+
+</code>
+</pre>
+          </div>
+        </section>
+        <section>
+          <p>They can also be chained to perform sequential modifications.</p><br>
+          <div class="text-center">
+            <pre><code data-trim>
+{{ booleanValue | yesNo | uppercase }}
+
+</code>
+</pre>
+          </div>
+        </section>
+        <section id="example1">
+          <p>Filters in action</p><br>
+          <input ng-model="myValue">
+          <p>{{myValue | uppercase}}</p>
+        </section>
+        <section>
+          <h2>Creating Custom Filters</h2>
+        </section>
+        <section>
+          <p>Filters are specialized objects which means their API is defined by AngularJS.</p>
+        </section>
+        <section>
+          <p>To create a filter, just register a new filter factory function with your module.</p>
+        </section>
+        <section>
+          <p>Internally, this will use the filterProvider (provided by AngularJS).</p><br>
+          <pre><code class="js" data-trim>
+angular.module('boolean.filters', [ ])
+  .filter('yesNo', function() {
+  
+  });
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <p>This factory function should return a new filter function which takes the input value as the first argument.</p><br>
+          <pre><code class="js" data-trim>
+angular.module('boolean.filters', [ ])
+  .filter('yesNo', function() {
+    return function(value) {
+      if (value) {
+        return 'Yes';
+      } else {
+        return 'No';
+      }
+    };
+  });
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Filter arguments are passed in as additional arguments to the filter function.</p><br>
+          <pre><code class="js" data-trim>
+angular.module('boolean.filters', [ ])
+  .filter('yesNo', function() {
+    return function(value, casual) {
+      if (value) {
+        return casual ? 'Yep' : 'Yes';
+      } else {
+        return casual ? 'Nope' : 'No';
+      }
+    };
+  });
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Filter's aren't limited to simple values. They can manipulate any type of object.</p><br>
+          <pre><code class="js" data-trim>
+angular.module('date.filters', [ ])
+  .filter('momentShortDate', function () {
+    return function (date) {
+      return moment(date).format("MMM D, YYYY");
+    };
+  })
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <h2>Filtering Arrays</h2>
+        </section>
+        <section>
+          <p>Since filters can be used with any type of object, we can also use them to filter arrays.</p>
+        </section>
+        <section>
+          <p>To use a filter with ng-repeat, simply "pipe" the source array through a filter.</p>
+        </section>
+        <section>
+          <p>This will take the source array and return a new filtered array to ng-repeat.</p><br>
+          <pre><code class="html" data-trim>
+&lt;tr ng-repeat="employee in employees | filter:myFilter | orderBy:'name'"&gt;
+  &lt;td&gt;{{employee.name}}&lt;/td&gt;
+&lt;/tr&gt;
+
+</code>
+</pre>
+          <p>The "filter" and "orderBy" filters are provided by AngularJS.</p>
+        </section>
+        <section id="example2" ng-controller="Lecture9Controller">
+          <p>Filtering arrays in action</p><br>
+          <input ng-model="myFilter" class="form-control"><br>
+          <div ng-repeat="isisEmployee in isisEmployees | filter:myFilter | orderBy:'name'">{{isisEmployee.name}}</div>
+        </section>
+        <section>
+          <h1>Unit Testing</h1>
+          <h2>Continued</h2>
+        </section>
+        <section>
+          <p>To test our filters, we'll first use the injector service to get our filter.</p><br>
+          <pre><code class="js" data-trim>
+var yesNoFilter;
+
+beforeEach(function() {
+  yesNoFilter = $injector.get('yesNoFilter');
+});
+
+</code>
+</pre>
+          <p>Notice that "Filter" is appended to the actual name of our filter.</p>
+        </section>
+        <section>
+          <p>Then, we'll pass values into it and test that the output meets our expectations.</p><br>
+          <pre><code class="js" data-trim>
+describe('yesNo Filter', function() {
+  it('should display Yes for true', function() {
+    expect(yesNoFilter(true)).to.equal('Yes');
+  });
+});
+
+</code>
+</pre>
+        </section>
+        <section>
+          <h1>Lab Nine</h1>
+          <h2>Filters</h2>
+        </section>
+        <section>
+          <p>In this lab you'll use the "orderBy" filter on employee, timesheet, and project lists and create some of your own filters.</p>
+        </section>
+        <script>
+          angular.module('lecture09', []).controller('Lecture9Controller', function($scope) {
+            $scope.isisEmployees = [
+              {name: 'Sterling Archer'},
+              {name: 'Lana Kane'},
+              {name: 'Malory Archer'},
+              {name: 'Cyril Figgis'},
+              {name: 'Pam Poovey'},
+              {name: 'Krieger'}];
+          });
+          
+          angular.bootstrap(document.getElementById("example1"), ["lecture09"]);
+          angular.bootstrap(document.getElementById("example2"), ["lecture09"]);
+        </script>
+      </div>
+    </div>
+    <script src="/assets/js/app.js"></script>
+  </body>
+</html>
