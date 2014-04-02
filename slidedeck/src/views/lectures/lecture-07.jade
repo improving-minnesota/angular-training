@@ -205,10 +205,10 @@ include ../includes/mixins
       </code>
 
   section
-    h2 $api service
+    h2 api service
 
   section
-    p In order to make it easier to use $resource, we have added an $api
+    p In order to make it easier to use $resource, we have added an api
       | service to handle all of the configuration of new resources.
 
   section
@@ -216,7 +216,7 @@ include ../includes/mixins
 
     pre.
       <code class="js" data-trim>
-      .factory('$api', function ($resource) {
+      .factory('api', function ($resource) {
         var api = {
           idOnly : {_id: '@_id'},
 
@@ -267,24 +267,24 @@ include ../includes/mixins
       </code>
 
   section
-    p This api service is now used by the $control service to make our HTTP request.
+    p This api service is now used by the data service to make our HTTP request.
 
     pre.
       <code class="js" data-trim>
-      .factory('$control', function ($api) {
+      .factory('data', function (api) {
 
         var control = {
           // Calls the paged() function.
           page : function (resource, query) {
-            return $api[resource].paged(query).$promise;
+            return api[resource].paged(query).$promise;
           },
           // other code is here
           get : function (resource, query) {
-              return $api[resource].get(query).$promise;
+              return api[resource].get(query).$promise;
           },
           // still more code
           update : function (resource, model) {
-            var updated = $api[resource].update(model);
+            var updated = api[resource].update(model);
             return updated.$promise || updated;
           },
       </code>
