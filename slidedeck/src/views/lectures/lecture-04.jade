@@ -219,7 +219,7 @@ include ../includes/mixins
       angular.module('app', [])
         .controller(function($resource) {
           var Employee = $resource(
-            '/employee/:employeeId',
+            '/employees/:employeeId',
             {employeeId:'@id'}
           );
         });
@@ -232,7 +232,7 @@ include ../includes/mixins
     .text-center
       pre.
         <code class="js" data-trim>
-        var Employee = $resource('/employee/:employeeId');
+        var Employee = $resource('/employees/:employeeId');
 
         </code>
 
@@ -242,7 +242,7 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       var Employee = $resource(
-        '/employee/:employeeId',
+        '/employees/:employeeId',
         {employeeId:'@id'}
       );
 
@@ -264,7 +264,7 @@ include ../includes/mixins
     p What will the HTTP request look like for this action?
 
   section
-    p GET /employee/23
+    p GET /employees/23
 
   section
     p It is important to realize that invoking a $resource object method immediately returns an empty reference.
