@@ -5,7 +5,6 @@
 - In a console:
 
 ```
-git reset --hard
 git checkout lab-11-protractor
 git pull
 ```
@@ -16,9 +15,11 @@ git pull
 ### Set up web driver to manipulate the browser for us
 * We need to set up the Chrome web driver for Protractor to run our tests.
 * In a console window, within the `timesheet` home directory, run:
+
 ```
 ./node_modules/protractor/bin/webdriver-manager update
 ```
+
 * You should see output in your console that the chromedriver zip file was dowloaded.
 
 &nbsp;
@@ -65,6 +66,7 @@ grunt.loadNpmTasks('grunt-protractor-runner');
 &nbsp;
 ### Test the Grunt task has been registered.
 * In a console window, run:
+
 ```
 grunt protractor:e2e
 ```
@@ -86,16 +88,20 @@ grunt protractor:e2e
 ```
 ### Test the Configuration
 * Start the application server by running:
+
 ```
 grunt runapp:development
 ```
+
 * In a **separate** console window, run the Grunt protractor task:
+
 ```
 grunt protractor:e2e
 ```
+
 * You should get output in your console similar to:
 
-```
+```javascript
 Running "protractor:e2e" (protractor) task
 
 ------------------------------------
@@ -111,6 +117,7 @@ Finished in 0.004 seconds
 
 Done, without errors.
 ```
+
 &nbsp;
 ## Security Tests
 
@@ -245,7 +252,10 @@ this.restoreFirstEmployee = function () {
 
 
 ### Navigating to the create employee form
-* line 15
+ - Locate the `TODO` near line 15.
+- Test that we actually go to the create employee form.
+  - Use the `indexPage` page object to click the new employee button.
+  - Verify that the page title is now "Create Employee".  
 
 ```javascript
 it('takes us to the create employee form', function () {
@@ -255,7 +265,10 @@ it('takes us to the create employee form', function () {
 ```
 
 ### Navigating to the employee detail page
-* line 22
+- Locate the `TODO` near line 22.
+- Test clicking the first employee in the table takes us to the detail page.
+- Use the `indexPage` page object to click the first employee in the list.
+- Verify that the page title is now "Update Employee".
 
 ```javascript
 it('takes us to the employee detail page', function () {
@@ -265,7 +278,10 @@ it('takes us to the employee detail page', function () {
 ```
 
 ### Deleting an employee
-* line 30
+- Locate the `TODO` near line 30.
+- Test that removing an employee changes the styling of its row.
+  - Use the `indexPage` page object to delete the first employee.
+  - Verify that the first employee now has a class : 'faded'.
 
 ```javascript
 it('should fade the employee row', function () {
@@ -274,7 +290,12 @@ it('should fade the employee row', function () {
 });
 ```
 
-* line 35
+- Locate the `TODO` near line 35.
+- Test that the button's text changes when an employee is deleted.
+
+> Since we have not reset the page state since the last test, the first employee should
+> still be 'deleted'. Remember in functional testing, the web driver is just taking place
+> of an actual user so your view will remain exactly as your last test left it.
 
 ```javascript
 it('should change the action button text', function () {
@@ -283,7 +304,10 @@ it('should change the action button text', function () {
 ```
 
 ### Restoring an employee
-* line 42
+- Locate the `TODO` near line 42.
+- Test what happens when we click the 'restore' button on the first employee.
+  - Use the `indexPage` page object to click the restore button.
+  - Verify that the 'faded' class was removed from the row.
 
 ```javascript
 it('should set the row back to normal', function () {
@@ -292,7 +316,8 @@ it('should set the row back to normal', function () {
 });
 ```
 
-* line 47
+- Locate the `TODO` near line 47.
+- Test the button text is reset to 'Delete'.
 
 ```javascript
 it('should restore the action button text', function () {
@@ -342,6 +367,7 @@ it('should return back to the index page on cancel', function () {
 
 * Keep the **employees.spec.js** file open and enter `browser.debugger()` inside any of the form tests you just wrote.
 * Now run your tests, but this time use:
+
 ```
 grunt protractor:debug
 ```
@@ -350,6 +376,7 @@ grunt protractor:debug
 * It's just like you're running it like normal, except that you are in the state that your test left the browser in.
 * You can actually use the Protractor library from within your Chrome console.
 * Open the console and type:
+
 ```
 window.clientSideScripts.findInputs('username');
 ```
@@ -430,4 +457,10 @@ describe('Form Page', function () {
   });
 
 });
+```
+
+### Commit your code to git and celebrate!!!
+```
+git add .
+git commit -m 'Whew...we made it and we are awesome!'
 ```

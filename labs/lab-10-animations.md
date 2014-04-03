@@ -3,12 +3,20 @@
 - In a console:
 
 ```
-git reset --hard
 git checkout lab-10-animations
 git pull
 ```
 &nbsp;
-##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
+##### Start the grunt tasks:
+```
+grunt karma:unit
+```
+```
+grunt watch:development
+```
+```
+grunt shell:server
+```
 
 &nbsp;
 ## Set up the CSS class for animated items
@@ -20,9 +28,11 @@ git pull
 
 * Open **client/assets/templates/app/employees/index.html**
 * Find the table row that has contains the `ng-repeat` and add:
+
 ```javascript
 class="repeated-item fadeable-row"
 ```
+
 * Now do this for the other tables in the application located in:
   * client/assets/templates/app/projects/index.html
   * client/assets/templates/app/timesheets/detail.html
@@ -87,3 +97,9 @@ class="repeated-item fadeable-row"
 * Run your server and open the application.
 * Log in and navigate through the app, can you see the fade in/out effect?
 * Try changing the CSS animation and see what kind of results you can get.
+
+### Commit your code!
+```
+git add .
+git commit -m 'We are now animaniacs.'
+```
