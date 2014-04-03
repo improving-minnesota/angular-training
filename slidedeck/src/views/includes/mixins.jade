@@ -7,15 +7,14 @@ mixin page(title)
       meta(name="apple-mobile-web-app-capable", content="yes")
       meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
       meta(name="description", content=title)
-      link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
-      script(src="/assets/js/components/angular/angular.js")
-      script(src="/assets/js/components/angular-animate/angular-animate.js")
+      link(href="/angular-training/assets/css/style.css", rel="stylesheet", type="text/css")
+      script(src="/angular-training/assets/js/angular.js")
       script(type='text/javascript').
         if( window.location.search.match( /print-pdf/gi ) ) {
           var link = document.createElement( 'link' );
           link.rel = 'stylesheet';
           link.type = 'text/css';
-          link.href = '/assets/css/pdf.css';
+          link.href = '/angular-training/assets/css/pdf.css';
           document.getElementsByTagName( 'head' )[0].appendChild( link );
         }
 
@@ -25,7 +24,7 @@ mixin page(title)
         .slides
           block
 
-      script(src="/assets/js/app.js")
+      script(src="/angular-training/assets/js/app.js")
 
 
 
@@ -67,11 +66,11 @@ mixin slides-index(title)
 
 mixin animated-header()
   .sliding-image-container
-    img.animate-logos.angular(src="/assets/img/angular.png")
-    img.animate-logos.grunt(src="/assets/img/grunt-logo.png")
-    img.animate-logos.yeoman(src="/assets/img/yeoman-logo.png")
-    img.animate-logos.node(src="/assets/img/node-logo.png")
-    img.animate-logos.bower(src="/assets/img/bower-logo.png")
+    img.animate-logos.angular(src="/angular-training/assets/img/angular.png")
+    img.animate-logos.grunt(src="/angular-training/assets/img/grunt-logo.png")
+    img.animate-logos.yeoman(src="/angular-training/assets/img/yeoman-logo.png")
+    img.animate-logos.node(src="/angular-training/assets/img/node-logo.png")
+    img.animate-logos.bower(src="/angular-training/assets/img/bower-logo.png")
   .fading-header-container
     h1.animate-headers.angular Angular.js
     h1.animate-headers.grunt Grunt.js
