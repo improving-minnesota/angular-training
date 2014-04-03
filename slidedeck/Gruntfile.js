@@ -15,7 +15,8 @@ module.exports = function(grunt) {
           paths: ['src/assets/less']
         },
         files : {
-          'dist/temp/style.css': 'src/assets/less/style.less'
+          'dist/temp/style.css': 'src/assets/less/style.less',
+          'dist/temp/pdf.css': 'src/assets/less/pdf.less'
         }
       }
     },
@@ -26,6 +27,9 @@ module.exports = function(grunt) {
           'dist/assets/css/style.css':[
             'src/assets/js/components/highlight.js/styles/github.css',
             'dist/temp/style.css'
+          ],
+          'dist/assets/css/pdf.css':[
+            'dist/temp/pdf.css'
           ]
         }
       }
@@ -150,7 +154,7 @@ module.exports = function(grunt) {
           stdout: true,
           stderr: true
         },
-        command: 'git subtree split --branch gh-pages --prefix dist/'
+        command: 'cd ../; git subtree split --branch gh-pages --prefix slidedeck/dist/'
       }
     }
 

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Lecture 03 - Karma and Unit Testing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Lecture 03 - Karma and Unit Testing">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/components/angular/angular.js"></script>
+    <script src="/assets/js/components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript">
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/assets/css/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="opi-logo"></div>
+      <div class="slides">
+        <section data-state="index-slide" class="index-section">
+          <div class="sliding-image-container"><img src="/assets/img/angular.png" class="animate-logos angular"><img src="/assets/img/grunt-logo.png" class="animate-logos grunt"><img src="/assets/img/yeoman-logo.png" class="animate-logos yeoman"><img src="/assets/img/node-logo.png" class="animate-logos node"><img src="/assets/img/bower-logo.png" class="animate-logos bower"></div>
+          <div class="fading-header-container">
+            <h1 class="animate-headers angular">Angular.js</h1>
+            <h1 class="animate-headers grunt">Grunt.js</h1>
+            <h1 class="animate-headers yeoman">Yeoman</h1>
+            <h1 class="animate-headers node">Node.js</h1>
+            <h1 class="animate-headers bower">Bower.js</h1>
+          </div>
+          <h3>Karma and Unit Testing</h3>
+          <h4>Lecture 03</h4>
+        </section>
+        <section>
+          <h1>Lab Two</h1>
+          <h2>Solution</h2>
+        </section>
+        <section>
+          <h1>Unit Testing</h1>
+        </section>
+        <section>
+          <p>
+            JavaScript is a dynamically typed language which comes with great power of expression,
+            but it also comes with almost no help from the compiler.
+          </p>
+        </section>
+        <section>
+          <p>For this reason any code written in JavaScript needs to come with a strong set of tests.</p>
+        </section>
+        <section>
+          <p>The Angular team has built many features into Angular which makes testing your applications easy.</p>
+        </section>
+        <section>
+          <h3>There is no excuse for not testing</h3>
+        </section>
+        <section>
+          <p>You'll more than likely spend half of your time in labs testing your solutions.</p>
+          <p>.. and this is a good thing.</p>
+        </section>
+        <section>
+          <h1>Karma</h1>
+        </section>
+        <section>
+          <h2>Karma</h2>
+          <ul>
+            <li>Essentially a tool that spawns a web server to ..</li>
+            <li>Execute your source code</li>
+            <li>Against your test code</li>
+            <li>Within each of the browsers you configure.</li>
+          </ul>
+        </section>
+        <section>
+          <p>
+            The results for each test against each browser are examined and displayed via the command line
+            to the developer such that they can see which browsers and tests passed or failed.
+          </p>
+        </section>
+        <section>
+          <p>We'll use Karma with Grunt to integrate tests directly into our development workflow.</p>
+        </section>
+        <section>
+          <h1>Jasmine</h1>
+        </section>
+        <section>
+          <p>Jasmine is a behavior-driven development (BDD) framework for testing JavaScript code.</p>
+        </section>
+        <section>
+          <p>Behavior driven development uses examples to illustrate behavior.</p>
+        </section>
+        <section>
+          <h2>Suites</h2>
+        </section>
+        <section>
+          <p>A test suite begins with a call to the global Jasmine function<strong> describe()</strong>with two parameters: a string and a function.</p>
+        </section>
+        <section>
+          <p>
+            The string is a name or title for a spec suite – usually what is being tested and function is a block of code
+            that implements the suite.
+          </p>
+        </section>
+        <section>
+          <pre><code class="js" data-trim>
+describe("Some feature", function() {
+
+});
+
+</code>
+</pre>
+        </section>
+        <section>
+          <h2>Specs</h2>
+        </section>
+        <section>
+          <p>A spec contains one or more expectations that test the state of the code.</p>
+        </section>
+        <section>
+          <p>Specs are defined by calling the global Jasmine function<strong> it()</strong>which, like describe(), takes a string and a function.</p>
+        </section>
+        <section>
+          <p>The string is the title of the spec and the function is the spec, or test.</p>
+        </section>
+        <section>
+          <pre><code class="js" data-trim>
+describe("Some feature", function() {
+  it('should behave in a certain way', function() {
+  
+  });
+});
+
+</code
+</pre>
+        </section>
+        <section>
+          <p>You can nest describe blocks to elaborate on what is being tested.</p>
+        </section>
+        <section>
+          <pre><code class="js" data-trim>
+describe("Some feature", function() {
+  it('should behave in a certain way', function() {
+  
+  });
+  describe("component", function() {
+    it('should do what we expect', function() {
+    
+    });
+  });
+});
+
+</code>
+</pre>
+          <p>Some feature should behave a certain way.</p>
+          <p>Some feature component should do what we expect.</p>
+        </section>
+        <section>
+          <p>Jasmine also provides us with test life-cycle functions that we can use to set up and/or tear down our test environment:<strong> beforeEach() and afterEach()</strong></p>
+        </section>
+        <section>
+          <h2>Expectations</h2>
+        </section>
+        <section>
+          <p>Expectations are built with the function 'expect' which takes a value, called the actual.</p>
+        </section>
+        <section>
+          <p>It is chained with a Matcher function, which takes the expected value.</p>
+        </section>
+        <section>
+          <p>Each matcher implements a boolean comparison between the actual value and the expected value.</p>
+        </section>
+        <section>
+          <p>The matcher is responsible for reporting to Jasmine if the expectation is true or false.</p>
+        </section>
+        <section>
+          <pre><code class="js" data-trim>
+describe("Some feature", function() {
+  it('should behave in a certain way', function() {
+    expect(true).to.equal(true);
+    expect({}).to.be.ok; // Ok checks if the actual is defined
+  });
+});
+
+</code>
+</pre>
+        </section>
+        <section>
+          <h1>Angular Mocks</h1>
+        </section>
+        <section>
+          <p>
+            Instead of our tests talking to real services, it will often suffice to speak to the 'mock' versions
+            of the services, which will respond to calls accurately, but rather unintelligently.
+          </p>
+        </section>
+        <section>
+          <p>
+            We use mocks because if we relied on a real service writing real data, then it may interfere with the
+            execution of our test runner in its own potentially sandboxed environment.
+          </p>
+        </section>
+        <section>
+          <p>Let us use the $location service as an example.</p>
+        </section>
+        <section>
+          <p>
+            If one of of our tests changes the location of the address bar during testing, this could potentially disrupt
+            the entire test process.
+          </p>
+        </section>
+        <section>
+          <p>Angular provides tools and services to mock different kinds of components when testing.</p>
+        </section>
+        <section>
+          <p>Lets start by mocking a module that we'll be testing.</p>
+        </section>
+        <section>
+          <p>Angular provides angular.mock.module (aliased as 'module' on window) to mock Angular modules</p>
+        </section>
+        <section>
+          <pre><code class="js" data-trim>
+beforeEach(module(
+  'app.controllers'
+));
+
+</code>
+</pre>
+          <p>Why do we mock the app.controllers module inside a beforeEach statement?</p>
+        </section>
+        <section>
+          <p>We want to make sure that we're starting with a blank slate so that changes made by other tests don't interfere with the current test.</p>
+        </section>
+        <section>
+          <p>Now that we've mocked the module that contains the component we wish to test, we need to mock the component itself.</p>
+        </section>
+        <section>
+          <p>More than likely, our component will have dependencies that are required to test it.</p>
+        </section>
+        <section>
+          <p>We use the angular.mock.inject (aliased as 'inject' on window) to inject mock dependencies.</p>
+        </section>
+        <section>
+          <pre><code class="js" data-trim>
+var controller, scope;
+
+beforeEach(module(
+  'app.controllers'
+));
+
+beforeEach(
+  inject(
+    function($rootScope, $controller) {
+      scope = $rootScope.$new();
+      controller = $controller("MainCtrl", {
+        $scope: scope
+      });
+    }
+  )
+);
+
+</code>
+</pre>
+          <p>Notice that we use an additional before each here to make sure each test has a fresh controller.</p>
+        </section>
+        <section>
+          <p>Lets break this down and discuss what's going on in each step.</p>
+        </section>
+        <section>
+          <p>To instantiate our controller for testing, we'll need to inject the $controller service and $rootScope service.</p>
+        </section>
+        <section>
+          <p>The inject function is going to inject $rootScope and the $controller services that we need to build an instance of our controller.</p><br>
+          <pre><code class="js" data-trim>
+  inject(
+    function($rootScope, $controller) {
+    
+    }
+  );
+  
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Now, we're going to create a new scope from the root scope that we'll supply to our controller.</p><br>
+          <pre><code class="js" data-trim>
+inject(
+  function($rootScope, $controller) {
+    scope = $rootScope.$new();
+  }
+);
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Then, we'll use the $controller service to instantiate our controller and supply the dependencies it needs.</p><br>
+          <pre><code class="js" data-trim>
+controller('MainCtrl', function($scope) {
+
+});
+
+</code></pre>
+          <pre><code class="js" data-trim>
+inject(
+  function($rootScope, $controller) {
+    scope = $rootScope.$new();
+    controller = $controller("MainCtrl", {
+      $scope: scope
+    });
+  }
+)
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>If we needed to supply additional mock dependencies, we could do that here as well.</p><br>
+          <pre><code class="js" data-trim>
+controller('MainCtrl', function($scope, person) {
+  $scope.person = person;
+});
+
+</code></pre>
+          <pre><code class="js" data-trim>
+inject(
+  function($rootScope, $controller) {
+    scope = $rootScope.$new();
+    controller = $controller("MainCtrl", {
+      $scope: scope
+      person: [{id: 1, name:'Cyril'}]
+    });
+  }
+)
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Questions?</p>
+        </section>
+        <section>
+          <p>Now that we have an instance of our controller, we can start testing it.</p>
+        </section>
+        <section>
+          <pre><code class="js" data-trim>
+it('should be able to instantiate the controller', function () {
+  expect(controller).to.be.ok;
+});
+
+it('should have person on scope', function () {
+  expect(scope.person).to.be.ok;
+});
+
+</code>
+</pre>
+        </section>
+        <section>
+          <h1>Lab Three</h1>
+          <h2>Karma Karma Karma Chameleon</h2>
+        </section>
+      </div>
+    </div>
+    <script src="/assets/js/app.js"></script>
+  </body>
+</html>

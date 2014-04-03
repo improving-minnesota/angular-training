@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Lecture 01 - Project Layout and Development Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Lecture 01 - Project Layout and Development Tools">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/components/angular/angular.js"></script>
+    <script src="/assets/js/components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript">
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/assets/css/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="opi-logo"></div>
+      <div class="slides">
+        <section data-state="index-slide" class="index-section">
+          <div class="sliding-image-container"><img src="/assets/img/angular.png" class="animate-logos angular"><img src="/assets/img/grunt-logo.png" class="animate-logos grunt"><img src="/assets/img/yeoman-logo.png" class="animate-logos yeoman"><img src="/assets/img/node-logo.png" class="animate-logos node"><img src="/assets/img/bower-logo.png" class="animate-logos bower"></div>
+          <div class="fading-header-container">
+            <h1 class="animate-headers angular">Angular.js</h1>
+            <h1 class="animate-headers grunt">Grunt.js</h1>
+            <h1 class="animate-headers yeoman">Yeoman</h1>
+            <h1 class="animate-headers node">Node.js</h1>
+            <h1 class="animate-headers bower">Bower.js</h1>
+          </div>
+          <h3>Project Layout and Development Tools</h3>
+          <h4>Lecture 01</h4>
+        </section>
+        <section>
+          <h1>NPM</h1>
+        </section>
+        <section>
+          <p>NPM is the official package manager for Node.js</p>
+        </section>
+        <section>
+          <p>NPM runs through the command line and manages dependencies for an application.</p>
+        </section>
+        <section>
+          <p>It also allows users to install Node.js applications that are available on the npm registry.</p>
+        </section>
+        <section>
+          <p>For those who are familiar with dependency management tools and artifact repositories like Maven and Maven Central, NPM is similar.</p>
+        </section>
+        <section>
+          <p>One distinct difference between the two is that NPM does not manage build processes like Maven does.</p>
+        </section>
+        <section>
+          <p>Most, if not all, node projects contain a package.json file in the root project.</p>
+        </section>
+        <section>
+          <p>This file exposes metadata about your application as well as it's dependencies.</p>
+        </section>
+        <section>
+          <pre><code class="json" data-trim>
+{
+  "name": "my-project",
+  "version": "0.0.1",
+  "description": "My Cool Node Project",
+  "main": "index.js",
+  "author": "Sterling Archer",
+  "dependencies": {
+    "grunt": "0.4.2"
+  }
+}
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>When checking out a fresh project from GitHub, simply run 'npm install' to install all the dependencies required to run the project.</p>
+        </section>
+        <section>
+          <h4>Fun Fact</h4>
+          <p>Contrary to the belief of many, "npm" is not in fact an abbreviation for "Node Package Manager." It is a recursive bacronymic abbreviation for "npm is not an acronym."</p>
+        </section>
+        <section>
+          <h1>Bower</h1>
+        </section>
+        <section>
+          <p>Bower is a package manager for front end dependencies.</p>
+        </section>
+        <section>
+          <p>We'll be using Bower in our project to manage libraries that we use in our Angular application, such as Angular itself.</p>
+        </section>
+        <section>
+          <p>Like NPM, bower requires a bower.json file in the root of the project that specifies metadata about our project as well as its dependencies.</p>
+        </section>
+        <section>
+          <pre><code class="json" data-trim>
+{
+  "name": "my-project",
+  "version": "0.0.1",
+  "description": "My Cool Node Project",
+  "author": "Pam Poovey",
+  "dependencies": {
+    "angular": "~1.2.14"
+  }
+}
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>When checking out a fresh project from GitHub, simply run 'bower install' to install all the client side dependencies required by the client application.</p>
+        </section>
+        <section>
+          <p>Aside from using NPM and Bower to install our dependencies, we wont focus much on NPM or Bower in this training class.</p>
+        </section>
+        <section>
+          <p>You can visit the NPM and Bower websites to learn more about them.</p>
+          <p><a href="http://bower.io">bower.io</a></p>
+          <p><a href="https://www.npmjs.org">npmjs.org</a></p>
+        </section>
+        <section>
+          <h1>Grunt</h1>
+        </section>
+        <section>
+          <p>Grunt is a JavaScript Task Runner.</p>
+        </section>
+        <section>
+          <p>We'll be using Grunt to automate many of the project build tasks associated with a web application.</p>
+        </section>
+        <section>
+          <p>
+            The less work we have to do when performing repetitive tasks like minification, compilation, unit
+            testing, linting, and etc, the easier our life becomes.
+          </p>
+        </section>
+        <section>
+          <p>
+            Grunt, by itself, is a framework designed for running tasks.  It also provides a lot of common
+            utilities needed for performing things like filesystem operations.
+          </p>
+        </section>
+        <section>
+          <p>
+            We'll be using Grunt plugins created by individuals and the community that help automate tasks that are
+            specific to our application.
+          </p>
+        </section>
+        <section>
+          <p>We'll go into more detail about Grunt and how to use it to automate our development process in the last lecture of this training class.</p>
+        </section>
+        <section>
+          <h1>Project Layout</h1>
+        </section>
+        <section>
+          <p>In this training class, you'll be building a Angular application that tracks employee timesheets across different projects.</p>
+        </section>
+        <section>
+          <p>To help speed things along so we can focus on the really important parts like Angular, we've created the base project structure for you.</p>
+        </section>
+        <section>
+          <p>Lets take a look.</p>
+        </section>
+        <section>
+          <h1>Lab 01</h1>
+          <h2>Application Setup</h2>
+        </section>
+      </div>
+    </div>
+    <script src="/assets/js/app.js"></script>
+  </body>
+</html>
