@@ -180,19 +180,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   
   grunt.registerTask('connect', 'Start a custom static web server.', function() {
-    grunt.log.writeln('Starting static web server in "dist" on port 9001.');
+    grunt.log.writeln('Starting static web server in "dist" on port 8001.');
     
     connect()
-    .use(redirect())
-    .use(function(req, res, next) {
-      if (req.url == '/') {
-        res.redirect('/angular-training');
-      } else {
-        next();
-      }
-    })
-    .use('/angular-training', connect.static('dist'))
-    .listen(8001);
+      .use(redirect())
+      .use(function(req, res, next) {
+        if (req.url == '/') {
+          res.redirect('/angular-training');
+        } else {
+          next();
+        }
+      })
+      .use('/angular-training', connect.static('dist'))
+      .listen(8001);
   });
 
   // Default task(s).
