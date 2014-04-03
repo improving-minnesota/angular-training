@@ -5,7 +5,6 @@
 - In a console:
 
 ```
-git reset --hard
 git checkout lab-6-interceptors
 git pull
 ```
@@ -68,6 +67,7 @@ responseError: function (rejection) {
 
 
 - Now we need to add the interceptor into the `$httpProvider` interceptors array.
+- Since it is in a configuration block, we need to use the provider, not the service instance.
 - Locate the `TODO` near line #35 and register the interceptor.
 
 ```javascript
@@ -98,7 +98,7 @@ interceptor = $injector.get('nProgressInterceptor');
 ```
 
 ###### Create spies for the NProgress library
-- Since our interceptor calls a third party api, we need to verify that these calls actualy get made.
+- Since our interceptor calls a third party api, we need to verify that these calls actually get made.
 - We need to create spies via the excellent **sinon** library.
 - Locate the `TODO` near line #18 and create the spies for `start()` and `done()`:
 
@@ -120,7 +120,9 @@ spies.done.restore();
 
 ###### Test a successful request
 - Now it's time to verify the behavior of a successful request.
-- Locate the `TODO` near line #34 and add these tests:
+- Locate the `TODO` near line #34 and test the start of the progress bar:
+  - Call the request callback and pass in the `success` configuration object.
+  - Verify that the `start()` function on the `NProgress` global was called (using `sinon`).
 
 ```javascript
 it('should start the progress bar', function () {
@@ -128,8 +130,9 @@ it('should start the progress bar', function () {
   expect(spies.start).to.have.been.called;
 });
 ```
-- This test calls request method on our interceptor and makes sure that `NProgress.start()` was called.
-- We are also making use of the *chai* matcher library to verify that the spy was called.
+
+- This test calls the request method on our interceptor and makes sure that `NProgress.start()` was called.
+- We are also making use of the *chai* matcher library to verify that the spy was **called**.
 
 
 - Now let's verify that our promise resolves as expected
@@ -156,17 +159,28 @@ it('should return a promise containing the config object', function () {
 - Now that we have tested a successful request, let's make sure a request with an error behaves like we expect.
 - Locate the `TODO` near line 49 and add:
 
+- Test that the progress bar stops if there is an error in the request.
+  - Call the `requestError` callback and pass in the `rejection` test object.
+  - Verify that the `NProgress.done()` was called via the `sinon` spy.
+
 ```javascript
 it('should stop the progress bar', function () {
   interceptor.requestError(rejection);
   expect(spies.done).to.have.been.called;
 });
+```
 
+- Test that the promise is rejected when the request has an error.
+  - Call `requestError` callback and set its result to a variable, `promise`.
+  - Verify that the `promise` was rejected with the rejection test object.
+
+```javascript
 it('should reject the promise with the rejection config', function () {
   var promise = interceptor.requestError(rejection);
   expect(promise).to.have.been.rejectedWith(rejection);
 });
 ```
+
 - Notice that we are using `chai-as-promised`'s `rejectedWith()` to test for a rejected promise?
 - Could you imagine the amount of code it would take to wrap the promise and test for rejection?
 - I love libraries that make our jobs easier, don't you?
@@ -176,14 +190,24 @@ it('should reject the promise with the rejection config', function () {
 
 ###### Test a successful response
 - OK, now that we have tested the request lifecycle, let's move on to responses.
-- Locate the `TODO` near line #63 and add:
+- Locate the `TODO` near line #63 and add tests for success responses:
+
+
+- Verify that the progress bar is stopped.
+  - Call the interceptor's `response` callback with the success test object.
+  - Verify that the `done()` function was called via your `sinon` spy.
 
 ```javascript
 it('should stop the progress bar', function () {
   interceptor.response(success);
   expect(spies.done).to.have.been.called;
 });
+```
+- Test that a promise is returned with the successful response.
+  - Call the `response()` callback again and assign its result to a variable named `promise`.
+  - Verify that the promise is ***eventually*** called.
 
+```javascript
 it('should return a promise with the response object', function () {
   var promise = interceptor.response(success);
   expect(promise).to.eventually.equal(success);
@@ -196,6 +220,10 @@ it('should return a promise with the response object', function () {
 - Time to test an error in our response.
 - Locate the `TODO` near line #77 and add this test
 
+- Test the progress bar is stopped with an error
+  - Call the `responseError()` function and pass in the `rejection` test object.
+  - Verify that the `done()` function was called on `NProgress`. (via its spy, `spies.done`)
+
 ```javascript
 it('should stop the progress bar', function () {
   interceptor.responseError(rejection);
@@ -204,6 +232,9 @@ it('should stop the progress bar', function () {
 ```
 
 - And at the `TODO` near line #82:
+- Test the promise is also rejected when the response has an error.
+  - Call the `responseError()` callback and assign its result to a variable, `promise`.
+  - Verify that the ***promise*** was rejected with the rejection test object.
 
 ```javascript
 it('should reject the promise with the rejection config', function () {
@@ -217,6 +248,7 @@ it('should reject the promise with the rejection config', function () {
 &nbsp;
 ### Set the Interceptor Module as a Dependency for the Application
 - Now all we have to do is make sure that the module is loaded when Angular is booting up.
+- This will make it available to the entire application.
 
 - Open **client/src/main.js** and set our new module as a dependency:
 
@@ -230,3 +262,10 @@ it('should reject the promise with the rejection config', function () {
 - Open your browser and navigate to : http://localhost:3000
 - Navigate to the different list pages and watch for your spinner and progress bar.
 - Do you see it working now?
+
+&nbsp;
+### Commit your work to Git
+```
+git add .
+git commit -m 'Cool interceptor badge acquired!!'
+```

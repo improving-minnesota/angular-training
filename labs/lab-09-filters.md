@@ -4,13 +4,22 @@
 ## Checkout the lab branch
 
 - In your console:
+
 ```
-git reset --hard
 git checkout lab-9-filters
 git pull
 ```
 &nbsp;
-##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
+##### Start the grunt tasks
+```
+grunt karma:unit
+```
+```
+grunt watch:development
+```
+```
+grunt shell:server
+```
 
 &nbsp;
 ## Using an Angular provided filter to sort our tables.
@@ -36,11 +45,13 @@ ng-repeat="project in pageConfig.data | orderBy:'name'"
 ```
 
 ###### Sort the timesheets by begin date
+
 ```javascript
 ng-repeat="timesheet in pageConfig.data | orderBy:'beginDate'"
 ```
 
 ###### Sort the timeunits by date worked
+
 ```javascript
 ng-repeat="timeunit in timeunits | orderBy:'dateWorked'"
 ```
@@ -73,7 +84,6 @@ angular.module('boolean.filters', [ ])
 - Enter this code below your module declaration
 
 ```javascript
-
   .filter('yesNo', function() {
     return function(value) {
       if (_.isBoolean(value)) {
@@ -101,14 +111,14 @@ angular.module('boolean.filters', [ ])
 beforeEach(module('boolean.filters'));
 ```
 
-- That gives tells Karma to fire up a module and set our boolean filters as a dependency.
+- This tells Karma to fire up a module and set our boolean filters as a dependency.
 - Now let's inject our filter so that we can test it.
 - Find the `TODO` near line #10 and enter the below code:
 
 ```javascript
 yesNoFilter = $injector.get('yesNoFilter');
 ```
-- With this line of code, we're asking the injector service to grab our filter and assign it to our variable.
+- With this line of code, we are asking the injector service to grab our filter and assign it to our variable.
 - Now we can write our tests!!
 - Write each of the below tests, start Karma, and verify they all pass.
 
@@ -370,3 +380,9 @@ it('should display "Invalid date" for an invalid date', function() {
 
 - Make sure your server is running and navigate to the timesheet page.
 - How do your new filters look?
+
+### Commit your code to git.
+```
+git add .
+git commit -m 'Heard ya like filters so we put some filters in your filters so you can filter while filtering.'
+```
