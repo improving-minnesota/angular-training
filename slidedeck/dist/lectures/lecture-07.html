@@ -52,19 +52,25 @@
         </section>
         <section>
           <h3>Specialized Objects</h3>
-          <p>Specialized objects conform to a specific Angular framework API. These objects are one of controllers, directives, filters or animations.</p>
+          <p>Specialized objects conform to a specific Angular framework API.</p>
+        </section>
+        <section>
+          <p>An example of these specialized objects are controllers, directives, filters or animations.</p>
         </section>
         <section>
           <p>The injector needs to know how to create these objects.</p>
         </section>
         <section>
-          <p>You tell the injector by registering a "recipe" for creating your object. There are five recipe types.</p>
+          <p>You tell the injector by registering a "recipe" for creating your object.</p>
+        </section>
+        <section>
+          <p>There are five recipe types.</p>
         </section>
         <section>
           <h2>Value Recipe</h2>
         </section>
         <section>
-          <p>You can use the Value recipe to create named Values that are injectable.</p>
+          <p>You can use the Value recipe to create named values that are injectable.</p>
         </section>
         <section>
           <p>You cannot inject dependencies into a Value recipe.</p>
@@ -92,15 +98,16 @@ angular.module('app', [])
         </section>
         <section>
           <p>
-            Since simple values, like url prefix, don't have dependencies or configuration,
+            Since simple values don't have dependencies or configuration,
             it is often handy to make them available in both the configuration and run phases.
           </p>
           <p>This is what the Constant recipe is for.</p>
         </section>
         <section>
           <pre><code class="js" data-trim>
-  angular.module('app')
-    .constant('apiUrl', '/api');
+angular.module('app')
+  .constant('apiUrl', '/api');
+  
 </code>
 </pre>
         </section>

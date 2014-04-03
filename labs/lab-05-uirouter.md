@@ -699,7 +699,7 @@ $scope.logTime = function logTime () {
 ```javascript
 $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
   if (timeunit.deleted) {
-    console.log('error ' + x);
+    console.log('error deleting timesheet');
     return;
   }
 
