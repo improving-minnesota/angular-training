@@ -5,12 +5,20 @@
 * In your console:
 
 ```
-git reset --hard
 git checkout lab-8-directives
 git pull
 ```
 &nbsp;
-##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
+##### Start the grunt tasks in separate consoles.:
+```
+grunt karma:unit
+```
+```
+grunt watch:development
+```
+```
+grunt shell:server
+```
 
 &nbsp;
 ## Form Validation
@@ -61,12 +69,25 @@ ng-disabled="employeeForm.$invalid"
 - The pagination api expects a query object with a page number and sort properties.
 - Find the `TODO` near line #7 and enter the following:
 
+- Create a query object that has 2 properties:
+  - `page` : the value of the `page` parameter
+  - `sort` : a Javascript object that has a `username` property with the value of 1.
+
 ```javascript
 var query = {
   page: page,
   sort: {username: 1}
 };
+```
 
+> Our pagination service endpoint returns a JSON object that contains all of the configuration needed for pagination.
+> It also contains a data property which is an array of our resources.
+
+- Change the `data.list` function call to a `data.page` function.
+  - Use the `query` object we just created as a the options object.
+  - Set the result to `pageConfig` on our controller's scope.
+
+```javascript
 data.page('employees', query)
   .then(function (pageConfig) {
     $scope.pageConfig = pageConfig;
@@ -87,6 +108,8 @@ data.page('employees', query)
 
 - We need to set up the expectation for the API call for the page of employees for when the controller initializes.
 - Look for the `TODO` near line #79 and replace it with:
+  - An expectation for a `GET` to the `/users` url with the query parameters from our `query` object for page 1.
+  - Flush the mock backend.
 
 ```javascript
 $httpBackend.expect('GET', '/users?page=1&sort=%7B%22username%22:1%7D');
@@ -94,6 +117,10 @@ $httpBackend.flush();
 ```
 - Now we can write our test.
 - Find the `TODO` near line #85 and write the following test.
+  - Set an expectation of a `GET` request to `/users` for page 2.
+  - Call the `requestEmployees(2)` function on scope for page 2.
+  - Flush the backend.
+  - Verify that the response contains the correct `pageConfig` by testing its name.
 
 ```javascript
 it('should set the result to the pageConfig object', function () {
@@ -103,11 +130,6 @@ it('should set the result to the pageConfig object', function () {
   expect($scope.pageConfig.name).to.equal("pageConfig2");
 });
 ```
-- This test does the following for us:
-  - Sets another expectation for an API call for a page of employees
-  - Makes the call to request the employee page
-  - Flushes the mock http backend
-  - Checks that the `pageConfig` on scope is the response.
 
 - Now run the tests, using `grunt karma:unit` in a separate console from your `runapp` and `watch` tasks.
 - Did they pass?
@@ -116,7 +138,12 @@ it('should set the result to the pageConfig object', function () {
 
 - Now that we have the function in place to request the page of employees, we can add the directive to the list page to control when and how the page requests are made.
 - Open **client/assets/templates/app/employees/index.html**
-- Look for the `TODO` near line 51 and add the following markup:
+- Look for the `TODO` near line 51 and add the *pagination* directive:
+  - Set the `total-items` to the value of `pageConfig.totalItems`.
+  - Set the `page` to the value of `pageConfig.page`.
+  - Set the `items-per-page` to the value of `pageConfig.limit`
+  - We also want to show the `boundary-links` and have the buttons `rotate`.
+  - Lastly, when a page is selected, we want to call teh `requestEmployees(page)` function on our controller's scope.
 
 ```xml
 <div class="text-center">
@@ -160,7 +187,9 @@ var query = {
   page: page,
   sort: {beginDate: 1}
 };
+```
 
+```javascript
 data.page('timesheets', query)
   .then(function (pageConfig) {
     $scope.pageConfig = pageConfig;
@@ -290,6 +319,14 @@ $scope.$digest();
 $scope.$apply();
 ```
 
+###### What is really happening here?
+  - Since we are not completely bootstrapping our entire Angular application in our unit tests, we need to simulate the bootstrapping process.
+  - We register a DOM element with the `angular` global object.
+  - We then tell the $compile service to process the registered element.
+  - Angular gives us a linking function as a result which we immediately call with our test `$scope`.
+  - After our element has been compiled and linked, we tell Angular to run its digest cycle and apply it to our test '$scope'.
+  - Once that is complete, we have a small section of DOM that is fully 'Angular-aware' and can be tested.  
+
 ###### Test the header is set
 - Look for the `TODO` near line #42.
 - Add the below test to check that the directive adds a `<h4>` tag.
@@ -312,6 +349,10 @@ it('should respond to changes', function () {
   expect(element.find('h4').text()).to.equal('My Updated Header');
 });
 ```
+> Something new!! We called $scope.$apply() in this test. This tells Angular that
+> an event happened outside of its normal run loop so that it knows to run a new digest cycle
+> and apply any changes that would result.
+
 - Run `grunt karma:unit` and verify that these both pass.
 
 ###### Test the transclusion
@@ -399,6 +440,10 @@ it('should transclude the directive element contents', function () {
   };
 });
 ```
+
+> Something new!! We used Angular's $scope.$watch() function that takes 2 functions as arguments.
+> Angular will do dirty checking against the result of the first function and call the second
+> function if the value has changed since the last digest cycle.
 
 - Now, let's add our template
 - Open **client/assets/templates/directives/timesheet/progress-bar.html**
@@ -497,7 +542,7 @@ describe('progress bar > 100%', function() {
 - It's finally time to see our directive at work!
 - Open **client/assets/templates/app/timesheets/detail.html**
 
-- Let's first had a header so that our users know what they are seeing.
+- Let's first add a header so that our users know what they are seeing.
 - Look for the `TODO` near line #39 and add:
 
 ```xml
@@ -520,3 +565,9 @@ describe('progress bar > 100%', function() {
 
 - Now you're ready to refresh the page, navigate to the timesheet view, and see your handywork in action!!
 - Try deleting/restoring timeunits and see what happens!! Only dynamic awesomeness!! No big deal!!
+
+### Commit your changes to git and get ready for the next lab.
+```
+git add .
+git commit -m 'I can haz directives'
+```
