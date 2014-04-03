@@ -1,4 +1,7 @@
 module.exports = function(grunt) {
+  
+  var connect = require('connect'),
+    redirect = require('connect-redirection');
 
   // Project configuration.
   grunt.initConfig({
@@ -38,6 +41,7 @@ module.exports = function(grunt) {
     concat:{
       dist : {
         src : [
+          
           // Reveal.js
           'src/assets/js/components/headjs/dist/head.js',
           'src/assets/js/components/reveal.js/js/reveal.js',
@@ -54,6 +58,14 @@ module.exports = function(grunt) {
         ],
 
         dest: 'dist/temp/app.js'
+      },
+      angular : {
+        src : [
+          //Angular
+          'src/assets/js/components/angular/angular.js',
+          'src/assets/js/components/angular-animate/angular-animate.js'
+        ],
+        dest: 'dist/temp/angular.js'
       }
     },
 
@@ -61,6 +73,11 @@ module.exports = function(grunt) {
       dist : {
         files: {
           'dist/assets/js/app.js' : ['dist/temp/app.js']
+        }
+      },
+      angular : {
+        files: {
+          'dist/assets/js/angular.js' : ['dist/temp/angular.js']
         }
       }
     },
@@ -138,16 +155,7 @@ module.exports = function(grunt) {
         tasks: ['assemble']
       }
     },
-
-    connect: {
-      server: {
-        options: {
-          port: 8001,
-          base: 'dist'
-        }
-      }
-    },
-
+    
     shell : {
       publish : {
         options: {
@@ -170,11 +178,29 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-shell');
+  
+  grunt.registerTask('connect', 'Start a custom static web server.', function() {
+    grunt.log.writeln('Starting static web server in "dist" on port 9001.');
+    
+    connect()
+    .use(redirect())
+    .use(function(req, res, next) {
+      if (req.url == '/') {
+        res.redirect('/angular-training');
+      } else {
+        next();
+      }
+    })
+    .use('/angular-training', connect.static('dist'))
+    .listen(8001);
+  });
 
   // Default task(s).
   grunt.registerTask('default', ['assemble']);
   grunt.registerTask('assemble', ['clean:pre', 'less', 'cssmin', 'concat', 'uglify', 'jade', 'copy', 'clean:post']);
   grunt.registerTask('run', ['connect', 'watch']);
   grunt.registerTask('publish', ['assemble', 'shell:publish']);
+  
+
 
 };
