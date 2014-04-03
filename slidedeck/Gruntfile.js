@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
   
-  var connect = require('connect');
+  var connect = require('connect'),
+    redirect = require('connect-redirection');
 
   // Project configuration.
   grunt.initConfig({
@@ -180,7 +181,18 @@ module.exports = function(grunt) {
   
   grunt.registerTask('connect', 'Start a custom static web server.', function() {
     grunt.log.writeln('Starting static web server in "dist" on port 9001.');
-    connect().use('/angular-training', connect.static('dist')).listen(8001);
+    
+    connect()
+    .use(redirect())
+    .use(function(req, res, next) {
+      if (req.url == '/') {
+        res.redirect('/angular-training');
+      } else {
+        next();
+      }
+    })
+    .use('/angular-training', connect.static('dist'))
+    .listen(8001);
   });
 
   // Default task(s).
