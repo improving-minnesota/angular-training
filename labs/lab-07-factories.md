@@ -3,12 +3,11 @@
 &nbsp;
 ## Checkout the lab branch
 ```
-git reset --hard
 git checkout lab-7-factories
 git pull
 ```
 &nbsp;
-##### Start the grunt tasks: `karma:unit`, `watch:development`, and `runapp:development` in separate consoles.
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `shell:server` in separate consoles.
 
 &nbsp;
 ## Resources services
@@ -295,7 +294,7 @@ angular.module('notifications.services', [])
 notifications.error('This is an error message');
 ```
 
-- To create an success notification, the api is :
+- To create a success notification, the api is :
 
 ```javascript
 notifications.success('This is a success message');
@@ -305,12 +304,15 @@ notifications.success('This is a success message');
 ### Test the Notifications Service
 - Now we just need to test our service to make sure that it works as expected before we use it in our application.
 - Open **client/test/unit/services/notifications.spec.js**
-- You'll notice that the Jasmine specification has been started for you by your teammates.
+- You'll notice that the **Jasmine** specification has been started for you by your teammates.
 
 ###### Test that the close button will be shown
 
 - Find the `TODO` near line #28
 - Add a test to check for a close button:
+  - Create an empty object named, `message`.
+  - Call the `message()` function on the `notifications` service with an empty message configuration object.
+  - Verify that the message object has been extended with a `showCloseButton` property set to true.
 
 ```javascript
 it('should set showCloseButton to true on the message', function () {
@@ -323,6 +325,10 @@ it('should set showCloseButton to true on the message', function () {
 ###### Test the message object can be extended with a configuration
 
 - Locate the `TODO` near line #34 and add the following test:
+- Test the message object is extended with the configuration parameter.
+  - Create an empty object named, `message`.
+  - Call the `notifications` service `message()` function with the `message` object and an extra configuration.
+  - Verify that the configuration's properties now exist on the `message` object.
 
 ```javascript
 it('extend the message object with the passed in config', function () {
@@ -335,6 +341,11 @@ it('extend the message object with the passed in config', function () {
 ###### Test we can post a message
 
 - Locate the `TODO` near line #40 and add the following test:
+
+- Using our `sinon` spies, test the `Messenger.post()` method is called with the extended configuration.
+  - Call the `notifications.message()` function with a configured message object and extra configuration.
+  - Verify that the `spies.post` was called.
+  - Also verify that the `spies.post` was called with the expected configuration.
 
 ```javascript
 it('should post the message via Messenger', function () {
@@ -351,6 +362,14 @@ it('should post the message via Messenger', function () {
 ###### Test posting an error message
 - Locate the `TODO` near line #52 and add the following test:
 
+- Test the `notifications.error` method creates the correct configuration.
+  - Call the `notifications.error` method with an error message.
+  - Verify that:
+    - The message is set in the configuration.
+    - The message `type` is 'error'.
+    - The property, `showCloseButton` is set to true.
+    - The `id` is set to 'error-message'.
+
 ```javascript
 it('should post an error message', function () {
   notifications.error('oh noze');
@@ -366,6 +385,14 @@ it('should post an error message', function () {
 ###### Test posting a success message
 - Locate the `TODO` near line #64 and add the following test:
 
+- Test the `notifications.success` method creates the expected configuration.
+  - Call the `notifications.success()` method with a success message.
+  - Verify that:
+    - The `message` property is the success message.
+    - The `type` property is set to 'success'.
+    - The `showCloseButton` is set to true.
+    - The configuration `id` is 'success-message'.
+
 ```javascript
 it('should post a success message', function () {
   notifications.success('i can haz');
@@ -380,6 +407,14 @@ it('should post a success message', function () {
 
 ###### Test posting an info message
 - Locate the `TODO` near line #76 and add the following test:
+
+- Test posting an info message creates the expected configuration.
+  - Call the `notifications.info()` function with a message.
+  - Verify that:
+    - The message is the info message.
+    - The `type` property is 'info'.
+    - The 'showCloseButton' is set to true.
+    - The message's `id` is 'info-message'.
 
 ```javascript
 it('should post an info message', function () {
@@ -402,14 +437,23 @@ it('should post an info message', function () {
 
 ###### Successful Login
 - Open **client/src/security/services/authentication.js**
-- Make sure that your notifications service is injected where needed.
+
+- Make sure that your notifications service is injected where needed!
 - Add a success message to welcome the user back on successful login.
+
+```javascript
+notifications.success('Welcome back, ' + securityContext.user.username);
+```
+
 - Run the app and login, did you see your welcome message?
 
 ###### Employees
 
 - Open **client/src/app/employees/controllers.js**
 - Locate all of the `TODO`'s throughout the controllers and add success or error notifications where needed.
+  - You are awesome, so this should be a piece of cake.
+
+
 - Run the application and remove/restore/add employees and see your messages.
 
 ### Extra Credit
@@ -418,3 +462,10 @@ it('should post an info message', function () {
   - Projects controllers
   - Timesheet controllers
   - Timeunits controllers
+
+&nbsp;
+### Commit your changes to Git
+```
+git add .
+git commit -m 'Security and Notifications for all the things.'
+```
