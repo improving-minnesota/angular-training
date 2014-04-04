@@ -307,7 +307,7 @@ it('should display "Invalid date" for an invalid date', function() {
 &nbsp;
 ### Create a filter to format a long date like *November 18, 2013*
 - Management also wants some dates to have a long format
-- In `date.filters.js`, register the `momentLongDate` filter under the `momentShortDate` filter.
+- In `date.js`, register the `momentLongDate` filter under the `momentShortDate` filter.
   - Don't forget to remove the `;` after the `momentShortDate` filter.
 
 ```javascript
