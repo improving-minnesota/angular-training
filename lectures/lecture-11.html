@@ -157,12 +157,24 @@ describe('Employees', function () {
           <p>When writing real tests scripts for your page, it's best to use the Page Objects pattern to make your tests more readable.</p>
         </section>
         <section>
-          <p>What are Page Objects?</p><br>
+          <h2>Page Objects</h2>
+        </section>
+        <section>
+          <p>What are page objects?</p><br>
           <ul>
             <li>Page Objects are models of the UI you are testing.</li>
             <li>They reduce the amount of duplications in our tests required to interact with the user interface.</li>
             <li>Page Objects face in both directions.  You can use them to set or get things like field values.</li>
           </ul>
+        </section>
+        <section>
+          <p>Facing towards the developer of a test, they represent the services offered by a particular page.</p>
+        </section>
+        <section>
+          <p>Facing away from the developer, they should be the only thing that has a deep knowledge of the structure of the HTML of a page (or part of a page)</p>
+        </section>
+        <section>
+          <p>It's simplest to think of the methods on a Page Object as offering the "services" that a page offers rather than exposing the details and mechanics of the page.</p>
         </section>
         <section>
           <p>Here we're creating a page object that models part of the employees list page.</p><br>
