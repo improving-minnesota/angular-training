@@ -53,10 +53,16 @@
           <p>When they're triggered, they'll attempt to perform a CSS animation or JavaScript callback animation depending on which is defined.</p>
         </section>
         <section>
-          <h2>Using Angular Animations</h2>
+          <p>First, lets take a look at the documentation for <a href="http://docs.angularjs.org/api/ngAnimate/service/$animate" target="_blank">$animate</a></p>
         </section>
         <section>
-          <p>Since Angular is designed to be modular, you'll need to import the ngAnimate library.</p><br>
+          <p>Now, lets take a look at the AngularJS source code for ngRepeat to see how it's hooked into the $animate service.</p><br><a href="https://github.com/angular/angular.js/blob/master/src/ng/directive/ngRepeat.js#L327" target="_blank">src/ng/directive/ngRepeat.js#L327</a>
+        </section>
+        <section>
+          <h2>Using Animations</h2>
+        </section>
+        <section>
+          <p>Since Angular is designed to be modular, you'll first need to specify the ngAnimate module as a dependency.</p><br>
           <div class="text-center">
             <pre><code data-trim>
 angular.module('app', ['ngAnimate'])
@@ -66,39 +72,58 @@ angular.module('app', ['ngAnimate'])
           </div>
         </section>
         <section>
-          <p>Animations can be applied to CSS classes by following a set of CSS class name conventions.</p>
-          <p>An example for ng-show is below</p><br>
+          <p>As we saw in the documentation for $animate, we can apply animations to our elements by defining CSS classes that that tell the browser how to animate an element.</p>
+        </section>
+        <section>
+          <p>The $animate service automatically adds and removes these classes for us at the right time. </p>
+        </section>
+        <section>
+          <p>An example set of CSS animations for ngShow are shown below</p><br>
+          <pre><code class="css" data-trim>
+.ng-hide-add, .ng-hide-remove {
+  transition: all linear 1.0s;
+  display: block !important;
+}
+
+.ng-hide-add.ng-hide-add-active,
+.ng-hide-remove {
+  opacity: 0;
+}
+
+.ng-hide-add,
+.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+}
+
+</code>
+</pre>
+          <p>Which elements are these animations going to be applied to?</p>
+        </section>
+        <section>
+          <p>All elements that use the ngShow directive.</p>
+          <p>This is because these class names are used for all the ngShow elements.</p>
+        </section>
+        <section>
+          <p>We can scope these animations by making the class definitions more descriptive. </p><br>
           <pre><code class="css" data-trim>
 .my-class.ng-hide-add, .my-class.ng-hide-remove {
-  -webkit-transition:all linear 1.0s;
-  -moz-transition:all linear 1.0s;
-  -o-transition:all linear 1.0s;
-  transition:all linear 1.0s;
-  display:block!important;
+  transition: all linear 1.0s;
+  display: block !important;
 }
 
 .my-class.ng-hide-add.ng-hide-add-active,
 .my-class.ng-hide-remove {
-  opacity:0;
+  opacity: 0;
 }
 
 .my-class.ng-hide-add,
 .my-class.ng-hide-remove.ng-hide-remove-active {
-  opacity:1;
+  opacity: 1;
 }
-</code>
 
+</code> 
 </pre>
-        </section>
-        <section>
-          <p>By modifying .my-class with the pre-defined animation classes, we can animate any show/hide by adding .my-class to it.</p><br>
-          <div class="text-center">
-            <pre><code class="html" data-trim>
-&lt;p class="my-class" ng-show="sayHello"&gt;Hello World!&lt;p&gt;
-
-</code>
-</pre>
-          </div>
+          <p>Notice here that these animations will only be applied to elements that have the CSS class "my-class". </p>
         </section>
         <section id="example1" ng-controller="Lecture10Controller">
           <button ng-click="sayHello = !sayHello">Say Hello</button>
@@ -108,23 +133,17 @@ angular.module('app', ['ngAnimate'])
           <p>If we add the animation classes for ng-repeat, we can animate lists as they change.</p><br>
           <pre><code class="css" data-trim>
 .repeated-item.ng-enter, .repeated-item.ng-move {
-  -webkit-transition:0.5s linear all;
-  -moz-transition:0.5s linear all;
-  -o-transition:0.5s linear all;
-  transition:0.5s linear all;
-  opacity:0;
+  transition: 0.5s linear all;
+  opacity: 0;
 }
 
 .repeated-item.ng-enter.ng-enter-active,
 .repeated-item.ng-move.ng-move-active {
-  opacity:1;
+  opacity: 1;
 }
 
 .repeated-item.ng-leave {
-  -webkit-animation:0.5s my_animation;
-  -moz-animation:0.5s my_animation;
-  -o-animation:0.5s my_animation;
-  animation:0.5s my_animation;
+  animation: 0.5s my_animation;
 }
 
 </code>
