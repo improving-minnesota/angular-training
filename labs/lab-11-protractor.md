@@ -251,19 +251,6 @@ this.restoreFirstEmployee = function () {
   * After you enter each test, run the grunt protractor test to see the results.
 
 
-### Navigating to the create employee form
- - Locate the `TODO` near line 15.
-- Test that we actually go to the create employee form.
-  - Use the `indexPage` page object to click the new employee button.
-  - Verify that the page title is now "Create Employee".  
-
-```javascript
-it('takes us to the create employee form', function () {
-  indexPage.clickNewEmployee();
-  expect(formPage.getPageTitle()).toBe("Create Employee");
-});
-```
-
 ### Navigating to the employee detail page
 - Locate the `TODO` near line 22.
 - Test clicking the first employee in the table takes us to the detail page.
