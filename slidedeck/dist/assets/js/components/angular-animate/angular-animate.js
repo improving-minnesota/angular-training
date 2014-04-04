@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.15
+ * @license AngularJS v1.2.14
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -707,7 +707,8 @@ angular.module('ngAnimate', ['ng'])
           /**
            *
            * @ngdoc function
-           * @name $animate#setClass
+           * @name ng.$animate#setClass
+           * @methodOf ng.$animate
            * @function
            * @description Adds and/or removes the given CSS classes to and from the element.
            * Once complete, the done() callback will be fired (if provided).
@@ -776,7 +777,7 @@ angular.module('ngAnimate', ['ng'])
           fireDOMOperation();
           fireBeforeCallbackAsync();
           fireAfterCallbackAsync();
-          closeAnimation();
+          fireDoneCallbackAsync();
           return;
         }
 
@@ -955,7 +956,7 @@ angular.module('ngAnimate', ['ng'])
                  animation, but class-based animations don't. An example of this
                  failing would be when a parent HTML tag has a ng-class attribute
                  causing ALL directives below to skip animations during the digest */
-              if(runner && runner.isClassBased) {
+              if(runner.isClassBased) {
                 cleanup(element, className);
               } else {
                 $$asyncCallback(function() {
