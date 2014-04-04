@@ -132,16 +132,88 @@ include ../includes/mixins
     h2 Page Objects
     
   section
+<<<<<<< HEAD
     p When writing real tests scripts for your page, it's best to use the Page Objects pattern to make your tests more readable.
 
   section
     p What are Page Objects?
+=======
+    p Protractor and WebDriverJS expose global API's that you can use to automate actions that a user would perform.
+
+  section
+    p
+      code browser
+      |   is a wrapper around an instance of webdriver.
+    p You can use this for navigation and page-wide information.
+
+  section
+    p
+      code element
+      |   is a helper function for finding and interacting with elements on the page you are testing.
+
+  section
+    p
+      code by
+      |   is a collection of element locator strategies.
+    p For example, elements can be found by CSS selector, by ID, or by the attribute they are bound to with ng-model.
+
+  section
+    p These locator strategies are Angular aware.
+    p You can use them to find and interact with elements
+    ul
+      li by.repeater
+      li by.model
+      li by.binding
+
+  section
+    p
+      code protractor
+      |   is the protractor namespace which wraps the webdriver namespace.
+    p This contains static variables and classes, such as protractor.Key which enumerates the codes for special keybord signals.
+
+  section
+    p We can use these functions to automate the end user and test that the page behaves in the way we expect.
+    br
+    pre.
+      <code data-trim>
+      describe('Employees', function () {
+
+        beforeEach (function () {
+          browser.get('#/app/employees');
+        });
+
+        describe("clicking new employee", function () {
+          it('takes us to the create employee form', function () {
+            element(by.buttonText("New Employee")).click();
+            expect(element(by.binding('$state.current.data.section')).getText()).toBe("Create Employee");
+          });
+        });
+
+      });
+
+      </code>
+
+  section
+    h2 Page Objects
+
+  section
+    p What are page objects?
+>>>>>>> feature/lab-review
     br
     ul
       li Page Objects are models of the UI you are testing.
       li They reduce the amount of duplications in our tests required to interact with the user interface.
       li Page Objects face in both directions.  You can use them to set or get things like field values.
       
+  section
+    p Facing towards the developer of a test, they represent the services offered by a particular page.
+
+  section
+    p Facing away from the developer, they should be the only thing that has a deep knowledge of the structure of the HTML of a page (or part of a page)
+
+  section
+    p It's simplest to think of the methods on a Page Object as offering the "services" that a page offers rather than exposing the details and mechanics of the page.
+
   section
     p Here we're creating a page object that models part of the employees list page.
     br
