@@ -103,7 +103,61 @@
           <h1>Writing E2E Tests</h1>
         </section>
         <section>
-          <p>What are page objects?</p><br>
+          <p>Protractor and WebDriverJS expose global API's that you can use to automate actions that a user would perform.</p>
+        </section>
+        <section>
+          <p><code>browser</code>  is a wrapper around an instance of webdriver.</p>
+          <p>You can use this for navigation and page-wide information.</p>
+        </section>
+        <section>
+          <p><code>element</code>  is a helper function for finding and interacting with elements on the page you are testing.</p>
+        </section>
+        <section>
+          <p><code>by</code>  is a collection of element locator strategies.</p>
+          <p>For example, elements can be found by CSS selector, by ID, or by the attribute they are bound to with ng-model.</p>
+        </section>
+        <section>
+          <p>These locator strategies are Angular aware.</p>
+          <p>You can use them to find and interact with elements</p>
+          <ul>
+            <li>by.repeater</li>
+            <li>by.model</li>
+            <li>by.binding</li>
+          </ul>
+        </section>
+        <section>
+          <p><code>protractor</code>  is the protractor namespace which wraps the webdriver namespace.</p>
+          <p>This contains static variables and classes, such as protractor.Key which enumerates the codes for special keybord signals.</p>
+        </section>
+        <section>
+          <p>We can use these functions to automate the end user and test that the page behaves in the way we expect.</p><br>
+          <pre><code data-trim>
+describe('Employees', function () {
+
+  beforeEach (function () {
+    browser.get('#/app/employees');
+  });
+  
+  describe("clicking new employee", function () {
+    it('takes us to the create employee form', function () {
+      element(by.buttonText("New Employee")).click();
+      expect(element(by.binding('$state.current.data.section')).getText()).toBe("Create Employee");
+    });
+  });
+  
+});
+
+</code>
+</pre>
+        </section>
+        <section>
+          <h2>Page Objects</h2>
+        </section>
+        <section>
+          <p>When writing real tests scripts for your page, it's best to use the Page Objects pattern to make your tests more readable.</p>
+        </section>
+        <section>
+          <p>What are Page Objects?</p><br>
           <ul>
             <li>Page Objects are models of the UI you are testing.</li>
             <li>They reduce the amount of duplications in our tests required to interact with the user interface.</li>
@@ -122,6 +176,7 @@ function EmployeesIndexPage() {
     by.buttonText("New Employee")
   );
   
+  // Here, we're finding an element by it's repeater configuration
   this.firstEmployee = element(
     by.repeater('employee in pageConfig.data').row(0)
   );
@@ -183,8 +238,8 @@ describe('Employees', function () {
 </code>
 </pre>
         </section>
-        <section data-background="#8c4738">
-          <p>Yes, it's that easy</p><img style="width: 100%; height: 100%;" src="/angular-training/assets/img/lecture-11/mind-blown.gif" class="no-style fragment">
+        <section>
+          <p>Yes, it's that easy</p><img style="width: 100%; height: 100%;" src="/angular-training/assets/img/lecture-11/mind-blown.gif" class="no-style">
         </section>
         <section>
           <h3>Things to consider</h3>
