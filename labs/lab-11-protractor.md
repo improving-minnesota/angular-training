@@ -180,7 +180,7 @@ it('should be able to login', function () {
 * Open the **client/test/e2e/app/employees/index.page.js** that was created for you by your teammates.
 * Look at the existing code and notice:
   * A `get()` function has been implemented that will navigate to the Employees index page.
-  * A properties for the page title, new employee button, and first row in the employee table have been provided.
+  * Properties for the page title, new employee button, and first row in the employee table have been provided.
   * A function to find the page title has been implemented for you.
 
 
