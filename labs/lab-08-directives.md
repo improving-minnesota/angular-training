@@ -64,14 +64,16 @@ ng-disabled="employeeForm.$invalid"
 
 ### Pagination for Employees
 
-###### Modify the controller method for getting a list of employees
-- Open **client/src/app/employees/controllers.js**
-- The pagination api expects a query object with a page number and sort properties.
-- Find the `TODO` near line #7 and enter the following:
+> Once again the projects module has been completed for you so that you can use it as a frame of reference.
 
-- Create a query object that has 2 properties:
-  - `page` : the value of the `page` parameter
-  - `sort` : a Javascript object that has a `username` property with the value of 1.
+###### Modify the controller method for getting a list of employees
+- Your teammates have implemented the controller changes needed to get a page of employees for you.
+- Open **client/src/app/employees/controllers.js**
+
+- Review the `requestEmployees()` method on scope:
+  - The pagination api expects a query object with a page number and sort properties.
+    - `page` : the value of the `page` parameter
+    - `sort` : a Javascript object that has a `username` property with the value of 1.
 
 ```javascript
 var query = {
@@ -80,12 +82,14 @@ var query = {
 };
 ```
 
+&nbsp;
 > Our pagination service endpoint returns a JSON object that contains all of the configuration needed for pagination.
 > It also contains a data property which is an array of our resources.
 
-- Change the `data.list` function call to a `data.page` function.
-  - Use the `query` object we just created as a the options object.
-  - Set the result to `pageConfig` on our controller's scope.
+&nbsp;
+- Our team replaced the `data.list` function call with the `data.page` function.
+  - This uses the `query` object we just created as a the options object.
+  - It also sets the response to `pageConfig` on our controller's scope.
 
 ```javascript
 data.page('employees', query)
@@ -94,45 +98,10 @@ data.page('employees', query)
   });
 ```
 
-- This creates the query object from page number that is passed in to the function and defaults the sort to the employee's username.
-- We also make an employees API call to the pagination endpoint and sets the result to the `pageConfig` object on scope.
-
 ###### Test the api call
-- Now we need to write the unit tests to verify that this functionality is working as expected.
-
-- Open **client/test/unit/app/employees/controllers.spec.js**
-- Look at lines #71 and #72
-  - Your teammates have set up mock reponses for when a page request is made for employees.
-  - Since there are two listed, they will be used in order. So the first request will return a 200 and the second will return a 200 with an object whose name is `pageConfig2`.
-
-
-- We need to set up the expectation for the API call for the page of employees for when the controller initializes.
-- Look for the `TODO` near line #79 and replace it with:
-  - An expectation for a `GET` to the `/users` url with the query parameters from our `query` object for page 1.
-  - Flush the mock backend.
-
-```javascript
-$httpBackend.expect('GET', '/users?page=1&sort=%7B%22username%22:1%7D');
-$httpBackend.flush();
-```
-- Now we can write our test.
-- Find the `TODO` near line #85 and write the following test.
-  - Set an expectation of a `GET` request to `/users` for page 2.
-  - Call the `requestEmployees(2)` function on scope for page 2.
-  - Flush the backend.
-  - Verify that the response contains the correct `pageConfig` by testing its name.
-
-```javascript
-it('should set the result to the pageConfig object', function () {
-  $httpBackend.expect('GET', '/users?page=2&sort=%7B%22username%22:1%7D');
-  $scope.requestEmployees(2);
-  $httpBackend.flush();
-  expect($scope.pageConfig.name).to.equal("pageConfig2");
-});
-```
-
-- Now run the tests, using `grunt karma:unit` in a separate console from your `runapp` and `watch` tasks.
-- Did they pass?
+- Now run the tests, using `grunt karma:unit` in a separate console from your `server` and `watch` tasks.
+- Did they all pass?
+- Open the **controllers.spec.js** file to check how your team tested the new controller functionality.
 
 ###### Add the pagination directive to the employees list page
 
@@ -179,44 +148,9 @@ it('should set the result to the pageConfig object', function () {
 
 ###### Modify the controller to request a page of projects
 
-- Find the `TODO` in **client/src/app/timesheets/controllers.js**
-
-```javascript
-var query = {
-  user_id: $stateParams.user_id,
-  page: page,
-  sort: {beginDate: 1}
-};
-```
-
-```javascript
-data.page('timesheets', query)
-  .then(function (pageConfig) {
-    $scope.pageConfig = pageConfig;
-  });
-```
-
-###### Test the controller's new functionality
-
-- Find the `TODO`s in **client/test/unit/app/timesheets/controllers.spec.js**
-
-- Near line #91 set up the API call expectation.
-
-```javascript
-$httpBackend.expect('GET', '/users/1234567890/timesheets?page=1&sort=%7B%22beginDate%22:1%7D');
-$httpBackend.flush();
-```
-
-* line 96
-
-```javascript
-it('should set the result to the pageConfig object', function () {
-  $httpBackend.expect('GET', '/users/1234567890/timesheets?page=2&sort=%7B%22beginDate%22:1%7D');
-  $scope.requestTimesheets(2);
-  $httpBackend.flush();
-  expect($scope.pageConfig.name).to.equal("pageConfig2");
-});
-```
+- Our team has implemented the controller functionality for you.
+- Review **client/src/app/timesheets/controllers.js**.
+- Do you see any differences?
 
 ###### Add the directive to the timesheets list page
 
