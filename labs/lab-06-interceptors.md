@@ -25,7 +25,7 @@ git pull
   - When the request is made, we should start the progress spinner.
   - If there is an error during the request, stop the spinner.
   - When the response has returned, we need to stop the spinner.
-  - If there is an error in the respons, stop the spinner.
+  - If there is an error in the response, stop the spinner.
 
 
 - An interceptor expects us to implement any of four life cycle event callback:
