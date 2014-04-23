@@ -101,7 +101,7 @@ angular.module('app.controllers', [])
 - Run the application via :
 
 ```
-grunt shell:server
+export NODE_ENV="development";node ./api/server.js
 ```
 - Leave this console open and running. It is acting as your server to serve the `index.html` and its dependencies.
 

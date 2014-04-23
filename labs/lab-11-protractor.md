@@ -90,7 +90,7 @@ grunt protractor:e2e
 * Start the application server by running:
 
 ```
-grunt runapp:development
+export NODE_ENV="development";node ./api/server.js
 ```
 
 * In a **separate** console window, run the Grunt protractor task:

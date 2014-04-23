@@ -63,7 +63,7 @@ grunt development
 - In a console window, run:
 
 ```
-grunt shell:server
+export NODE_ENV="development";node ./api/server.js
 ```
 
 - This kicks off a Node server and serves up our `index.html` page.
