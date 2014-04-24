@@ -41,6 +41,74 @@
           <h2>Solution</h2>
         </section>
         <section>
+          <h1>Callbacks</h1>
+          <h2>Review</h2>
+        </section>
+        <section>
+          <p>In JavaScript, functions are first-class objects, which means functions can be used in a first-class manner like objects.</p>
+        </section>
+        <section>
+          <p>We can store functions as variables and call them later. </p><br>
+          <pre><code class="js" data-trim>
+var myFunction = function() {
+  // Do something
+};
+
+myFunction();
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>We can also pass functions as arguments to other functions. </p><br>
+          <pre><code class="js" data-trim>
+var myFunction = function(arg) {
+  console.log('myFunction called');
+  arg();
+};
+
+var myOtherFunction = function() {
+  console.log('myOtherFunction called');
+};
+
+myFunction(myOtherFunction);
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Functions passed as arguments to other functions (that are then "called back" at a later time) are called callbacks.</p>
+        </section>
+        <section>
+          <p>Callbacks are typically used to perform an action after some asynchronous event has occurred.</p>
+        </section>
+        <section>
+          <p>Lets consider performing an action on a user triggered event.</p><br>
+          <pre><code class="js" data-trim>
+// Our callback
+var buttonClicked = function() {
+  console.log('My button clicked!');
+}
+
+// Pass the callback to click
+$('#my-button').click(buttonClicked);
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Since our callback is only being used once, we don't need to assign it to a variable.</p>
+          <p>We can just create the callback inline.</p><br>
+          <pre><code class="js" data-trim>   
+// Pass the callback to click
+$('#my-button').click(function() {
+  console.log('My button clicked!');
+});
+
+</code>
+</pre>
+        </section>
+        <section>
           <h1>Promises</h1>
         </section>
         <section>
@@ -173,7 +241,7 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
         <section>
           <p>Now, lets use the promise to execute a task after our asynchronous function completes.</p><br>
           <pre><code class="js" data-trim>
-controller('PromiseCtrl', function($scope, $q, $timeout) {
+controller('PromiseCtrl', function($scope) {
 
   // $scope.myAsyncTask = ...
   
@@ -193,7 +261,7 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
         <section>
           <p>The data service methods return promises to the response data from the server.</p><br>
           <pre><code class="js" data-trim>
-controller('EmployeeCtrl', function($scope, $q, $timeout) {
+controller('EmployeeCtrl', function($scope, data) {
 
   data.list('employees')
     .then(function (employees) {
@@ -230,14 +298,14 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
         <section>
           <p>We reject promises so that we handle the errors appropriately</p><br>
           <pre><code class="js" data-trim>
-controller('PromiseCtrl', function($scope, $q, $timeout) {
+controller('PromiseCtrl', function($scope, $log) {
 
   $scope.myAsyncTask()         // call myAsyncTask (fails)
     .then(function(result) {   // then,
       $scope.result = result;  // this will never happen
     })
     .catch(function(error) {   // because we're catching failures
-      console.log('Error!', error);
+      $log.error("Error!", error);
     });
     
 });
@@ -252,7 +320,7 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
         <section>
           <p>You can use the $q.when(), when you're dealing with an object that might or might not be a promise.</p><br>
           <pre><code class="js" data-trim>
-controller('PromiseCtrl', function($q) {
+controller('PromiseCtrl', function($scope, $q) {
   // Try to use a promise from some async task
   $q.when($scope.myAsyncTask())
     .then(function(result) {    // then,
