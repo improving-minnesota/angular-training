@@ -269,6 +269,10 @@ $scope.cancel = function cancel () {
 $scope.saveText = $state.current.data.saveText;
 ```
 
+> Note: If you have the ```karma``` window running, you are going to have failing tests:
+> Cannot read **saveText** of undefined. 
+> Don't fret...We will fix these in a minute. 
+
 ###### Updating an employee
 - To update an employee, we can use the instance method, `$update` on our `$resource` object.
 - This method returns a promise that we need to set success and error handlers for:
