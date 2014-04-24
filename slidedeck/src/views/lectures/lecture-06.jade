@@ -7,6 +7,78 @@ include ../includes/mixins
   section
     h1 Lab Five
     h2 Solution
+    
+  section
+    h1 Callbacks
+    h2 Review
+    
+  section
+    p In JavaScript, functions are first-class objects, which means functions can be used in a first-class manner like objects.
+      
+  section
+    p We can store functions as variables and call them later. 
+    br
+    pre.
+      <code class="js" data-trim>
+      var myFunction = function() {
+        // Do something
+      };
+      
+      myFunction();
+      
+      </code>
+      
+  section
+    p We can also pass functions as arguments to other functions. 
+    br
+    pre.
+      <code class="js" data-trim>
+      var myFunction = function(arg) {
+        console.log('myFunction called');
+        arg();
+      };
+      
+      var myOtherFunction = function() {
+        console.log('myOtherFunction called');
+      };
+      
+      myFunction(myOtherFunction);
+      
+      </code>
+      
+  section
+    p Functions passed as arguments to other functions (that are then "called back" at a later time) are called callbacks.
+  
+  section
+    p Callbacks are typically used to perform an action after some asynchronous event has occurred.
+    
+  section
+    p Lets consider performing an action on a user triggered event.
+    br
+    pre.
+      <code class="js" data-trim>
+      // Our callback
+      var buttonClicked = function() {
+        console.log('My button clicked!');
+      }
+      
+      // Pass the callback to click
+      $('#my-button').click(buttonClicked);
+      
+      </code>
+      
+  section
+    p Since our callback is only being used once, we don't need to assign it to a variable.
+    p We can just create the callback inline.
+    br
+    pre.   
+      <code class="js" data-trim>   
+      // Pass the callback to click
+      $('#my-button').click(function() {
+        console.log('My button clicked!');
+      });
+      
+      </code>
 
   section
     h1 Promises
@@ -147,7 +219,7 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      controller('PromiseCtrl', function($scope, $q, $timeout) {
+      controller('PromiseCtrl', function($scope) {
 
         // $scope.myAsyncTask = ...
 
@@ -168,7 +240,7 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      controller('EmployeeCtrl', function($scope, $q, $timeout) {
+      controller('EmployeeCtrl', function($scope, data) {
 
         data.list('employees')
           .then(function (employees) {
@@ -207,14 +279,14 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      controller('PromiseCtrl', function($scope, $q, $timeout) {
+      controller('PromiseCtrl', function($scope, $log) {
 
         $scope.myAsyncTask()         // call myAsyncTask (fails)
           .then(function(result) {   // then,
             $scope.result = result;  // this will never happen
           })
           .catch(function(error) {   // because we're catching failures
-            console.log('Error!', error);
+            $log.error("Error!", error);
           });
 
       });
@@ -230,7 +302,7 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      controller('PromiseCtrl', function($q) {
+      controller('PromiseCtrl', function($scope, $q) {
         // Try to use a promise from some async task
         $q.when($scope.myAsyncTask())
           .then(function(result) {    // then,
