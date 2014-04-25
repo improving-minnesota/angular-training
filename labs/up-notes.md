@@ -41,3 +41,8 @@ grunt watch:development
 # Open Chrome and navigate to http://localhost:3000
 
 ```
+
+If Chrome is not installed 
+- Open windows explorer 
+- Navigate to c:\Program Files\Google\Chrome\Application\<latest version>\installer
+- Run setup.exe
