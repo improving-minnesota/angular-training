@@ -1,6 +1,6 @@
-UP AngularJS Training
+# UP AngularJS Training
 
-Lab Bootstrap
+## Lab Bootstrap
 
 ```bash
 # Change directories to your desktop
@@ -42,7 +42,25 @@ grunt watch:development
 
 ```
 
-If Chrome is not installed 
+## If Chrome is not installed 
 - Open windows explorer 
 - Navigate to c:\Program Files\Google\Chrome\Application\<latest version>\installer
 - Run setup.exe
+
+
+## Installing Chrome Driver Manually
+
+Since the firewall blocks downloading executables or zips, you'll have to manually copy the chromedriver executable from the share drive.
+
+```bash
+
+# Move in to the project folder
+cd angular-timesheet
+
+# Make a selenium folder inside the protractor node_module folder
+mkdir ./node_modules/protractor/selenium
+
+# Copy the Windows 7 Chrome Driver from the network drive to the selenium folder
+cp /g/All/Training/Angular/chromedriver.exe node_modules/protractor/selenium/.
+
+```
