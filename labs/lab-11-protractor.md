@@ -314,9 +314,18 @@ it('should restore the action button text', function () {
 &nbsp;
 ## Testing the employee form page
 
-
-* First let's set up the employee form page to let us cancel the form during our tests.
+* First we need to set up the employee form page to let us get the page's title and its text. 
 * Open **client/test/e2e/app/employees/form.page.js**
+* Replace the `TODO` near line #4: 
+
+```javascript
+this.pageTitle = element(by.binding('$state.current.data.section'));
+this.getPageTitle = function () {
+  return this.pageTitle.getText();
+};
+```
+
+* Next let's set up the employee form page to let us cancel the form during our tests.
 * Around line #14, find the `TODO` and add the following function to the page object:
 
 ```javascript
