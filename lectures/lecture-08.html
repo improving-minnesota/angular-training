@@ -138,14 +138,13 @@ angular.module('app.directives', [])
           </p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
-  .directive('myCoolDirective', [
-    'dependency',
-    function(dependency) {
+  .directive('myCoolDirective',
+    function(myDependency) {
       return {
         //...
       };
     }
-  ]);
+  );
   
 </code>
 </pre>
@@ -184,7 +183,7 @@ angular.module('app.directives', [])
 angular.module('app.directives', [])
   .directive('myCoolDirective', function() {
     return {
-      templateUrl: 'my-cool-directive.html'
+      templateUrl: 'templates/directives/my-cool-directive.html'
     };
   });
   
@@ -211,6 +210,26 @@ angular.module('app.directives', [])
         <section>
           <h4>Nope!</h4>
           <p>HTML comments are elements which means this template violates the one root element rule.</p>
+        </section>
+        <section>
+          <h3>Replace</h3>
+        </section>
+        <section>
+          <p>The replace option specifies how the template should be placed in the directive.</p>
+        </section>
+        <section>
+          <p>When replace is true, the template will replace the element the directive is specified on.</p>
+          <p>When replace is false, the template will be placed inside the element the directive is specified on.</p><br>
+          <pre><code data-trim>
+angular.module('app.directives', [])
+  .directive('myCoolDirective', function() {
+    return {
+      replace: true
+    };
+  });
+  
+</code>
+</pre>
         </section>
         <section>
           <h3>Restrict</h3>
@@ -305,7 +324,7 @@ angular.module('app.directives', [])
   
 </code></pre>
           <pre><code class="html" data-trim>
-&lt;div my-cool-directive some-attribute="myAttribute" &gt;&lt;/div&gt;
+&lt;div my-cool-directive some-attribute="myAttribute"&gt;&lt;/div&gt;
 
 </code>
 </pre>
@@ -340,13 +359,16 @@ angular.module('app.directives', [])
           <p>Any legal expression is allowed, including an expression which contains a function call.</p>
         </section>
         <section>
+          <p>The '&' binding is very useful for supplying callbacks to directives.</p>
+        </section>
+        <section>
           <p>The last type of binding in the attribute value or expression binding '@'.</p>
         </section>
         <section>
           <p>The '@' binding maps the attribute value (string) in the context of the parent scope to the isolate scope.</p>
         </section>
         <section>
-          <p>If scope.value was 5, the value of attributeValue in the isolate scope would be "11".</p><br>
+          <p>If scope.value was 5, the value of attributeValue in the isolate scope would be "11" (string).</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective',function() {
