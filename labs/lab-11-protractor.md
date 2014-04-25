@@ -380,6 +380,23 @@ window.clientSideScripts.findByModel('employee.username');
 * Pretty neat, huh?
 * see the docs at https://github.com/angular/protractor/tree/master/docs for more info on this.
 
+####Note: If you get this output when attempting to debug####
+- Run the below scripts to :
+  - Output the pid of the process hanging on to port 5858. 
+  - Kill that process so that we can use that port. 
+
+```bash
+lsof -i :5858
+kill -p <pid>
+```
+
+- If you are using **Windows** and the above commands did not work, try: 
+
+```bash
+taskkill /f /t /im chromedriver.exe
+```
+
+
 &nbsp;
 ## Practice, Practice, Practice
 
