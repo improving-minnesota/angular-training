@@ -20,43 +20,29 @@
   opacity:1;
 }
 
-
-@keyframes my_animation {
-  from { opacity:1; }
-  to { opacity:0; }
+.repeated-item {
+  line-height:40px;
+  list-style:none;
+  box-sizing:border-box;
 }
-
-@-webkit-keyframes my_animation {
-  from { opacity:1; }
-  to { opacity:0; }
-}
-
-@-moz-keyframes my_animation {
-  from { opacity:1; }
-  to { opacity:0; }
-}
-
-@-o-keyframes my_animation {
-  from { opacity:1; }
-  to { opacity:0; }
-}
-
-.repeated-item.ng-enter, .repeated-item.ng-move {
-  -webkit-transition: 1.0s linear all;
-  -moz-transition: 1.0s linear all;
-  -o-transition: 1.0s linear all;
-  transition: 1.0s linear all;
-  opacity:0;
-}
-
-.repeated-item.ng-enter.ng-enter-active,
-.repeated-item.ng-move.ng-move-active {
-  opacity:1;
-}
-
+ 
+.repeated-item.ng-move,
+.repeated-item.ng-enter,
 .repeated-item.ng-leave {
-  -webkit-animation: 1.0s my_animation;
-  -moz-animation: 1.0s my_animation;
-  -o-animation: 1.0s my_animation;
-  animation: 1.0s my_animation;
+  -webkit-transition:all linear 1.0s;
+  transition:all linear 1.0s;
+}
+ 
+.repeated-item.ng-leave.ng-leave-active,
+.repeated-item.ng-move,
+.repeated-item.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+ 
+.repeated-item.ng-leave,
+.repeated-item.ng-move.ng-move-active,
+.repeated-item.ng-enter.ng-enter-active {
+  opacity:1;
+  max-height:40px;
 }
