@@ -106,14 +106,13 @@ include ../includes/mixins
     pre.
       <code data-trim>
       angular.module('app.directives', [])
-        .directive('myCoolDirective', [
-          'dependency',
-          function(dependency) {
+        .directive('myCoolDirective',
+          function(myDependency) {
             return {
               //...
             };
           }
-        ]);
+        );
 
       </code>
 
@@ -153,7 +152,7 @@ include ../includes/mixins
       angular.module('app.directives', [])
         .directive('myCoolDirective', function() {
           return {
-            templateUrl: 'my-cool-directive.html'
+            templateUrl: 'templates/directives/my-cool-directive.html'
           };
         });
 
@@ -180,6 +179,27 @@ include ../includes/mixins
   section
     h4 Nope!
     p HTML comments are elements which means this template violates the one root element rule.
+    
+  section
+    h3 Replace
+    
+  section
+    p The replace option specifies how the template should be placed in the directive.
+    
+  section
+    p When replace is true, the template will replace the element the directive is specified on.
+    p When replace is false, the template will be placed inside the element the directive is specified on.
+    br
+    pre.
+      <code data-trim>
+      angular.module('app.directives', [])
+        .directive('myCoolDirective', function() {
+          return {
+            replace: true
+          };
+        });
+
+      </code>
 
   section
     h3 Restrict
@@ -278,7 +298,7 @@ include ../includes/mixins
       </code>
     pre.
       <code class="html" data-trim>
-      &lt;div my-cool-directive some-attribute="myAttribute" &gt;&lt;/div&gt;
+      &lt;div my-cool-directive some-attribute="myAttribute"&gt;&lt;/div&gt;
 
       </code>
 
@@ -313,6 +333,9 @@ include ../includes/mixins
 
   section
     p Any legal expression is allowed, including an expression which contains a function call.
+    
+  section
+    p The '&' binding is very useful for supplying callbacks to directives.
 
   section
     p The last type of binding in the attribute value or expression binding '@'.
@@ -322,7 +345,7 @@ include ../includes/mixins
       | The '@' binding maps the attribute value (string) in the context of the parent scope to the isolate scope.
 
   section
-    p If scope.value was 5, the value of attributeValue in the isolate scope would be "11".
+    p If scope.value was 5, the value of attributeValue in the isolate scope would be "11" (string).
     br
     pre.
       <code data-trim>
