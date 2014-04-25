@@ -374,8 +374,9 @@ grunt protractor:debug
 * Open the console and type:
 
 ```
-window.clientSideScripts.findInputs('username');
+window.clientSideScripts.findByModel('employee.username');
 ```
+
 * Pretty neat, huh?
 * see the docs at https://github.com/angular/protractor/tree/master/docs for more info on this.
 
