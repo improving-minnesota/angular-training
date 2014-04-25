@@ -42,10 +42,15 @@ grunt watch:development
 
 ```
 
+## If Chrome is not installed 
+- Open windows explorer 
+- Navigate to c:\Program Files\Google\Chrome\Application\<latest version>\installer
+- Run setup.exe
+
+
 ## Installing Chrome Driver Manually
 
 Since the firewall blocks downloading executables or zips, you'll have to manually copy the chromedriver executable from the share drive.
-
 
 ```bash
 
@@ -59,4 +64,3 @@ mkdir ./node_modules/protractor/selenium
 cp /g/All/Training/Angular/chromedriver.exe node_modules/protractor/selenium/.
 
 ```
-
