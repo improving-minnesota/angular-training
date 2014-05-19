@@ -71,6 +71,10 @@ grunt.loadNpmTasks('grunt-protractor-runner');
 grunt protractor:e2e
 ```
 
+- You should see an error that Protractor has no `specs` to run. 
+  - This means that the protractor task is running as expected. 
+  - We will correct this error in the next section. 
+
 &nbsp;
 ## Protractor configuration
 
@@ -371,7 +375,7 @@ grunt protractor:debug
 * Wait for the Chrome browser to open and stop.
 * It's just like you're running it like normal, except that you are in the state that your test left the browser in.
 * You can actually use the Protractor library from within your Chrome console.
-* Open the console and type:
+* Open the Chrome window that Protractor is driving, open the dev tools' console and type:
 
 ```
 window.clientSideScripts.findByModel('employee.username');
