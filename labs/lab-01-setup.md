@@ -63,7 +63,7 @@ grunt development
 - In a console window, run:
 
 ```
-grunt serve:dev
+grunt serve:development
 ```
 
 - This kicks off a Node server and serves up our `index.html` page.

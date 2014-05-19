@@ -17,7 +17,7 @@ grunt karma:unit
 grunt watch:development
 ```
 ```
-grunt serve:dev
+grunt serve:development
 ```
 
 &nbsp;

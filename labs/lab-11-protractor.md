@@ -94,7 +94,7 @@ grunt protractor:e2e
 * Start the application server by running:
 
 ```
-grunt serve:dev
+grunt serve:development
 ```
 
 * In a **separate** console window, run the Grunt protractor task:

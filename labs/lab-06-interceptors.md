@@ -9,7 +9,7 @@ git checkout lab-6-interceptors
 git pull
 ```
 &nbsp;
-##### Start the grunt tasks: `karma:unit`, `watch:development`, and `grunt serve:dev` in separate consoles.
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `grunt serve:development` in separate consoles.
 
 &nbsp;
 ## Create a Progress Bar for API Calls
