@@ -15,7 +15,7 @@ grunt karma:unit
 grunt watch:development
 ```
 ```
-export NODE_ENV="development";node ./api/server.js
+grunt serve:dev
 ```
 
 &nbsp;

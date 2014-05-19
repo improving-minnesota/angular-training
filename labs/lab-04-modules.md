@@ -456,7 +456,7 @@ Chrome 33.0.1750 (Mac OS X 10.9.2): Executed 19 of 19 SUCCESS (0.127 secs / 0.12
 - If you haven't already, start the application via:
 
 ```
-export NODE_ENV="development";node ./api/server.js
+grunt serve:dev
 ```
 
 - Open your Chrome browser and navigate to http://localhost:3000/#/employees

@@ -7,7 +7,7 @@ git checkout lab-7-factories
 git pull
 ```
 &nbsp;
-##### Start the grunt tasks: `karma:unit`, `watch:development`, and `shell:server` in separate consoles.
+##### Start the grunt tasks: `karma:unit`, `watch:development`, and `grunt serve:dev` in separate consoles.
 
 &nbsp;
 ## Resources services
