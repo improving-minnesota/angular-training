@@ -33,7 +33,7 @@ bower install
 export NODE_ENV="development"; node api/server.js
 
 # Open a second terminal to the project folder
-cd /c/Users/<username>/Desktop/angular-training
+cd /c/Users/<username>/Desktop/angular-timesheet
 
 # Start the watch:development task
 grunt watch:development
