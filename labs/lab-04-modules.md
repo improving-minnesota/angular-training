@@ -126,7 +126,7 @@ $routeProvider
 - Our first resource will be the `employees` resource.
 
 - The server team has provided us with the REST endpoints that follow the application's standards.
-  - The only caviat is that the url for employees is actually `/users`.
+  - The only caveat is that the url for employees is actually `/users`.
   - Not a problem though because we can set this configuration:
 
 
