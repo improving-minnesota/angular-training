@@ -45,7 +45,7 @@ browsers: ['Chrome'],
   - Imported the task into your `Grunt` configuration so that it is available.
 
 
-- Locate the `TODO` near line #370 and configure the task:
+- Locate the `TODO` near line #401 and configure the task:
 
 ```javascript
 karma : {
