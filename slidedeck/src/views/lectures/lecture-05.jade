@@ -597,7 +597,7 @@ include ../includes/mixins
 
     pre.
       <code class="js" data-trim>
-      controller('ProjectDetailCtrl', function(projects) {
+      controller('ProjectsDetailCtrl', function(projects) {
         // Here we can inject projects because it was resolved
         // in the parent state.
       });
@@ -633,7 +633,7 @@ include ../includes/mixins
 
     pre.
       <code class="js" data-trim>
-      controller('ProjectDetailCtrl', function($scope, $state) {
+      controller('ProjectsDetailCtrl', function($scope, $state) {
         $scope.title = $state.current.data.title;
         $scope.section = $state.current.data.section;
       });
