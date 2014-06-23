@@ -23,7 +23,8 @@ npm install -g grunt-cli
 npm install
 
 #Export global npm modules path
-export PATH="${PATH}:/c/Users/<username>/AppData/Roaming/npm"
+#Skip this, should be fixed for June 23rd-25th class
+#export PATH="${PATH}:/c/Users/<username>/AppData/Roaming/npm"
 
 # Install Bower Dependencies
 # (type n to disable collection of statistics)
