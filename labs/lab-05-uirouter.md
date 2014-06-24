@@ -522,7 +522,7 @@ it('should transition to the detail page of the created employee', function () {
 ```
 - What is this?
   - The `ng-class` directive sets a class on an element if the second part of the hash is truthy.
-    - So if the current state is (or a child of) `app.employees`, the `<li>` will have a class of **enabled**.
+    - So if the current state is (or a child of) `app.employees`, the `<li>` will have a class of **active**.
   - The `ui-sref` directive is used to replace the `href` attribute, but takes a state name instead of a url.
     - When the user clicks this link, the `$state` service will transition to the `app.employees` state.
 

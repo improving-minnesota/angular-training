@@ -23,7 +23,7 @@ api.add({
   url: '/users'
 });
 ```
-- This registration automatically give you:
+- This registration automatically gives you:
   - a POST to `/users` with a JSON request body via `data.create()`.
   - a GET to `/users` with parameters via `data.list()`
   - a GET to `/users` with a JSON request body (used for pagination) via `data.page()`.
