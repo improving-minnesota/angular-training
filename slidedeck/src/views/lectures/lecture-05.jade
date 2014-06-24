@@ -232,7 +232,7 @@ include ../includes/mixins
     p Often, URLs have dynamic parts to them which are called parameters.
 
   section
-    p Here's how you set a basic basic parameter in your URL.
+    p Here's how you set a basic parameter in your URL.
     br
     pre.
       <code class="js" data-trim>
@@ -597,7 +597,7 @@ include ../includes/mixins
 
     pre.
       <code class="js" data-trim>
-      controller('ProjectDetailCtrl', function(projects) {
+      controller('ProjectsDetailCtrl', function(projects) {
         // Here we can inject projects because it was resolved
         // in the parent state.
       });
@@ -633,7 +633,7 @@ include ../includes/mixins
 
     pre.
       <code class="js" data-trim>
-      controller('ProjectDetailCtrl', function($scope, $state) {
+      controller('ProjectsDetailCtrl', function($scope, $state) {
         $scope.title = $state.current.data.title;
         $scope.section = $state.current.data.section;
       });
@@ -847,7 +847,7 @@ include ../includes/mixins
           li If true will force transition even if the state or params have not changed.
 
   section
-    p Let's look at an example of a state transistion with params and options: 
+    p Let's look at an example of a state transition with params and options: 
     br
     pre.
       <code class="js" data-trim>

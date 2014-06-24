@@ -126,7 +126,7 @@ $routeProvider
 - Our first resource will be the `employees` resource.
 
 - The server team has provided us with the REST endpoints that follow the application's standards.
-  - The only caviat is that the url for employees is actually `/users`.
+  - The only caveat is that the url for employees is actually `/users`.
   - Not a problem though because we can set this configuration:
 
 
@@ -228,7 +228,7 @@ it('should be able to instantiate the controller and request a list of employees
 
 - We used a couple of different methods on the `$httpBackend` service:
   - `expect()` : This function tells the `$httpBackend` service to fail the test if the expected request is not made.
-  - `flush()` : Since `$httpBackend` is not making real request to the server, it stores all of the requests that are made and will only evaluate the `expect()`'s  and return configured resonses once we call `flush()`.
+  - `flush()` : Since `$httpBackend` is not making real request to the server, it stores all of the requests that are made and will only evaluate the `expect()`'s  and return configured responses once we call `flush()`.
     - This gives us real control of when we're testing our response expectations.
 
 ###### Test that employees is populated on scope

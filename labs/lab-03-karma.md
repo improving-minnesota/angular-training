@@ -17,7 +17,7 @@ git pull
 
 ### Add the Jasmine framework
 
-- Locate the `TODO` near line #4 and add the `jasmine` framework :
+- Locate the `TODO` near line #7 and add the `jasmine` framework :
 
 ```javascript
 frameworks: ['jasmine'],
@@ -27,7 +27,7 @@ frameworks: ['jasmine'],
 ### Configure Chrome
 
 - We want `karma` to run our tests through the Chrome browser so that we have access to dev tools while running our tests.
-- Find the `TODO` located near line #29 and register the Chrome browser via :
+- Find the `TODO` located near line #37 and register the Chrome browser via :
 
 ```javascript
 browsers: ['Chrome'],
@@ -45,7 +45,7 @@ browsers: ['Chrome'],
   - Imported the task into your `Grunt` configuration so that it is available.
 
 
-- Locate the `TODO` near line #370 and configure the task:
+- Locate the `TODO` near line #401 and configure the task:
 
 ```javascript
 karma : {
