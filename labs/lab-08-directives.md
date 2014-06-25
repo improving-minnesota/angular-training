@@ -29,6 +29,14 @@ grunt serve:development
 - Let's take advantage of that and add some form validation to the employees form.
 - Open **client/assets/templates/app/employees/form.html**
 
+- We need to tell Angular that we are NOT using HTML5 validation in our form, but will be using Angular's validation. 
+
+- Find the ```<form>``` tag and add the `novalidate` attribute.  
+
+```xml
+<form class="form-horizontal" novalidate name="employeeForm">
+```
+
 - Add the following validation to the form:
   - Set the **username** to have a minimum length of 1, a max length of 40, and a required field.
   - Set the **email** to have a minimum length of 1, a max length of 100, and a required field.
