@@ -256,7 +256,7 @@ $stateProvider
           <p>Often, URLs have dynamic parts to them which are called parameters.</p>
         </section>
         <section>
-          <p>Here's how you set a basic basic parameter in your URL.</p><br>
+          <p>Here's how you set a basic parameter in your URL.</p><br>
           <pre><code class="js" data-trim>
 $stateProvider
   .state('app', {
@@ -601,7 +601,7 @@ $stateProvider
 </code>
 </pre>
           <pre><code class="js" data-trim>
-controller('ProjectDetailCtrl', function(projects) {
+controller('ProjectsDetailCtrl', function(projects) {
   // Here we can inject projects because it was resolved
   // in the parent state.
 });
@@ -636,7 +636,7 @@ $stateProvider
 </code>
 </pre>
           <pre><code class="js" data-trim>
-controller('ProjectDetailCtrl', function($scope, $state) {
+controller('ProjectsDetailCtrl', function($scope, $state) {
   $scope.title = $state.current.data.title;
   $scope.section = $state.current.data.section;
 });
@@ -865,7 +865,7 @@ $stateProvider
           </ul>
         </section>
         <section>
-          <p>Let's look at an example of a state transistion with params and options: </p><br>
+          <p>Let's look at an example of a state transition with params and options: </p><br>
           <pre><code class="js" data-trim>
 $state.go('employees.detail', {id: 1}, {reload: true});
 </code>
