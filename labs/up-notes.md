@@ -40,7 +40,8 @@ grunt watch:development
 
 # Open Chrome and navigate to http://localhost:3000, you should see
 
-# Open notepad and save the following lines.  You will need to run these everytime you open a new terminal window.
+# Open notepad and save the following lines.
+# You will need to run these everytime you open a new terminal window.
 cd /c/Users/<username>/Desktop/angular-timesheet
 export PATH="${PATH}:/c/Users/<username>/AppData/Roaming/npm"
 
