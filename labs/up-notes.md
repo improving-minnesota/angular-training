@@ -38,7 +38,7 @@ cd /c/Users/<username>/Desktop/angular-timesheet
 # Start the watch:development task
 grunt watch:development
 
-# Open Chrome and navigate to http://localhost:3000, you should see
+# Open Chrome and navigate to http://localhost:3000
 
 # Open notepad and save the following lines.
 # You will need to run these everytime you open a new terminal window.
