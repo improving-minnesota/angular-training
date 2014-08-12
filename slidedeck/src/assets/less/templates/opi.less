@@ -8,7 +8,7 @@
 @logo-width:                  742px;
 @logo-height:                 267px;
 @logo-default-scale:          0.3;
-@logo-default-opacity:        0.5;
+@logo-default-opacity:        0.4;
 @logo-overview-opacity:       0.1;
 @logo-red-color:              #ee311d;
 
@@ -33,15 +33,15 @@ body {
 }
 
 .reveal .opi-logo {
-  position: fixed;
+  position: absolute;
   top: 50px;
   left: 50px;
-  width: floor(@logo-width * @logo-default-scale);
-  height: floor(@logo-height * @logo-default-scale);
+  width: 15%;
+  height: 10%;
   background-image: url('../img/opi-logo.png');
-  background-repeat: no-repeat;
-  background-position:left top;
-  background-size: 100%;
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position: top left;
   opacity: @logo-default-opacity;
   .transition(~"left 0.7s ease, opacity 0.7s ease");
 }
