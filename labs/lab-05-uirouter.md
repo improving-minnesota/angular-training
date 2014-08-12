@@ -276,7 +276,7 @@ $scope.saveText = $state.current.data.saveText;
 ###### Updating an employee
 - To update an employee, we can use the instance method, `$update` on our `$resource` object.
 - This method returns a promise that we need to set success and error handlers for:
-  - If the response is successful, update `$scope.timesheet` with the response object.
+  - If the response is successful, update `$scope.employee` with the response object.
   - If the response errors, log the error to the console (for now).
 
 
@@ -286,7 +286,7 @@ $scope.saveText = $state.current.data.saveText;
 $scope.save = function save () {
   $scope.employee.$update()
     .then(function (updated) {
-      $scope.timesheet = updated;
+      $scope.employee = updated;
       console.log('success!');
     })
     .catch(function (x) {
