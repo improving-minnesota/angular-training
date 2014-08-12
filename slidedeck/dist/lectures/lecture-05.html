@@ -814,18 +814,18 @@ $stateProvider
           <h2>Transitions</h2>
         </section>
         <section>
-          <p>UI-Router has a Low-level method for transitioning to a new state, transitionTo(). </p>
+          <p>UI-Router has a Low-level method for transitioning to a new state, transitionTo().</p>
           <ul>
-            <li>$state.go uses transitionTo internally. </li>
+            <li>$state.go uses transitionTo internally.</li>
             <li>$state.go is recommended in most situations.</li>
           </ul>
         </section>
         <section>
-          <p>$state.go or $state.transitionTo take 3 parameters: </p>
+          <p>$state.go or $state.transitionTo take 3 parameters:</p>
           <ul>
             <li>"to" : The name of the state to transition to.</li>
             <li>"toParams" : An optional object used to populate the $stateParams.</li>
-            <li>"options" : An optional object used to configure the state transition. </li>
+            <li>"options" : An optional object used to configure the state transition.</li>
           </ul>
         </section>
         <section>
@@ -833,7 +833,7 @@ $stateProvider
           <ul>
             <li>location - {boolean=true|string=}
               <ul>
-                <li>If true will update the url in the location bar. </li>
+                <li>If true will update the url in the location bar.</li>
                 <li>If string, must be "replace", which will update url and also replace last history record.</li>
               </ul>
             </li>
@@ -865,7 +865,7 @@ $stateProvider
           </ul>
         </section>
         <section>
-          <p>Let's look at an example of a state transition with params and options: </p><br>
+          <p>Let's look at an example of a state transition with params and options:</p><br>
           <pre><code class="js" data-trim>
 $state.go('employees.detail', {id: 1}, {reload: true});
 </code>
@@ -880,7 +880,7 @@ $state.go('employees.detail', {id: 1}, {reload: true});
         <section>
           <p>
             We recommend that as you go through this labs, you utilize the
-            <a href="http://angular-ui.github.io/ui-router/site/#/api">AngularUI Router documentation</a>.
+            <a href="http://angular-ui.github.io/ui-router/site/#/api/ui.router">AngularUI Router documentation</a>.
             
           </p>
         </section>

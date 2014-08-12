@@ -785,12 +785,12 @@ include ../includes/mixins
   section
     p $state service is responsible for representing states as well as transitioning between them.
 
-  section 
+  section
     p It also provides interfaces to ask for current state or even states you're coming from.
 
   section
     h3 Methods
-    ul 
+    ul
       li get(stateOrName)
       li go(to, params, options)
       li href(stateOrName, params, options)
@@ -799,9 +799,9 @@ include ../includes/mixins
       li reload()
       li transitionTo(to, toParams, options)
 
-  section 
+  section
     h3 Properties
-    ul 
+    ul
       li params - A param object, e.g. {sectionId: section.id)}, that you'd like to test against the current active state.
       li current - A reference to the state's config object. However you passed it in. Useful for accessing custom data.
       li transition - Currently pending transition. A promise that'll resolve or reject.
@@ -810,44 +810,44 @@ include ../includes/mixins
     h2 Transitions
 
   section
-    p UI-Router has a Low-level method for transitioning to a new state, transitionTo(). 
+    p UI-Router has a Low-level method for transitioning to a new state, transitionTo().
     ul
-      li $state.go uses transitionTo internally. 
+      li $state.go uses transitionTo internally.
       li $state.go is recommended in most situations.
 
   section
-    p $state.go or $state.transitionTo take 3 parameters: 
+    p $state.go or $state.transitionTo take 3 parameters:
     ul
       li "to" : The name of the state to transition to.
       li "toParams" : An optional object used to populate the $stateParams.
-      li "options" : An optional object used to configure the state transition. 
+      li "options" : An optional object used to configure the state transition.
 
   section
     h3 Transition Options
     ul
       li location - {boolean=true|string=}
-        ul 
-          li If true will update the url in the location bar. 
+        ul
+          li If true will update the url in the location bar.
           li If string, must be "replace", which will update url and also replace last history record.
       li inherit - {boolean=false}
-        ul 
+        ul
           li If true will inherit url parameters from current url.
 
   section
     h3 Transition Options - cont.
     ul
       li relative - {object=}
-        ul 
+        ul
           li When transitioning with relative path (e.g '^'), defines which state to be relative from.
       li notify - {boolean=true}
         ul
           li If true will broadcast $stateChangeStart and $stateChangeSuccess events.
       li reload - {boolean=false}
-        ul 
+        ul
           li If true will force transition even if the state or params have not changed.
 
   section
-    p Let's look at an example of a state transition with params and options: 
+    p Let's look at an example of a state transition with params and options:
     br
     pre.
       <code class="js" data-trim>
@@ -863,7 +863,7 @@ include ../includes/mixins
   section
     p.
       We recommend that as you go through this labs, you utilize the
-      <a href="http://angular-ui.github.io/ui-router/site/#/api">AngularUI Router documentation</a>.
+      <a href="http://angular-ui.github.io/ui-router/site/#/api/ui.router">AngularUI Router documentation</a>.
 
   section
     h1 Unit Testing
