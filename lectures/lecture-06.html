@@ -126,7 +126,7 @@ $('#my-button').click(function() {
         </section>
         <section>
           <h3>The</h3>
-          <h1>Pyramid</h1>
+          <h2>Pyramid</h2>
           <h1>of Doom</h1>
         </section>
         <section>
@@ -241,7 +241,8 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
         </section>
         <section>
           <p>Now, lets use the promise to execute a task after our asynchronous function completes.</p><br>
-          <pre><code class="js" data-trim>
+          <pre><a href="http://embed.plnkr.co/V5sFcd/preview" target="_blank"><i class="fa fa-external-link"></i></a>
+<code class="js" data-trim>
 controller('PromiseCtrl', function($scope) {
 
   // $scope.myAsyncTask = ...
@@ -297,8 +298,9 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
 </pre>
         </section>
         <section>
-          <p>We reject promises so that we handle the errors appropriately</p><br>
-          <pre><code class="js" data-trim>
+          <p>We reject promises so that we handle the errors appropriately</p>
+          <pre><a href="http://embed.plnkr.co/OdBU2J/preview" target="_blank"><i class="fa fa-external-link"></i></a>
+<code class="js" data-trim>
 controller('PromiseCtrl', function($scope, $log) {
 
   $scope.myAsyncTask()         // call myAsyncTask (fails)
@@ -319,11 +321,19 @@ controller('PromiseCtrl', function($scope, $log) {
           <p> What if you don't know if the object you're dealing with is a promise or not?</p>
         </section>
         <section>
-          <p>You can use the $q.when(), when you're dealing with an object that might or might not be a promise.</p><br>
-          <pre><code class="js" data-trim>
+          <p>You can use the $q.when() to wrap a non promise object with a thennable promise.</p>
+          <p>$q.when() will do nothing if the value is a $q promise.</p>
+          <pre><a href="http://embed.plnkr.co/3IO2lL/preview" target="_blank"><i class="fa fa-external-link"></i></a>
+<code class="js" data-trim>
 controller('PromiseCtrl', function($scope, $q) {
-  // Try to use a promise from some async task
-  $q.when($scope.myAsyncTask())
+  // This function doesn't return a promise, just a String
+  // Note that String does not have the function then() on it
+  $scope.mySyncTask = function() {
+    return "Result";
+  };
+  
+  // Wrap the result of some syncronous task with a thennable promise
+  $q.when($scope.mySyncTask())
     .then(function(result) {    // then,
       $scope.result = result;   // do something with the result
     });
