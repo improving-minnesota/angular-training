@@ -99,7 +99,7 @@ include ../includes/mixins
 
   section
     h3 The
-    h1 Pyramid
+    h2 Pyramid
     h1 of Doom
 
   section
@@ -221,6 +221,7 @@ include ../includes/mixins
     p Now, lets use the promise to execute a task after our asynchronous function completes.
     br
     pre.
+      <a href="http://embed.plnkr.co/V5sFcd/preview" target="_blank"><i class="fa fa-external-link"></i></a>
       <code class="js" data-trim>
       controller('PromiseCtrl', function($scope) {
 
@@ -279,8 +280,8 @@ include ../includes/mixins
 
   section
     p We reject promises so that we handle the errors appropriately
-    br
     pre.
+      <a href="http://embed.plnkr.co/OdBU2J/preview" target="_blank"><i class="fa fa-external-link"></i></a>
       <code class="js" data-trim>
       controller('PromiseCtrl', function($scope, $log) {
 
@@ -301,13 +302,20 @@ include ../includes/mixins
     p  What if you don't know if the object you're dealing with is a promise or not?
 
   section
-    p You can use the $q.when(), when you're dealing with an object that might or might not be a promise.
-    br
+    p You can use the $q.when() to wrap a non promise object with a thennable promise.
+    p $q.when() will do nothing if the value is a $q promise.
     pre.
+      <a href="http://embed.plnkr.co/3IO2lL/preview" target="_blank"><i class="fa fa-external-link"></i></a>
       <code class="js" data-trim>
       controller('PromiseCtrl', function($scope, $q) {
-        // Try to use a promise from some async task
-        $q.when($scope.myAsyncTask())
+        // This function doesn't return a promise, just a String
+        // Note that String does not have the function then() on it
+        $scope.mySyncTask = function() {
+          return "Result";
+        };
+
+        // Wrap the result of some syncronous task with a thennable promise
+        $q.when($scope.mySyncTask())
           .then(function(result) {    // then,
             $scope.result = result;   // do something with the result
           });
