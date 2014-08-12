@@ -7,29 +7,29 @@ include ../includes/mixins
   section
     h1 Lab Five
     h2 Solution
-    
+
   section
     h1 Callbacks
     h2 Review
-    
+
   section
     p In JavaScript, functions are first-class objects, which means functions can be used in a first-class manner like objects.
-      
+
   section
-    p We can store functions as variables and call them later. 
+    p We can store functions as variables and call them later.
     br
     pre.
       <code class="js" data-trim>
       var myFunction = function() {
         // Do something
       };
-      
+
       myFunction();
-      
+
       </code>
-      
+
   section
-    p We can also pass functions as arguments to other functions. 
+    p We can also pass functions as arguments to other functions.
     br
     pre.
       <code class="js" data-trim>
@@ -37,21 +37,21 @@ include ../includes/mixins
         console.log('myFunction called');
         arg();
       };
-      
+
       var myOtherFunction = function() {
         console.log('myOtherFunction called');
       };
-      
+
       myFunction(myOtherFunction);
-      
+
       </code>
-      
+
   section
     p Functions passed as arguments to other functions (that are then "called back" at a later time) are called callbacks.
-  
+
   section
     p Callbacks are typically used to perform an action after some asynchronous event has occurred.
-    
+
   section
     p Lets consider performing an action on a user triggered event.
     br
@@ -61,23 +61,23 @@ include ../includes/mixins
       var buttonClicked = function() {
         console.log('My button clicked!');
       }
-      
+
       // Pass the callback to click
       $('#my-button').click(buttonClicked);
-      
+
       </code>
-      
+
   section
     p Since our callback is only being used once, we don't need to assign it to a variable.
     p We can just create the callback inline.
     br
-    pre.   
-      <code class="js" data-trim>   
+    pre.
+      <code class="js" data-trim>
       // Pass the callback to click
       $('#my-button').click(function() {
         console.log('My button clicked!');
       });
-      
+
       </code>
 
   section
@@ -92,7 +92,7 @@ include ../includes/mixins
     p That action may or may not be finished at any given point in time.
 
   section
-    img.no-style(style="width: 75%;", src="/angular-training/assets/img/lecture-06/wat_grande.jpg")
+    img.no-style(style="width: 80%;", src="/angular-training/assets/img/lecture-06/wat_grande.jpg")
 
   section
     p To understand why we use promises, lets look at one big problem that promises can mitigate.
@@ -161,6 +161,9 @@ include ../includes/mixins
         .done();
 
       </code>
+
+  section
+    img.no-style(style="width: 80%;", src="/angular-training/assets/img/lecture-06/awesome.gif")
 
   section
     p With this approach, you also get implicit error propagation, just like try, catch, and finally.
