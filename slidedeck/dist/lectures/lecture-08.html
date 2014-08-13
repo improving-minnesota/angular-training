@@ -232,6 +232,32 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
+          <p>Template</p>
+          <pre><code class="html" data-trim>
+&lt;div class="text-center"&gt;
+  &lt;p&gt;Hello World!&lt;/p&gt;
+&lt;/div&gt;
+
+</code></pre>
+          <p>Result when replace is set to false</p>
+          <pre><code class="html" data-trim>
+&lt;div my-cool-directive&gt;
+  &lt;div class="text-center"&gt;
+    &lt;p&gt;Hello World!&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+          <p>Result when replace is set to true</p>
+          <pre><code class="html" data-trim>
+&lt;div class="text-center"&gt;
+  &lt;p&gt;Hello World!&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
           <h3>Restrict</h3>
         </section>
         <section>
@@ -271,12 +297,12 @@ angular.module('app.directives', [])
         </section>
         <section>
           <p>
-            What we want to be able to do is separate the scope inside a directive from the scope outside, and
+            What we want to be able to do is separate the scope inside a directive from the scope outside the directive, and
             then map the outer scope to a directive's inner scope.
           </p>
         </section>
         <section>
-          <p>We can do this by creating what we call an isolate scope using the directives scope option.</p>
+          <p>We can do this by creating what we call an isolate scope using the scope option.</p>
         </section>
         <section>
           <p>The directive below will have an isolate scope that is not mapped to anything in the parent scope (completely isolated)</p><br>
@@ -288,6 +314,29 @@ angular.module('app.directives', [])
     };
   });
   
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Assuming myCoolDirective has a completely isolate scope.</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 3"&gt;
+  &lt;p&gt;{{myVar}}&lt;/p&gt;
+  &lt;div my-cool-directive&gt;
+    &lt;p&gt;{{myVar}}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+          <p>It would result in the following after being compiled and linked.</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 3"&gt;
+  &lt;p&gt;3&lt;/p&gt;
+  &lt;div my-cool-directive&gt;
+    &lt;p&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
 </code>
 </pre>
         </section>
@@ -334,6 +383,29 @@ angular.module('app.directives', [])
           <p>Changes made in the parent scope are reflected in the isolate scope and visa versa.</p><img src="/angular-training/assets/img/lecture-08/scope.png" class="no-style">
         </section>
         <section>
+          <p>Assuming myCoolDirective binds someAttribute between scopes.</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 3"&gt;
+  &lt;p&gt;{{myVar}}&lt;/p&gt;
+  &lt;div my-cool-directive some-attribute="myVar"&gt;
+    &lt;p&gt;{{someAttribute}}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+          <p>It would result in the following after being compiled and linked.</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 3"&gt;
+  &lt;p&gt;3&lt;/p&gt;
+  &lt;div my-cool-directive some-attribute="myVar"&gt;
+    &lt;p&gt;3&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
           <p>Next, we have function binding or '&'</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
@@ -365,10 +437,7 @@ angular.module('app.directives', [])
           <p>The last type of binding in the attribute value or expression binding '@'.</p>
         </section>
         <section>
-          <p>The '@' binding maps the attribute value (string) in the context of the parent scope to the isolate scope.</p>
-        </section>
-        <section>
-          <p>If scope.value was 5, the value of attributeValue in the isolate scope would be "11" (string).</p><br>
+          <p>The '@' binding maps the attribute value (string) in the context of the parent scope to the isolate scope.</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective',function() {
@@ -381,7 +450,28 @@ angular.module('app.directives', [])
   
 </code></pre>
           <pre><code class="html" data-trim>
-&lt;div my-cool-directive attribute-value="{{ scope.value + 6 }}" &gt;&lt;/div&gt;
+&lt;div my-cool-directive attribute-value="{{ count + " things" }}" &gt;&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Assuming myCoolDirective binds the value of someAttribute between scopes.</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="count = 3"&gt;
+  &lt;div my-cool-directive attribute-value="{{count + ' things'}}"&gt;
+    &lt;p&gt;{{someAttribute}}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+          <p>It would result in the following after being compiled and linked.</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="count = 3"&gt;
+  &lt;div my-cool-directive attribute-value="3 things"&gt;
+    &lt;p&gt;3 things&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 
 </code>
 </pre>
@@ -404,8 +494,10 @@ angular.module('app.directives', [])
         <section>
           <p>First, lets look at using a transclude directive</p><br>
           <pre><code class="html" data-trim>
-&lt;div my-frame-directive &gt;
-  &lt;p&gt;{{outerScopeVariable}}&lt;/p&gt;
+&lt;div ng-init="myTranscludedVar = 'Hello'"&gt;
+  &lt;div my-frame-directive&gt;
+    &lt;p&gt;{{myTranscludedVar}}&lt;/p&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 
 </code>
@@ -414,15 +506,16 @@ angular.module('app.directives', [])
         <section>
           <p>Now, lets look at the template for a transclusion directive</p><br>
           <pre><code class="html" data-trim>
-&lt;div class="{{isolateScopeVariable}}"&gt;
+&lt;div ng-init="myVar = 'World!'"&gt;
   &lt;div ng-transclude &gt;&lt;/div&gt;
+  &lt;p&gt;{{myVar}}&lt;/p&gt;
 &lt;/div&gt;
 
 </code></pre>
           <p>Angular will place the contents of the directive</p>
           <div class="text-center">
             <pre><code class="html" data-trim>
-&lt;p&gt;{{outerScopeVariable}}&lt;/p&gt;
+&lt;p&gt;{{myTranscludedVar}}&lt;/p&gt;
 
 </code></pre>
           </div>
@@ -431,8 +524,42 @@ angular.module('app.directives', [])
         <section>
           <p>After compilation, the final DOM will look like</p><br>
           <pre><code class="html" data-trim>
-&lt;div class="{{isolateScopeVariable}}"&gt;
-  &lt;p&gt;{{outerScopeVariable}}&lt;/p&gt;
+&lt;div ng-init="myTranscludedVar = 'Hello'"&gt;
+  &lt;div my-frame-directive&gt;
+    &lt;div ng-init="myVar = 'World!'"&gt;
+      &lt;p&gt;Hello&lt;/p&gt;
+      &lt;p&gt;World!&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myTranscludedVar = 'Hello'"&gt;
+  &lt;div my-frame-directive&gt;
+    &lt;p&gt;{{myTranscludedVar}}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myVar = 'World!'"&gt;
+  &lt;div ng-transclude &gt;&lt;/div&gt;
+  &lt;p&gt;{{myVar}}&lt;/p&gt;
+&lt;/div&gt;
+
+</code></pre>
+          <pre><code class="html" data-trim>
+&lt;div ng-init="myTranscludedVar = 'Hello'"&gt;
+  &lt;div my-frame-directive&gt;
+    &lt;div ng-init="myVar = 'World!'"&gt;
+      &lt;p&gt;Hello&lt;/p&gt;
+      &lt;p&gt;World!&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 
 </code>
@@ -663,7 +790,7 @@ beforeEach(inject(function($rootScope, _$compile_) {
 </pre>
         </section>
         <section>
-          <p>Then, we'll create our mock <code>$scope</code>, element, and finally use the <code>$compile</code> service to compile and link our directive.</p><br>
+          <p>Then, we'll create our mock<code>$scope</code>, element, and finally use the<code>$compile</code> service to compile and link our directive.</p><br>
           <pre><code data-trim>
 beforeEach(function () {
   // Notice that we can use properties
