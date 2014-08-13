@@ -17,8 +17,8 @@ include ../includes/mixins
     br
     .text-center
       pre.
-        <code data-trim>
-        {{ booleanValue | yesNo }}
+        <code class="html" data-trim>
+        &lt;p&gt;{{ booleanValue | yesNo }}&lt;/p&gt;
 
         </code>
 
@@ -27,8 +27,8 @@ include ../includes/mixins
     br
     .text-center
       pre.
-        <code data-trim>
-        {{ booleanValue | yesNo:arg1:arg2 }}
+        <code class="html" data-trim>
+        &lt;p&gt;{{ booleanValue | yesNo:arg1:arg2 }}&lt;/p&gt;
 
         </code>
 
@@ -37,16 +37,24 @@ include ../includes/mixins
     br
     .text-center
       pre.
-        <code data-trim>
-        {{ booleanValue | yesNo | uppercase }}
+        <code class="html" data-trim>
+        &lt;p&gt;{{ booleanValue | yesNo | uppercase }}&lt;/p&gt;
 
         </code>
 
-  section(id="example1")
+  section
     p Filters in action
     br
-    input(ng-model="myValue")
-    p {{myValue | uppercase}}
+    .text-center
+      pre.
+        <code class="html" data-trim>
+        &lt;p&gt;{{ myValue | uppercase }}&lt;/p&gt;
+
+        </code>
+    br
+    div(id="example1")
+      input(ng-model="myValue")
+      p {{myValue | uppercase}}
 
   section
     h2 Creating Custom Filters
@@ -63,7 +71,7 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       angular.module('boolean.filters', [ ])
-        .filter('yesNo', function() {
+        .filter('yesNo', function(myDependency) {
 
         });
 
@@ -73,9 +81,14 @@ include ../includes/mixins
     p This factory function should return a new filter function which takes the input value as the first argument.
     br
     pre.
+      <code class="html" data-trim>
+      &lt;p&gt;{{myVar | yesNo}}&lt;/p&gt;
+
+      </code>
+    pre.
       <code class="js" data-trim>
       angular.module('boolean.filters', [ ])
-        .filter('yesNo', function() {
+        .filter('yesNo', function(myDependency) {
           return function(value) {
             if (value) {
               return 'Yes';
@@ -90,6 +103,11 @@ include ../includes/mixins
   section
     p Filter arguments are passed in as additional arguments to the filter function.
     br
+    pre.
+      <code class="html" data-trim>
+      &lt;p&gt;{{myVar | yesNo:true}}&lt;/p&gt;
+
+      </code>
     pre.
       <code class="js" data-trim>
       angular.module('boolean.filters', [ ])
@@ -108,6 +126,11 @@ include ../includes/mixins
   section
     p Filter's aren't limited to simple values. They can manipulate any type of object.
     br
+    pre.
+      <code class="html" data-trim>
+      &lt;p&gt;{{new Date() | momentShortDate}}&lt;/p&gt;
+
+      </code>
     pre.
       <code class="js" data-trim>
       angular.module('date.filters', [ ])

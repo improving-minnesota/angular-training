@@ -19,16 +19,11 @@ include ../includes/mixins
 
   section
     p When they're triggered, they'll attempt to perform a CSS animation or JavaScript callback animation depending on which is defined.
-    
+
   section
-    p 
-      | First, lets take a look at the documentation for 
-      a(href="http://docs.angularjs.org/api/ngAnimate/service/$animate", target="_blank") $animate
-    
-  section
-    p Now, lets take a look at the AngularJS source code for ngRepeat to see how it's hooked into the $animate service.
-    br
-    a(href="https://github.com/angular/angular.js/blob/master/src/ng/directive/ngRepeat.js#L327", target="_blank") src/ng/directive/ngRepeat.js#L327
+    p
+      | First, lets take a look at the documentation for
+      a(href="https://docs.angularjs.org/api/ngAnimate", target="_blank") ngAnimate
 
   section
     h2 Using Animations
@@ -42,13 +37,13 @@ include ../includes/mixins
         angular.module('app', ['ngAnimate'])
 
         </code>
-        
+
   section
-    p As we saw in the documentation for $animate, we can apply animations to our elements by defining CSS classes that that tell the browser how to animate an element.
-    
+    p As we saw in the documentation for ngAnimate, we can apply animations to our elements by defining CSS classes that that tell the browser how to animate an element.
+
   section
-    p The $animate service automatically adds and removes these classes for us at the right time. 
-    
+    p The $animate service automatically adds and removes these classes for us at the right time.
+
   section
     p An example set of CSS animations for ngShow are shown below
     br
@@ -68,17 +63,17 @@ include ../includes/mixins
       .ng-hide-remove.ng-hide-remove-active {
         opacity: 1;
       }
-      
+
       </code>
-    
+
     p Which elements are these animations going to be applied to?
-    
+
   section
     p All elements that use the ngShow directive.
     p This is because these class names are used for all the ngShow elements.
-    
+
   section
-    p We can scope these animations by making the class definitions more descriptive. 
+    p We can scope these animations by making the class definitions more descriptive.
     br
     pre.
       <code class="css" data-trim>
@@ -96,10 +91,10 @@ include ../includes/mixins
       .my-class.ng-hide-remove.ng-hide-remove-active {
         opacity: 1;
       }
-      
-      </code> 
-    
-    p Notice here that these animations will only be applied to elements that have the CSS class "my-class". 
+
+      </code>
+
+    p Notice here that these animations will only be applied to elements that have the CSS class "my-class".
 
   section(id="example1", ng-controller="Lecture10Controller")
     button(ng-click="sayHello = !sayHello") Say Hello
@@ -116,14 +111,14 @@ include ../includes/mixins
         -webkit-transition: all linear 1.0s;
         transition: all linear 1.0s;
       }
-       
+
       .repeated-item.ng-leave.ng-leave-active,
       .repeated-item.ng-move,
       .repeated-item.ng-enter {
         opacity: 0;
         max-height: 0;
       }
-       
+
       .repeated-item.ng-leave,
       .repeated-item.ng-move.ng-move-active,
       .repeated-item.ng-enter.ng-enter-active {

@@ -47,8 +47,8 @@
           <p>When used in expressions, filters are an easy way to convert model values to display values.</p>
           <p>Inside an expression, just "pipe" the model value to a particular filter.</p><br>
           <div class="text-center">
-            <pre><code data-trim>
-{{ booleanValue | yesNo }}
+            <pre><code class="html" data-trim>
+&lt;p&gt;{{ booleanValue | yesNo }}&lt;/p&gt;
 
 </code>
 </pre>
@@ -57,8 +57,8 @@
         <section>
           <p>Filters can accept optional arguments separated by a colon.</p><br>
           <div class="text-center">
-            <pre><code data-trim>
-{{ booleanValue | yesNo:arg1:arg2 }}
+            <pre><code class="html" data-trim>
+&lt;p&gt;{{ booleanValue | yesNo:arg1:arg2 }}&lt;/p&gt;
 
 </code>
 </pre>
@@ -67,17 +67,25 @@
         <section>
           <p>They can also be chained to perform sequential modifications.</p><br>
           <div class="text-center">
-            <pre><code data-trim>
-{{ booleanValue | yesNo | uppercase }}
+            <pre><code class="html" data-trim>
+&lt;p&gt;{{ booleanValue | yesNo | uppercase }}&lt;/p&gt;
 
 </code>
 </pre>
           </div>
         </section>
-        <section id="example1">
+        <section>
           <p>Filters in action</p><br>
-          <input ng-model="myValue">
-          <p>{{myValue | uppercase}}</p>
+          <div class="text-center">
+            <pre><code class="html" data-trim>
+&lt;p&gt;{{ myValue | uppercase }}&lt;/p&gt;
+
+</code></pre>
+          </div><br>
+          <div id="example1">
+            <input ng-model="myValue">
+            <p>{{myValue | uppercase}}</p>
+          </div>
         </section>
         <section>
           <h2>Creating Custom Filters</h2>
@@ -92,7 +100,7 @@
           <p>Internally, this will use the filterProvider (provided by AngularJS).</p><br>
           <pre><code class="js" data-trim>
 angular.module('boolean.filters', [ ])
-  .filter('yesNo', function() {
+  .filter('yesNo', function(myDependency) {
   
   });
   
@@ -101,9 +109,13 @@ angular.module('boolean.filters', [ ])
         </section>
         <section>
           <p>This factory function should return a new filter function which takes the input value as the first argument.</p><br>
+          <pre><code class="html" data-trim>
+&lt;p&gt;{{myVar | yesNo}}&lt;/p&gt;
+
+</code></pre>
           <pre><code class="js" data-trim>
 angular.module('boolean.filters', [ ])
-  .filter('yesNo', function() {
+  .filter('yesNo', function(myDependency) {
     return function(value) {
       if (value) {
         return 'Yes';
@@ -118,6 +130,10 @@ angular.module('boolean.filters', [ ])
         </section>
         <section>
           <p>Filter arguments are passed in as additional arguments to the filter function.</p><br>
+          <pre><code class="html" data-trim>
+&lt;p&gt;{{myVar | yesNo:true}}&lt;/p&gt;
+
+</code></pre>
           <pre><code class="js" data-trim>
 angular.module('boolean.filters', [ ])
   .filter('yesNo', function() {
@@ -135,6 +151,10 @@ angular.module('boolean.filters', [ ])
         </section>
         <section>
           <p>Filter's aren't limited to simple values. They can manipulate any type of object.</p><br>
+          <pre><code class="html" data-trim>
+&lt;p&gt;{{new Date() | momentShortDate}}&lt;/p&gt;
+
+</code></pre>
           <pre><code class="js" data-trim>
 angular.module('date.filters', [ ])
   .filter('momentShortDate', function () {
