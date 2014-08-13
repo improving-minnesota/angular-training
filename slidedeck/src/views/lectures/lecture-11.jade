@@ -67,6 +67,9 @@ include ../includes/mixins
     p Protractor and WebDriverJS expose global API's that you can use to automate actions that a user would perform.
 
   section
+    p One important thing to note about protractor tests is that, unlike karma tests which run in the browser, protractor tests run in node and drive a browser.
+
+  section
     p
       code browser
       |   is a wrapper around an instance of webdriver.
@@ -206,7 +209,8 @@ include ../includes/mixins
       <code data-trim>
       describe('Employees', function () {
 
-        var indexPage = require('./index.page.js');
+        var indexPage = require('./index.page.js'),
+          formPage = require('./form.page.js');
 
         beforeEach (function () {
           indexPage.get();

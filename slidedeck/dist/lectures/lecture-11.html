@@ -97,6 +97,9 @@
           <p>Protractor and WebDriverJS expose global API's that you can use to automate actions that a user would perform.</p>
         </section>
         <section>
+          <p>One important thing to note about protractor tests is that, unlike karma tests which run in the browser, protractor tests run in node and drive a browser.</p>
+        </section>
+        <section>
           <p><code>browser</code>  is a wrapper around an instance of webdriver.</p>
           <p>You can use this for navigation and page-wide information.</p>
         </section>
@@ -223,8 +226,9 @@ describe('Employees', function () {
           <pre><code data-trim>
 describe('Employees', function () {
 
-  var indexPage = require('./index.page.js');
-  
+  var indexPage = require('./index.page.js'),
+    formPage = require('./form.page.js');
+    
   beforeEach (function () {
     indexPage.get();
   });
