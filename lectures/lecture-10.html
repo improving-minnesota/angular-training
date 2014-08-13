@@ -53,10 +53,7 @@
           <p>When they're triggered, they'll attempt to perform a CSS animation or JavaScript callback animation depending on which is defined.</p>
         </section>
         <section>
-          <p>First, lets take a look at the documentation for <a href="http://docs.angularjs.org/api/ngAnimate/service/$animate" target="_blank">$animate</a></p>
-        </section>
-        <section>
-          <p>Now, lets take a look at the AngularJS source code for ngRepeat to see how it's hooked into the $animate service.</p><br><a href="https://github.com/angular/angular.js/blob/master/src/ng/directive/ngRepeat.js#L327" target="_blank">src/ng/directive/ngRepeat.js#L327</a>
+          <p>First, lets take a look at the documentation for<a href="https://docs.angularjs.org/api/ngAnimate" target="_blank">ngAnimate</a></p>
         </section>
         <section>
           <h2>Using Animations</h2>
@@ -72,10 +69,10 @@ angular.module('app', ['ngAnimate'])
           </div>
         </section>
         <section>
-          <p>As we saw in the documentation for $animate, we can apply animations to our elements by defining CSS classes that that tell the browser how to animate an element.</p>
+          <p>As we saw in the documentation for ngAnimate, we can apply animations to our elements by defining CSS classes that that tell the browser how to animate an element.</p>
         </section>
         <section>
-          <p>The $animate service automatically adds and removes these classes for us at the right time. </p>
+          <p>The $animate service automatically adds and removes these classes for us at the right time.</p>
         </section>
         <section>
           <p>An example set of CSS animations for ngShow are shown below</p><br>
@@ -104,7 +101,7 @@ angular.module('app', ['ngAnimate'])
           <p>This is because these class names are used for all the ngShow elements.</p>
         </section>
         <section>
-          <p>We can scope these animations by making the class definitions more descriptive. </p><br>
+          <p>We can scope these animations by making the class definitions more descriptive.</p><br>
           <pre><code class="css" data-trim>
 .my-class.ng-hide-add, .my-class.ng-hide-remove {
   transition: all linear 1.0s;
@@ -121,9 +118,9 @@ angular.module('app', ['ngAnimate'])
   opacity: 1;
 }
 
-</code> 
+</code>
 </pre>
-          <p>Notice here that these animations will only be applied to elements that have the CSS class "my-class". </p>
+          <p>Notice here that these animations will only be applied to elements that have the CSS class "my-class".</p>
         </section>
         <section id="example1" ng-controller="Lecture10Controller">
           <button ng-click="sayHello = !sayHello">Say Hello</button>
