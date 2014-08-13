@@ -39,10 +39,7 @@ include ../includes/mixins
     p Protractor is an end to end test framework for AngularJS applications thats built on top of WebDriverJS.
 
   section
-    p Protractor runs tests against your application running in a real browser, interacting with it as a user would.
-
-  section
-    p Protractor is a wrapper around WebDriverJS which is a JavaScript API for Selenium.
+    p WebDriverJS is just a JavaScript API for Selenium.
 
   section
     p What is Selenium?
@@ -54,20 +51,14 @@ include ../includes/mixins
     p Think of Selinium as an end user.
 
   section
-    p What is WebDriverJS?
-
-  section
-    p WebDriverJS is a JavaScript API for Selenium.
-
-  section
     p We use WebDriverJS to send instructions to a Selenium server running in the background.
 
   section
-    h2 ChromeDriver
-    p ChromeDriver allows us to bypass a Selenium installation and "drive" Chrome.
+    img.no-style(src="/angular-training/assets/img/lecture-11/protractor-flow.png")
 
   section
-    img.no-style(src="/angular-training/assets/img/lecture-11/protractor-flow.png")
+    h2 ChromeDriver
+    p In this lab we're going to use ChromeDriver which allows us to bypass a Selenium installation and "drive" Chrome directly.
 
   section
     h1 Writing E2E Tests
@@ -105,7 +96,7 @@ include ../includes/mixins
       code protractor
       |   is the protractor namespace which wraps the webdriver namespace.
     p This contains static variables and classes, such as protractor.Key which enumerates the codes for special keyboard signals.
-    
+
   section
     p We can use these functions to automate the end user and test that the page behaves in the way we expect.
     br
