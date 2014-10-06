@@ -1,5 +1,6 @@
 Angular Training Labs and Slides Project
 ================
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/objectpartners/angular-training?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Labs ##
 Lab markdown files are located in the labs folder
