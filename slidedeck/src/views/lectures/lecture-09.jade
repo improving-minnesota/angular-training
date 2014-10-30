@@ -12,7 +12,9 @@ include ../includes/mixins
     h1 Filters
 
   section
-    p When used in expressions, filters are an easy way to convert model values to display values.
+    p When used in expressions,
+      strong  filters
+      |  are an easy way to convert model values to display values.
     p Inside an expression, just "pipe" the model value to a particular filter.
     br
     .text-center
@@ -60,13 +62,17 @@ include ../includes/mixins
     h2 Creating Custom Filters
 
   section
-    p Filters are specialized objects which means their API is defined by AngularJS.
+    p Filters are
+      strong  specialized objects
+      | , which means their API is defined by AngularJS.
 
   section
     p To create a filter, just register a new filter factory function with your module.
 
   section
-    p Internally, this will use the filterProvider (provided by AngularJS).
+    p Internally, this will use the
+      strong  filterProvider
+    |  (provided by AngularJS).
     br
     pre.
       <code class="js" data-trim>
@@ -124,7 +130,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Filter's aren't limited to simple values. They can manipulate any type of object.
+    p Filters aren't limited to simple values. They can manipulate any type of object.
     br
     pre.
       <code class="html" data-trim>
@@ -149,10 +155,13 @@ include ../includes/mixins
     p Since filters can be used with any type of object, we can also use them to filter arrays.
 
   section
-    p To use a filter with ng-repeat, simply "pipe" the source array through a filter.
+    p To use a filter with
+      strong  ng-repeat
+      | , simply "pipe" the source array through a filter.
 
   section
-    p This will take the source array and return a new filtered array to ng-repeat.
+    p This will take the source array and return a new filtered array to
+      strong  ng-repeat.
     br
     pre.
       <code class="html" data-trim>
@@ -208,7 +217,9 @@ include ../includes/mixins
     h2 Filters
 
   section
-    p In this lab you'll use the "orderBy" filter on employee, timesheet, and project lists and create some of your own filters.
+    p In this lab you'll use the
+      strong  orderBy
+      |  filter on employee, timesheet, and project lists and create some of your own filters.
 
   script.
     angular.module('lecture09', []).controller('Lecture9Controller', function($scope) {

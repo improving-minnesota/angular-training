@@ -47,13 +47,14 @@ include ../includes/mixins
       </code>
 
   section
-    p Functions passed as arguments to other functions (that are then "called back" at a later time) are called callbacks.
+    p Functions passed as arguments to other functions (that are then "called back" at a later time) are called
+      strong  callbacks.
 
   section
     p Callbacks are typically used to perform an action after some asynchronous event has occurred.
 
   section
-    p Lets consider performing an action on a user triggered event.
+    p Let's consider performing an action on a user-triggered event.
     br
     pre.
       <code class="js" data-trim>
@@ -85,7 +86,8 @@ include ../includes/mixins
 
   section
     p
-      | Promises provide a well-defined interface for interacting with an object that represents the result
+      strong  Promises
+      |  provide a well-defined interface for interacting with an object that represents the result
       | of an asynchronous action.
 
   section
@@ -95,7 +97,7 @@ include ../includes/mixins
     img.no-style(style="width: 80%;", src="/angular-training/assets/img/lecture-06/wat_grande.jpg")
 
   section
-    p To understand why we use promises, lets look at one big problem that promises can mitigate.
+    p To understand why we use promises, let's look at one big problem that promises can mitigate.
 
   section
     h3 The
@@ -103,7 +105,9 @@ include ../includes/mixins
     h1 of Doom
 
   section
-    p The "Pyramid of Doom" a situation where code marches to the right faster than it marches forward.
+    p The
+      strong  Pyramid of Doom
+      | , a situation where code marches to the right faster than it marches forward.
     br
     pre.
       <code class="js" data-trim>
@@ -166,10 +170,12 @@ include ../includes/mixins
     img.no-style(style="width: 80%;", src="/angular-training/assets/img/lecture-06/awesome.gif")
 
   section
-    p With this approach, you also get implicit error propagation, just like try, catch, and finally.
+    p With this approach, you also get implicit error propagation, just like when using try, catch, and finally.
 
   section
-    p An error in promisedStep1 will flow all the way to the catch function, where it’s caught and handled.
+    p An error in
+      strong  promisedStep1
+      |  will flow all the way to the catch function, where it’s caught and handled.
 
   section
     p Using the callback method, you would have to provide error handling for each individual step.
@@ -185,16 +191,22 @@ include ../includes/mixins
 
   section
     h3 Deferred
-    p The "Deferred" object represents a task which will finish in the future.
+    p A
+      strong  deferred
+      |  object represents a task that will finish in the future.
 
   section
-    p AngularJS provides the $q service which you can use to create deferred objects.
+    p AngularJS provides the
+      strong  $q
+      |  service which you can use to create deferred objects.
 
   section
-    p Let's create a promise chain with the $q service.
+    p Let's create a promise chain with the
+      strong  $q
+      |  service.
 
   section
-    p First, lets create an asynchronous function that returns a promise.
+    p First, let's create an asynchronous function that returns a promise.
     br
     pre.
       <code class="js" data-trim>
@@ -218,7 +230,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Now, lets use the promise to execute a task after our asynchronous function completes.
+    p Now, let's use the promise to execute a task after our asynchronous function completes.
     br
     pre.
       <a href="http://embed.plnkr.co/V5sFcd/preview" target="_blank"><i class="fa fa-external-link"></i></a>
@@ -227,7 +239,7 @@ include ../includes/mixins
 
         // $scope.myAsyncTask = ...
 
-        $scope.myAsyncTask()         // call myAsyncTask
+        $scope.myAsyncTask()         // call myAsyncTask, which returns the promise object
           .then(function(result) {   // then,
             $scope.result = result;  // save the result on scope
           });
@@ -279,7 +291,7 @@ include ../includes/mixins
       </code>
 
   section
-    p We reject promises so that we handle the errors appropriately
+    p We reject promises so that we handle the errors appropriately.
     pre.
       <a href="http://embed.plnkr.co/OdBU2J/preview" target="_blank"><i class="fa fa-external-link"></i></a>
       <code class="js" data-trim>
@@ -302,8 +314,14 @@ include ../includes/mixins
     p  What if you don't know if the object you're dealing with is a promise or not?
 
   section
-    p You can use the $q.when() to wrap a non promise object with a thennable promise.
-    p $q.when() will do nothing if the value is a $q promise.
+    p You can use
+      strong  $q.when()
+      |  to wrap a non-promise object with a thenable promise.
+    p
+      strong  $q.when()
+      |  will do nothing if the value is a
+      strong  $q
+      |  promise.
     pre.
       <a href="http://embed.plnkr.co/3IO2lL/preview" target="_blank"><i class="fa fa-external-link"></i></a>
       <code class="js" data-trim>
@@ -314,7 +332,7 @@ include ../includes/mixins
           return "Result";
         };
 
-        // Wrap the result of some syncronous task with a thennable promise
+        // Wrap the result of some syncronous task with a thenable promise
         $q.when($scope.mySyncTask())
           .then(function(result) {    // then,
             $scope.result = result;   // do something with the result
@@ -333,16 +351,21 @@ include ../includes/mixins
       | intercept those requests and perform actions before they reach their destination.
 
   section
-    p For that reason, AngularJS provides interceptors.
+    p For that reason, AngularJS provides
+      strong  interceptors.
 
   section
-    p The interceptors are service factories that are registered with the $httpProvider by adding them to the $httpProvider.interceptors array.
+    p The interceptors are service factories that are registered with the
+      strong  $httpProvider
+      |  by adding them to the
+      strong  $httpProvider.interceptors
+      |  array.
 
   section
     p The factory is called and injected with dependencies (if any) and returns the interceptor.
 
   section
-    p Lets start by creating a factory that intercepts requests.
+    p Let's start by creating a factory that intercepts requests.
 
   section
     p Interceptors are free to modify the the object passed into them and then return them as an object or a promise to the object.
