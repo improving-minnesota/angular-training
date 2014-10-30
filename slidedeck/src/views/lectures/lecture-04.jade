@@ -13,7 +13,9 @@ include ../includes/mixins
     h2 Continued
 
   section
-    p A module consists of configuration and run blocks which get applied to the application during the bootstrap process.
+    p A
+      strong  module
+      |  consists of configuration and run blocks which get applied to the application during the bootstrap process.
 
   section
     p In its simplest form, the module consists of two kinds of blocks.
@@ -22,7 +24,9 @@ include ../includes/mixins
     h2 Configuration Blocks
 
   section
-    p Configuration blocks get executed during the provider registrations and configuration phase.
+    p
+      strong  Configuration blocks
+      |  get executed during the provider registrations and configuration phase.
 
   section
     p Only providers and constants can be injected into configuration blocks.
@@ -34,7 +38,9 @@ include ../includes/mixins
     h2 Run Blocks
 
   section
-    p Run blocks get executed after the injector is created and are used to kickstart the application.
+    p
+      strong  Run blocks
+      |  get executed after the injector is created and are used to kickstart the application.
 
   section
     p Only instances and constants can be injected into run blocks.
@@ -76,28 +82,44 @@ include ../includes/mixins
     p When building single page applications, like ours, this presents a problem.
 
   section
-    p The process of reloading a page adds significant overhead especially considering we already have everything we need to display every page.
+    p The process of reloading a page adds significant overhead, especially considering we already have everything we need to display every page.
 
   section
-    p This is where the Angular $route service comes into play.
+    p This is where the Angular
+      strong  $route
+      |  service comes into play.
 
   section
-    p The $route service is used for deep-linking URLs to controllers and views (HTML partials).
+    p The
+      strong  $route
+      |  service is used for deep-linking URLs to controllers and views (HTML partials).
 
   section
-    p It watches $location.url() and tries to map the path to an existing route definition.
+    p It watches
+      strong  $location.url()
+      |  and tries to map the path to an existing route definition.
 
   section
-    p When the location changes, the $route service will load the HTML partial for the page and then compile and link the associated controller to it.
+    p When the location changes, the
+      strong  $route
+      |  service will load the HTML partial for the page and then compile and link the associated controller to it.
 
   section
-    p We use the $routeProvider in our module's configuration block to instruct the $route service which URL's are to be matched to which templates and controllers.
+    p We use the
+      strong  $routeProvider
+      |  in our module's configuration block to instruct the
+      strong  $route
+      |  service to match URLs with their associated templates and controllers.
 
   section
-    p Lets configure some routes.
+    p Let's configure some routes.
 
   section
-    p This configures the $route service so that when the browser URL is /projects, load the template, compile it, and link the project controller on it.
+    p This configures the
+      strong  $route
+      |  service so that when the browser URL is
+      strong  /projects
+      | , load the template, compile it, and link the project controller on it.
     br
     pre.
       <code class="js" data-trim>
@@ -113,7 +135,9 @@ include ../includes/mixins
       </code>
 
   section
-    p We can add additional configurations by chaining 'when' statements.
+    p We can add additional configurations by chaining
+      strong  'when'
+      |  statements.
     br
     pre.
       <code class="js" data-trim>
@@ -133,10 +157,12 @@ include ../includes/mixins
       </code>
 
   section
-    p What about when a user enters a URL that's not in the configuration?
+    p What about when a user enters a URL that is not in the configuration?
 
   section
-    p Simply add an 'otherwise' statement to the configuration chain to redirect the user to a default page.
+    p Simply add an
+      strong  'otherwise'
+      |  statement to the configuration chain to redirect the user to a default page.
     br
     pre.
       <code class="js" data-trim>
@@ -155,10 +181,14 @@ include ../includes/mixins
       </code>
 
   section
-    p Now that we've configured the $route service, we need to tell it where to display the matched templates in the DOM.
+    p Now that we've configured the
+      strong  $route
+      |  service, we need to tell it where to display the matched templates in the DOM.
 
   section
-    p For this, we'll use the ngView directive.
+    p For this, we'll use the
+      strong  ngView
+      |  directive.
     br
     pre.
       <code class="html" data-trim>
@@ -172,22 +202,32 @@ include ../includes/mixins
     h1 Resources
 
   section
-    p A resource is an abstract term for the data returned by some RESTful endpoint.
+    p A
+      strong  resource
+      |  is an abstract term for the data returned by some RESTful endpoint.
 
   section
     p Since REST has an established pattern, we can use that pattern to simplify how we send and receive data with our RESTful API.
 
   section
-    p Angular provides the $resource service to help us with that.
+    p Angular provides the
+      strong  $resource
+      |  service to help us with that.
 
   section
-    p The $resource service is a factory to create a resource object that lets you interact with RESTful server-side data sources.
+    p The
+      strong  $resource
+      |  service is a factory to create a resource object that lets you interact with RESTful server-side data sources.
 
   section
-    p The returned resource object has action methods which provide high-level behaviors without the need to interact with the low level $http service.
+    p The returned resource object has action methods which provide high-level behaviors without the need to interact with the low level
+      strong  $http
+      |  service.
 
   section
-    p By default, the $resource class object is configured with the following methods.
+    p By default, the
+      strong  $resource
+      |  class object is configured with the following methods.
     br
     pre.
       <code class="js" data-trim>
@@ -202,7 +242,9 @@ include ../includes/mixins
       </code>
 
   section
-    p Calling these methods invoke an $http request with the specified http method, destination and parameters.
+    p Calling these methods invoke a
+      strong  $http
+      |  request with the specified HTTP method, destination and parameters.
 
   section
     p When the data is returned from the server, the object is then an instance of the resource class.
@@ -237,7 +279,9 @@ include ../includes/mixins
         </code>
 
   section
-    p The second argument specifies how $resource should substitute those URL variables with the options passed in.
+    p The second argument specifies how
+      strong  $resource
+      |  should substitute those URL variables with the options passed in.
     br
     pre.
       <code class="js" data-trim>
@@ -247,13 +291,17 @@ include ../includes/mixins
       );
 
       </code>
-    p Here, the 'id' property in the options object will be substituted in the place of :employeeId in the resource URL.
+    p Here, the
+      strong  'id'
+      |  property in the options object will be substituted in the place of
+      strong  :employeeId
+      |  in the resource URL.
 
   section
     p It's important to note here that Employee is a resource class.  We will use the resource class to create new instances of the resource.
 
   section
-    p Now that we've defined our resource, we can use the Employee resource class to get an instance of an employee
+    p Now that we've defined our resource, we can use the Employee resource class to get an instance of an employee.
     br
     .text-center
       pre.
@@ -264,10 +312,13 @@ include ../includes/mixins
     p What will the HTTP request look like for this action?
 
   section
-    p GET /employees/23
+    p
+      strong  GET /employees/23
 
   section
-    p It is important to realize that invoking a $resource object method immediately returns an empty reference.
+    p It is important to realize that invoking a
+      strong  $resource
+      |  object method immediately returns an empty reference.
 
   section
     p Once the data is returned from the server the existing reference is populated with the actual data.
@@ -286,15 +337,19 @@ include ../includes/mixins
       });
 
       </code>
-    p What will the HTTP request look like for $scope.employee.$save()?
-
-  section
-    p POST /employees/23
+    p What will the HTTP request look like for
+      strong  $scope.employee.$save()
+      | ?
 
   section
     p
-      | In Lab 4, we've wrapped the $resource service with an api and data service to even further simplify how
-      | you will communicate with the API.
+      strong POST /employees/23
+
+  section
+    p
+      | In Lab 4, we've wrapped the
+      strong  $resource
+      |  service with an api and data service to even further simplify how you will communicate with the API.
 
   section
     h1 Unit Testing
@@ -312,13 +367,19 @@ include ../includes/mixins
     p Or alternatively just let the application make requests, respond with pre-trained responses, and assert that the end result is what we expect it to be.
 
   section
-    p To help with this, Angular provides the $httpBackend mock service.
+    p To help with this, Angular provides the
+      strong  $httpBackend
+      |  mock service.
 
   section
-    p The $httpBackend mock service is a fake HTTP backend implementation suitable for unit testing applications that use the $http service.
+    p The
+      strong  $httpBackend
+      |  mock service is a fake HTTP backend implementation suitable for unit testing applications that use the
+      strong  $http
+      |  service.
 
   section
-    p There are two ways to specify what test data should be returned as http responses by the mock backend:
+    p There are two ways to specify what test data should be returned as HTTP responses by the mock backend:
     ul
       li.
         <strong>$httpBackend.expect</strong> - specifies a request expectation
@@ -340,7 +401,9 @@ include ../includes/mixins
     p The test will pass whether or not the request gets made during testing.
 
   section
-    p The $httpBackend used in production always responds to requests asynchronously.
+    p The
+      strong  $httpBackend
+      |  used in production always responds to requests asynchronously.
 
   section
     p  If we preserved this behavior in unit testing, we'd have to create asynchronous unit tests.
@@ -349,16 +412,24 @@ include ../includes/mixins
     p Asynchronous unit tests are hard to write, follow, and maintain.
 
   section
-    p The mock can't respond synchronously either, that would change the execution of the code being tested.
+    p The mock can't respond synchronously either; that would change the execution of the code being tested.
 
   section
-    p For this reason, the mock $httpBackend service has a flush method.
+    p For this reason, the mock
+      strong  $httpBackend
+      |  service has a
+      strong  flush()
+      |  method.
 
   section
-    p The flush method allows you to explicitly flush pending requests.
+    p The
+      strong  flush()
+      |  method allows you to explicitly flush pending requests.
 
   section
-    p Lets write a test that uses the mock $httpBackend service.
+    p Let's write a test that uses the mock
+      strong  $httpBackend
+      |  service.
 
   section
     p For brevity, the test setup has been omitted.
@@ -392,7 +463,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Last, we can provide mock responses to our network requests.
+    p Also, we can provide data to send back in our mock responses to our network requests.
     br
     pre.
       <code class="js" data-trim>

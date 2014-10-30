@@ -53,14 +53,14 @@
           <p>For this reason any code written in JavaScript needs to come with a strong set of tests.</p>
         </section>
         <section>
-          <p>The Angular team has built many features into Angular which makes testing your applications easy.</p>
+          <p>The Angular team has built many features into Angular that make testing your applications easy.</p>
         </section>
         <section>
           <h3>There is no excuse for not testing</h3>
         </section>
         <section>
           <p>You'll more than likely spend half of your time in labs testing your solutions.</p>
-          <p>.. and this is a good thing.</p>
+          <p>...and this is a good thing.</p>
         </section>
         <section>
           <h1>Karma</h1>
@@ -68,10 +68,7 @@
         <section>
           <h2>Karma</h2>
           <ul>
-            <li>Essentially a tool that spawns a web server to ..</li>
-            <li>Execute your source code</li>
-            <li>Against your test code</li>
-            <li>Within each of the browsers you configure.</li>
+            <li>Essentially a tool that spawns a web server to execute your<strong> source code</strong> against your<strong> test code</strong> within<strong> each of the browsers</strong> you configure</li>
           </ul>
         </section>
         <section>
@@ -87,7 +84,7 @@
           <h1>Jasmine</h1>
         </section>
         <section>
-          <p>Jasmine is a behavior-driven development (BDD) framework for testing JavaScript code.</p>
+          <p>Jasmine is a<strong> behavior-driven development (BDD)</strong> framework for testing JavaScript code.</p>
         </section>
         <section>
           <p>Behavior driven development uses examples to illustrate behavior.</p>
@@ -96,7 +93,7 @@
           <h2>Suites</h2>
         </section>
         <section>
-          <p>A test suite begins with a call to the global Jasmine function<strong> describe()</strong>with two parameters: a string and a function.</p>
+          <p>A test suite begins with a call to the global Jasmine function<strong> describe()</strong> with two parameters: a string and a function.</p>
         </section>
         <section>
           <p>
@@ -120,7 +117,7 @@ describe("Some feature", function() {
           <p>A spec contains one or more expectations that test the state of the code.</p>
         </section>
         <section>
-          <p>Specs are defined by calling the global Jasmine function<strong> it()</strong>which, like describe(), takes a string and a function.</p>
+          <p>Specs are defined by calling the global Jasmine function<strong> it()</strong> which, like<strong> describe()</strong>, takes a string and a function.</p>
         </section>
         <section>
           <p>The string is the title of the spec and the function is the spec, or test.</p>
@@ -158,16 +155,16 @@ describe("Some feature", function() {
           <p>Some feature component should do what we expect.</p>
         </section>
         <section>
-          <p>Jasmine also provides us with test life-cycle functions that we can use to set up and/or tear down our test environment:<strong> beforeEach() and afterEach()</strong></p>
+          <p>Jasmine also provides us with test life-cycle functions that we can use to set up and/or tear down our test environment:<strong> beforeEach()</strong> and<strong> afterEach()</strong></p>
         </section>
         <section>
           <h2>Expectations</h2>
         </section>
         <section>
-          <p>Expectations are built with the function 'expect' which takes a value, called the actual.</p>
+          <p>Expectations are built with the function<strong> expect()</strong>, which takes a value, called the<strong> actual</strong>.</p>
         </section>
         <section>
-          <p>It is chained with a Matcher function, which takes the expected value.</p>
+          <p>It is chained with a<strong> matcher</strong> function, which takes the expected value.</p>
         </section>
         <section>
           <p>Each matcher implements a boolean comparison between the actual value and the expected value.</p>
@@ -191,10 +188,7 @@ describe("Some feature", function() {
           <h1>Angular Mocks</h1>
         </section>
         <section>
-          <p>
-            Instead of our tests talking to real services, it will often suffice to speak to the 'mock' versions
-            of the services, which will respond to calls accurately, but rather unintelligently.
-          </p>
+          <p>Instead of our tests talking to real services, it will often suffice to speak to the<strong> mock</strong> versions of the services, which will respond to calls accurately, but rather unintelligently.</p>
         </section>
         <section>
           <p>
@@ -203,7 +197,7 @@ describe("Some feature", function() {
           </p>
         </section>
         <section>
-          <p>Let us use the $location service as an example.</p>
+          <p>Let's use the<strong> $location</strong> service as an example.</p>
         </section>
         <section>
           <p>
@@ -215,10 +209,10 @@ describe("Some feature", function() {
           <p>Angular provides tools and services to mock different kinds of components when testing.</p>
         </section>
         <section>
-          <p>Lets start by mocking a module that we'll be testing.</p>
+          <p>Let's start by mocking a module that we'll be testing.</p>
         </section>
         <section>
-          <p>Angular provides angular.mock.module (aliased as 'module' on window) to mock Angular modules</p>
+          <p>Angular provides<strong> angular.mock.module</strong> (aliased as 'module' on window) to mock Angular modules</p>
         </section>
         <section>
           <pre><code class="js" data-trim>
@@ -228,7 +222,7 @@ beforeEach(module(
 
 </code>
 </pre>
-          <p>Why do we mock the app.controllers module inside a beforeEach statement?</p>
+          <p>Why do we mock the app.controllers module inside a<strong> beforeEach()</strong> statement?</p>
         </section>
         <section>
           <p>We want to make sure that we're starting with a blank slate so that changes made by other tests don't interfere with the current test.</p>
@@ -240,7 +234,7 @@ beforeEach(module(
           <p>More than likely, our component will have dependencies that are required to test it.</p>
         </section>
         <section>
-          <p>We use the angular.mock.inject (aliased as 'inject' on window) to inject mock dependencies.</p>
+          <p>We use<strong> angular.mock.inject</strong> (aliased as 'inject' on window) to inject mock dependencies.</p>
         </section>
         <section>
           <pre><code class="js" data-trim>
@@ -269,10 +263,10 @@ beforeEach(
           <p>Lets break this down and discuss what's going on in each step.</p>
         </section>
         <section>
-          <p>To instantiate our controller for testing, we'll need to inject the $controller service and $rootScope service.</p>
+          <p>To instantiate our controller for testing, we'll need to inject the<strong> $controller</strong> service and<strong> $rootScope</strong> service.</p>
         </section>
         <section>
-          <p>The inject function is going to inject $rootScope and the $controller services that we need to build an instance of our controller.</p><br>
+          <p>The inject function is going to inject<strong> $rootScope</strong> and the<strong> $controller</strong> services that we need to build an instance of our controller.</p><br>
           <pre><code class="js" data-trim>
   inject(
     function($rootScope, $controller) {
@@ -296,7 +290,7 @@ inject(
 </pre>
         </section>
         <section>
-          <p>Then, we'll use the $controller service to instantiate our controller and supply the dependencies it needs.</p><br>
+          <p>Then, we'll use the<strong> $controller</strong> service to instantiate our controller and supply the dependencies it needs.</p><br>
           <pre><code class="js" data-trim>
 controller('MainCtrl', function($scope) {
 

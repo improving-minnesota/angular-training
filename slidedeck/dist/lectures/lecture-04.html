@@ -45,7 +45,7 @@
           <h2>Continued</h2>
         </section>
         <section>
-          <p>A module consists of configuration and run blocks which get applied to the application during the bootstrap process.</p>
+          <p>A<strong> module</strong> consists of configuration and run blocks which get applied to the application during the bootstrap process.</p>
         </section>
         <section>
           <p>In its simplest form, the module consists of two kinds of blocks.</p>
@@ -54,7 +54,7 @@
           <h2>Configuration Blocks</h2>
         </section>
         <section>
-          <p>Configuration blocks get executed during the provider registrations and configuration phase.</p>
+          <p><strong> Configuration blocks</strong> get executed during the provider registrations and configuration phase.</p>
         </section>
         <section>
           <p>Only providers and constants can be injected into configuration blocks.</p>
@@ -66,7 +66,7 @@
           <h2>Run Blocks</h2>
         </section>
         <section>
-          <p>Run blocks get executed after the injector is created and are used to kickstart the application.</p>
+          <p><strong> Run blocks</strong> get executed after the injector is created and are used to kickstart the application.</p>
         </section>
         <section>
           <p>Only instances and constants can be injected into run blocks.</p>
@@ -107,28 +107,28 @@ angular.module('app', [])
           <p>When building single page applications, like ours, this presents a problem.</p>
         </section>
         <section>
-          <p>The process of reloading a page adds significant overhead especially considering we already have everything we need to display every page.</p>
+          <p>The process of reloading a page adds significant overhead, especially considering we already have everything we need to display every page.</p>
         </section>
         <section>
-          <p>This is where the Angular $route service comes into play.</p>
+          <p>This is where the Angular<strong> $route</strong> service comes into play.</p>
         </section>
         <section>
-          <p>The $route service is used for deep-linking URLs to controllers and views (HTML partials).</p>
+          <p>The<strong> $route</strong> service is used for deep-linking URLs to controllers and views (HTML partials).</p>
         </section>
         <section>
-          <p>It watches $location.url() and tries to map the path to an existing route definition.</p>
+          <p>It watches<strong> $location.url()</strong> and tries to map the path to an existing route definition.</p>
         </section>
         <section>
-          <p>When the location changes, the $route service will load the HTML partial for the page and then compile and link the associated controller to it.</p>
+          <p>When the location changes, the<strong> $route</strong> service will load the HTML partial for the page and then compile and link the associated controller to it.</p>
         </section>
         <section>
-          <p>We use the $routeProvider in our module's configuration block to instruct the $route service which URL's are to be matched to which templates and controllers.</p>
+          <p>We use the<strong> $routeProvider</strong> in our module's configuration block to instruct the<strong> $route</strong> service to match URLs with their associated templates and controllers.</p>
         </section>
         <section>
-          <p>Lets configure some routes.</p>
+          <p>Let's configure some routes.</p>
         </section>
         <section>
-          <p>This configures the $route service so that when the browser URL is /projects, load the template, compile it, and link the project controller on it.</p><br>
+          <p>This configures the<strong> $route</strong> service so that when the browser URL is<strong> /projects</strong>, load the template, compile it, and link the project controller on it.</p><br>
           <pre><code class="js" data-trim>
 angular.module('app', [])
   .config(function($routeProvider) {
@@ -143,7 +143,7 @@ angular.module('app', [])
 </pre>
         </section>
         <section>
-          <p>We can add additional configurations by chaining 'when' statements.</p><br>
+          <p>We can add additional configurations by chaining<strong> 'when'</strong> statements.</p><br>
           <pre><code class="js" data-trim>
 angular.module('app', [])
   .config(function($routeProvider) {
@@ -162,10 +162,10 @@ angular.module('app', [])
 </pre>
         </section>
         <section>
-          <p>What about when a user enters a URL that's not in the configuration?</p>
+          <p>What about when a user enters a URL that is not in the configuration?</p>
         </section>
         <section>
-          <p>Simply add an 'otherwise' statement to the configuration chain to redirect the user to a default page.</p><br>
+          <p>Simply add an<strong> 'otherwise'</strong> statement to the configuration chain to redirect the user to a default page.</p><br>
           <pre><code class="js" data-trim>
 angular.module('app', [])
   .config(function($routeProvider) {
@@ -183,10 +183,10 @@ angular.module('app', [])
 </pre>
         </section>
         <section>
-          <p>Now that we've configured the $route service, we need to tell it where to display the matched templates in the DOM.</p>
+          <p>Now that we've configured the<strong> $route</strong> service, we need to tell it where to display the matched templates in the DOM.</p>
         </section>
         <section>
-          <p>For this, we'll use the ngView directive.</p><br>
+          <p>For this, we'll use the<strong> ngView</strong> directive.</p><br>
           <pre><code class="html" data-trim>
 &lt;body&gt;
   &lt;div ng-view&gt;&lt;/div&gt
@@ -199,22 +199,22 @@ angular.module('app', [])
           <h1>Resources</h1>
         </section>
         <section>
-          <p>A resource is an abstract term for the data returned by some RESTful endpoint.</p>
+          <p>A<strong> resource</strong> is an abstract term for the data returned by some RESTful endpoint.</p>
         </section>
         <section>
           <p>Since REST has an established pattern, we can use that pattern to simplify how we send and receive data with our RESTful API.</p>
         </section>
         <section>
-          <p>Angular provides the $resource service to help us with that.</p>
+          <p>Angular provides the<strong> $resource</strong> service to help us with that.</p>
         </section>
         <section>
-          <p>The $resource service is a factory to create a resource object that lets you interact with RESTful server-side data sources.</p>
+          <p>The<strong> $resource</strong> service is a factory to create a resource object that lets you interact with RESTful server-side data sources.</p>
         </section>
         <section>
-          <p>The returned resource object has action methods which provide high-level behaviors without the need to interact with the low level $http service.</p>
+          <p>The returned resource object has action methods which provide high-level behaviors without the need to interact with the low level<strong> $http</strong> service.</p>
         </section>
         <section>
-          <p>By default, the $resource class object is configured with the following methods.</p><br>
+          <p>By default, the<strong> $resource</strong> class object is configured with the following methods.</p><br>
           <pre><code class="js" data-trim>
 {
   'get':    {method:'GET'},
@@ -228,7 +228,7 @@ angular.module('app', [])
 </pre>
         </section>
         <section>
-          <p>Calling these methods invoke an $http request with the specified http method, destination and parameters.</p>
+          <p>Calling these methods invoke a<strong> $http</strong> request with the specified HTTP method, destination and parameters.</p>
         </section>
         <section>
           <p>When the data is returned from the server, the object is then an instance of the resource class.</p>
@@ -263,7 +263,7 @@ var Employee = $resource('/employees/:employeeId');
           </div>
         </section>
         <section>
-          <p>The second argument specifies how $resource should substitute those URL variables with the options passed in.</p><br>
+          <p>The second argument specifies how<strong> $resource</strong> should substitute those URL variables with the options passed in.</p><br>
           <pre><code class="js" data-trim>
 var Employee = $resource(
   '/employees/:employeeId',
@@ -271,13 +271,13 @@ var Employee = $resource(
 );
 
 </code></pre>
-          <p>Here, the 'id' property in the options object will be substituted in the place of :employeeId in the resource URL.</p>
+          <p>Here, the<strong> 'id'</strong> property in the options object will be substituted in the place of<strong> :employeeId</strong> in the resource URL.</p>
         </section>
         <section>
           <p>It's important to note here that Employee is a resource class.  We will use the resource class to create new instances of the resource.</p>
         </section>
         <section>
-          <p>Now that we've defined our resource, we can use the Employee resource class to get an instance of an employee</p><br>
+          <p>Now that we've defined our resource, we can use the Employee resource class to get an instance of an employee.</p><br>
           <div class="text-center">
             <pre><code class="js" data-trim>
 $scope.employee = Employee.get({id: 23});
@@ -287,10 +287,10 @@ $scope.employee = Employee.get({id: 23});
           <p>What will the HTTP request look like for this action?</p>
         </section>
         <section>
-          <p>GET /employees/23</p>
+          <p><strong> GET /employees/23</strong></p>
         </section>
         <section>
-          <p>It is important to realize that invoking a $resource object method immediately returns an empty reference.</p>
+          <p>It is important to realize that invoking a<strong> $resource</strong> object method immediately returns an empty reference.</p>
         </section>
         <section>
           <p>Once the data is returned from the server the existing reference is populated with the actual data.</p>
@@ -307,16 +307,13 @@ $scope.employee = Employee.get({id: 23}, function() {
 });
 
 </code></pre>
-          <p>What will the HTTP request look like for $scope.employee.$save()?</p>
+          <p>What will the HTTP request look like for<strong> $scope.employee.$save()</strong>?</p>
         </section>
         <section>
-          <p>POST /employees/23</p>
+          <p><strong>POST /employees/23</strong></p>
         </section>
         <section>
-          <p>
-            In Lab 4, we've wrapped the $resource service with an api and data service to even further simplify how
-            you will communicate with the API.
-          </p>
+          <p>In Lab 4, we've wrapped the<strong> $resource</strong> service with an api and data service to even further simplify how you will communicate with the API.</p>
         </section>
         <section>
           <h1>Unit Testing</h1>
@@ -335,13 +332,13 @@ $scope.employee = Employee.get({id: 23}, function() {
           <p>Or alternatively just let the application make requests, respond with pre-trained responses, and assert that the end result is what we expect it to be.</p>
         </section>
         <section>
-          <p>To help with this, Angular provides the $httpBackend mock service.</p>
+          <p>To help with this, Angular provides the<strong> $httpBackend</strong> mock service.</p>
         </section>
         <section>
-          <p>The $httpBackend mock service is a fake HTTP backend implementation suitable for unit testing applications that use the $http service.</p>
+          <p>The<strong> $httpBackend</strong> mock service is a fake HTTP backend implementation suitable for unit testing applications that use the<strong> $http</strong> service.</p>
         </section>
         <section>
-          <p>There are two ways to specify what test data should be returned as http responses by the mock backend:</p>
+          <p>There are two ways to specify what test data should be returned as HTTP responses by the mock backend:</p>
           <ul>
             <li><strong>$httpBackend.expect</strong> - specifies a request expectation</li>
             <li>
@@ -365,7 +362,7 @@ $scope.employee = Employee.get({id: 23}, function() {
           <p>The test will pass whether or not the request gets made during testing.</p>
         </section>
         <section>
-          <p>The $httpBackend used in production always responds to requests asynchronously.</p>
+          <p>The<strong> $httpBackend</strong> used in production always responds to requests asynchronously.</p>
         </section>
         <section>
           <p> If we preserved this behavior in unit testing, we'd have to create asynchronous unit tests.</p>
@@ -374,16 +371,16 @@ $scope.employee = Employee.get({id: 23}, function() {
           <p>Asynchronous unit tests are hard to write, follow, and maintain.</p>
         </section>
         <section>
-          <p>The mock can't respond synchronously either, that would change the execution of the code being tested.</p>
+          <p>The mock can't respond synchronously either; that would change the execution of the code being tested.</p>
         </section>
         <section>
-          <p>For this reason, the mock $httpBackend service has a flush method.</p>
+          <p>For this reason, the mock<strong> $httpBackend</strong> service has a<strong> flush()</strong> method.</p>
         </section>
         <section>
-          <p>The flush method allows you to explicitly flush pending requests.</p>
+          <p>The<strong> flush()</strong> method allows you to explicitly flush pending requests.</p>
         </section>
         <section>
-          <p>Lets write a test that uses the mock $httpBackend service.</p>
+          <p>Let's write a test that uses the mock<strong> $httpBackend</strong> service.</p>
         </section>
         <section>
           <p>For brevity, the test setup has been omitted.</p><br>
@@ -415,7 +412,7 @@ describe('a controller that uses $http', function() {
 </pre>
         </section>
         <section>
-          <p>Last, we can provide mock responses to our network requests.</p><br>
+          <p>Also, we can provide data to send back in our mock responses to our network requests.</p><br>
           <pre><code class="js" data-trim>
 describe('a controller that uses $http', function() {
   it('should put the users on scope', function () {
