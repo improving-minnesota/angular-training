@@ -48,10 +48,10 @@
           <p>It's common to attach controllers at different levels of the DOM hierarchy.</p>
         </section>
         <section>
-          <p>Since the ng-controller directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.</p>
+          <p>Since the<strong> ng-controller</strong> directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.</p>
         </section>
         <section>
-          <p>The $scope that each controller receives will have access to properties and methods defined by controllers higher up the hierarchy.</p>
+          <p>The<strong> $scope</strong> that each controller receives will have access to properties and methods defined by controllers higher up the hierarchy.</p>
         </section>
         <section>
           <pre><code class="html" data-trim>
@@ -100,10 +100,10 @@ angular.module('app.controllers', [])
           <p>This behavior is very useful in applications with complex user interfaces.</p>
         </section>
         <section>
-          <p>We can use parents scopes and controllers as a means to communicate between child scopes and controllers.</p>
+          <p>We can use parent scopes and controllers as a means to communicate between child scopes and controllers.</p>
         </section>
         <section>
-          <p>Unfortunately the url routing service provided by Angular doesn't allow for this complex view design and controller inheritance.</p>
+          <p>Unfortunately, the URL routing service provided by Angular doesn't allow for this complex view design and controller inheritance.</p>
         </section>
         <section>
           <p>This is where the community, specifically the AngularUI team, has stepped in to provide a better solution.</p>
@@ -112,10 +112,10 @@ angular.module('app.controllers', [])
           <h1>UI Router</h1>
         </section>
         <section>
-          <p>AngularUI Router is a routing framework for AngularJS, which allows you to organize the parts of your interface into a state machine.</p>
+          <p><strong> AngularUI Router</strong> is a routing framework for AngularJS, which allows you to organize the parts of your interface into a state machine.</p>
         </section>
         <section>
-          <p>Unlike the $route service in Angular core, which is organized around URL routes, UI Router is organized around states.</p>
+          <p>Unlike the<strong> $route</strong> service in Angular core, which is organized around URL routes, UI Router is organized around<strong> states</strong>.</p>
         </section>
         <section>
           <p>These states may optionally have routes, as well as other behavior attached to them.</p>
@@ -127,7 +127,7 @@ angular.module('app.controllers', [])
           <p>Since the AngularUI Router is a module, we need to include it as a module dependency.</p>
         </section>
         <section>
-          <p>Notice that the $stateProvider is configured within the module config block.</p><br>
+          <p>Notice that the<strong> $stateProvider</strong> is configured within the module config block.</p><br>
           <pre><code class="js" data-trim>
 angular.module('app', ['ui.router'])
   .config(function($stateProvider) {
@@ -144,7 +144,7 @@ angular.module('app', ['ui.router'])
           <h2>State Manager</h2>
         </section>
         <section>
-          <p>The AngularUI Router $stateProvider works similar to Angular's router, but it focuses purely on state.</p>
+          <p>The AngularUI Router<strong> $stateProvider</strong> works similar to Angular's router, but it focuses purely on state.</p>
         </section>
         <section>
           <p>A state corresponds to a "place" in the application in terms of the overall UI and navigation.</p>
@@ -156,7 +156,7 @@ angular.module('app', ['ui.router'])
           <p>States often have things in common, and the primary way of factoring out these commonalities in this model is via the state hierarchy (parent/child states or nested states).</p>
         </section>
         <section>
-          <p>A state in its simplest form can be added like this</p><br>
+          <p>A state in its simplest form can be added like this:</p><br>
           <pre><code class="html" data-trim>
 &lt;body&gt;
   &lt;div ui-view&gt;&lt;/div&gt;
@@ -175,7 +175,7 @@ angular.module('app', ['ui.router'])
 </pre>
         </section>
         <section>
-          <p>When a state is activated, its templates are automatically inserted into the ui-view of its parent state's template.</p>
+          <p>When a state is activated, its templates are automatically inserted into the<strong> ui-view</strong> of its parent state's template.</p>
         </section>
         <section>
           <p>This is what the DOM will look like when the app state is active.</p><br>
@@ -199,7 +199,7 @@ angular.module('app', ['ui.router'])
           <p>The simplest way to set your template is via the template config property.</p>
         </section>
         <section>
-          <p>In our application, most of our templates will be fairly large so we'll use the templateUrl property.</p>
+          <p>In our application, most of our templates will be fairly large so we'll use the<strong> templateUrl</strong> property.</p>
         </section>
         <section>
           <pre><code class="js" data-trim>
@@ -234,10 +234,10 @@ $stateProvider
           <h3>URLS</h3>
         </section>
         <section>
-          <p>Most states in our application will have a url associated with them.</p>
+          <p>Most states in our application will have a URL associated with them.</p>
         </section>
         <section>
-          <p>Here's how you set a basic url.</p><br>
+          <p>Here's how you set a basic URL.</p><br>
           <pre><code class="js" data-trim>
 $stateProvider
   .state('app', {
@@ -250,10 +250,10 @@ $stateProvider
 </pre>
         </section>
         <section>
-          <p>When the user accesses /app then the 'app' state would become active.</p>
+          <p>When the user accesses<strong> /app</strong>, then the 'app' state would become active.</p>
         </section>
         <section>
-          <p>Often, URLs have dynamic parts to them which are called parameters.</p>
+          <p>Often, URLs have dynamic parts to them which are called<strong> parameters.</strong></p>
         </section>
         <section>
           <p>Here's how you set a basic parameter in your URL.</p><br>
@@ -269,7 +269,7 @@ $stateProvider
 </pre>
         </section>
         <section>
-          <p>These parameters can be injected into the controller using the $stateParams service.</p><br>
+          <p>These parameters can be injected into the controller using the<strong> $stateParams</strong> service.</p><br>
           <pre><code class="js" data-trim>
 controller('AppCtrl',
   function($scope, $stateParams) {
@@ -294,16 +294,16 @@ controller('AppCtrl',
           </ul>
         </section>
         <section>
-          <p>We wont be using these in our project but, they are available if you ever need to use them.</p>
+          <p>We won't be using these in our project, but they are available if you ever need to use them.</p>
         </section>
         <section>
           <h3>Custom Data</h3>
         </section>
         <section>
-          <p>You can also attach custom data to the $state object.</p>
+          <p>You can also attach custom data to the<strong> $state</strong> object.</p>
         </section>
         <section>
-          <p>The $state object can be injected, making it available to controllers and thus, templates.</p>
+          <p>The<strong> $state</strong> object can be injected, making it available to controllers and thus, templates.</p>
         </section>
         <section>
           <p>This can be very useful when defining properties like a page title.</p><br>
@@ -322,7 +322,7 @@ $stateProvider
 </pre>
         </section>
         <section>
-          <p>The $state object is specific to the state that instantiated the controller.</p><br>
+          <p>The<strong> $state</strong> object is specific to the state that instantiated the controller.</p><br>
           <pre><code class="js" data-trim>
 controller('AppCtrl',
   function($scope, $state) {
@@ -338,10 +338,10 @@ controller('AppCtrl',
           <h3>Resolve</h3>
         </section>
         <section>
-          <p>You can use resolve to provide your controller with content or data that is custom to the state.</p>
+          <p>You can use<strong> resolve</strong> to provide your controller with content or data that is custom to the state.</p>
         </section>
         <section>
-          <p>The resolve property is an optional map of dependencies which should be injected into the controller.</p>
+          <p>The<strong> resolve</strong> property is an optional map of dependencies which should be injected into the controller.</p>
         </section>
         <section>
           <p>If any of these dependencies are promises, they will be resolved and converted to a value before the controller is instantiated.</p>
@@ -350,7 +350,7 @@ controller('AppCtrl',
           <p>This is ideal when we need to load data required to display the view.</p>
         </section>
         <section>
-          <p>By placing API requests in the states resolve configuration, we can make sure we have the data required to render the view before the view is actually rendered.</p>
+          <p>By placing API requests in the state's<strong> resolve</strong> configuration, we can make sure we have the data required to render the view before the view is actually rendered.</p>
         </section>
         <section>
           <p>Notice that we can use DI in our resolve configurations.</p><br>
@@ -409,7 +409,7 @@ $stateProvider
           <p>There are several ways to nest states.</p>
         </section>
         <section>
-          <p>For our project, we'll be using the dot notation method to signify nested states.</p>
+          <p>For our project, we'll be using the</p><strong> dot notation</strong> method to signify nested states.
         </section>
         <section>
           <p>In this example, the projects state is nested within the app state.</p><br>
@@ -431,7 +431,7 @@ $stateProvider
           <p>You can also register child states before the parent state exists.</p>
         </section>
         <section>
-          <p>The $stateProvider will queue each state up as it's configured.</p>
+          <p>The<strong> $stateProvider</strong> will queue each state up as it is configured.</p>
         </section>
         <section>
           <p>Once a parent state is registered, the children of that state will then be registered.</p>
@@ -500,7 +500,7 @@ controller('AppCtrl', function($scope) {
 </pre>
         </section>
         <section>
-          <p>Then, given the app.projects state and ProjectsCtrl</p><br>
+          <p>Then, given the</p><strong> app.projects</strong> state and ProjectsCtrl<br>
           <pre><code class="js" data-trim>
 angular.module('app.projects', [])
   .config(function($stateProvider) {
@@ -521,7 +521,7 @@ controller('ProjectCtrl', function($scope) {
 </pre>
         </section>
         <section>
-          <p>"My Property" will be printed out to the console when the app.projects state is active because it's inherited from the parent state.</p>
+          <p>"My Property" will be printed out to the console when the<strong> app.projects</strong> state is active because it is inherited from the parent state.</p>
         </section>
         <section>
           <p>Where does scope inheritance happen?  In the state configuration or the view?</p>
@@ -536,10 +536,10 @@ controller('ProjectCtrl', function($scope) {
           <h4>Views</h4>
         </section>
         <section>
-          <p>Child states will load their templates into their parent's template element with the ui-view directive.</p>
+          <p>Child states will load their templates into their parent's template element with the<strong> ui-view</strong> directive.</p>
         </section>
         <section>
-          <p>For these views, what will the resulting DOM look like when the app.projects state is active?</p><br>
+          <p>For these views, what will the resulting DOM look like when the<strong> app.projects</strong> state is active?</p><br>
           <pre><code class="html" data-trim>
 &lt;!-- index.html --&gt;
 &lt;body&gt;
@@ -583,7 +583,7 @@ controller('ProjectCtrl', function($scope) {
           <h4>Resolved Dependencies</h4>
         </section>
         <section>
-          <p>Child states inherit a parent states resolved dependencies.</p><br>
+          <p>Child states inherit a parent state's resolved dependencies.</p><br>
           <pre><code class="js" data-trim>
 $stateProvider
   .state('app.projects', {
@@ -613,10 +613,10 @@ controller('ProjectsDetailCtrl', function(projects) {
           <h4>Data Properties</h4>
         </section>
         <section>
-          <p>Child states inherit a parent states data properties.</p>
+          <p>Child states inherit a parent state's data properties.</p>
         </section>
         <section>
-          <p>What will the value of $scope.title and $scope.section be in ProjectDetailCtrl?</p>
+          <p>What will the value of<strong> $scope.title</strong> and<strong> $scope.section</strong> be in ProjectDetailCtrl?</p>
           <pre><code class="js" data-trim>
 $stateProvider
   .state('app.projects', {
@@ -645,8 +645,8 @@ controller('ProjectsDetailCtrl', function($scope, $state) {
 </pre>
         </section>
         <section>
-          <p>$scope.title would be "Project Detail"</p>
-          <p>$scope.section would be "Projects"</p>
+          <p><strong> $scope.title</strong> would be "Project Detail"</p>
+          <p><strong> $scope.section</strong> would be "Projects"</p>
           <p>Even though data is inherited, we can still override parts of that data in child states.</p>
         </section>
         <section>
@@ -659,7 +659,7 @@ controller('ProjectsDetailCtrl', function($scope, $state) {
           <p>Rather, a child state's URL is appended to the parent state's URL unless otherwise defined.</p>
         </section>
         <section>
-          <p>Which state would be loaded when the user accesses /projects/12?</p><br>
+          <p>Which state would be loaded when the user accesses<strong> /projects/12</strong>?</p><br>
           <pre><code class="js" data-trim>
 $stateProvider
   .state('app.projects', {
@@ -675,11 +675,11 @@ $stateProvider
 </pre>
         </section>
         <section>
-          <p>The app.projects.detail state.</p>
-          <p>That being said, there is one special thing to note with the $stateParams service</p>
+          <p>The<strong> app.projects.detail</strong> state.</p>
+          <p>That being said, there is one special thing to note with the<strong> $stateParams</strong> service</p>
         </section>
         <section>
-          <p>In state controllers, the $stateParams object will only contain the params that were registered with that state.</p>
+          <p>In state controllers, the<strong>$stateParams</strong> object will only contain the params that were registered with that state.</p>
         </section>
         <section>
           <p>Controllers and templates are not inherited in nested states.</p>
@@ -688,22 +688,22 @@ $stateProvider
           <h2>Abstract States</h2>
         </section>
         <section>
-          <p>An abstract state can have child states, but can not get activated itself.</p>
+          <p>An<strong> abstract state</strong> can have child states, but can not get activated itself.</p>
         </section>
         <section>
-          <p>Abstract states are activated implicitly when one of their descendants are activated.</p>
+          <p>An abstract state is activated implicitly when one of its descendants is activated.</p>
         </section>
         <section>
           <p>Some examples of how you might use an abstract state</p>
           <ul>
-            <li>To prepend a url to all child state urls.</li>
-            <li>To insert a template with its own ui-view(s) that its child states will populate.</li>
+            <li>To prepend a URL to all child state URLs.</li>
+            <li>To insert a template with its own<strong> ui-view(s)</strong> that its child states will populate.</li>
             <li>To provide resolved dependencies via resolve for use by child states.</li>
             <li>To provide inherited custom data via data for use by child states.</li>
           </ul>
         </section>
         <section>
-          <p>One important thing to note is that abstract states still need their own &lt;div ui-view&gt;&lt;/div&gt; for their children to plug into.</p>
+          <p>One important thing to note is that abstract states still need their own<strong>  &lt;div ui-view&gt;&lt;/div&gt;</strong> for their children to plug into.</p>
         </section>
         <section>
           <pre><code class="js" data-trim>
@@ -730,13 +730,13 @@ $stateProvider
           <h2>Multiple Named Views</h2>
         </section>
         <section>
-          <p>You can name your views so that you can have more than one ui-view per template.</p>
+          <p>You can name your views so that you can have more than one<strong> ui-view</strong> per template.</p>
         </section>
         <section>
-          <p>When setting multiple views, you need to use the views property on state.</p>
+          <p>When setting multiple views, you need to use the<strong> views</strong> property on state.</p>
         </section>
         <section>
-          <p>The view property is an object that allows you to specify state properties for the view.</p>
+          <p>The<strong> views</strong> property is an object that allows you to specify state properties for the view.</p>
         </section>
         <section>
           <p>You can specify most of the same configurations on the named views as you can in the state.</p><br>
@@ -759,10 +759,10 @@ $stateProvider
 </pre>
         </section>
         <section>
-          <p>Now lets take a look at how we would layout the ui-view directives.</p>
+          <p>Now lets take a look at how we would layout the<strong> ui-view</strong> directives.</p>
         </section>
         <section>
-          <p>Where would child views of app be rendered?</p><br>
+          <p>Where would child views of<strong> app</strong> be rendered?</p><br>
           <pre><code class="html" data-trim>
 &lt;body&gt;
   &lt;div ui-view="navbar"&gt;&lt;/div&gt;
@@ -773,7 +773,7 @@ $stateProvider
 </pre>
         </section>
         <section>
-          <p>Child views will be rendered in the first unnamed ui-view encountered in the app template or view templates.</p>
+          <p>Child views will be rendered in the first unnamed<strong> ui-view</strong> encountered in the app template or view templates.</p>
         </section>
         <section>
           <p>With great power comes great responsibility.</p>
@@ -785,14 +785,14 @@ $stateProvider
           <h2>$state service</h2>
         </section>
         <section>
-          <p>$state service is responsible for representing states as well as transitioning between them.</p>
+          <p>The<strong> $state</strong> service is responsible for representing states as well as transitioning between them.</p>
         </section>
         <section>
           <p>It also provides interfaces to ask for current state or even states you're coming from.</p>
         </section>
         <section>
           <h3>Methods</h3>
-          <ul>
+          <ul style="font-weight: bold;">
             <li>get(stateOrName)</li>
             <li>go(to, params, options)</li>
             <li>href(stateOrName, params, options)</li>
@@ -805,41 +805,41 @@ $stateProvider
         <section>
           <h3>Properties</h3>
           <ul>
-            <li>params - A param object, e.g. {sectionId: section.id)}, that you'd like to test against the current active state.</li>
-            <li>current - A reference to the state's config object. However you passed it in. Useful for accessing custom data.</li>
-            <li>transition - Currently pending transition. A promise that'll resolve or reject.</li>
+            <li><strong> params:</strong> A param object, e.g. {sectionId: section.id)}, that you'd like to test against the current active state.</li>
+            <li><strong> current:</strong> A reference to the state's config object. However you passed it in. Useful for accessing custom data.</li>
+            <li><strong> transition:</strong> Currently pending transition. A promise that'll resolve or reject.</li>
           </ul>
         </section>
         <section>
           <h2>Transitions</h2>
         </section>
         <section>
-          <p>UI-Router has a Low-level method for transitioning to a new state, transitionTo().</p>
+          <p>UI-Router has a low-level method for transitioning to a new state,<strong> transitionTo().</strong></p>
           <ul>
-            <li>$state.go uses transitionTo internally.</li>
-            <li>$state.go is recommended in most situations.</li>
+            <li><strong> $state.go</strong> uses<strong> transitionTo()</strong> internally.</li>
+            <li><strong> $state.go</strong> is recommended in most situations.</li>
           </ul>
         </section>
         <section>
-          <p>$state.go or $state.transitionTo take 3 parameters:</p>
+          <p><strong> $state.go</strong> or<strong> $state.transitionTo</strong> take 3 parameters:</p>
           <ul>
-            <li>"to" : The name of the state to transition to.</li>
-            <li>"toParams" : An optional object used to populate the $stateParams.</li>
-            <li>"options" : An optional object used to configure the state transition.</li>
+            <li><strong> to:</strong> The name of the state to transition to.</li>
+            <li><strong> toParams:</strong> An optional object used to populate the $stateParams.</li>
+            <li><strong> options:</strong> An optional object used to configure the state transition.</li>
           </ul>
         </section>
         <section>
           <h3>Transition Options</h3>
           <ul>
-            <li>location - {boolean=true|string=}
+            <li><strong> location:</strong> {boolean=true|string=}
               <ul>
-                <li>If true will update the url in the location bar.</li>
-                <li>If string, must be "replace", which will update url and also replace last history record.</li>
+                <li>If the value is true, it will update the URL in the location bar.</li>
+                <li>If the value is a string, it must be "replace", which will update the URL and also replace the last history record.</li>
               </ul>
             </li>
-            <li>inherit - {boolean=false}
+            <li><strong> inherit:</strong> {boolean=false}
               <ul>
-                <li>If true will inherit url parameters from current url.</li>
+                <li>If the value is true, it will inherit the URL parameters from the current URL.</li>
               </ul>
             </li>
           </ul>
@@ -847,19 +847,19 @@ $stateProvider
         <section>
           <h3>Transition Options - cont.</h3>
           <ul>
-            <li>relative - {object=}
+            <li><strong> relative:</strong> {object=}
               <ul>
-                <li>When transitioning with relative path (e.g '^'), defines which state to be relative from.</li>
+                <li>When transitioning with a relative path (e.g., '^'), this defines which state to be relative from.</li>
               </ul>
             </li>
-            <li>notify - {boolean=true}
+            <li><strong> notify:</strong> {boolean=true}
               <ul>
-                <li>If true will broadcast $stateChangeStart and $stateChangeSuccess events.</li>
+                <li>If the value is true, this will broadcast<strong> $stateChangeStart</strong> and<strong> $stateChangeSuccess</strong> events.</li>
               </ul>
             </li>
-            <li>reload - {boolean=false}
+            <li><strong> reload:</strong> {boolean=false}
               <ul>
-                <li>If true will force transition even if the state or params have not changed.</li>
+                <li>If the value is true, this will force a transition, even if the state or params have not changed.</li>
               </ul>
             </li>
           </ul>
@@ -892,10 +892,10 @@ $state.go('employees.detail', {id: 1}, {reload: true});
           <p>Now that we've added AngularUI Router to our application, we need to make sure that we can test state transitions.</p>
         </section>
         <section>
-          <p>Instead of injecting the router, we can test everything we need to by simply stubbing out the $state service.</p>
+          <p>Instead of injecting the router, we can test everything we need to by simply stubbing out the<strong> $state</strong> service.</p>
         </section>
         <section>
-          <p>First, we'll stub the state service during our test initialization and save it.</p><br>
+          <p>First, we'll stub the<strong> $state</strong> service during our test initialization and save it.</p><br>
           <pre><code class="js" data-trim>
 spies = {
   state: sinon.stub($state)
@@ -905,7 +905,7 @@ spies = {
 </pre>
         </section>
         <section>
-          <p>Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the $state service.</p><br>
+          <p>Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the<strong> $state</strong> service.</p><br>
           <pre><code class="js" data-trim>
 beforeEach(function() {
   $scope = $rootScope.$new();
