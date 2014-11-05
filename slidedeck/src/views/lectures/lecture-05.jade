@@ -16,10 +16,14 @@ include ../includes/mixins
     p It's common to attach controllers at different levels of the DOM hierarchy.
 
   section
-    p Since the ng-controller directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
+    p Since the
+      strong  ng-controller
+      |  directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
 
   section
-    p The $scope that each controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
+    p The
+      strong  $scope
+      |  that each controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
 
   section
     pre.
@@ -70,10 +74,10 @@ include ../includes/mixins
     p This behavior is very useful in applications with complex user interfaces.
 
   section
-    p We can use parents scopes and controllers as a means to communicate between child scopes and controllers.
+    p We can use parent scopes and controllers as a means to communicate between child scopes and controllers.
 
   section
-    p Unfortunately the url routing service provided by Angular doesn't allow for this complex view design and controller inheritance.
+    p Unfortunately, the URL routing service provided by Angular doesn't allow for this complex view design and controller inheritance.
 
   section
     p This is where the community, specifically the AngularUI team, has stepped in to provide a better solution.
@@ -82,10 +86,16 @@ include ../includes/mixins
     h1 UI Router
 
   section
-    p AngularUI Router is a routing framework for AngularJS, which allows you to organize the parts of your interface into a state machine.
+    p
+      strong  AngularUI Router
+      |  is a routing framework for AngularJS, which allows you to organize the parts of your interface into a state machine.
 
   section
-    p Unlike the $route service in Angular core, which is organized around URL routes, UI Router is organized around states.
+    p Unlike the
+      strong  $route
+      |  service in Angular core, which is organized around URL routes, UI Router is organized around
+      strong  states
+      | .
 
   section
     p These states may optionally have routes, as well as other behavior attached to them.
@@ -97,7 +107,9 @@ include ../includes/mixins
     p Since the AngularUI Router is a module, we need to include it as a module dependency.
 
   section
-    p Notice that the $stateProvider is configured within the module config block.
+    p Notice that the
+      strong  $stateProvider
+      |  is configured within the module config block.
     br
     pre.
       <code class="js" data-trim>
@@ -115,7 +127,9 @@ include ../includes/mixins
     h2 State Manager
 
   section
-    p The AngularUI Router $stateProvider works similar to Angular's router, but it focuses purely on state.
+    p The AngularUI Router
+      strong  $stateProvider
+      |  works similar to Angular's router, but it focuses purely on state.
 
   section
     p A state corresponds to a "place" in the application in terms of the overall UI and navigation.
@@ -127,7 +141,7 @@ include ../includes/mixins
     p States often have things in common, and the primary way of factoring out these commonalities in this model is via the state hierarchy (parent/child states or nested states).
 
   section
-    p A state in its simplest form can be added like this
+    p A state in its simplest form can be added like this:
     br
     pre.
       <code class="html" data-trim>
@@ -148,7 +162,9 @@ include ../includes/mixins
       </code>
 
   section
-    p When a state is activated, its templates are automatically inserted into the ui-view of its parent state's template.
+    p When a state is activated, its templates are automatically inserted into the
+      strong  ui-view
+      |  of its parent state's template.
 
   section
     p This is what the DOM will look like when the app state is active.
@@ -173,7 +189,9 @@ include ../includes/mixins
     p The simplest way to set your template is via the template config property.
 
   section
-    p In our application, most of our templates will be fairly large so we'll use the templateUrl property.
+    p In our application, most of our templates will be fairly large so we'll use the
+      strong  templateUrl
+      |  property.
 
   section
     pre.
@@ -209,10 +227,10 @@ include ../includes/mixins
     h3 URLS
 
   section
-    p Most states in our application will have a url associated with them.
+    p Most states in our application will have a URL associated with them.
 
   section
-    p Here's how you set a basic url.
+    p Here's how you set a basic URL.
     br
     pre.
       <code class="js" data-trim>
@@ -226,10 +244,13 @@ include ../includes/mixins
       </code>
 
   section
-    p When the user accesses /app then the 'app' state would become active.
+    p When the user accesses
+      strong  /app
+      |, then the 'app' state would become active.
 
   section
-    p Often, URLs have dynamic parts to them which are called parameters.
+    p Often, URLs have dynamic parts to them which are called
+      strong  parameters.
 
   section
     p Here's how you set a basic parameter in your URL.
@@ -246,7 +267,9 @@ include ../includes/mixins
       </code>
 
   section
-    p These parameters can be injected into the controller using the $stateParams service.
+    p These parameters can be injected into the controller using the
+      strong  $stateParams
+      |  service.
     br
     pre.
       <code class="js" data-trim>
@@ -270,16 +293,20 @@ include ../includes/mixins
         <strong>Query Parameters</strong> /projects?myParam1&myParam2
 
   section
-    p We wont be using these in our project but, they are available if you ever need to use them.
+    p We won't be using these in our project, but they are available if you ever need to use them.
 
   section
     h3 Custom Data
 
   section
-    p You can also attach custom data to the $state object.
+    p You can also attach custom data to the
+      strong  $state
+      |  object.
 
   section
-    p The $state object can be injected, making it available to controllers and thus, templates.
+    p The
+      strong  $state
+      |  object can be injected, making it available to controllers and thus, templates.
 
   section
     p This can be very useful when defining properties like a page title.
@@ -299,7 +326,9 @@ include ../includes/mixins
       </code>
 
   section
-    p The $state object is specific to the state that instantiated the controller.
+    p The
+      strong  $state
+      |  object is specific to the state that instantiated the controller.
     br
     pre.
       <code class="js" data-trim>
@@ -317,10 +346,14 @@ include ../includes/mixins
     h3 Resolve
 
   section
-    p You can use resolve to provide your controller with content or data that is custom to the state.
+    p You can use
+      strong  resolve
+      |  to provide your controller with content or data that is custom to the state.
 
   section
-    p The resolve property is an optional map of dependencies which should be injected into the controller.
+    p The
+      strong  resolve
+      |  property is an optional map of dependencies which should be injected into the controller.
 
   section
     p If any of these dependencies are promises, they will be resolved and converted to a value before the controller is instantiated.
@@ -329,7 +362,9 @@ include ../includes/mixins
     p This is ideal when we need to load data required to display the view.
 
   section
-    p By placing API requests in the states resolve configuration, we can make sure we have the data required to render the view before the view is actually rendered.
+    p By placing API requests in the state's
+      strong  resolve
+      |  configuration, we can make sure we have the data required to render the view before the view is actually rendered.
 
   section
     p Notice that we can use DI in our resolve configurations.
@@ -392,7 +427,9 @@ include ../includes/mixins
     p There are several ways to nest states.
 
   section
-    p For our project, we'll be using the dot notation method to signify nested states.
+    p For our project, we'll be using the
+    strong  dot notation
+    |  method to signify nested states.
 
   section
     p In this example, the projects state is nested within the app state.
@@ -415,7 +452,9 @@ include ../includes/mixins
     p You can also register child states before the parent state exists.
 
   section
-    p The $stateProvider will queue each state up as it's configured.
+    p The
+      strong  $stateProvider
+      |  will queue each state up as it is configured.
 
   section
     p Once a parent state is registered, the children of that state will then be registered.
@@ -488,7 +527,9 @@ include ../includes/mixins
       </code>
 
   section
-    p Then, given the app.projects state and ProjectsCtrl
+    p Then, given the
+    strong  app.projects
+    |  state and ProjectsCtrl
     br
     pre.
       <code class="js" data-trim>
@@ -511,7 +552,9 @@ include ../includes/mixins
       </code>
 
   section
-    p "My Property" will be printed out to the console when the app.projects state is active because it's inherited from the parent state.
+    p "My Property" will be printed out to the console when the
+      strong  app.projects
+      |  state is active because it is inherited from the parent state.
 
   section
     p Where does scope inheritance happen?  In the state configuration or the view?
@@ -526,10 +569,14 @@ include ../includes/mixins
     h4 Views
 
   section
-    p Child states will load their templates into their parent's template element with the ui-view directive.
+    p Child states will load their templates into their parent's template element with the
+      strong  ui-view
+      |  directive.
 
   section
-    p For these views, what will the resulting DOM look like when the app.projects state is active?
+    p For these views, what will the resulting DOM look like when the
+      strong  app.projects
+      |  state is active?
     br
     pre.
       <code class="html" data-trim>
@@ -576,7 +623,7 @@ include ../includes/mixins
     h4 Resolved Dependencies
 
   section
-    p Child states inherit a parent states resolved dependencies.
+    p Child states inherit a parent state's resolved dependencies.
     br
     pre.
       <code class="js" data-trim>
@@ -608,10 +655,14 @@ include ../includes/mixins
     h4 Data Properties
 
   section
-    p Child states inherit a parent states data properties.
+    p Child states inherit a parent state's data properties.
 
   section
-    p What will the value of $scope.title and $scope.section be in ProjectDetailCtrl?
+    p What will the value of
+      strong  $scope.title
+      |  and
+      strong  $scope.section
+      |  be in ProjectDetailCtrl?
     pre.
       <code class="js" data-trim>
       $stateProvider
@@ -641,8 +692,12 @@ include ../includes/mixins
       </code>
 
   section
-    p $scope.title would be "Project Detail"
-    p $scope.section would be "Projects"
+    p
+      strong  $scope.title
+      |  would be "Project Detail"
+    p
+      strong  $scope.section
+      |  would be "Projects"
     p Even though data is inherited, we can still override parts of that data in child states.
 
   section
@@ -655,7 +710,9 @@ include ../includes/mixins
     p Rather, a child state's URL is appended to the parent state's URL unless otherwise defined.
 
   section
-    p Which state would be loaded when the user accesses /projects/12?
+    p Which state would be loaded when the user accesses
+      strong  /projects/12
+      | ?
     br
     pre.
       <code class="js" data-trim>
@@ -672,11 +729,17 @@ include ../includes/mixins
       </code>
 
   section
-    p The app.projects.detail state.
-    p That being said, there is one special thing to note with the $stateParams service
+    p The
+      strong  app.projects.detail
+      |  state.
+    p That being said, there is one special thing to note with the
+      strong  $stateParams
+      |  service
 
   section
-    p In state controllers, the $stateParams object will only contain the params that were registered with that state.
+    p In state controllers, the
+      strong $stateParams
+      |  object will only contain the params that were registered with that state.
 
   section
     p Controllers and templates are not inherited in nested states.
@@ -685,21 +748,27 @@ include ../includes/mixins
     h2 Abstract States
 
   section
-    p An abstract state can have child states, but can not get activated itself.
+    p An
+      strong  abstract state
+      |  can have child states, but can not get activated itself.
 
   section
-    p Abstract states are activated implicitly when one of their descendants are activated.
+    p An abstract state is activated implicitly when one of its descendants is activated.
 
   section
     p Some examples of how you might use an abstract state
     ul
-      li To prepend a url to all child state urls.
-      li To insert a template with its own ui-view(s) that its child states will populate.
+      li To prepend a URL to all child state URLs.
+      li To insert a template with its own
+        strong  ui-view(s)
+        |  that its child states will populate.
       li To provide resolved dependencies via resolve for use by child states.
       li To provide inherited custom data via data for use by child states.
 
   section
-    p One important thing to note is that abstract states still need their own &lt;div ui-view&gt;&lt;/div&gt; for their children to plug into.
+    p One important thing to note is that abstract states still need their own
+      strong='  <div ui-view></div>'
+      |  for their children to plug into.
 
   section
     pre.
@@ -726,13 +795,19 @@ include ../includes/mixins
     h2 Multiple Named Views
 
   section
-    p You can name your views so that you can have more than one ui-view per template.
+    p You can name your views so that you can have more than one
+      strong  ui-view
+      |  per template.
 
   section
-    p When setting multiple views, you need to use the views property on state.
+    p When setting multiple views, you need to use the
+      strong  views
+      |  property on state.
 
   section
-    p The view property is an object that allows you to specify state properties for the view.
+    p The
+      strong  views
+      |  property is an object that allows you to specify state properties for the view.
 
   section
     p You can specify most of the same configurations on the named views as you can in the state.
@@ -756,10 +831,14 @@ include ../includes/mixins
       </code>
 
   section
-    p Now lets take a look at how we would layout the ui-view directives.
+    p Now lets take a look at how we would layout the
+      strong  ui-view
+      |  directives.
 
   section
-    p Where would child views of app be rendered?
+    p Where would child views of
+      strong  app
+      |  be rendered?
     br
     pre.
       <code class="html" data-trim>
@@ -771,7 +850,9 @@ include ../includes/mixins
       </code>
 
   section
-    p Child views will be rendered in the first unnamed ui-view encountered in the app template or view templates.
+    p Child views will be rendered in the first unnamed
+      strong  ui-view
+      |  encountered in the app template or view templates.
 
   section
     p With great power comes great responsibility.
@@ -783,14 +864,16 @@ include ../includes/mixins
     h2 $state service
 
   section
-    p $state service is responsible for representing states as well as transitioning between them.
+    p The
+      strong  $state
+      |  service is responsible for representing states as well as transitioning between them.
 
   section
     p It also provides interfaces to ask for current state or even states you're coming from.
 
   section
     h3 Methods
-    ul
+    ul(style="font-weight: bold;")
       li get(stateOrName)
       li go(to, params, options)
       li href(stateOrName, params, options)
@@ -802,49 +885,86 @@ include ../includes/mixins
   section
     h3 Properties
     ul
-      li params - A param object, e.g. {sectionId: section.id)}, that you'd like to test against the current active state.
-      li current - A reference to the state's config object. However you passed it in. Useful for accessing custom data.
-      li transition - Currently pending transition. A promise that'll resolve or reject.
+      li
+        strong  params:
+        |  A param object, e.g. {sectionId: section.id)}, that you'd like to test against the current active state.
+      li
+        strong  current:
+        |  A reference to the state's config object. However you passed it in. Useful for accessing custom data.
+      li
+        strong  transition:
+        |  Currently pending transition. A promise that'll resolve or reject.
 
   section
     h2 Transitions
 
   section
-    p UI-Router has a Low-level method for transitioning to a new state, transitionTo().
+    p UI-Router has a low-level method for transitioning to a new state,
+      strong  transitionTo().
     ul
-      li $state.go uses transitionTo internally.
-      li $state.go is recommended in most situations.
+      li
+        strong  $state.go
+        |  uses
+        strong  transitionTo()
+        |  internally.
+      li
+        strong  $state.go
+        |  is recommended in most situations.
 
   section
-    p $state.go or $state.transitionTo take 3 parameters:
+    p
+      strong  $state.go
+      |  or
+      strong  $state.transitionTo
+      |  take 3 parameters:
     ul
-      li "to" : The name of the state to transition to.
-      li "toParams" : An optional object used to populate the $stateParams.
-      li "options" : An optional object used to configure the state transition.
+      li
+        strong  to:
+        |  The name of the state to transition to.
+      li
+        strong  toParams:
+        |  An optional object used to populate the $stateParams.
+      li
+        strong  options:
+        |  An optional object used to configure the state transition.
 
   section
     h3 Transition Options
     ul
-      li location - {boolean=true|string=}
+      li
+        strong  location:
+        |  {boolean=true|string=}
         ul
-          li If true will update the url in the location bar.
-          li If string, must be "replace", which will update url and also replace last history record.
-      li inherit - {boolean=false}
+          li If the value is true, it will update the URL in the location bar.
+          li If the value is a string, it must be "replace", which will update the URL and also replace the last history record.
+      li
+        strong  inherit:
+        |  {boolean=false}
         ul
-          li If true will inherit url parameters from current url.
+          li If the value is true, it will inherit the URL parameters from the current URL.
 
   section
     h3 Transition Options - cont.
     ul
-      li relative - {object=}
+      li
+        strong  relative:
+        |  {object=}
         ul
-          li When transitioning with relative path (e.g '^'), defines which state to be relative from.
-      li notify - {boolean=true}
+          li When transitioning with a relative path (e.g., '^'), this defines which state to be relative from.
+      li
+        strong  notify:
+        |  {boolean=true}
         ul
-          li If true will broadcast $stateChangeStart and $stateChangeSuccess events.
-      li reload - {boolean=false}
+          li If the value is true, this will broadcast
+            strong  $stateChangeStart
+            |  and
+            strong  $stateChangeSuccess
+            |  events.
+      li
+        strong  reload:
+        |  {boolean=false}
         ul
-          li If true will force transition even if the state or params have not changed.
+          li If the value is true, this will force a transition, even if the state or params have not changed.
 
   section
     p Let's look at an example of a state transition with params and options:
@@ -873,10 +993,14 @@ include ../includes/mixins
     p Now that we've added AngularUI Router to our application, we need to make sure that we can test state transitions.
 
   section
-    p Instead of injecting the router, we can test everything we need to by simply stubbing out the $state service.
+    p Instead of injecting the router, we can test everything we need to by simply stubbing out the
+      strong  $state
+      |  service.
 
   section
-    p First, we'll stub the state service during our test initialization and save it.
+    p First, we'll stub the
+      strong  $state
+      |  service during our test initialization and save it.
     br
     pre.
       <code class="js" data-trim>
@@ -887,7 +1011,9 @@ include ../includes/mixins
       </code>
 
   section
-    p Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the $state service.
+    p Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the
+      strong  $state
+      |  service.
     br
     pre.
       <code class="js" data-trim>

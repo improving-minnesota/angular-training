@@ -75,7 +75,7 @@
           <p>Now, back to the compiler</p>
         </section>
         <section>
-          <p>The compiler is an Angular service which traverses the DOM looking for directives.</p>
+          <p>The</p><strong> compiler</strong> is an Angular service which traverses the DOM looking for directives.
         </section>
         <section>
           <p>The compilation process happens in two phases.</p>
@@ -98,7 +98,7 @@
           <h2>Scope</h2>
         </section>
         <section>
-          <p>Scope is an object that refers to the application model.  It is an execution context for expressions.</p>
+          <p><strong> Scope</strong> is an object that refers to the application model.  It is an execution context for expressions.</p>
         </section>
         <section>
           <p>Scopes are arranged in hierarchical structure which mimic the DOM structure of the application.</p>
@@ -110,8 +110,8 @@
           <p>Let's see the HTML compiler in action</p>
         </section>
         <section>
-          <p>ng-init evaluates a JavaScript expression on scope.</p>
-          <p>ng-bind takes a variable on scope and sets the content of the element to it.</p><br>
+          <p><strong> ng-init</strong> evaluates a JavaScript expression on scope.</p>
+          <p><strong> ng-bind</strong> takes a variable on scope and sets the content of the element to it.</p><br>
           <pre><code class="html" data-trim>
 &lt;div ng-init="myVar = 1 + 2;"&gt;
   &lt;p ng-bind="myVar"&gt;&lt;/p&gt;
@@ -159,7 +159,7 @@
           <h1>Modules</h1>
         </section>
         <section>
-          <p>You can think of a module as a container for the different parts of your app.</p>
+          <p>You can think of a<strong> module</strong> as a container for the different parts of your app.</p>
         </section>
         <section>
           <p>Most applications have a main method that instantiates and wires together the different parts of the application.</p>
@@ -187,7 +187,7 @@
           <p>What does a module look like?</p>
         </section>
         <section>
-          <p>The code below creates a new module named 'app'</p><br>
+          <p>The code below creates a new module named<strong> 'app'</strong></p><br>
           <pre><code class="js" data-trim>
 angular.module('app', []);
 
@@ -198,7 +198,7 @@ angular.module('app', []);
           <p>Modules can list other modules as their dependencies.</p>
         </section>
         <section>
-          <p>Depending on a module implies that required module needs to be loaded before the requiring module is loaded.</p>
+          <p>Depending on a module implies that the required module needs to be loaded before the requiring module is loaded.</p>
         </section>
         <section>
           <p>Each module will only be loaded once, even if multiple other modules require it.</p>
@@ -242,7 +242,7 @@ angular.module('feature1.1', []);
         </section>
         <section>
           <p>
-            The simplest way to get hold of the dependencies, is to assume that the function parameter names are
+            The simplest way to get hold of the dependencies is to assume that the function parameter names are
             the names of the dependencies.
           </p>
         </section>
@@ -253,7 +253,7 @@ angular.module('feature1.1', []);
           </p>
         </section>
         <section>
-          <p>The example below shows how to specify that $scope and myService need to be injected into the function.</p><br>
+          <p>The example below shows how to specify that<strong> $scope</strong> and<strong> myService</strong> need to be injected into the function.</p><br>
           <pre><code class="js" data-trim>
   function($scope, myService) {
   
@@ -263,7 +263,7 @@ angular.module('feature1.1', []);
 </pre>
         </section>
         <section>
-          <p>The argument based DI method doesn't always work, we'll elaborate on the reason in Lecture 12.</p>
+          <p>The argument-based DI method doesn't always work; we'll elaborate on the reason in Lecture 12.</p>
         </section>
         <section>
           <p>Because of this complication, we can also use the array method for specifying dependencies.</p>
@@ -302,7 +302,7 @@ angular.module('feature1.1', []);
           <h1>Controllers</h1>
         </section>
         <section>
-          <p>In Angular, a controller is a JavaScript constructor function that is used to augment the Angular Scope.</p>
+          <p>In Angular, a<strong> controller</strong> is a JavaScript constructor function that is used to augment the Angular Scope.</p>
         </section>
         <section>
           <p>You can create controllers on a module.  The first argument is the controller name, and the second is the constructor function.</p><br>
@@ -357,7 +357,7 @@ angular.module('app.controllers', [])
 </pre>
         </section>
         <section>
-          <p>You can associate controllers with scope objects implicitly via the ngController directive.</p>
+          <p>You can associate controllers with scope objects implicitly via the<strong> ngController</strong> directive.</p>
         </section>
         <section>
           <p>Controller</p>
@@ -391,10 +391,10 @@ angular.module('app.controllers', [])
 </pre>
         </section>
         <section>
-          <p>Lets add some functionality to scope and show off data binding.</p>
+          <p>Let's add some functionality to scope and show off data binding.</p>
         </section>
         <section>
-          <p>The $interval service executes a function on scope in the supplied interval.</p>
+          <p>The<strong> $interval</strong> service executes a function on scope in the supplied interval.</p>
           <pre><code class="js" data-trim>
 angular.module('app.controllers', [])
   .controller('TimeController',
@@ -432,10 +432,10 @@ angular.module('app.controllers', [])
           </p>
         </section>
         <section>
-          <p>At this point Angular looks for the ng-app directive which designates your application root.</p>
+          <p>At this point Angular looks for the<strong> ng-app</strong> directive which designates your application root.</p>
         </section>
         <section>
-          <p>Typically the ng-app directive is used on the root html or body elements so that the entire document is traversed and linked by the compiler.</p><br>
+          <p>Typically the<strong> ng-app</strong> directive is used on the root html or body elements so that the entire document is traversed and linked by the compiler.</p><br>
           <pre><code class="html" data-trim>
 &lt;html ng-app="app"&gt;
 
