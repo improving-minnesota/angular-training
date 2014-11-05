@@ -47,19 +47,19 @@
           <h2>What is E2E?</h2>
         </section>
         <section>
-          <p>E2E stands for End-to-End</p>
+          <p>E2E stands for<strong> End-to-End</strong></p>
         </section>
         <section>
-          <p>E2E testing is a methodology used to test whether the flow of an application is performing as designed from start to finish.</p>
+          <p><strong> E2E testing</strong> is a methodology used to test whether the flow of an application is performing as designed from start to finish.</p>
         </section>
         <section>
           <p>E2E tests validate the functionality of the application as a whole instead of the individual parts and pieces (unit testing).</p>
         </section>
         <section>
-          <p>Typically, E2E testing in web applications is the automation of an end user.</p>
+          <p>In web applications, E2E testing typically automates the actions of an end user.</p>
         </section>
         <section>
-          <p>The preferred tool used to accomplish this testing in AngularJS applications is Protractor.</p>
+          <p>The preferred tool used to accomplish this testing in AngularJS applications is<strong> Protractor.</strong></p>
         </section>
         <section>
           <h1>Protractor</h1>
@@ -68,19 +68,19 @@
           <p>What is Protractor?</p>
         </section>
         <section>
-          <p>Protractor is an end to end test framework for AngularJS applications thats built on top of WebDriverJS.</p>
+          <p><strong> Protractor</strong> is an end-to-end test framework for AngularJS applications thats built on top of<strong> WebDriverJS.</strong></p>
         </section>
         <section>
-          <p>WebDriverJS is just a JavaScript API for Selenium.</p>
+          <p><strong> WebDriverJS</strong> is just a JavaScript API for<strong> Selenium.</strong></p>
         </section>
         <section>
           <p>What is Selenium?</p>
         </section>
         <section>
-          <p>Selenium is a tool that automates browsers and it runs as an independent server.</p>
+          <p><strong> Selenium</strong> is a tool that automates browsers; it runs as an independent server.</p>
         </section>
         <section>
-          <p>Think of Selinium as an end user.</p>
+          <p>Think of Selenium as an automated end user.</p>
         </section>
         <section>
           <p>We use WebDriverJS to send instructions to a Selenium server running in the background.</p>
@@ -88,40 +88,46 @@
         <section><img src="/angular-training/assets/img/lecture-11/protractor-flow.png" class="no-style"></section>
         <section>
           <h2>ChromeDriver</h2>
-          <p>In this lab we're going to use ChromeDriver which allows us to bypass a Selenium installation and "drive" Chrome directly.</p>
+          <p>In this lab we're going to use<strong> ChromeDriver</strong>, which allows us to bypass a Selenium installation and "drive" Chrome directly.</p>
         </section>
         <section>
           <h1>Writing E2E Tests</h1>
         </section>
         <section>
-          <p>Protractor and WebDriverJS expose global API's that you can use to automate actions that a user would perform.</p>
+          <p>Protractor and WebDriverJS expose global APIs that you can use to automate actions that a user would perform.</p>
         </section>
         <section>
-          <p>One important thing to note about protractor tests is that, unlike karma tests which run in the browser, protractor tests run in node and drive a browser.</p>
+          <p>One important thing to note about Protractor tests is that, unlike Karma tests that run in the browser, Protractor tests run in Node.js and "drive" a browser.</p>
         </section>
         <section>
-          <p><code>browser</code>  is a wrapper around an instance of webdriver.</p>
+          <h2>E2E Test Syntax</h2>
+        </section>
+        <section>
+          <p>Protractor uses the Jasmine test framework by default, so you can use the<strong> describe</strong> and<strong> it</strong> structure, just like in Karma tests.</p>
+        </section>
+        <section>
+          <p>The<strong> browser</strong> global variable is a wrapper around an instance of WebDriver.</p>
           <p>You can use this for navigation and page-wide information.</p>
         </section>
         <section>
-          <p><code>element</code>  is a helper function for finding and interacting with elements on the page you are testing.</p>
+          <p>The<strong> element</strong> global variable contains a helper function for finding and interacting with elements on the page you are testing.</p>
         </section>
         <section>
-          <p><code>by</code>  is a collection of element locator strategies.</p>
-          <p>For example, elements can be found by CSS selector, by ID, or by the attribute they are bound to with ng-model.</p>
+          <p>The<strong> by</strong> global variable contains a collection of element locator strategies.</p>
+          <p>For example, elements can be found by CSS selector, by ID, or by the attribute they are bound to with<strong> ng-model.</strong></p>
         </section>
         <section>
-          <p>These locator strategies are Angular aware.</p>
-          <p>You can use them to find and interact with elements</p>
+          <p>These locator strategies are Angular-aware.</p>
+          <p>You can use them to find and interact with elements.</p>
           <ul>
-            <li>by.repeater</li>
-            <li>by.model</li>
-            <li>by.binding</li>
+            <li><strong>by.repeater</strong></li>
+            <li><strong>by.model</strong></li>
+            <li><strong>by.binding</strong></li>
           </ul>
         </section>
         <section>
-          <p><code>protractor</code>  is the protractor namespace which wraps the webdriver namespace.</p>
-          <p>This contains static variables and classes, such as protractor.Key which enumerates the codes for special keyboard signals.</p>
+          <p><strong> protractor</strong> is the protractor namespace which wraps the webdriver namespace.</p>
+          <p>This contains static variables and classes, such as<strong> protractor.Key</strong>, which enumerates the codes for special keyboard signals.</p>
         </section>
         <section>
           <p>We can use these functions to automate the end user and test that the page behaves in the way we expect.</p><br>
@@ -148,24 +154,24 @@ describe('Employees', function () {
           <h2>Page Objects</h2>
         </section>
         <section>
-          <p>When writing real tests scripts for your page, it's best to use the Page Objects pattern to make your tests more readable.</p>
+          <p>When writing real tests scripts for your page, it's best to use the<strong> Page Objects</strong> pattern to make your tests more readable.</p>
         </section>
         <section>
           <h2>Page Objects</h2>
         </section>
         <section>
-          <p>What are page objects?</p><br>
+          <p>What are Page Objects?</p><br>
           <ul>
-            <li>Page Objects are models of the UI you are testing.</li>
+            <li><strong> Page Objects</strong> are models of the UI you are testing.</li>
             <li>They reduce the amount of duplications in our tests required to interact with the user interface.</li>
-            <li>Page Objects face in both directions.  You can use them to set or get things like field values.</li>
+            <li>Page Objects "face" in both directions.  You can use them to set or get things like field values.</li>
           </ul>
         </section>
         <section>
-          <p>Facing towards the developer of a test, they represent the services offered by a particular page.</p>
+          <p>Facing "toward" the developer of a test, they represent the services offered by a particular page.</p>
         </section>
         <section>
-          <p>Facing away from the developer, they should be the only thing that has a deep knowledge of the structure of the HTML of a page (or part of a page)</p>
+          <p>Facing "away" from the developer, they should be the only thing that has a deep knowledge of the structure of the HTML of a page (or part of a page).</p>
         </section>
         <section>
           <p>It's simplest to think of the methods on a Page Object as offering the "services" that a page offers rather than exposing the details and mechanics of the page.</p>
@@ -182,7 +188,7 @@ function EmployeesIndexPage() {
     by.buttonText("New Employee")
   );
   
-  // Here, we're finding an element by it's repeater configuration
+  // Here, we're finding an element by its repeater configuration
   this.firstEmployee = element(
     by.repeater('employee in pageConfig.data').row(0)
   );
@@ -206,7 +212,7 @@ describe('Employees', function () {
 </pre>
         </section>
         <section>
-          <p>Then, we'll use a beforeEach to make sure that each of our specs start at the employee index page.</p><br>
+          <p>Then, we'll use a<strong> beforeEach</strong> to make sure that each of our specs start at the employee index page.</p><br>
           <pre><code data-trim>
 describe('Employees', function () {
 
@@ -246,13 +252,13 @@ describe('Employees', function () {
 </pre>
         </section>
         <section>
-          <p>Yes, it's that easy</p><img style="width: 100%; height: 100%;" src="/angular-training/assets/img/lecture-11/mind-blown.gif" class="no-style">
+          <p>Yes, it's that easy.</p><img style="width: 100%; height: 100%;" src="/angular-training/assets/img/lecture-11/mind-blown.gif" class="no-style">
         </section>
         <section>
           <h3>Things to consider</h3>
         </section>
         <section>
-          <p>Write tests that address the behavior of your application and not the framework (don’t test data binding).</p>
+          <p>You should write tests that address the behavior of your application and not the framework (don’t test data binding).</p>
         </section>
         <section>
           <p>Each test block should test as little as possible.</p>
@@ -262,7 +268,7 @@ describe('Employees', function () {
           <h2>Protractor</h2>
         </section>
         <section>
-          <p>In this lab, you'll set up protractor and create some E2E tests.</p>
+          <p>In this lab, you'll set up Protractor and create some E2E tests.</p>
         </section>
       </div>
     </div>

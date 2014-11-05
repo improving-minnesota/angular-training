@@ -44,7 +44,7 @@
           <h1>Filters</h1>
         </section>
         <section>
-          <p>When used in expressions, filters are an easy way to convert model values to display values.</p>
+          <p>When used in expressions,<strong> filters</strong> are an easy way to convert model values to display values.</p>
           <p>Inside an expression, just "pipe" the model value to a particular filter.</p><br>
           <div class="text-center">
             <pre><code class="html" data-trim>
@@ -91,13 +91,13 @@
           <h2>Creating Custom Filters</h2>
         </section>
         <section>
-          <p>Filters are specialized objects which means their API is defined by AngularJS.</p>
+          <p>Filters are<strong> specialized objects</strong>, which means their API is defined by AngularJS.</p>
         </section>
         <section>
           <p>To create a filter, just register a new filter factory function with your module.</p>
         </section>
         <section>
-          <p>Internally, this will use the filterProvider (provided by AngularJS).</p><br>
+          <p>Internally, this will use the<strong> filterProvider</strong></p> (provided by AngularJS).<br>
           <pre><code class="js" data-trim>
 angular.module('boolean.filters', [ ])
   .filter('yesNo', function(myDependency) {
@@ -150,7 +150,7 @@ angular.module('boolean.filters', [ ])
 </pre>
         </section>
         <section>
-          <p>Filter's aren't limited to simple values. They can manipulate any type of object.</p><br>
+          <p>Filters aren't limited to simple values. They can manipulate any type of object.</p><br>
           <pre><code class="html" data-trim>
 &lt;p&gt;{{new Date() | momentShortDate}}&lt;/p&gt;
 
@@ -173,10 +173,10 @@ angular.module('date.filters', [ ])
           <p>Since filters can be used with any type of object, we can also use them to filter arrays.</p>
         </section>
         <section>
-          <p>To use a filter with ng-repeat, simply "pipe" the source array through a filter.</p>
+          <p>To use a filter with<strong> ng-repeat</strong>, simply "pipe" the source array through a filter.</p>
         </section>
         <section>
-          <p>This will take the source array and return a new filtered array to ng-repeat.</p><br>
+          <p>This will take the source array and return a new filtered array to<strong> ng-repeat.</strong></p><br>
           <pre><code class="html" data-trim>
 &lt;tr ng-repeat="employee in employees | filter:myFilter | orderBy:'name'"&gt;
   &lt;td&gt;{{employee.name}}&lt;/td&gt;
@@ -225,7 +225,7 @@ describe('yesNo Filter', function() {
           <h2>Filters</h2>
         </section>
         <section>
-          <p>In this lab you'll use the "orderBy" filter on employee, timesheet, and project lists and create some of your own filters.</p>
+          <p>In this lab you'll use the<strong> orderBy</strong> filter on employee, timesheet, and project lists and create some of your own filters.</p>
         </section>
         <script>
           angular.module('lecture09', []).controller('Lecture9Controller', function($scope) {

@@ -44,15 +44,15 @@
           <h1>Providers</h1>
         </section>
         <section>
-          <p>The AngularJS injector creates two types of objects, services and specialized objects.</p>
+          <p>The AngularJS injector creates two types of objects,<strong> services</strong> and<strong> specialized objects.</strong></p>
         </section>
         <section>
           <h3>Services</h3>
-          <p>Services are objects whose API is defined by the developer writing the service.</p>
+          <p><strong>Services</strong> are objects whose API is defined by the developer writing the service.</p>
         </section>
         <section>
           <h3>Specialized Objects</h3>
-          <p>Specialized objects conform to a specific Angular framework API.</p>
+          <p><strong>Specialized objects</strong> conform to a specific Angular framework API.</p>
         </section>
         <section>
           <p>An example of these specialized objects are controllers, directives, filters or animations.</p>
@@ -61,7 +61,7 @@
           <p>The injector needs to know how to create these objects.</p>
         </section>
         <section>
-          <p>You tell the injector by registering a "recipe" for creating your object.</p>
+          <p>You tell the injector by registering a<strong> recipe</strong> for creating your object.</p>
         </section>
         <section>
           <p>There are five recipe types.</p>
@@ -70,7 +70,7 @@
           <h2>Value Recipe</h2>
         </section>
         <section>
-          <p>You can use the Value recipe to create named values that are injectable.</p>
+          <p>You can use the<strong> Value recipe</strong> to create named values that are injectable.</p>
         </section>
         <section>
           <p>You cannot inject dependencies into a Value recipe.</p>
@@ -101,7 +101,7 @@ angular.module('app', [])
             Since simple values don't have dependencies or configuration,
             it is often handy to make them available in both the configuration and run phases.
           </p>
-          <p>This is what the Constant recipe is for.</p>
+          <p>This is what the<strong> Constant recipe</strong> is for.</p>
         </section>
         <section>
           <pre><code class="js" data-trim>
@@ -115,7 +115,7 @@ angular.module('app')
           <h2>Factory Recipe</h2>
         </section>
         <section>
-          <p>The Factory recipe builds on top of the Value recipe but, adds the following abilities</p>
+          <p>The<strong> Factory recipe</strong> builds on top of the Value recipe, but adds the following abilities:</p>
           <ul>
             <li>the ability to use other services (have dependencies)</li>
             <li>service initialization</li>
@@ -148,10 +148,10 @@ angular.module('app', [])
           <h2>Service Recipe</h2>
         </section>
         <section>
-          <p>The Service recipe produces a service just like the Value or Factory recipes, but it does so by invoking a constructor with the new operator.</p>
+          <p>The<strong> Service recipe</strong> produces a service just like the Value or Factory recipes, but it does so by invoking a constructor with the new operator.</p>
         </section>
         <section>
-          <p>First, lets see how we can implement a service recipe with a factory</p><br>
+          <p>First, let's see how we can implement a Service recipe with a factory.</p><br>
           <pre><code class="js" data-trim>
 function AuthenticationService(myDependency) {
   this.loginAttempts = 0;
@@ -171,7 +171,7 @@ function AuthenticationService(myDependency) {
 </pre>
         </section>
         <section>
-          <p>With the AuthenticationService constructor function we just created, we can then register the new Service.</p>
+          <p>With the AuthenticationService constructor function we just created, we can then register the new service.</p>
           <pre><code class="js" data-trim>
 angular.module('app', [])
   .factory('authentication', function (myDependency) {
@@ -183,7 +183,7 @@ angular.module('app', [])
 </pre>
         </section>
         <section>
-          <p>Using the service recipe, we can accomplish the same thing with less code.</p><br>
+          <p>Using the Service recipe, we can accomplish the same thing with less code.</p><br>
           <pre><code class="js" data-trim>
 angular.module('app', [])
   .service('authentication', function(myDependency) {
@@ -204,28 +204,27 @@ angular.module('app', [])
 </pre>
         </section>
         <section>
-          <p>Service recipes follow a design pattern called constructor injection.</p>
+          <p>Service recipes follow a design pattern called<strong> constructor injection.</strong></p>
         </section>
         <section>
           <h2>Providers</h2>
         </section>
         <section>
-          <p>The Provider recipe is the core recipe type and all the other recipe types are just syntactic sugar on top of it.</p>
+          <p>The<strong> Provider recipe</strong> is the core recipe type; all the other recipe types are just syntactic sugar on top of it.</p>
         </section>
         <section>
-          <p>It is the most verbose recipe with the most abilities, but for most services it's overkill.</p>
+          <p>It's the most verbose recipe with the most abilities, but for most services it's overkill.</p>
         </section>
         <section>
           <p>You should use the Provider recipe only when you want to expose an API for application-wide configuration before the application starts.</p>
         </section>
         <section>
-          <p>The Provider recipe is syntactically defined as a custom type that implements a $get method.</p>
+          <p>The Provider recipe is syntactically defined as a custom type that implements a<strong> $get</strong> method.</p>
         </section>
         <section>
           <p>This method is a factory function just like the one we use in Factory recipe.</p>
-          <p>
-            In fact, if you define a Factory recipe, an empty Provider type with the $get
-            method set to your factory function is automatically created under the hood.
+          <p>In fact, if you define a Factory recipe, an empty Provider type with the
+            <Strong> $get</Strong> method set to your factory function is automatically created under the hood.
           </p>
         </section>
         <section>
@@ -249,13 +248,10 @@ angular.module('app', [])
           <h2>api service</h2>
         </section>
         <section>
-          <p>
-            In order to make it easier to use $resource, we have added an api
-            service to handle all of the configuration of new resources.
-          </p>
+          <p>In order to make it easier to use<strong> $resource</strong>, we have added an api service to handle all of the configuration of new resources.</p>
         </section>
         <section>
-          <p>First we declare the factory and create a 'private' configuration.</p>
+          <p>First, we declare the factory and create a 'private' configuration.</p>
           <pre><code class="js" data-trim>
 .factory('api', function ($resource) {
   var api = {
@@ -280,7 +276,7 @@ angular.module('app', [])
 </pre>
         </section>
         <section>
-          <p>Next, we create an 'add' function to check the configuration, then return the api object.</p>
+          <p>Next, we create an<strong> add()</strong> function to check the configuration, then return the<strong> api</strong> object.</p>
           <pre><code class="js" data-trim>
   add : function (config) {
     var params,

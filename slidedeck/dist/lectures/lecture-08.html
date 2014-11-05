@@ -44,9 +44,8 @@
           <h1>Directives</h1>
         </section>
         <section>
-          <p>
-            At a high level, directives are markers on a DOM element (such as an attribute, element name, or CSS class)
-            that tell AngularJS's HTML compiler ($compile) to attach a specified behavior to that DOM element.
+          <p>At a high level,<strong> directives</strong> are markers on a DOM element (such as an attribute, element name, or CSS class)
+            that tell AngularJS's HTML compiler<strong> ($compile)</strong> to attach a specified behavior to that DOM element.
           </p>
         </section>
         <section>
@@ -56,7 +55,7 @@
           <h2>Matching Directives</h2>
         </section>
         <section>
-          <p>In the following example, we say that the &lt;input&gt; element matches the ngModel directive.</p><br>
+          <p>In the following example, we say that the &lt;input&gt; element matches the<strong> ngModel</strong> directive.</p><br>
           <div class="text-center">
             <pre><code class="html" data-trim>
 &lt;input ng-model="myModel" /&gt;
@@ -66,13 +65,10 @@
           </div>
         </section>
         <section>
-          <p>Angular normalizes an element's tag and attribute name to determine which elements match which directives.</p>
+          <p>Angular normalizes an element's tag and attribute name to match elements to directives.</p>
         </section>
         <section>
-          <p>
-            Directives are typically declared in camelCase form.  Since HTML is case insensitive, directives are referred to in their
-            lower-case-dash-delimited form when attached to elements.
-          </p>
+          <p>Directives are typically declared in<strong> camelCase</strong> form.  Since HTML is case insensitive, directives are referred to in their lower-case-dash-delimited, or<strong> dash-case</strong> form when attached to elements.</p>
         </section>
         <section>
           <p>Below is an example of declaring a directive and referring to it in HTML.</p><br>
@@ -90,28 +86,28 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
-          <p>$compile can match directives based on element names,</p>
+          <p><strong> $compile</strong> can match directives based on<strong> element names,</strong></p>
           <div class="text-center">
             <pre><code class="html" data-trim>
 &lt;my-cool-directive&gt; &lt;/my-cool-directive&gt;
 
 </code></pre>
           </div>
-          <p>attributes,</p>
+          <p><strong>attributes,</strong></p>
           <div class="text-center">
             <pre><code class="html" data-trim>
 &lt;div my-cool-directive&gt; &lt;/div&gt;
 
 </code></pre>
           </div>
-          <p>class names,</p>
+          <p><strong>class names,</strong></p>
           <div class="text-center">
             <pre><code class="html" data-trim>
 &lt;div class="my-cool-directive"&gt; &lt;/div&gt;
 
 </code></pre>
           </div>
-          <p>and html comments.</p>
+          <p>and<strong> HTML comments.</strong></p>
           <div class="text-center">
             <pre><code class="html" data-trim>
 &lt;!-- directive: my-cool-directive --&gt;
@@ -132,10 +128,7 @@ angular.module('app.directives', [])
           <p>Like controllers, directives are registered on modules.</p>
         </section>
         <section>
-          <p>
-            To register a directive, you use the module.directive API. module.directive takes the normalized
-            directive name followed by a factory function.
-          </p><br>
+          <p>To register a directive, you use the<strong> module.directive</strong> API.<strong> module.directive</strong> takes the normalized directive name followed by a factory function.</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective',
@@ -150,19 +143,16 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
-          <p>
-            This factory function should return an object with the different options to tell $compile how
-            the directive should behave when matched.
-          </p>
+          <p>This factory function should return an object with the different options to tell<strong> $compile</strong> how the directive should behave when matched.</p>
         </section>
         <section>
           <h2>Directive Configuration</h2>
         </section>
         <section>
-          <h3>Template</h3>
+          <h3>Templates</h3>
         </section>
         <section>
-          <p>You can use templates to set the contents of your directive in two ways.</p>
+          <p>You can use<strong> templates</strong> to set the contents of your directive in two ways.</p>
         </section>
         <section>
           <p>You can add inline templates for very small templates.</p><br>
@@ -178,7 +168,7 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
-          <p>More often that not, your templates will be large.  In this case, it's better to use the templateUrl option.</p><br>
+          <p>More often that not, your templates will be large.  In this case, it's better to use the<strong> templateUrl</strong> option to link to a separate HTML file.</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective', function() {
@@ -194,7 +184,7 @@ angular.module('app.directives', [])
           <p>One important thing to note about directive templates is that they can only have one root element.</p>
         </section>
         <section>
-          <p>If a directive template has more than one root element, the $compile service will throw an error.</p>
+          <p>If a directive template has more than one root element, the<strong> $compile</strong> service will throw an error.</p>
         </section>
         <section>
           <p>Is the following directive template valid?</p><br>
@@ -209,17 +199,17 @@ angular.module('app.directives', [])
         </section>
         <section>
           <h4>Nope!</h4>
-          <p>HTML comments are elements which means this template violates the one root element rule.</p>
+          <p>HTML comments are elements, which means this template violates the one root element rule.</p>
         </section>
         <section>
           <h3>Replace</h3>
         </section>
         <section>
-          <p>The replace option specifies how the template should be placed in the directive.</p>
+          <p>The<strong> replace</strong> option specifies how the template should be placed in the directive.</p>
         </section>
         <section>
-          <p>When replace is true, the template will replace the element the directive is specified on.</p>
-          <p>When replace is false, the template will be placed inside the element the directive is specified on.</p><br>
+          <p>When<strong> replace</strong> is<strong> true</strong>, the template will replace the element the directive is specified on.</p>
+          <p>When<strong> replace</strong> is<strong> false</strong>, the template will be placed inside the element the directive is specified on.</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective', function() {
@@ -302,7 +292,7 @@ angular.module('app.directives', [])
           </p>
         </section>
         <section>
-          <p>We can do this by creating what we call an isolate scope using the scope option.</p>
+          <p>We can do this by creating what we call an<strong> isolate scope</strong> using the<strong> scope</strong> option on the directive.</p>
         </section>
         <section>
           <p>The directive below will have an isolate scope that is not mapped to anything in the parent scope (completely isolated)</p><br>
@@ -318,7 +308,7 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
-          <p>Assuming myCoolDirective has a completely isolate scope.</p>
+          <p>Assuming myCoolDirective has a completely isolate scope,</p>
           <pre><code class="html" data-trim>
 &lt;div ng-init="myVar = 3"&gt;
   &lt;p&gt;{{myVar}}&lt;/p&gt;
@@ -328,7 +318,7 @@ angular.module('app.directives', [])
 &lt;/div&gt;
 
 </code></pre>
-          <p>It would result in the following after being compiled and linked.</p>
+          <p>it would result in the following after being compiled and linked.</p>
           <pre><code class="html" data-trim>
 &lt;div ng-init="myVar = 3"&gt;
   &lt;p&gt;3&lt;/p&gt;
@@ -341,7 +331,7 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
-          <p>When we want to map the outer scope to the directives inner scope, we use a scope configuration object.</p><br>
+          <p>When we want to map the outer scope to the directives inner scope, we use a<strong> scope configuration object.</strong></p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective',function() {
@@ -357,7 +347,7 @@ angular.module('app.directives', [])
         </section>
         <section>
           <p>There are multiple ways to map parent scope to the isolate scope.</p>
-          <p>Lets start with the most common, '=' or two way binding.</p>
+          <p>Let's start with the most common: the '=' or<strong> two-way</strong> binding.</p>
         </section>
         <section>
           <p>This will instruct Angular to bind the value supplied with the element attribute "some-attribute" to the isolate scope.</p><br>
@@ -383,7 +373,7 @@ angular.module('app.directives', [])
           <p>Changes made in the parent scope are reflected in the isolate scope and visa versa.</p><img src="/angular-training/assets/img/lecture-08/scope.png" class="no-style">
         </section>
         <section>
-          <p>Assuming myCoolDirective binds someAttribute between scopes.</p>
+          <p>Assuming myCoolDirective binds someAttribute between scopes,</p>
           <pre><code class="html" data-trim>
 &lt;div ng-init="myVar = 3"&gt;
   &lt;p&gt;{{myVar}}&lt;/p&gt;
@@ -393,7 +383,7 @@ angular.module('app.directives', [])
 &lt;/div&gt;
 
 </code></pre>
-          <p>It would result in the following after being compiled and linked.</p>
+          <p>it would result in the following after being compiled and linked.</p>
           <pre><code class="html" data-trim>
 &lt;div ng-init="myVar = 3"&gt;
   &lt;p&gt;3&lt;/p&gt;
@@ -406,7 +396,7 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
-          <p>Next, we have function binding or '&'</p><br>
+          <p>Next, we have the '&', or<strong> function</strong> binding.</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective', function() {
@@ -434,7 +424,7 @@ angular.module('app.directives', [])
           <p>The '&' binding is very useful for supplying callbacks to directives.</p>
         </section>
         <section>
-          <p>The last type of binding in the attribute value or expression binding '@'.</p>
+          <p>The last type of binding is the '@', or<strong> attribute value or expression</strong> binding.</p>
         </section>
         <section>
           <p>The '@' binding maps the attribute value (string) in the context of the parent scope to the isolate scope.</p><br>
@@ -480,7 +470,7 @@ angular.module('app.directives', [])
           <h3>Transclude</h3>
         </section>
         <section>
-          <p>The transclude option changes the way scopes are nested.</p>
+          <p>The<strong> transclude</strong> option changes the way scopes are nested.</p>
         </section>
         <section>
           <p>It makes it so that the contents of a transcluded directive have whatever scope is outside the directive, rather than whatever scope is on the inside.</p>
@@ -492,7 +482,7 @@ angular.module('app.directives', [])
           <p>Another way to look at transclusion is as a picture frame.</p><img src="/angular-training/assets/img/lecture-08/transclude-frame.png" class="no-style">
         </section>
         <section>
-          <p>First, lets look at using a transclude directive</p><br>
+          <p>First, let's look at using a transclude directive.</p><br>
           <pre><code class="html" data-trim>
 &lt;div ng-init="myTranscludedVar = 'Hello'"&gt;
   &lt;div my-frame-directive&gt;
@@ -504,7 +494,7 @@ angular.module('app.directives', [])
 </pre>
         </section>
         <section>
-          <p>Now, lets look at the template for a transclusion directive</p><br>
+          <p>Now, let's look at the template for a transclusion directive.</p><br>
           <pre><code class="html" data-trim>
 &lt;div ng-init="myVar = 'World!'"&gt;
   &lt;div ng-transclude &gt;&lt;/div&gt;
@@ -519,7 +509,7 @@ angular.module('app.directives', [])
 
 </code></pre>
           </div>
-          <p>in the place of the element with the ng-transclude attribute</p>
+          <p>in the place of the element with the ng-transclude attribute.</p>
         </section>
         <section>
           <p>After compilation, the final DOM will look like</p><br>
@@ -582,10 +572,10 @@ angular.module('app.directives', [])
           <h3>Linking</h3>
         </section>
         <section>
-          <p>Directives that want to modify the DOM typically use the link option.</p>
+          <p>Directives that want to modify the DOM typically use the<strong> link</strong> option.</p>
         </section>
         <section>
-          <p>The link property takes a function with the following signature</p><br>
+          <p>The link property takes a function with the following signature:</p><br>
           <pre><code data-trim>
 function(scope, element, attrs) {
 
@@ -593,16 +583,16 @@ function(scope, element, attrs) {
 
 </code></pre>
           <ul>
-            <li><strong>scope</strong> is the Angular scope of the directive (isolate).</li>
-            <li><strong>element</strong> is the jqLite-wrapped element that this directive matches.</li>
+            <li><strong>scope:</strong> the Angular scope of the directive (isolate).</li>
+            <li><strong>element:</strong> the jqLite-wrapped element that this directive matches.</li>
             <li>
-              <strong>attrs</strong> is a hash object with key-value pairs of normalized attribute names and their corresponding attribute values.
+              <strong>attrs:</strong> a hash object with key-value pairs of normalized attribute names and their corresponding attribute values.
               
             </li>
           </ul>
         </section>
         <section>
-          <p>Inside the link function, you can initialize scope, watch properties, modify element attributes, and etc.</p>
+          <p>Inside the link function, you can initialize scope, watch properties, modify element attributes, etc.</p>
         </section>
         <section>
           <p>For example</p><br>
@@ -632,13 +622,13 @@ angular.module('app.directives', [])
           <h3>Controllers</h3>
         </section>
         <section>
-          <p>You can easily attach controllers to directives with the controller option.</p>
+          <p>You can easily attach controllers to directives with the<strong> controller</strong> option.</p>
         </section>
         <section>
           <p>There are two ways to specify controllers on directives.</p>
         </section>
         <section>
-          <p>You can declare a controller inline</p><br>
+          <p>You can declare a controller inline:</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective', function() {
@@ -654,10 +644,10 @@ angular.module('app.directives', [])
   
 </code>
 </pre>
-          <p>The $scope injected into the controller will be the isolate scope of the directive.</p>
+          <p>The<strong> $scope</strong> injected into the controller will be the isolate scope of the directive.</p>
         </section>
         <section>
-          <p>Or, you can specify the name of an existing controller</p><br>
+          <p>Or, you can specify the name of an existing controller:</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .controller('MyCoolDirectiveController', function($scope) {
@@ -683,11 +673,11 @@ angular.module('app.directives', [])
           <p>In some cases, you'll want to use multiple directives together and have them communicate with each other.</p>
         </section>
         <section>
-          <p>The ngModel and validation directives are a great example of this behavior.</p>
+          <p>The<strong> ngModel</strong> and<strong> validation</strong> directives are a great example of this behavior.</p>
         </section>
         <section>
-          <p>The ngModel directive controls the binding between the input (view) value and model value.</p>
-          <p>The ng-maxlength directive tells the ngModel directive when the view value is valid and that it should update the model.</p><br>
+          <p>The<strong> ngModel</strong> directive controls the binding between the input (view) value and model value.</p>
+          <p>The<strong> ng-maxlength</strong> directive tells the<strong> ngModel</strong> directive when the view value is valid and that it should update the model.</p><br>
           <div class="text-center">
             <pre><code class="html" data-trim>
 &lt;input ng-model="myString" ng-maxlength="5" /&gt;
@@ -697,19 +687,19 @@ angular.module('app.directives', [])
           </div>
         </section>
         <section>
-          <p>For this use case, AngularJS provides the "require" configuration option for directives.</p>
+          <p>For this use case, AngularJS provides the<strong> require</strong> configuration option for directives.</p>
         </section>
         <section>
-          <p>The require option tells the $compile service to find another directive and inject it's controller as the fourth argument to the linking function.</p>
+          <p>The<strong> require</strong> option tells the<strong> $compile</strong> service to find another directive and inject its controller as the fourth argument to the linking function.</p>
         </section>
         <section>
-          <p>The require option takes a string name (or array of strings) of the directive(s) to pass in.</p>
+          <p>The<strong> require</strong> option takes a string name (or array of strings) of the directive(s) to pass in.</p>
         </section>
         <section>
           <p>If no such directive can be found, or if the directive does not have a controller, then an error is raised.</p>
         </section>
         <section>
-          <p>The require names can be prefixed with flags to tell the $compile service how to find another directive's controller.</p>
+          <p>The require names can be prefixed with flags to tell the<strong> $compile</strong> service how to find another directive's controller.</p>
         </section>
         <section>
           <h4>(no prefix)</h4>
@@ -728,10 +718,10 @@ angular.module('app.directives', [])
           <p>Attempt to locate the required controller by searching the element's parents or pass null to the link function if not found.</p>
         </section>
         <section>
-          <p>Lets look at creating a directive that requires the ngModel directive</p>
+          <p>Let's look at creating a directive that requires the<strong> ngModel</strong> directive.</p>
         </section>
         <section>
-          <p>Since, ngModel and myCoolDirective are siblings (on the same element), we wont need to specify a prefix.</p><br>
+          <p>Since<strong> ngModel</strong> and<strong> myCoolDirective</strong> are siblings (on the same element), we won't need to specify a prefix.</p><br>
           <div class="text-center">
             <pre><code class="html" data-trim>
 &lt;input ng-model="myString" my-cool-directive /&gt;
@@ -741,7 +731,7 @@ angular.module('app.directives', [])
           </div>
         </section>
         <section>
-          <p>Now that the ngModel controller is injected into our link function, we can interface it's controller.</p><br>
+          <p>Now that the<strong> ngModel</strong> controller is injected into our link function, we can access its controller.</p><br>
           <pre><code data-trim>
 angular.module('app.directives', [])
   .directive('myCoolDirective', function() {
@@ -756,10 +746,10 @@ angular.module('app.directives', [])
   
 </code>
 </pre>
-          <p>Here, we're just printing out the model value and view value maintained by the ngModel controller.</p>
+          <p>Here, we're just printing out the model value and view value maintained by the<strong> ngModel</strong> controller.</p>
         </section>
         <section>
-          <p>So when should you put logic in a controller vs. a linking function?</p><br>
+          <p>So when should you put logic in a controller vs. using a linking function?</p><br>
           <ul>
             <li><strong>Controller</strong> - Your logic can be reused across directives.</li>
             <li><strong>Controller</strong> - You're providing an API for use by other directives (require).</li>
@@ -774,7 +764,7 @@ angular.module('app.directives', [])
           <p>Now that we've learned about how to create our own directives, we'll need to learn how we can test them.</p>
         </section>
         <section>
-          <p>First, we'll need to make sure that we inject the $compile service, our directive module, and any templates used by the directive.</p><br>
+          <p>First, we'll need to make sure that we inject the<strong> $compile</strong> service, our directive module, and any templates used by the directive.</p><br>
           <pre><code data-trim>
 beforeEach(module(
   'app.directives',
@@ -790,7 +780,7 @@ beforeEach(inject(function($rootScope, _$compile_) {
 </pre>
         </section>
         <section>
-          <p>Then, we'll create our mock<code>$scope</code>, element, and finally use the<code>$compile</code> service to compile and link our directive.</p><br>
+          <p>Then, we'll create our mock<strong> $scope</strong>, element, and finally use the<strong> $compile</strong> service to compile and link our directive.</p><br>
           <pre><code data-trim>
 beforeEach(function () {
   // Notice that we can use properties
@@ -841,7 +831,7 @@ beforeEach(function () {
           <p>Now we're ready to start testing the expected behavior of the directive.</p>
         </section>
         <section>
-          <p>Lets assume that myCoolDirective sets the CSS attribute  "color" on the element based on myColor.</p><br>
+          <p>Lets assume that<strong> myCoolDirective</strong> sets the CSS attribute  "color" on the element based on<strong>   myColor.</strong></p><br>
           <pre><code data-trim>
 describe('my cool directive', function() {
   it('should set the element color', function () {
@@ -867,10 +857,10 @@ describe('my cool directive', function() {
           <p>AngularJS provides jqLite functions that expose the parent scope and isolate scope of a particular element</p>
         </section>
         <section>
-          <p>The non-isolate scope can be accessed by calling<code>element.scope()</code></p>
+          <p>The non-isolate scope can be accessed by calling<strong> element.scope()</strong></p>
         </section>
         <section>
-          <p>The isolate scope can be accessed by calling<code>element.isolateScope()</code></p>
+          <p>The isolate scope can be accessed by calling<strong> element.isolateScope()</strong></p>
         </section>
         <section>
           <p>Here, we can validate the binding between the parent and isolate scope.</p><br>

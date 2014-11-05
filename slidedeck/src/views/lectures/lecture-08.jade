@@ -13,8 +13,12 @@ include ../includes/mixins
 
   section
     p
-      | At a high level, directives are markers on a DOM element (such as an attribute, element name, or CSS class)
-      | that tell AngularJS's HTML compiler ($compile) to attach a specified behavior to that DOM element.
+      | At a high level,
+      strong  directives
+      |  are markers on a DOM element (such as an attribute, element name, or CSS class)
+      | that tell AngularJS's HTML compiler
+      strong  ($compile)
+      |  to attach a specified behavior to that DOM element.
 
   section
     p Before we can write a directive, we need to know how Angular's HTML compiler determines when to use a given directive.
@@ -23,7 +27,9 @@ include ../includes/mixins
     h2 Matching Directives
 
   section
-    p In the following example, we say that the &lt;input&gt; element matches the ngModel directive.
+    p In the following example, we say that the &lt;input&gt; element matches the
+      strong  ngModel
+      |  directive.
     br
     .text-center
       pre.
@@ -33,12 +39,15 @@ include ../includes/mixins
         </code>
 
   section
-    p Angular normalizes an element's tag and attribute name to determine which elements match which directives.
+    p Angular normalizes an element's tag and attribute name to match elements to directives.
 
   section
     p
-      | Directives are typically declared in camelCase form.  Since HTML is case insensitive, directives are referred to in their
-      | lower-case-dash-delimited form when attached to elements.
+      | Directives are typically declared in
+      strong  camelCase
+      |  form.  Since HTML is case insensitive, directives are referred to in their lower-case-dash-delimited, or
+      strong  dash-case
+      |  form when attached to elements.
 
   section
     p Below is an example of declaring a directive and referring to it in HTML.
@@ -58,28 +67,34 @@ include ../includes/mixins
       </code>
 
   section
-    p $compile can match directives based on element names,
+    p
+      strong  $compile
+      |  can match directives based on
+      strong  element names,
     .text-center
       pre.
         <code class="html" data-trim>
         &lt;my-cool-directive&gt; &lt;/my-cool-directive&gt;
 
         </code>
-    p attributes,
+    p
+      strong attributes,
     .text-center
       pre.
         <code class="html" data-trim>
         &lt;div my-cool-directive&gt; &lt;/div&gt;
 
         </code>
-    p class names,
+    p
+      strong class names,
     .text-center
       pre.
         <code class="html" data-trim>
         &lt;div class="my-cool-directive"&gt; &lt;/div&gt;
 
         </code>
-    p and html comments.
+    p and
+      strong  HTML comments.
     .text-center
       pre.
         <code class="html" data-trim>
@@ -100,8 +115,11 @@ include ../includes/mixins
 
   section
     p
-      | To register a directive, you use the module.directive API. module.directive takes the normalized
-      | directive name followed by a factory function.
+      | To register a directive, you use the
+      strong  module.directive
+      |  API.
+      strong  module.directive
+      |  takes the normalized directive name followed by a factory function.
     br
     pre.
       <code data-trim>
@@ -118,17 +136,20 @@ include ../includes/mixins
 
   section
     p
-      | This factory function should return an object with the different options to tell $compile how
-      | the directive should behave when matched.
+      | This factory function should return an object with the different options to tell
+      strong  $compile
+      |  how the directive should behave when matched.
 
   section
     h2 Directive Configuration
 
   section
-    h3 Template
+    h3 Templates
 
   section
-    p You can use templates to set the contents of your directive in two ways.
+    p You can use
+      strong  templates
+      |  to set the contents of your directive in two ways.
 
   section
     p You can add inline templates for very small templates.
@@ -145,7 +166,9 @@ include ../includes/mixins
       </code>
 
   section
-    p More often that not, your templates will be large.  In this case, it's better to use the templateUrl option.
+    p More often that not, your templates will be large.  In this case, it's better to use the
+      strong  templateUrl
+      |  option to link to a separate HTML file.
     br
     pre.
       <code data-trim>
@@ -162,7 +185,9 @@ include ../includes/mixins
     p One important thing to note about directive templates is that they can only have one root element.
 
   section
-    p If a directive template has more than one root element, the $compile service will throw an error.
+    p If a directive template has more than one root element, the
+      strong  $compile
+      |  service will throw an error.
 
   section
     p Is the following directive template valid?
@@ -178,17 +203,27 @@ include ../includes/mixins
 
   section
     h4 Nope!
-    p HTML comments are elements which means this template violates the one root element rule.
+    p HTML comments are elements, which means this template violates the one root element rule.
 
   section
     h3 Replace
 
   section
-    p The replace option specifies how the template should be placed in the directive.
+    p The
+      strong  replace
+      |  option specifies how the template should be placed in the directive.
 
   section
-    p When replace is true, the template will replace the element the directive is specified on.
-    p When replace is false, the template will be placed inside the element the directive is specified on.
+    p When
+      strong  replace
+      |  is
+      strong  true
+      | , the template will replace the element the directive is specified on.
+    p When
+      strong  replace
+      |  is
+      strong  false
+      | , the template will be placed inside the element the directive is specified on.
     br
     pre.
       <code data-trim>
@@ -273,7 +308,11 @@ include ../includes/mixins
       | then map the outer scope to a directive's inner scope.
 
   section
-    p We can do this by creating what we call an isolate scope using the scope option.
+    p We can do this by creating what we call an
+      strong  isolate scope
+      |  using the
+      strong  scope
+      |  option on the directive.
 
   section
     p The directive below will have an isolate scope that is not mapped to anything in the parent scope (completely isolated)
@@ -290,7 +329,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Assuming myCoolDirective has a completely isolate scope.
+    p Assuming myCoolDirective has a completely isolate scope,
     pre.
       <code class="html" data-trim>
       &lt;div ng-init="myVar = 3"&gt;
@@ -301,7 +340,7 @@ include ../includes/mixins
       &lt;/div&gt;
 
       </code>
-    p It would result in the following after being compiled and linked.
+    p it would result in the following after being compiled and linked.
     pre.
       <code class="html" data-trim>
       &lt;div ng-init="myVar = 3"&gt;
@@ -314,7 +353,8 @@ include ../includes/mixins
       </code>
 
   section
-    p When we want to map the outer scope to the directives inner scope, we use a scope configuration object.
+    p When we want to map the outer scope to the directives inner scope, we use a
+      strong  scope configuration object.
     br
     pre.
       <code data-trim>
@@ -331,7 +371,9 @@ include ../includes/mixins
 
   section
     p There are multiple ways to map parent scope to the isolate scope.
-    p Lets start with the most common, '=' or two way binding.
+    p Let's start with the most common: the '=' or
+      strong  two-way
+      |  binding.
 
   section
     p This will instruct Angular to bind the value supplied with the element attribute "some-attribute" to the isolate scope.
@@ -360,7 +402,7 @@ include ../includes/mixins
     img.no-style(src="/angular-training/assets/img/lecture-08/scope.png")
 
   section
-    p Assuming myCoolDirective binds someAttribute between scopes.
+    p Assuming myCoolDirective binds someAttribute between scopes,
     pre.
       <code class="html" data-trim>
       &lt;div ng-init="myVar = 3"&gt;
@@ -371,7 +413,7 @@ include ../includes/mixins
       &lt;/div&gt;
 
       </code>
-    p It would result in the following after being compiled and linked.
+    p it would result in the following after being compiled and linked.
     pre.
       <code class="html" data-trim>
       &lt;div ng-init="myVar = 3"&gt;
@@ -384,7 +426,9 @@ include ../includes/mixins
       </code>
 
   section
-    p Next, we have function binding or '&'
+    p Next, we have the '&', or
+      strong  function
+      |  binding.
     br
     pre.
       <code data-trim>
@@ -414,7 +458,9 @@ include ../includes/mixins
     p The '&' binding is very useful for supplying callbacks to directives.
 
   section
-    p The last type of binding in the attribute value or expression binding '@'.
+    p The last type of binding is the '@', or
+      strong  attribute value or expression
+      |  binding.
 
   section
     p The '@' binding maps the attribute value (string) in the context of the parent scope to the isolate scope.
@@ -463,7 +509,9 @@ include ../includes/mixins
     h3 Transclude
 
   section
-    p The transclude option changes the way scopes are nested.
+    p The
+      strong  transclude
+      |  option changes the way scopes are nested.
 
   section
     p It makes it so that the contents of a transcluded directive have whatever scope is outside the directive, rather than whatever scope is on the inside.
@@ -476,7 +524,7 @@ include ../includes/mixins
     img.no-style(src="/angular-training/assets/img/lecture-08/transclude-frame.png")
 
   section
-    p First, lets look at using a transclude directive
+    p First, let's look at using a transclude directive.
     br
     pre.
       <code class="html" data-trim>
@@ -489,7 +537,7 @@ include ../includes/mixins
       </code>
 
   section
-    p Now, lets look at the template for a transclusion directive
+    p Now, let's look at the template for a transclusion directive.
     br
     pre.
       <code class="html" data-trim>
@@ -506,7 +554,7 @@ include ../includes/mixins
         &lt;p&gt;{{myTranscludedVar}}&lt;/p&gt;
 
         </code>
-    p in the place of the element with the ng-transclude attribute
+    p in the place of the element with the ng-transclude attribute.
 
   section
     p After compilation, the final DOM will look like
@@ -573,10 +621,12 @@ include ../includes/mixins
     h3 Linking
 
   section
-    p Directives that want to modify the DOM typically use the link option.
+    p Directives that want to modify the DOM typically use the
+      strong  link
+      |  option.
 
   section
-    p The link property takes a function with the following signature
+    p The link property takes a function with the following signature:
     br
     pre.
       <code data-trim>
@@ -587,14 +637,14 @@ include ../includes/mixins
       </code>
     ul
       li.
-        <strong>scope</strong> is the Angular scope of the directive (isolate).
+        <strong>scope:</strong> the Angular scope of the directive (isolate).
       li.
-        <strong>element</strong> is the jqLite-wrapped element that this directive matches.
+        <strong>element:</strong> the jqLite-wrapped element that this directive matches.
       li.
-        <strong>attrs</strong> is a hash object with key-value pairs of normalized attribute names and their corresponding attribute values.
+        <strong>attrs:</strong> a hash object with key-value pairs of normalized attribute names and their corresponding attribute values.
 
   section
-    p Inside the link function, you can initialize scope, watch properties, modify element attributes, and etc.
+    p Inside the link function, you can initialize scope, watch properties, modify element attributes, etc.
 
   section
     p For example
@@ -625,13 +675,15 @@ include ../includes/mixins
     h3 Controllers
 
   section
-    p You can easily attach controllers to directives with the controller option.
+    p You can easily attach controllers to directives with the
+      strong  controller
+      |  option.
 
   section
     p There are two ways to specify controllers on directives.
 
   section
-    p You can declare a controller inline
+    p You can declare a controller inline:
     br
     pre.
       <code data-trim>
@@ -649,10 +701,12 @@ include ../includes/mixins
 
       </code>
 
-    p The $scope injected into the controller will be the isolate scope of the directive.
+    p The
+      strong  $scope
+      |  injected into the controller will be the isolate scope of the directive.
 
   section
-    p Or, you can specify the name of an existing controller
+    p Or, you can specify the name of an existing controller:
     br
     pre.
       <code data-trim>
@@ -680,11 +734,21 @@ include ../includes/mixins
     p In some cases, you'll want to use multiple directives together and have them communicate with each other.
 
   section
-    p The ngModel and validation directives are a great example of this behavior.
+    p The
+      strong  ngModel
+      |  and
+      strong  validation
+      |  directives are a great example of this behavior.
 
   section
-    p The ngModel directive controls the binding between the input (view) value and model value.
-    p The ng-maxlength directive tells the ngModel directive when the view value is valid and that it should update the model.
+    p The
+      strong  ngModel
+      |  directive controls the binding between the input (view) value and model value.
+    p The
+      strong  ng-maxlength
+      |  directive tells the
+      strong  ngModel
+      |  directive when the view value is valid and that it should update the model.
     br
     .text-center
       pre.
@@ -694,19 +758,29 @@ include ../includes/mixins
         </code>
 
   section
-    p For this use case, AngularJS provides the "require" configuration option for directives.
+    p For this use case, AngularJS provides the
+      strong  require
+      |  configuration option for directives.
 
   section
-    p The require option tells the $compile service to find another directive and inject it's controller as the fourth argument to the linking function.
+    p The
+      strong  require
+      |  option tells the
+      strong  $compile
+      |  service to find another directive and inject its controller as the fourth argument to the linking function.
 
   section
-    p The require option takes a string name (or array of strings) of the directive(s) to pass in.
+    p The
+      strong  require
+      |  option takes a string name (or array of strings) of the directive(s) to pass in.
 
   section
     p If no such directive can be found, or if the directive does not have a controller, then an error is raised.
 
   section
-    p The require names can be prefixed with flags to tell the $compile service how to find another directive's controller.
+    p The require names can be prefixed with flags to tell the
+      strong  $compile
+      |  service how to find another directive's controller.
 
   section
     h4 (no prefix)
@@ -725,10 +799,16 @@ include ../includes/mixins
     p Attempt to locate the required controller by searching the element's parents or pass null to the link function if not found.
 
   section
-    p Lets look at creating a directive that requires the ngModel directive
+    p Let's look at creating a directive that requires the
+      strong  ngModel
+      |  directive.
 
   section
-    p Since, ngModel and myCoolDirective are siblings (on the same element), we wont need to specify a prefix.
+    p Since
+      strong  ngModel
+      |  and
+      strong  myCoolDirective
+      |  are siblings (on the same element), we won't need to specify a prefix.
     br
     .text-center
       pre.
@@ -738,7 +818,9 @@ include ../includes/mixins
         </code>
 
   section
-    p Now that the ngModel controller is injected into our link function, we can interface it's controller.
+    p Now that the
+      strong  ngModel
+      |  controller is injected into our link function, we can access its controller.
     br
     pre.
       <code data-trim>
@@ -755,10 +837,12 @@ include ../includes/mixins
 
       </code>
 
-    p Here, we're just printing out the model value and view value maintained by the ngModel controller.
+    p Here, we're just printing out the model value and view value maintained by the
+      strong  ngModel
+      |  controller.
 
   section
-    p So when should you put logic in a controller vs. a linking function?
+    p So when should you put logic in a controller vs. using a linking function?
     br
     ul
       li
@@ -779,7 +863,9 @@ include ../includes/mixins
     p Now that we've learned about how to create our own directives, we'll need to learn how we can test them.
 
   section
-    p First, we'll need to make sure that we inject the $compile service, our directive module, and any templates used by the directive.
+    p First, we'll need to make sure that we inject the
+      strong  $compile
+      |  service, our directive module, and any templates used by the directive.
     br
     pre.
       <code data-trim>
@@ -798,9 +884,9 @@ include ../includes/mixins
   section
     p
       | Then, we'll create our mock
-      code $scope
+      strong  $scope
       | , element, and finally use the
-      code $compile
+      strong  $compile
       |  service to compile and link our directive.
     br
     pre.
@@ -854,7 +940,10 @@ include ../includes/mixins
     p Now we're ready to start testing the expected behavior of the directive.
 
   section
-    p Lets assume that myCoolDirective sets the CSS attribute  "color" on the element based on myColor.
+    p Lets assume that
+      strong  myCoolDirective
+      |  sets the CSS attribute  "color" on the element based on
+      strong    myColor.
     br
     pre.
       <code data-trim>
@@ -883,12 +972,12 @@ include ../includes/mixins
   section
     p
       | The non-isolate scope can be accessed by calling
-      code element.scope()
+      strong  element.scope()
 
   section
     p
       | The isolate scope can be accessed by calling
-      code element.isolateScope()
+      strong  element.isolateScope()
 
   section
     p Here, we can validate the binding between the parent and isolate scope.
