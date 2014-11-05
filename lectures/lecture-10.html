@@ -44,22 +44,22 @@
           <h1>Animations</h1>
         </section>
         <section>
-          <p>AngularJS provides hooks for animations on common directives such as ngRepeat, ngSwitch, and ngView.</p>
+          <p>AngularJS provides hooks for animations on common directives such as<strong> ngRepeat, ngSwitch,</strong> and<strong> ngView.</strong></p>
         </section>
         <section>
-          <p>Animation hooks are in place to trigger animations during the life cycle of provided directives.</p>
+          <p><strong> Animation hooks</strong> are in place to trigger animations during the life cycle of provided directives.</p>
         </section>
         <section>
           <p>When they're triggered, they'll attempt to perform a CSS animation or JavaScript callback animation depending on which is defined.</p>
         </section>
         <section>
-          <p>First, lets take a look at the documentation for &nbsp;<a href="https://docs.angularjs.org/api/ngAnimate" target="_blank">ngAnimate</a></p>
+          <p>First, let's take a look at the documentation for&nbsp;<a href="https://docs.angularjs.org/api/ngAnimate" target="_blank">ngAnimate</a></p>
         </section>
         <section>
           <h2>Using Animations</h2>
         </section>
         <section>
-          <p>Since Angular is designed to be modular, you'll first need to specify the ngAnimate module as a dependency.</p><br>
+          <p>Since Angular is designed to be modular, you'll first need to specify the<strong> ngAnimate</strong> module as a dependency.</p><br>
           <div class="text-center">
             <pre><code data-trim>
 angular.module('app', ['ngAnimate'])
@@ -69,13 +69,13 @@ angular.module('app', ['ngAnimate'])
           </div>
         </section>
         <section>
-          <p>As we saw in the documentation for ngAnimate, we can apply animations to our elements by defining CSS classes that that tell the browser how to animate an element.</p>
+          <p>As we saw in the documentation for<strong> ngAnimate</strong>, we can apply animations to our elements by defining CSS classes that that tell the browser how to animate an element.</p>
         </section>
         <section>
-          <p>The $animate service automatically adds and removes these classes for us at the right time.</p>
+          <p>The<strong> $animate</strong> service automatically adds and removes these classes for us at the right time.</p>
         </section>
         <section>
-          <p>An example set of CSS animations for ngShow are shown below</p><br>
+          <p>An example set of CSS animations for<strong> ngShow</strong> are shown below</p><br>
           <pre><code class="css" data-trim>
 .ng-hide-add, .ng-hide-remove {
   transition: all linear 1.0s;
@@ -97,8 +97,8 @@ angular.module('app', ['ngAnimate'])
           <p>Which elements are these animations going to be applied to?</p>
         </section>
         <section>
-          <p>All elements that use the ngShow directive.</p>
-          <p>This is because these class names are used for all the ngShow elements.</p>
+          <p>All elements that use the<strong> ngShow</strong> directive.</p>
+          <p>This is because these class names are used for all the<strong> ngShow</strong> elements.</p>
         </section>
         <section>
           <p>We can scope these animations by making the class definitions more descriptive.</p><br>
@@ -127,7 +127,7 @@ angular.module('app', ['ngAnimate'])
           <p ng-show="sayHello" class="example-1">Hello World!</p>
         </section>
         <section>
-          <p>If we add the animation classes for ng-repeat, we can animate lists as they change.</p><br>
+          <p>If we add the animation classes for<strong> ng-repeat</strong>, we can animate lists as they change.</p><br>
           <pre><code class="css" data-trim>
 .repeated-item.ng-move,
 .repeated-item.ng-enter,

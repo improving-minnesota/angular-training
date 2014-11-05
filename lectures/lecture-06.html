@@ -77,13 +77,13 @@ myFunction(myOtherFunction);
 </pre>
         </section>
         <section>
-          <p>Functions passed as arguments to other functions (that are then "called back" at a later time) are called callbacks.</p>
+          <p>Functions passed as arguments to other functions (that are then "called back" at a later time) are called<strong> callbacks.</strong></p>
         </section>
         <section>
           <p>Callbacks are typically used to perform an action after some asynchronous event has occurred.</p>
         </section>
         <section>
-          <p>Lets consider performing an action on a user triggered event.</p><br>
+          <p>Let's consider performing an action on a user-triggered event.</p><br>
           <pre><code class="js" data-trim>
 // Our callback
 var buttonClicked = function() {
@@ -112,8 +112,7 @@ $('#my-button').click(function() {
           <h1>Promises</h1>
         </section>
         <section>
-          <p>
-            Promises provide a well-defined interface for interacting with an object that represents the result
+          <p><strong> Promises</strong> provide a well-defined interface for interacting with an object that represents the result
             of an asynchronous action.
           </p>
         </section>
@@ -122,7 +121,7 @@ $('#my-button').click(function() {
         </section>
         <section><img style="width: 80%;" src="/angular-training/assets/img/lecture-06/wat_grande.jpg" class="no-style"></section>
         <section>
-          <p>To understand why we use promises, lets look at one big problem that promises can mitigate.</p>
+          <p>To understand why we use promises, let's look at one big problem that promises can mitigate.</p>
         </section>
         <section>
           <h3>The</h3>
@@ -130,7 +129,7 @@ $('#my-button').click(function() {
           <h1>of Doom</h1>
         </section>
         <section>
-          <p>The "Pyramid of Doom" a situation where code marches to the right faster than it marches forward.</p><br>
+          <p>The<strong> Pyramid of Doom</strong>, a situation where code marches to the right faster than it marches forward.</p><br>
           <pre><code class="js" data-trim>
 step1(function (value1) {
   step2(value1, function(value2) {
@@ -188,10 +187,10 @@ promisedStep1()
         </section>
         <section><img style="width: 80%;" src="/angular-training/assets/img/lecture-06/awesome.gif" class="no-style"></section>
         <section>
-          <p>With this approach, you also get implicit error propagation, just like try, catch, and finally.</p>
+          <p>With this approach, you also get implicit error propagation, just like when using try, catch, and finally.</p>
         </section>
         <section>
-          <p>An error in promisedStep1 will flow all the way to the catch function, where it’s caught and handled.</p>
+          <p>An error in<strong> promisedStep1</strong> will flow all the way to the catch function, where it’s caught and handled.</p>
         </section>
         <section>
           <p>Using the callback method, you would have to provide error handling for each individual step.</p>
@@ -208,16 +207,16 @@ promisedStep1()
         </section>
         <section>
           <h3>Deferred</h3>
-          <p>The "Deferred" object represents a task which will finish in the future.</p>
+          <p>A<strong> deferred</strong> object represents a task that will finish in the future.</p>
         </section>
         <section>
-          <p>AngularJS provides the $q service which you can use to create deferred objects.</p>
+          <p>AngularJS provides the<strong> $q</strong> service which you can use to create deferred objects.</p>
         </section>
         <section>
-          <p>Let's create a promise chain with the $q service.</p>
+          <p>Let's create a promise chain with the<strong> $q</strong> service.</p>
         </section>
         <section>
-          <p>First, lets create an asynchronous function that returns a promise.</p><br>
+          <p>First, let's create an asynchronous function that returns a promise.</p><br>
           <pre><code class="js" data-trim>
 controller('PromiseCtrl', function($scope, $q, $timeout) {
   $scope.myAsyncTask = function() {
@@ -240,14 +239,14 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
 </pre>
         </section>
         <section>
-          <p>Now, lets use the promise to execute a task after our asynchronous function completes.</p><br>
+          <p>Now, let's use the promise to execute a task after our asynchronous function completes.</p><br>
           <pre><a href="http://embed.plnkr.co/V5sFcd/preview" target="_blank"><i class="fa fa-external-link"></i></a>
 <code class="js" data-trim>
 controller('PromiseCtrl', function($scope) {
 
   // $scope.myAsyncTask = ...
   
-  $scope.myAsyncTask()         // call myAsyncTask
+  $scope.myAsyncTask()         // call myAsyncTask, which returns the promise object
     .then(function(result) {   // then,
       $scope.result = result;  // save the result on scope
     });
@@ -298,7 +297,7 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
 </pre>
         </section>
         <section>
-          <p>We reject promises so that we handle the errors appropriately</p>
+          <p>We reject promises so that we handle the errors appropriately.</p>
           <pre><a href="http://embed.plnkr.co/OdBU2J/preview" target="_blank"><i class="fa fa-external-link"></i></a>
 <code class="js" data-trim>
 controller('PromiseCtrl', function($scope, $log) {
@@ -321,8 +320,8 @@ controller('PromiseCtrl', function($scope, $log) {
           <p> What if you don't know if the object you're dealing with is a promise or not?</p>
         </section>
         <section>
-          <p>You can use the $q.when() to wrap a non promise object with a thennable promise.</p>
-          <p>$q.when() will do nothing if the value is a $q promise.</p>
+          <p>You can use<strong> $q.when()</strong> to wrap a non-promise object with a thenable promise.</p>
+          <p><strong> $q.when()</strong> will do nothing if the value is a<strong> $q</strong> promise.</p>
           <pre><a href="http://embed.plnkr.co/3IO2lL/preview" target="_blank"><i class="fa fa-external-link"></i></a>
 <code class="js" data-trim>
 controller('PromiseCtrl', function($scope, $q) {
@@ -332,7 +331,7 @@ controller('PromiseCtrl', function($scope, $q) {
     return "Result";
   };
   
-  // Wrap the result of some syncronous task with a thennable promise
+  // Wrap the result of some syncronous task with a thenable promise
   $q.when($scope.mySyncTask())
     .then(function(result) {    // then,
       $scope.result = result;   // do something with the result
@@ -353,16 +352,16 @@ controller('PromiseCtrl', function($scope, $q) {
           </p>
         </section>
         <section>
-          <p>For that reason, AngularJS provides interceptors.</p>
+          <p>For that reason, AngularJS provides<strong> interceptors.</strong></p>
         </section>
         <section>
-          <p>The interceptors are service factories that are registered with the $httpProvider by adding them to the $httpProvider.interceptors array.</p>
+          <p>The interceptors are service factories that are registered with the<strong> $httpProvider</strong> by adding them to the<strong> $httpProvider.interceptors</strong> array.</p>
         </section>
         <section>
           <p>The factory is called and injected with dependencies (if any) and returns the interceptor.</p>
         </section>
         <section>
-          <p>Lets start by creating a factory that intercepts requests.</p>
+          <p>Let's start by creating a factory that intercepts requests.</p>
         </section>
         <section>
           <p>Interceptors are free to modify the the object passed into them and then return them as an object or a promise to the object.</p><br>
