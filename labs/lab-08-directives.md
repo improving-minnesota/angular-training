@@ -217,7 +217,7 @@ data.page('employees', query)
 - Add the following markup to the template:
 
 ```xml
-<div class="row tsz-form-section-header">
+<div tsz-form-section-header class="row">
   <div class="col-xs-6">
     <h4>{{header}}</h4>
   </div>
