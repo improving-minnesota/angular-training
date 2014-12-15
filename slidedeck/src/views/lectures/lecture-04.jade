@@ -259,7 +259,7 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       angular.module('app', [])
-        .controller(function($resource) {
+        .controller('EmployeeCtrl', function($scope, $resource) {
           var Employee = $resource(
             '/employees/:employeeId',
             {employeeId:'@id'}
@@ -327,7 +327,7 @@ include ../includes/mixins
     p We can supply a callback function to be executed once the reference is populated with data.
 
   section
-    p One we have a populated instance of the employee resource, we can change its data and call actions on it.
+    p Once we have a populated instance of the employee resource, we can change its data and call actions on it.
     br
     pre.
       <code class="js" data-trim>
@@ -364,7 +364,7 @@ include ../includes/mixins
     p All we really need is to verify whether a certain request has been sent or not.
 
   section
-    p Or alternatively just let the application make requests, respond with pre-trained responses, and assert that the end result is what we expect it to be.
+    p Alternatively, we can just let the application make requests, respond with pre-trained responses, and assert that the end result is what we expect it to be.
 
   section
     p To help with this, Angular provides the
