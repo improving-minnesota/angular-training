@@ -242,7 +242,7 @@ angular.module('app', [])
         <section>
           <pre><code class="js" data-trim>
 angular.module('app', [])
-  .controller(function($resource) {
+  .controller('EmployeeCtrl', function($scope, $resource) {
     var Employee = $resource(
       '/employees/:employeeId',
       {employeeId:'@id'}
@@ -299,7 +299,7 @@ $scope.employee = Employee.get({id: 23});
           <p>We can supply a callback function to be executed once the reference is populated with data.</p>
         </section>
         <section>
-          <p>One we have a populated instance of the employee resource, we can change its data and call actions on it.</p><br>
+          <p>Once we have a populated instance of the employee resource, we can change its data and call actions on it.</p><br>
           <pre><code class="js" data-trim>
 $scope.employee = Employee.get({id: 23}, function() {
   $scope.employee.name = 'Lana';
@@ -329,7 +329,7 @@ $scope.employee = Employee.get({id: 23}, function() {
           <p>All we really need is to verify whether a certain request has been sent or not.</p>
         </section>
         <section>
-          <p>Or alternatively just let the application make requests, respond with pre-trained responses, and assert that the end result is what we expect it to be.</p>
+          <p>Alternatively, we can just let the application make requests, respond with pre-trained responses, and assert that the end result is what we expect it to be.</p>
         </section>
         <section>
           <p>To help with this, Angular provides the<strong> $httpBackend</strong> mock service.</p>
