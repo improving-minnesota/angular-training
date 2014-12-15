@@ -7,6 +7,11 @@
 * [Docco](http://jashkenas.github.io/docco/) `npm install -g docco`
 * [Karma](https://github.com/karma-runner/karma/) `npm install -g karma`
 
+**NOTE:** If you have errors, try running this first:
+```
+npm config set strict-ssl false
+```
+
 ### Checkout the Github repository
 
 - Checkout project from Github
