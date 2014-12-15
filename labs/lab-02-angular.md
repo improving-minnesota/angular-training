@@ -19,7 +19,7 @@ git pull
   - First notice that the design team has laid out the application with a *Bootstrap* navbar and a main content section.
 
 
-- Register the application with Angular by adding the `ng-app` directive is in the `<html>` tag.
+- Register the application with Angular by adding the `ng-app` directive in the `<html>` tag.
     - This tells Angular to boot itself up.
 
 
