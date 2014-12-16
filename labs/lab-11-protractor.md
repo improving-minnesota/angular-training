@@ -391,7 +391,7 @@ taskkill /f /t /im chromedriver.exe
 
 
 &nbsp;
-## Practice, Practice, Practice
+## Practice, Practice, Practice (AKA Extra Credit)
 
 ### Using the employees.spec.js as a guide, implement the end to end tests for the Projects module.
 * Open **timesheet/client/test/e2e/app/projects/projects.spec.js**
