@@ -63,7 +63,7 @@ protractor: {
 &nbsp;
 ### Register the `grunt-protractor-runner`
 
-* In the open `Gruntfile.js` find the `TODO` around line #468.
+* In the open `Gruntfile.js` find the `TODO` around line #486.
 * We need to register the task that was installed via NPM.
 * Enter the below javascript to register the task.
 
