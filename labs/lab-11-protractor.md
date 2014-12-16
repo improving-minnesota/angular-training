@@ -328,7 +328,7 @@ this.cancelForm = function () {
 * Did you notice that your teammates already created a lot of the form page for you?
   * Look it over and make sure you understand what is happening.
 * Open **client/test/e2e/app/employees/employees.spec.js**
-* Find the `TODO` around line #60 and enter the following tests:
+* Find the `TODO` around line #69 and enter the following tests:
 
 ```javascript
 it('should be able to update the employee', function () {
