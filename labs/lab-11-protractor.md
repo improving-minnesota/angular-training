@@ -35,7 +35,7 @@ npm install
 
 ### Configure the `grunt-protractor-runner` task.
 
-* Open `Gruntfile.js` and find the `TODO` around line #400.
+* Open `Gruntfile.js` and find the `TODO` around line #416.
 
 ###### Set these options :
 * Keep the process alive (our watch task) even if a test fails.
