@@ -10,6 +10,14 @@ git pull
 ```
 
 &nbsp;
+## Update NPM Dependencies
+- Our project architects have updated some dependencies in our package.json file. To pull this in we must run:
+
+```
+npm install
+```
+
+&nbsp;
 ## Install ChromeWebDriver
 
 ### Set up web driver to manipulate the browser for us
