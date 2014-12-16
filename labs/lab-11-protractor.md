@@ -360,6 +360,7 @@ grunt protractor:debug
 ```
 
 * Wait for the Chrome browser to open and stop.
+* (If console stops early, enter 'c' to continue. The debugging can be buggy)
 * It's just like you're running it like normal, except that you are in the state that your test left the browser in.
 * You can actually use the Protractor library from within your Chrome console.
 * Open the Chrome window that Protractor is driving, open the dev tools' console and type:
@@ -370,6 +371,7 @@ window.clientSideScripts.findByModel('employee.username');
 
 * Pretty neat, huh?
 * see the docs at https://github.com/angular/protractor/tree/master/docs for more info on this.
+* There is also a new beat browser.pause() that is a lighter version of debugger and can be used with the normal protractor:e2e command. See http://ng-learn.org/2014/04/Pausing-Protractor/ for more info
 
 ####Note: If you get this output when attempting to debug####
 - Run the below scripts to :
