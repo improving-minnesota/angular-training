@@ -317,7 +317,7 @@ it('should restore the action button text', function () {
 * Open **client/test/e2e/app/employees/form.page.js**
 
 * Next let's set up the employee form page to let us cancel the form during our tests.
-* Around line #14, find the `TODO` and add the following function to the page object:
+* Around line #16, find the `TODO` and add the following function to the page object:
 
 ```javascript
 this.cancelForm = function () {
