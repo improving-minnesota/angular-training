@@ -465,6 +465,7 @@ describe('Form Page', function () {
 
 });
 ```
+* Did you get an extra }); on the last line? Aha! Copy and pasted you did!
 
 ### Commit your code to git and celebrate!!!
 ```
