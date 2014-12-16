@@ -72,18 +72,6 @@ grunt.loadNpmTasks('grunt-protractor-runner');
 ```
 
 &nbsp;
-### Test the Grunt task has been registered.
-* In a console window, run:
-
-```
-grunt protractor:e2e
-```
-
-- You should see an error that Protractor has no `specs` to run. 
-  - This means that the protractor task is running as expected. 
-  - We will correct this error in the next section. 
-
-&nbsp;
 ## Protractor configuration
 
 ### Let's register the tests that we will write together
