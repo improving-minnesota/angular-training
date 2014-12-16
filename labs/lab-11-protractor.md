@@ -291,7 +291,7 @@ it('should change the action button text', function () {
 ```
 
 ### Restoring an employee
-- Locate the `TODO` near line 42.
+- Locate the `TODO` near line 47.
 - Test what happens when we click the 'restore' button on the first employee.
   - Use the `indexPage` page object to click the restore button.
   - Verify that the 'faded' class was removed from the row.
@@ -303,7 +303,7 @@ it('should set the row back to normal', function () {
 });
 ```
 
-- Locate the `TODO` near line 47.
+- Locate the `TODO` near line 54.
 - Test the button text is reset to 'Delete'.
 
 ```javascript
