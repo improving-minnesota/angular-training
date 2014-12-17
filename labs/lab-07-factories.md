@@ -211,7 +211,7 @@ resolve: {
 
 ### Run the application and test it out
 
-- If you haven't already, start the application with `grunt runapp:development` and `grunt watch:development` in separate consoles.
+- If you haven't already, start the application with `grunt serve:development` and `grunt watch:development` in separate consoles.
 - Navigate to http://localhost:3000
 - When prompted for login, login with :
 ```
