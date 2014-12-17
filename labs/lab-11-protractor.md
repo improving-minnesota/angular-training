@@ -25,7 +25,7 @@ npm install
 * In a console window, within the `angular-timesheet` home directory, run:
 
 ```
-./node_modules/protractor/bin/webdriver-manager update
+./node_modules/protractor/bin/webdriver-manager update --ignore_ssl
 ```
 
 * You should see output in your console that the chromedriver zip file was dowloaded.
