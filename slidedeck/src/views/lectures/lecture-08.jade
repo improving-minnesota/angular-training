@@ -471,7 +471,7 @@ include ../includes/mixins
         .directive('myCoolDirective',function() {
           return {
             scope: {
-              attributeValue: '@'
+              someAttribute: '@attributeValue'
             }
           };
         });
