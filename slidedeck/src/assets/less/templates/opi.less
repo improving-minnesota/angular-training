@@ -10,15 +10,14 @@
 @logo-default-scale:          0.3;
 @logo-default-opacity:        0.4;
 @logo-overview-opacity:       0.1;
-@logo-red-color:              #ee311d;
+@logo-red-color:              #d1091d;
 
-@link-color:                  darken(desaturate(@logo-red-color, 20%), 10%);
-@link-hover-color:            desaturate(@link-color, 10%);
-@link-roll-bg:                darken(desaturate(@logo-red-color, 20%), 25%);
-@nav-arrow-color:             darken(desaturate(@logo-red-color, 20%), 10%);
-@nav-arrow-hover-color:       desaturate(lighten(@nav-arrow-color, 10%), 10%);
-
-@progress-color:              darken(desaturate(@logo-red-color, 20%), 10%);;
+@link-color:                  @logo-red-color;
+@link-hover-color:            @link-color;
+@link-roll-bg:                darken(@logo-red-color, 25%);
+@nav-arrow-color:             @logo-red-color;
+@nav-arrow-hover-color:       lighten(@nav-arrow-color, 10%);
+@progress-color:              @logo-red-color;
 
 body {
   .background-image(radial-gradient(center, circle cover, @body-gradient-start 10%, @body-gradient-end 95%));
@@ -38,7 +37,7 @@ body {
   left: 50px;
   width: 15%;
   height: 10%;
-  background-image: url('../img/opi-logo.png');
+  background-image: url('../img/2015-OPI-Logo-Stacked.png');
   background-repeat:no-repeat;
   background-size: contain;
   background-position: top left;
