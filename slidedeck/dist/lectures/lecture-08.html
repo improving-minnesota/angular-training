@@ -433,7 +433,7 @@ angular.module('app.directives', [])
   .directive('myCoolDirective',function() {
     return {
       scope: {
-        attributeValue: '@'
+        someAttribute: '@attributeValue'
       }
     };
   });
