@@ -34,7 +34,7 @@ git pull
 ```
 
 - Now we need a place for Angular to place our application templates.
-- Find the todo and add the `ng-view` directive inside our DOM.
+- Find 'Add the ng-view directive' comment and add the `ng-view` directive inside our DOM.
 
 ```xml
 <div ng-view></div>
