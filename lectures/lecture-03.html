@@ -323,7 +323,7 @@ inject(
   function($rootScope, $controller) {
     scope = $rootScope.$new();
     controller = $controller("MainCtrl", {
-      $scope: scope
+      $scope: scope,
       person: [{id: 1, name:'Cyril'}]
     });
   }
