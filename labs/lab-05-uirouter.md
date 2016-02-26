@@ -120,10 +120,12 @@ grunt serve:development
       views : {
         'navbar' : {
           controller: 'NavCtrl',
+          controllerAs: 'navCtrl',
           templateUrl: 'assets/templates/app/navbar.html'
         },
         'content' : {
           controller: 'AppCtrl',
+          controllerAs: 'appCtrl',
           templateUrl: 'assets/templates/app/index.html'
         }
       }
@@ -160,6 +162,7 @@ grunt serve:development
     .state('app.employees', {
       url: '/employees',
       controller: 'EmployeeCtrl',
+      controllerAs: 'employeeCtrl',
       templateUrl: 'assets/templates/app/employees/index.html',
       data: {
         section: 'Employees'
@@ -169,6 +172,7 @@ grunt serve:development
     .state('app.employees.detail', {
       url: '/detail/:_id',
       controller: 'EmployeeDetailCtrl',
+      controllerAs: 'employeeFormCtrl',
       templateUrl: 'assets/templates/app/employees/form.html',
       data: {
         section: 'Update Employee',
@@ -187,6 +191,7 @@ grunt serve:development
     .state('app.employees.create', {
       url: '/create',
       controller: 'EmployeeCreateCtrl',
+      controllerAs: 'employeeFormCtrl',
       templateUrl: 'assets/templates/app/employees/form.html',
       data: {
         section: 'Create Employee',
@@ -223,17 +228,17 @@ grunt serve:development
 ##### First things first: Find the related `TODO`'s and inject `$state` and `$stateParams` into all 3 of our controllers.
 
 ```javascript
-function ($scope, data, $state, $stateParams) {
+function (data, $state, $stateParams) {
 ```
 
 ##### Now let's implement some functionality
 
-- At the `TODO` near line #14, add the `showDetail` and `createNew` methods:
+- At the `TODO` near line #16, add the `showDetail` and `createNew` methods:
 - The `showDetail` function will react to a user clicking on an employee in the table:
 - We need to make sure that the employee is not deleted and then instruct the `$state` service to go to the `app.employees.detail` state.
 
 ```javascript
-$scope.showDetail = function showDetail (employee) {
+vm.showDetail = function showDetail (employee) {
   if (employee.deleted) {
      console.log('cannot view a deleted employee');
      return;
@@ -245,15 +250,15 @@ $scope.showDetail = function showDetail (employee) {
 - We just need to instruct the `$state` service to transition to the `app.employees.create` state.
 
 ```javascript
-$scope.createNew = function createNew () {
+vm.createNew = function createNew () {
   $state.go('app.employees.create', $stateParams);
 };
 ```
 
-- Add the `cancel` function by replacing the `TODO` near line #50 with:
+- Add the `cancel` function by replacing the `TODO` near line #52 with:
 
 ```javascript
-$scope.cancel = function cancel () {
+vm.cancel = function cancel () {
   $state.go('app.employees', {}, {reload: true});
 };
 ```
@@ -266,7 +271,7 @@ $scope.cancel = function cancel () {
 - Locate the `TODO` and add:
 
 ```javascript
-$scope.saveText = $state.current.data.saveText;
+vm.saveText = $state.current.data.saveText;
 ```
 
 > Note: If you have the ```karma``` window running, you are going to have failing tests:
@@ -276,21 +281,22 @@ $scope.saveText = $state.current.data.saveText;
 ###### Updating an employee
 - To update an employee, we can use the instance method, `$update` on our `$resource` object.
 - This method returns a promise that we need to set success and error handlers for:
-  - If the response is successful, update `$scope.employee` with the response object.
+  - If the response is successful, update `vm.employee` with the response object.
   - If the response errors, log the error to the console (for now).
 
 
-- Locate the `TODO` near line #63 and add:
+- Locate the `TODO` near line #64 and add:
 
 ```javascript
-$scope.save = function save () {
-  $scope.employee.$update()
+vm.save = function save () {
+  vm.employee.$update()
     .then(function (updated) {
-      $scope.employee = updated;
+      vm.employee = updated;
+      $state.go('app.employees', {}, {reload: true});
       console.log('success!');
     })
     .catch(function (x) {
-      console.log('error : ' + x);
+      console.log('error : ' + JSON.stringify(x));
     });
 };
 ```
@@ -299,10 +305,10 @@ $scope.save = function save () {
 
 ###### Set `saveText`
 
-- Just like in the `EmployeeDetailCtrl` set the `saveText` on `$scope` to the current state's data:
+- Just like in the `EmployeeDetailCtrl` set the `saveText` on the controller to the current state's data:
 
 ```javascript
-$scope.saveText = $state.current.data.saveText;
+vm.saveText = $state.current.data.saveText;
 ```
 
 ###### Employee create controller
@@ -315,14 +321,14 @@ $scope.saveText = $state.current.data.saveText;
 - Find the `TODO` near line #81 and add:
 
 ```javascript
-$scope.save = function save () {
-  data.create('employees', $scope.employee)
+vm.save = function save () {
+  data.create('employees', vm.employee)
     .then(function (created) {
       console.log('success!');
-      $state.go('app.employees.detail', {_id: created._id});
+      $state.go('app.employees', {}, {reload: true});
     })
     .catch(function (x) {
-      console.log('error : ' + x);
+      console.log('error : ' + JSON.stringify(x));
     });
 };
 ```
@@ -336,11 +342,10 @@ $scope.save = function save () {
 
 ###### Test setup
 - In order for our Jasmine tests to know about ui-router, you'll need to inject the `$state` and `$stateParams` services into your mock module:
-- Locate the `TODO` near line #25 and inject the two services into our `beforeEach` block:
+- Locate the `TODO` near line #24 and inject the two services into our `beforeEach` block:
 
 ```javascript
-beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state_, _$stateParams_){
-  $rootScope = _$rootScope_;
+beforeEach(inject(function (_$httpBackend_, _$controller_, _$state_, _$stateParams_){
   $httpBackend = _$httpBackend_;
   $controller = _$controller_;
   $state = _$state_;
@@ -348,7 +353,7 @@ beforeEach(inject(function (_$rootScope_, _$httpBackend_, _$controller_, _$state
 }));
 ```
 - Since we want to test that `$state` is being called, not actually transition to the different states, we will use the `sinon` library to stub out the behaviour.
-- Stub the `$state` service by replacing the `TODO` near line #37 with:
+- Stub the `$state` service by replacing the `TODO` near line #36 with:
 
 ```javascript
 state: sinon.stub($state)
@@ -364,13 +369,13 @@ state: sinon.stub($state)
 
 
 - Let's inject our stubbed services into our controller under test:
-- Around line #62, replace the `TODO` with:
+- Around line #61, replace the `TODO` with:
 
 ```javascript
 $state: spies.state
 ```
 
-- Test the detail transition by replacing the `TODO` near line #91 with:
+- Test the detail transition by replacing the `TODO` near line #90 with:
   - Flushing the mock http backend to avoid any test corruption.
   - Call our new `showDetail(employee)` method on scope.
   - Test that the `$state.go()` function was called with the correct state name, `app.employees.detail`.
@@ -378,12 +383,12 @@ $state: spies.state
 ```javascript
 it('should transition to the employee detail state', function () {
   $httpBackend.flush();
-  $scope.showDetail(employee);
+  controller.showDetail(employee);
   expect(spies.state.go).to.have.been.calledWith('app.employees.detail');
 });
 ```
 
-- Test the create employee transition by replacing the `TODO` near line #98 with:
+- Test the create employee transition by replacing the `TODO` near line #96 with:
   - Flushing the backend first.
   - Call the `createNew()` function on scope.
   - Verify that the `$state.go()` was called with the correct state.
@@ -391,12 +396,12 @@ it('should transition to the employee detail state', function () {
 ```javascript
 it('should transition to the create employee state', function () {
   $httpBackend.flush();
-  $scope.createNew();
+  controller.createNew();
   expect(spies.state.go).to.have.been.calledWith('app.employees.create');
 });
 ```
 
-- Test the cancel transition by replacing the `TODO` near line #183 with:
+- Test the cancel transition by replacing the `TODO` near line #182 with:
   - Flush the backend.
   - Call the `cancel()` function on scope.
   - Verify that the `$state.go()` function was called as expected.
@@ -404,7 +409,7 @@ it('should transition to the create employee state', function () {
 ```javascript
 it('should return back to the employee list', function () {
   $httpBackend.flush();
-  $scope.cancel();
+  controller.cancel();
   expect(spies.state.go).to.have.been.calledWith('app.employees');
 });
 ```
@@ -432,16 +437,16 @@ $state: spies.state
 
 ```javascript
 it('should set saveText to the current state saveText', function () {
-  expect($scope.saveText).to.equal('update');
+  expect(controller.saveText).to.equal('update');
 });
 ```
 
-- Test the controller is initialized with the employee injected from the state's resolve by replacing the `TODO` near line 215 with:
+- Test the controller is initialized with the employee injected from the state's resolve by replacing the `TODO` near line 214 with:
 
 ```javascript
 it('should set the employee on scope to the resolved employee', function () {
-  expect($scope.employee._id).to.equal(employee._id);
-  expect($scope.employee.username).to.equal(employee.username);
+  expect(controller.employee._id).to.equal(employee._id);
+  expect(controller.employee.username).to.equal(employee.username);
 });
 ```
 
@@ -449,13 +454,13 @@ it('should set the employee on scope to the resolved employee', function () {
 - Find the `TODO' near line #235 and replace it with:
   - Call the `save()` method on scope.
   - Flush the mock http backend.
-  - Verify that `$scope.employee` matches our expected response.
+  - Verify that `controller.employee` matches our expected response.
 
 ```javascript
 it('should set the employee on scope to be the updated employee', function () {
-  $scope.save();
+  controller.save();
   $httpBackend.flush();
-  expect($scope.employee.username).to.equal(updatedEmployee.username);
+  expect(controller.employee.username).to.equal(updatedEmployee.username);
 });
 ```
 &nbsp;
@@ -482,25 +487,25 @@ $state: spies.state
 
 ```javascript
 it('should set saveText to the current state saveText', function () {
-  expect($scope.saveText).to.equal('create');
+  expect(controller.saveText).to.equal('create');
 });
 
 it('should set the employee on scope to a non admin user', function () {
-  expect($scope.employee.admin).to.be.false;
-  expect($scope.employee.username).to.be.empty;
+  expect(controller.employee.admin).to.be.false;
+  expect(controller.employee.username).to.be.empty;
 });
 ```
 
 - Test the save function:
-  - Call the `$scope.save()` function.
+  - Call the `controller.save()` function.
   - Flush the mock http backend.
-  - Verify that the `$state` service was instructed to go the newly created employoee's detail page.
+  - Verify that the `$state` service was instructed to go the employee page.
 
 ```javascript
 it('should transition to the detail page of the created employee', function () {
-  $scope.save();
+  controller.save();
   $httpBackend.flush();
-  expect(spies.state.go).to.have.been.calledWith('app.employees.detail', {_id: employee._id});
+  expect(spies.state.go).to.have.been.calledWith('app.employees');
 });
 ```
 
@@ -533,7 +538,7 @@ it('should transition to the detail page of the created employee', function () {
 - At the `TODO` near line #5, add the button to navigate to the create employee state:
 
 ```xml
-<button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
+<button class="btn btn-primary btn-block" type="button" ng-click="employeeCtrl.createNew()">
   <i class="icon-plus"></i>
   New Employee
 </button>
@@ -573,6 +578,7 @@ it('should transition to the detail page of the created employee', function () {
     .state('app.timesheets', {
       url: '/users/:user_id/timesheets',
       controller: 'TimesheetCtrl',
+      controllerAs: 'timesheetCtrl',
       templateUrl: 'assets/templates/app/timesheets/index.html',
       data: {
         section: 'Timesheets'
@@ -581,6 +587,7 @@ it('should transition to the detail page of the created employee', function () {
     .state('app.timesheets.detail', {
       url: '/detail/:_id',
       controller: 'TimesheetDetailCtrl',
+      controllerAs: 'timesheetDetailCtrl',
       templateUrl: 'assets/templates/app/timesheets/detail.html',
       data: {
         section: 'Timesheet Details'
@@ -605,6 +612,7 @@ it('should transition to the detail page of the created employee', function () {
     .state('app.timesheets.detail.edit', {
       url: '/edit',
       controller: 'TimesheetEditCtrl',
+      controllerAs: 'timesheetFormCtrl',
       templateUrl: 'assets/templates/app/timesheets/form.html',
       data: {
         section: 'Edit Timesheet',
@@ -614,6 +622,7 @@ it('should transition to the detail page of the created employee', function () {
     .state('app.timesheets.create', {
       url: '/create',
       controller: 'TimesheetCreateCtrl',
+      controllerAs: 'timesheetFormCtrl',
       templateUrl: 'assets/templates/app/timesheets/form.html',
       data: {
         section: 'Create Timesheet',
@@ -636,7 +645,7 @@ it('should transition to the detail page of the created employee', function () {
 ##### First things first: Find the related `TODO`'s and inject `$state` and `$stateParams` into all 4 of the Timesheet controllers.
 
 - First we need a configuration to help us refine our timesheet search to specific employees. We'll revisit this in a later lab, but for now...
-- Locate the `TODO` near line #8 and register the query object with the help of `$stateParams` service:
+- Locate the `TODO` near line #10 and register the query object with the help of `$stateParams` service:
 
 ```javascript
 var query = {
@@ -644,10 +653,10 @@ var query = {
 };
 ```
 
-- Implement the `showDetail` and `createNew` methods via the `TODO` near line #18:
+- Implement the `showDetail` and `createNew` methods via the `TODO` near line #20:
 
 ```javascript
-$scope.showDetail = function showDetail (timesheet) {
+vm.showDetail = function showDetail (timesheet) {
   if (timesheet.deleted) {
     console.log('error : cannot view a deleted timesheet');
     return;
@@ -655,7 +664,7 @@ $scope.showDetail = function showDetail (timesheet) {
   $state.go('app.timesheets.detail', timesheet);
 };
 
-$scope.createNew = function createNew () {
+vm.createNew = function createNew () {
   $state.go('app.timesheets.create', $stateParams);
 };
 ```
@@ -676,7 +685,7 @@ $scope.createNew = function createNew () {
   - Instruct the `$state` service to transition to the `app.timesheets.detail.edit` state for the timesheet.
 
 ```javascript
-$scope.edit = function edit (timesheet) {
+vm.edit = function edit (timesheet) {
   $state.go('app.timesheets.detail.edit', $stateParams);
 };
 ```
@@ -684,7 +693,7 @@ $scope.edit = function edit (timesheet) {
 - Next we need to handle clicking the `cancel` button.
 
 ```javascript
-$scope.cancel = function cancel () {
+vm.cancel = function cancel () {
   $state.go('app.timesheets', $stateParams, {reload: true});
 };
 ```
@@ -693,7 +702,7 @@ $scope.cancel = function cancel () {
   - A handler on scope for when the user clicks the button to log time.
 
 ```javascript
-$scope.logTime = function logTime () {
+vm.logTime = function logTime () {
   $state.go('app.timesheets.detail.timeunits.create', $stateParams);
 };
 ```
@@ -701,7 +710,7 @@ $scope.logTime = function logTime () {
   - This will behave similar to our other `showDetail()` functions for other modules.
 
 ```javascript
-$scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
+vm.showTimeunitDetail = function showTimeunitDetail (timeunit) {
   if (timeunit.deleted) {
     console.log('error deleting timesheet');
     return;
@@ -720,21 +729,22 @@ $scope.showTimeunitDetail = function showTimeunitDetail (timeunit) {
 - Locate the `TODO` near line #117 and set `saveText` to the current state's:
 
 ```javascript
-$scope.saveText = $state.current.data.saveText;
+vm.saveText = $state.current.data.saveText;
 ```
 
 - Add a save method to update an existing timesheet.
 - Find the `TODO` around line #120 and replace it with:
 
 ```javascript
-$scope.save = function save () {
-  $scope.timesheet.$update()
+vm.save = function save () {
+  vm.timesheet.$update()
     .then(function (updated) {
-      $scope.timesheet = updated;
+      vm.timesheet = updated;
+      $state.go('app.timesheets.detail', $stateParams, {reload: true});
       console.log('success !');
     })
     .catch(function (x) {
-      console.log('error ' + x);
+      console.log('error ' + JSON.stringify(x));
     });
 };
 ```
@@ -742,7 +752,7 @@ $scope.save = function save () {
 - Handle cancelling the form by replacing the `TODO` near line 131:
 
 ```javascript
-$scope.cancel = function cancel () {
+vm.cancel = function cancel () {
   $state.go('app.timesheets.detail', $stateParams, {reload: true});
 };
 ```
@@ -755,14 +765,14 @@ $scope.cancel = function cancel () {
 - Locate the `TODO` and set `saveText` to the current state's:
 
 ```javascript
-$scope.saveText = $state.current.data.saveText;
+vm.saveText = $state.current.data.saveText;
 ```
 
 - Implement the required methods by replacing the `TODO` near line 142:
 
 ```javascript
-$scope.save = function save () {
-  var timesheet = angular.extend({user_id: $stateParams.user_id}, $scope.timesheet);
+vm.save = function save () {
+  var timesheet = angular.extend({user_id: $stateParams.user_id}, vm.timesheet);
 
   data.create('timesheets', timesheet)
     .then(function (created) {
@@ -770,11 +780,11 @@ $scope.save = function save () {
       console.log('success !');
     })
     .catch(function (x) {
-       console.log('error ' + x);
+       console.log('error ' + JSON.stringify(x));
     });
 };
 
-$scope.cancel = function cancel () {
+vm.cancel = function cancel () {
   $state.go('app.timesheets', $stateParams, {reload: true});
 };
 ```
@@ -796,6 +806,7 @@ $scope.cancel = function cancel () {
       abstract: true,
       url: '/timeunits',
       controller: 'TimeunitCtrl',
+      controllerAs: 'timeunitCtrl',
       template: '<div ui-view></div>',
       resolve: {
         projects: [
@@ -808,6 +819,7 @@ $scope.cancel = function cancel () {
     .state('app.timesheets.detail.timeunits.create', {
       url: '/create',
       controller: 'TimeunitCreateCtrl',
+      controllerAs: 'timeunitFormCtrl',
       templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
       data: {
         section: 'Log Time'
@@ -816,6 +828,7 @@ $scope.cancel = function cancel () {
     .state('app.timesheets.detail.timeunits.edit', {
       url: '/edit/:timeunit_id',
       controller: 'TimeunitEditCtrl',
+      controllerAs: 'timeunitFormCtrl',
       templateUrl: 'assets/templates/app/timesheets/timeunits/form.html',
       data: {
         section: 'Edit Time'
@@ -847,10 +860,10 @@ $scope.cancel = function cancel () {
 ### TimeunitCtrl
 
 ###### Timeunit controller
-- Add cancel functionality by replacing the `TODO` near line #7 with:
+- Add cancel functionality by replacing the `TODO` near line #10 with:
 
 ```javascript
-$scope.cancel = function cancel () {
+vm.cancel = function cancel () {
   $state.go('app.timesheets.detail', $stateParams, {reload: true});
 };
 ```
@@ -859,17 +872,18 @@ $scope.cancel = function cancel () {
 ### TimeunitEditCtrl
 
 ###### Timeunit detail controller
-- Add the ability to update an existing timeunit by replacing the `TODO` near line #17:
+- Add the ability to update an existing timeunit by replacing the `TODO` near line #23:
 
 ```javascript
-$scope.save = function save () {
-  $scope.timeunit.$update()
+vm.save = function save () {
+  vm.timeunit.$update()
     .then(function (updated) {
-      $scope.timeunit = updated;
+      vm.timeunit = updated;
+      $state.go('app.timesheets.detail', $stateParams, {reload: true});
       console.log('success !');
     })
     .catch(function (x) {
-      console.log('error : ' + x);
+      console.log('error : ' + JSON.stringify(x));
       $state.reload();
     });
 };
@@ -884,24 +898,24 @@ $scope.save = function save () {
 - Replace the `TODO` near line #34 with:
 
 ```javascript
-$scope.timeunit = {
+vm.timeunit = {
   user_id: $stateParams.user_id,
   timesheet_id: $stateParams._id,
-  dateWorked: $scope.timesheet.beginDate
+  dateWorked: timesheet.beginDate
 };
 ```
 
 - Add the ability to create a new time unit near line #39:
 
 ```javascript
-$scope.save = function save () {
-  data.create('timeunits', $scope.timeunit)
+vm.save = function save () {
+  data.create('timeunits', vm.timeunit)
     .then(function (created) {
       $state.go('app.timesheets.detail', $stateParams, {reload: true});
       console.log('success !');
     })
     .catch(function (x) {
-      console.log('error : ' + x);
+      console.log('error : ' + JSON.stringify(x));
     });
 };
 ```
@@ -953,7 +967,7 @@ $scope.save = function save () {
 - Now we need a button to enable us to create a new timesheet (near line #5)
 
 ```xml
-<button class="btn btn-primary btn-block" type="button" ng-click="createNew()">
+<button class="btn btn-primary btn-block" type="button" ng-click="timesheetCtrl.createNew()">
   <i class="icon-plus"></i>
   New Timesheet
 </button>
@@ -984,7 +998,7 @@ $scope.save = function save () {
 - Locate the `TODO` near line #13 and set the repeater for the select box's `<option>`.
 
 ```xml
-<option ng-repeat="project in projects" value="{{project.name}}">{{project.name}}</option>
+<option ng-repeat="project in timeunitCtrl.projects" value="{{project.name}}">{{project.name}}</option>
 ```
 
 - Next we will set up a date picker for the timeunit's date worked.
@@ -993,11 +1007,11 @@ $scope.save = function save () {
 ```xml
 <input type="text" class="form-control"
    datepicker-popup="MM/dd/yyyy"
-   ng-model="timeunit.dateWorked"  
+   ng-model="timeunitFormCtrl.timeunit.dateWorked"  
    show-weeks="false"
    show-button-bar="false"
-   min="timesheet.beginDate"
-   max="timesheet.endDate"
+   min="timesheetDetailCtrl.timesheet.beginDate"
+   max="timesheetDetailCtrl.timesheet.endDate"
    ng-required="true"
    close-text="Close" />
 ```

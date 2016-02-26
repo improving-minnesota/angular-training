@@ -125,12 +125,6 @@ Done, without errors.
 
 * Open the security e2e spec at `client/test/e2e/security/security.spec.js`
 * You'll notice that in the `beforeEach` we navigate to application root as the first step using `browser.get('/');`
-* The next thing we need to do in our tests is get the instance of *Protractor* so that we can use it to test the status of our web page.
-* Find the `TODO` around line #7 and assign the `ptor` variable to the global `protractor` instance that is created by the test runner.
-
-```javascript
-ptor = protractor.getInstance();
-```
 
 * OK, now we're ready to write some tests.
 
@@ -141,7 +135,7 @@ ptor = protractor.getInstance();
 ```javascript
 it('should be redirected to the login state', function () {
   var loginForm = by.name('loginForm');
-  expect(ptor.isElementPresent(loginForm)).toBe(true);
+  expect(browser.isElementPresent(loginForm)).toBe(true);
 });
 ```
 * You'll notice that we set up a locator for the login form on the page by searching for its name, 'loginForm'.
@@ -157,14 +151,14 @@ it('should be redirected to the login state', function () {
 
 ```javascript
 it('should be able to login', function () {
-  element(by.model('user.username')).sendKeys('admin');
-  element(by.model('user.password')).sendKeys('password');
+  element(by.model('loginCtrl.user.username')).sendKeys('admin');
+  element(by.model('loginCtrl.user.password')).sendKeys('password');
   element(by.css('form button')).click();
 
-  browser.sleep(1.0);
+  browser.sleep(1000);
 
   var logout = by.css('a.logout');
-  expect(ptor.isElementPresent(logout)).toBe(true);
+  expect(browser.isElementPresent(logout)).toBe(true);
 });
 ```
 * Run the tests with the grunt protractor task and check out the results.
@@ -334,7 +328,7 @@ this.cancelForm = function () {
 it('should be able to update the employee', function () {
 
   formPage
-    .enterValue('employee.firstName', 'newName')
+    .enterValue('employeeFormCtrl.employee.firstName', 'newName')
     .saveForm('Update');
 
   browser.sleep(2);
@@ -448,10 +442,10 @@ describe('Form Page', function () {
     it('should be able to update the project', function () {
 
       formPage
-        .enterValue('project.name', 'newProjectName')
+        .enterValue('projectFormCtrl.project.name', 'newProjectName')
         .saveForm('Update');
 
-      browser.sleep(2);
+      browser.sleep(3000);
 
       expect(formPage.successMessage()).toContain('Updated project: ');
     });

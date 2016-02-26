@@ -102,7 +102,7 @@ var query = {
 ```javascript
 data.page('employees', query)
   .then(function (pageConfig) {
-    $scope.pageConfig = pageConfig;
+    vm.pageConfig = pageConfig;
   });
 ```
 
@@ -116,21 +116,21 @@ data.page('employees', query)
 - Now that we have the function in place to request the page of employees, we can add the directive to the list page to control when and how the page requests are made.
 - Open **client/assets/templates/app/employees/index.html**
 - Look for the `TODO` near line 51 and add the *pagination* directive:
-  - Set the `total-items` to the value of `pageConfig.totalItems`.
-  - Set the `page` to the value of `pageConfig.page`.
-  - Set the `items-per-page` to the value of `pageConfig.limit`
+  - Set the `total-items` to the value of `employeeCtrl.pageConfig.totalItems`.
+  - Set the `page` to the value of `employeeCtrl.pageConfig.page`.
+  - Set the `items-per-page` to the value of `employeeCtrl.pageConfig.limit`
   - We also want to show the `boundary-links` and have the buttons `rotate`.
-  - Lastly, when a page is selected, we want to call teh `requestEmployees(page)` function on our controller's scope.
+  - Lastly, when a page is selected, we want to call the `requestEmployees(page)` function on our controller's scope.
 
 ```xml
 <div class="text-center">
   <div pagination
-    total-items="pageConfig.totalItems"
-    page="pageConfig.page"
-    items-per-page="pageConfig.limit"
+    total-items="employeeCtrl.pageConfig.totalItems"
+    page="employeeCtrl.pageConfig.page"
+    items-per-page="employeeCtrl.pageConfig.limit"
     boundary-links="true"
     rotate="true"
-    on-select-page="requestEmployees(page)">
+    on-select-page="employeeCtrl.requestEmployees(page)">
   </div>
 </div>
 ```
@@ -167,12 +167,12 @@ data.page('employees', query)
 ```xml
 <div class="text-center">
   <div pagination
-    total-items="pageConfig.totalItems"
-    page="pageConfig.page"
-    items-per-page="pageConfig.limit"
+    total-items="timesheetCtrl.pageConfig.totalItems"
+    page="timesheetCtrl.pageConfig.page"
+    items-per-page="timesheetCtrl.pageConfig.limit"
     boundary-links="true"
     rotate="true"
-    on-select-page="requestTimesheets(page)">
+    on-select-page="timesheetCtrl.requestTimesheets(page)">
   </div>
 </div>
 ```
@@ -326,7 +326,7 @@ it('should transclude the directive element contents', function () {
 <div tsz-form-section-header header="Time Units">
   <div class="row">
     <div class="col-sm-4 col-sm-offset-8 pull-right">
-      <button type="button" class="btn btn-primary btn-block" ng-click="logTime()">Log Time</button>
+      <button type="button" class="btn btn-primary btn-block" ng-click="timesheetDetailCtrl.logTime()">Log Time</button>
     </div>
   </div>
 </div>
@@ -497,8 +497,8 @@ describe('progress bar > 100%', function() {
 ```xml
 <div class="row">
   <div class="col-xs-12">
-    <div tsz-weekly-progress-bar hours-worked="hoursWorked()"
-      hours-required="hoursRequired()" report="reportStatus(percentComplete)"></div>
+    <div tsz-weekly-progress-bar hours-worked="timesheetDetailCtrl.hoursWorked()"
+      hours-required="timesheetDetailCtrl.hoursRequired()" report="timesheetDetailCtrl.reportStatus(percentComplete)"></div>
   </div>
 </div>
 ```

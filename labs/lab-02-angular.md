@@ -30,7 +30,7 @@ git pull
 - Set the **MainCtrl** as the outermost controller for our application by adding the `ng-controller` directive to the body tag.
 
 ```xml
-<body ng-controller="MainCtrl">
+<body ng-controller="MainCtrl as mainCtrl">
 ```
 
 - Now we need a place for Angular to place our application templates.
@@ -79,18 +79,20 @@ angular.module('main', [
 ```javascript
 angular.module('app.controllers', [])
 
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function () {
 
   })
 
   .controller('AppCtrl',
-    function ($scope){
-      $scope.demo = {};
+    function (){
+      var vm = this;
+
+      vm.demo = {};
     }
   )
 
   .controller('NavCtrl',
-    function ($scope) {
+    function () {
 
     }
   );
