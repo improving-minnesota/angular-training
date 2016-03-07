@@ -141,12 +141,14 @@ authorization = $injector.get('authorization');
   - On a change, re-set `authenticated` and `loggedInUser` on scope.
 
 ```javascript
+var vm = this;
+
 $scope.$watch(function () {
   return securityContext.authenticated;
 },
 function (authenticated) {
-  $scope.authenticated = authenticated;
-  $scope.loggedInUser = securityContext.user;
+  vm.authenticated = authenticated;
+  vm.loggedInUser = securityContext.user;
 });
 ```
 - Since the `MainCtrl` controller is the top-most controller in the state hierarchy, its `$scope` properties will be available to all of the application controllers.
@@ -159,7 +161,7 @@ function (authenticated) {
 - Add a `ng-if` directive to the title's wrapper on line #3:
 
 ```xml
-<div ng-if="authenticated" class="col-xs-12">
+<div ng-if="mainCtrl.authenticated" class="col-xs-12">
 ```
 ###### Secure the navigation bar
 
@@ -168,14 +170,14 @@ function (authenticated) {
 - Add a `ng-if` directive to the `<ul>` on line #9:
 
 ```xml
-<ul ng-if="authenticated" class="nav navbar-nav navbar-left">
+<ul ng-if="mainCtrl.authenticated" class="nav navbar-nav navbar-left">
 ```
 
 - Now lets make sure that the button to navigate to the timesheets views are scoped to the logged in user:
 - Find the `TODO` near line #17 and set the `ui-sref` to:
 
 ```xml
-<a ui-sref="app.timesheets({user_id: loggedInUser._id})">Timesheets</a>
+<a ui-sref="app.timesheets({user_id: mainCtrl.loggedInUser._id})">Timesheets</a>
 ```
 
 - Lastly, we need a button to call that `logout` function that is living in the `NavCtrl`.
@@ -184,7 +186,7 @@ function (authenticated) {
 ```xml
 <ul class="nav navbar-nav navbar-right">
   <li>
-    <a class="navbar-brand logout" ng-click="logout()">  
+    <a class="navbar-brand logout" ng-click="navCtrl.logout()">  
      <i class="fa fa-power-off"></i>
      Logout
     </a>

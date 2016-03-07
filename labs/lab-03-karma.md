@@ -102,21 +102,17 @@ beforeEach(
 - Next follow the instructions from the `TODO` near line 14 and add:
 
 ```javascript
-beforeEach(inject(function($rootScope, $controller) {
-  scope = $rootScope.$new();
-  controller = $controller("MainCtrl", {
-    $scope: scope
-  });
+beforeEach(inject(function($controller) {
+  controller = $controller("MainCtrl");
 }));
 ```
 
 - What did we just do?
   - The beforeEach tells Jasmine to run the inclosed function before every test within the enclosing `describe`.
   - We then call `inject`, which instructs Angular that we are needing dependencies injected.
-  - We inject the `$rootScope` and use it to construct a new `$scope` object for our test controller.
-  - Using the `$controller` service, we instantiate a `MainCtrl` and inject our newly created `$scope` into it.
+  - Using the `$controller` service, we instantiate a `MainCtrl`.
 
-
+ 
  - Find the `TODO` near line #20 and write your first test:
 
 ```javascript
@@ -144,15 +140,12 @@ describe('setup', function () {
 - Find the `TODO` near line #30 and set up the controller for testing:
 
 ```javascript
-beforeEach(inject(function($rootScope, $controller) {
-  scope = $rootScope.$new();
-  controller = $controller("AppCtrl", {
-    $scope: scope
-  });
+beforeEach(inject(function($controller) {
+  controller = $controller("AppCtrl");
 }));
 ```
 
-- Now test the controller can be instantiated by replacing the `TODO` near line 38 with:
+- Now test the controller can be instantiated by replacing the `TODO` near line 36 with:
 
 ```javascript
 it('should be able to instantiate the controller', function () {

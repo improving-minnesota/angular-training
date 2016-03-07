@@ -31,7 +31,7 @@ grunt serve:development
 - Find the `<tr>` that is holding our repeater and change the `ng-repeat` directive to be:
 
 ```javascript
-ng-repeat="employee in pageConfig.data | orderBy:'username'"
+ng-repeat="employee in employeeCtrl.pageConfig.data | orderBy:'username'"
 ```
 - Now run the server (if it isn't already) and your grunt watch task.
 - Open the application in the browser and navigate to the employees page.
@@ -41,19 +41,19 @@ ng-repeat="employee in pageConfig.data | orderBy:'username'"
 
 ###### Sort the projects by the project name
 ```javascript
-ng-repeat="project in pageConfig.data | orderBy:'name'"
+ng-repeat="project in projectCtrl.pageConfig.data | orderBy:'name'"
 ```
 
 ###### Sort the timesheets by begin date
 
 ```javascript
-ng-repeat="timesheet in pageConfig.data | orderBy:'beginDate'"
+ng-repeat="timesheet in timesheetCtrl.pageConfig.data | orderBy:'beginDate'"
 ```
 
 ###### Sort the timeunits by date worked
 
 ```javascript
-ng-repeat="timeunit in timeunits | orderBy:'dateWorked'"
+ng-repeat="timeunit in timesheetDetailCtrl.timeunits | orderBy:'dateWorked'"
 ```
 - Replace each of the `ng-repeat` declarations in the `<tr>`'s and navigate to each of the pages to see the effects.
 - Pretty nice and easy to handle something that is very common.
@@ -170,7 +170,7 @@ it('should display "N/A" for null', function() {
 - Find the field that is bound to the admin property and change the binding to:
 
 ```xml
-{{employee.admin | yesNo}}
+{{employeeFormCtrl.employee.admin | yesNo}}
 ```
 - Now open **client/assets/templates/app/employees/index.html**
 - Find the `<td>` with the admin binding and change it to:
@@ -302,7 +302,7 @@ it('should display "Invalid date" for an invalid date', function() {
 
 - Navigate to both pages and verify that your new filter is working.
 
-- Nice job, but management still is satisfied...
+- Nice job, but management still is unsatisfied...
 
 &nbsp;
 ### Create a filter to format a long date like *November 18, 2013*
@@ -374,8 +374,8 @@ it('should display "Invalid date" for an invalid date', function() {
 - Find the bindings for the begin and end dates and replace them with:
 
 ```javascript
-{{timesheet.beginDate | momentLongDate}}
-{{timesheet.endDate | momentLongDate}}
+{{timesheetDetailCtrl.timesheet.beginDate | momentLongDate}}
+{{timesheetDetailCtrl.timesheet.endDate | momentLongDate}}
 ```
 
 - Make sure your server is running and navigate to the timesheet page.
