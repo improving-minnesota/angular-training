@@ -113,9 +113,9 @@ include ../includes/mixins
 
     p Notice here that these animations will only be applied to elements that have the CSS class "my-class".
 
-  section(id="example1", ng-controller="Lecture10Controller")
-    button(ng-click="sayHello = !sayHello") Say Hello
-    p.example-1(ng-show="sayHello") Hello World!
+  section(id="example1", ng-controller="Lecture10Controller as lecture10Controller")
+    button(ng-click="lecture10Controller.sayHello = !lecture10Controller.sayHello") Say Hello
+    p.example-1(ng-show="lecture10Controller.sayHello") Hello World!
 
   section
     p If we add the animation classes for
@@ -147,12 +147,12 @@ include ../includes/mixins
 
       </code>
 
-  section(id="example2", ng-controller="Lecture10Controller")
-    button(ng-click="pushTime()") Push Time
-    button(ng-click="popTime()") Pop Time
+  section(id="example2", ng-controller="Lecture10Controller as lecture10Controller")
+    button(ng-click="lecture10Controller.pushTime()") Push Time
+    button(ng-click="lecture10Controller.popTime()") Pop Time
     br
     br
-    div.repeated-item(ng-repeat="time in times") {{time | date:'h:mm:ss.sss a'}}
+    div.repeated-item(ng-repeat="time in lecture10Controller.times") {{time | date:'h:mm:ss.sss a'}}
 
   section
     h1 Lab Ten
@@ -162,19 +162,21 @@ include ../includes/mixins
     p In this lab, you're going to add animations to the employee, timesheet, and project lists.
 
   script.
-    angular.module('lecture10', ['ngAnimate']).controller('Lecture10Controller', function($scope) {
-      $scope.times = [];
+    angular.module('lecture10', ['ngAnimate']).controller('Lecture10Controller', function() {
+      var vm = this;
 
-      $scope.pushTime = function() {
-        $scope.times.push(new Date());
+      vm.times = [];
+
+      vm.pushTime = function() {
+        vm.times.push(new Date());
       };
 
-      $scope.popTime = function() {
-        $scope.times.shift();
+      vm.popTime = function() {
+        vm.times.shift();
       };
 
 
-      $scope.sayHello = false;
+      vm.sayHello = false;
     });
 
     angular.bootstrap(document.getElementById("example1"), ["lecture10"]);
