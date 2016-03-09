@@ -218,8 +218,9 @@ promisedStep1()
         <section>
           <p>First, let's create an asynchronous function that returns a promise.</p><br>
           <pre><code class="js" data-trim>
-controller('PromiseCtrl', function($scope, $q, $timeout) {
-  $scope.myAsyncTask = function() {
+controller('PromiseCtrl', function($q, $timeout) {
+  var vm = this;
+  vm.myAsyncTask = function() {
     // Create the deferred object
     var deferred = $q.defer();
     
@@ -242,13 +243,14 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
           <p>Now, let's use the promise to execute a task after our asynchronous function completes.</p><br>
           <pre><a href="http://embed.plnkr.co/V5sFcd/preview" target="_blank"><i class="fa fa-external-link"></i></a>
 <code class="js" data-trim>
-controller('PromiseCtrl', function($scope) {
-
-  // $scope.myAsyncTask = ...
+controller('PromiseCtrl', function() {
+  var vm = this;
   
-  $scope.myAsyncTask()         // call myAsyncTask, which returns the promise object
+  // vm.myAsyncTask = ...
+  
+  vm.myAsyncTask()         // call myAsyncTask, which returns the promise object
     .then(function(result) {   // then,
-      $scope.result = result;  // save the result on scope
+      vm.result = result;  // save the result on this controller scope
     });
     
 });
@@ -262,11 +264,12 @@ controller('PromiseCtrl', function($scope) {
         <section>
           <p>The data service methods return promises to the response data from the server.</p><br>
           <pre><code class="js" data-trim>
-controller('EmployeeCtrl', function($scope, data) {
-
+controller('EmployeeCtrl', function(data) {
+  var vm = this;
+  
   data.list('employees')
     .then(function (employees) {
-      $scope.employees = employees;
+      vm.employees = employees;
     });
     
 });
@@ -280,8 +283,10 @@ controller('EmployeeCtrl', function($scope, data) {
         <section>
           <p>When you can't resolve a promise, reject it.</p><br>
           <pre><code class="js" data-trim>
-controller('PromiseCtrl', function($scope, $q, $timeout) {
-  $scope.myAsyncTask = function() {
+controller('PromiseCtrl', function($q, $timeout) {
+  var vm = this;
+  
+  vm.myAsyncTask = function() {
     var deferred = $q.defer();
     
     $timeout(function() {
@@ -300,11 +305,12 @@ controller('PromiseCtrl', function($scope, $q, $timeout) {
           <p>We reject promises so that we handle the errors appropriately.</p>
           <pre><a href="http://embed.plnkr.co/OdBU2J/preview" target="_blank"><i class="fa fa-external-link"></i></a>
 <code class="js" data-trim>
-controller('PromiseCtrl', function($scope, $log) {
-
-  $scope.myAsyncTask()         // call myAsyncTask (fails)
+controller('PromiseCtrl', function($log) {
+  var vm = this;
+  
+  vm.myAsyncTask()         // call myAsyncTask (fails)
     .then(function(result) {   // then,
-      $scope.result = result;  // this will never happen
+      vm.result = result;  // this will never happen
     })
     .catch(function(error) {   // because we're catching failures
       $log.error("Error!", error);
@@ -324,17 +330,19 @@ controller('PromiseCtrl', function($scope, $log) {
           <p><strong> $q.when()</strong> will do nothing if the value is a<strong> $q</strong> promise.</p>
           <pre><a href="http://embed.plnkr.co/3IO2lL/preview" target="_blank"><i class="fa fa-external-link"></i></a>
 <code class="js" data-trim>
-controller('PromiseCtrl', function($scope, $q) {
+controller('PromiseCtrl', function($q) {
   // This function doesn't return a promise, just a String
   // Note that String does not have the function then() on it
-  $scope.mySyncTask = function() {
+  var vm = this;
+  
+  vm.mySyncTask = function() {
     return "Result";
   };
   
   // Wrap the result of some syncronous task with a thenable promise
-  $q.when($scope.mySyncTask())
+  $q.when(vm.mySyncTask())
     .then(function(result) {    // then,
-      $scope.result = result;   // do something with the result
+      vm.result = result;   // do something with the result
     });
     
 });
