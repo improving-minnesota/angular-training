@@ -122,9 +122,9 @@ angular.module('app', ['ngAnimate'])
 </pre>
           <p>Notice here that these animations will only be applied to elements that have the CSS class "my-class".</p>
         </section>
-        <section id="example1" ng-controller="Lecture10Controller">
-          <button ng-click="sayHello = !sayHello">Say Hello</button>
-          <p ng-show="sayHello" class="example-1">Hello World!</p>
+        <section id="example1" ng-controller="Lecture10Controller as lecture10Controller">
+          <button ng-click="lecture10Controller.sayHello = !lecture10Controller.sayHello">Say Hello</button>
+          <p ng-show="lecture10Controller.sayHello" class="example-1">Hello World!</p>
         </section>
         <section>
           <p>If we add the animation classes for<strong> ng-repeat</strong>, we can animate lists as they change.</p><br>
@@ -153,10 +153,10 @@ angular.module('app', ['ngAnimate'])
 </code>
 </pre>
         </section>
-        <section id="example2" ng-controller="Lecture10Controller">
-          <button ng-click="pushTime()">Push Time</button>
-          <button ng-click="popTime()">Pop Time</button><br><br>
-          <div ng-repeat="time in times" class="repeated-item">{{time | date:'h:mm:ss.sss a'}}</div>
+        <section id="example2" ng-controller="Lecture10Controller as lecture10Controller">
+          <button ng-click="lecture10Controller.pushTime()">Push Time</button>
+          <button ng-click="lecture10Controller.popTime()">Pop Time</button><br><br>
+          <div ng-repeat="time in lecture10Controller.times" class="repeated-item">{{time | date:'h:mm:ss.sss a'}}</div>
         </section>
         <section>
           <h1>Lab Ten</h1>
@@ -166,19 +166,21 @@ angular.module('app', ['ngAnimate'])
           <p>In this lab, you're going to add animations to the employee, timesheet, and project lists.</p>
         </section>
         <script>
-          angular.module('lecture10', ['ngAnimate']).controller('Lecture10Controller', function($scope) {
-            $scope.times = [];
+          angular.module('lecture10', ['ngAnimate']).controller('Lecture10Controller', function() {
+            var vm = this;
             
-            $scope.pushTime = function() {
-              $scope.times.push(new Date());
+            vm.times = [];
+            
+            vm.pushTime = function() {
+              vm.times.push(new Date());
             };
             
-            $scope.popTime = function() {
-              $scope.times.shift();
+            vm.popTime = function() {
+              vm.times.shift();
             };
             
             
-            $scope.sayHello = false;
+            vm.sayHello = false;
           });
           
           angular.bootstrap(document.getElementById("example1"), ["lecture10"]);

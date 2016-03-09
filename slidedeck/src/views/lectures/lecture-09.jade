@@ -165,7 +165,7 @@ include ../includes/mixins
     br
     pre.
       <code class="html" data-trim>
-      &lt;tr ng-repeat="employee in employees | filter:myFilter | orderBy:'name'"&gt;
+      &lt;tr ng-repeat="employee in employeeCtrl.employees | filter:myFilter | orderBy:'name'"&gt;
         &lt;td&gt;{{employee.name}}&lt;/td&gt;
       &lt;/tr&gt;
 
@@ -178,7 +178,7 @@ include ../includes/mixins
     br
     input.form-control(ng-model="myFilter")
     br
-    div(ng-repeat="isisEmployee in isisEmployees | filter:myFilter | orderBy:'name'") {{isisEmployee.name}}
+    div(ng-repeat="isisEmployee in isisEmpCtrl.isisEmployees | filter:myFilter | orderBy:'name'") {{isisEmployee.name}}
 
   section
     h1 Unit Testing
@@ -222,8 +222,10 @@ include ../includes/mixins
       |  filter on employee, timesheet, and project lists and create some of your own filters.
 
   script.
-    angular.module('lecture09', []).controller('Lecture9Controller', function($scope) {
-      $scope.isisEmployees = [
+    angular.module('lecture09', []).controller('Lecture9Controller', function() {
+      var vm = this;
+
+      vm.isisEmployees = [
         {name: 'Sterling Archer'},
         {name: 'Lana Kane'},
         {name: 'Malory Archer'},
