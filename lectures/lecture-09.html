@@ -178,7 +178,7 @@ angular.module('date.filters', [ ])
         <section>
           <p>This will take the source array and return a new filtered array to<strong> ng-repeat.</strong></p><br>
           <pre><code class="html" data-trim>
-&lt;tr ng-repeat="employee in employees | filter:myFilter | orderBy:'name'"&gt;
+&lt;tr ng-repeat="employee in employeeCtrl.employees | filter:myFilter | orderBy:'name'"&gt;
   &lt;td&gt;{{employee.name}}&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -189,7 +189,7 @@ angular.module('date.filters', [ ])
         <section id="example2" ng-controller="Lecture9Controller">
           <p>Filtering arrays in action</p><br>
           <input ng-model="myFilter" class="form-control"><br>
-          <div ng-repeat="isisEmployee in isisEmployees | filter:myFilter | orderBy:'name'">{{isisEmployee.name}}</div>
+          <div ng-repeat="isisEmployee in isisEmpCtrl.isisEmployees | filter:myFilter | orderBy:'name'">{{isisEmployee.name}}</div>
         </section>
         <section>
           <h1>Unit Testing</h1>
@@ -228,8 +228,10 @@ describe('yesNo Filter', function() {
           <p>In this lab you'll use the<strong> orderBy</strong> filter on employee, timesheet, and project lists and create some of your own filters.</p>
         </section>
         <script>
-          angular.module('lecture09', []).controller('Lecture9Controller', function($scope) {
-            $scope.isisEmployees = [
+          angular.module('lecture09', []).controller('Lecture9Controller', function() {
+            var vm = this;
+            
+            vm.isisEmployees = [
               {name: 'Sterling Archer'},
               {name: 'Lana Kane'},
               {name: 'Malory Archer'},
