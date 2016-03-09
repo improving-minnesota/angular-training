@@ -377,7 +377,7 @@ include ../includes/mixins
       &lt;/div&gt;
 
       </code>
-
+      
   section
     p Let's add some functionality to scope and show off data binding.
 
@@ -412,6 +412,87 @@ include ../includes/mixins
   section
     p There's no magic happening here.
     p This demonstrates how changes on scope are reflected in the view once the DOM has been compiled and linked by Angular.
+    
+  section
+    h1 controller as
+    
+  section
+    p Although we've demonstrated setting up controllers with the 
+      strong ngController 
+      | directive, and using 
+      strong $scope
+      |, there is a second (and preferred) method of declaring controllers.
+      
+  section 
+    p This is commonly known as 
+      strong controller as 
+      | syntax.
+  
+  section
+    p When we first declared a controller without using 
+      strong controller as
+      |, it looked like this:
+
+  section
+    p Controller
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.controllers', [])
+        .controller('TimeController',
+          function($scope, $interval) {
+            // Set the value of $scope.time to 'now' every 10 ms
+            $interval(function() {
+              $scope.time = new Date();
+            }, 10);
+          }
+        );
+
+      </code>
+    p Template
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="TimeController"&gt;
+        &lt;p&gt;{{time}}&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>
+      
+  section
+    p Now, note the changes in the controller and the template when we use the 
+      strong controller as 
+      | syntax: 
+      
+  section
+    p Controller
+    pre.
+      <code class="js" data-trim>
+      angular.module('app.controllers', [])
+        .controller('TimeController',
+          function($interval) {
+            var vm = this;
+            // Set the value of vm.time to 'now' every 10 ms
+            $interval(function() {
+              vm.time = new Date();
+            }, 10);
+          }
+        );
+
+      </code>
+    pre.
+      <code class="html" data-trim>
+      &lt;div ng-controller="TimeController as timeCtrl"&gt;
+        &lt;p&gt;{{timeCtrl.time}}&lt;/p&gt;
+      &lt;/div&gt;
+
+      </code>   
+      
+  section(id="example3", ng-controller="TimeControllerAs as timeCtrl")
+    h2(style="font-family: monospace;") {{timeCtrl.time}}       
+
+  section
+    p We'll be using the 
+      strong controller as 
+      | syntax in all of the labs you'll be working on later.
 
   section
     h1 Bootstrapping
@@ -459,7 +540,17 @@ include ../includes/mixins
             $scope.time = new Date();
           }, 10);
         }
+      ])
+      .controller('TimeControllerAs', [
+        '$interval',
+        function($interval) {
+          var vm = this;
+          $interval(function() {
+            vm.time = new Date();
+          }, 10);
+        }
       ]);
 
     angular.bootstrap(document.getElementById("example1"), ['lecture02']);
     angular.bootstrap(document.getElementById("example2"), ['lecture02']);
+    angular.bootstrap(document.getElementById("example3"), ['lecture02']);

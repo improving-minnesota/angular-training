@@ -128,7 +128,8 @@ include ../includes/mixins
           $routeProvider
             .when('/projects', {
                templateUrl: 'assets/templates/app/projects/index.html',
-               controller: 'ProjectCtrl'
+               controller: 'ProjectCtrl',
+               controllerAs: 'projectCtrl'
             });
         });
 
@@ -146,11 +147,13 @@ include ../includes/mixins
           $routeProvider
             .when('/projects', {
                templateUrl: 'assets/templates/app/projects/index.html',
-               controller: 'ProjectCtrl'
+               controller: 'ProjectCtrl',
+               controllerAs: 'projectCtrl'
             })
             .when('/employees', {
                templateUrl: 'assets/templates/app/employees/index.html',
-               controller: 'EmployeeCtrl'
+               controller: 'EmployeeCtrl',
+               controllerAs: 'employeeCtrl'
             });
         });
 
@@ -171,7 +174,8 @@ include ../includes/mixins
           $routeProvider
             .when('/projects', {
                templateUrl: 'assets/templates/app/projects/index.html',
-               controller: 'ProjectCtrl'
+               controller: 'ProjectCtrl',
+               controllerAs: 'projectCtrl'
             })
             .otherwise({
                redirectTo: '/projects'
@@ -259,7 +263,7 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       angular.module('app', [])
-        .controller('EmployeeCtrl', function($scope, $resource) {
+        .controller('EmployeeCtrl', function($resource) {
           var Employee = $resource(
             '/employees/:employeeId',
             {employeeId:'@id'}
@@ -285,6 +289,8 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
+      var vm = this;
+
       var Employee = $resource(
         '/employees/:employeeId',
         {employeeId:'@id'}
@@ -306,7 +312,7 @@ include ../includes/mixins
     .text-center
       pre.
         <code class="js" data-trim>
-        $scope.employee = Employee.get({id: 23});
+        vm.employee = Employee.get({id: 23});
 
         </code>
     p What will the HTTP request look like for this action?
@@ -331,14 +337,14 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      $scope.employee = Employee.get({id: 23}, function() {
-        $scope.employee.name = 'Lana';
-        $scope.employee.$save();
+      vm.employee = Employee.get({id: 23}, function() {
+        vm.employee.name = 'Lana';
+        vm.employee.$save();
       });
 
       </code>
     p What will the HTTP request look like for
-      strong  $scope.employee.$save()
+      strong  vm.employee.$save()
       | ?
 
   section
@@ -439,7 +445,7 @@ include ../includes/mixins
       describe('a controller that uses $http', function() {
         it('should be able to make a network request', function () {
           $httpBackend.expect('GET', '/users');
-          scope.getUsers();
+          controller.getUsers();
           $httpBackend.flush();
         });
       });
@@ -454,7 +460,7 @@ include ../includes/mixins
       describe('a controller that uses $http', function() {
         it('should be able to handle errors', function () {
           $httpBackend.expect('GET', '/users').respond(500);
-          scope.getUsers();
+          controller.getUsers();
           $httpBackend.flush();
           // expectations for handling errors
         });
@@ -468,11 +474,11 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       describe('a controller that uses $http', function() {
-        it('should put the users on scope', function () {
+        it('should put the users on the controller', function () {
           $httpBackend.expect('GET', '/users').respond(200, [{id:5}]);
-          scope.getUsers();
+          controller.getUsers();
           $httpBackend.flush();
-          expect(scope.users[0].id).to.equal(5);
+          expect(controller.users[0].id).to.equal(5);
         });
       });
 
