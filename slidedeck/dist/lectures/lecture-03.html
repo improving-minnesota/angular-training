@@ -103,7 +103,7 @@
         </section>
         <section>
           <pre><code class="js" data-trim>
-describe("Some feature", function() {
+describe('Some feature', function() {
 
 });
 
@@ -124,7 +124,7 @@ describe("Some feature", function() {
         </section>
         <section>
           <pre><code class="js" data-trim>
-describe("Some feature", function() {
+describe('Some feature', function() {
   it('should behave in a certain way', function() {
   
   });
@@ -138,11 +138,11 @@ describe("Some feature", function() {
         </section>
         <section>
           <pre><code class="js" data-trim>
-describe("Some feature", function() {
+describe('Some feature', function() {
   it('should behave in a certain way', function() {
   
   });
-  describe("component", function() {
+  describe('component', function() {
     it('should do what we expect', function() {
     
     });
@@ -174,7 +174,7 @@ describe("Some feature", function() {
         </section>
         <section>
           <pre><code class="js" data-trim>
-describe("Some feature", function() {
+describe('Some feature', function() {
   it('should behave in a certain way', function() {
     expect(true).to.equal(true);
     expect({}).to.be.ok; // Ok checks if the actual is defined
@@ -246,11 +246,8 @@ beforeEach(module(
 
 beforeEach(
   inject(
-    function($rootScope, $controller) {
-      scope = $rootScope.$new();
-      controller = $controller("MainCtrl", {
-        $scope: scope
-      });
+    function($controller) {
+      controller = $controller('MainCtrl');
     }
   )
 );
@@ -263,13 +260,13 @@ beforeEach(
           <p>Lets break this down and discuss what's going on in each step.</p>
         </section>
         <section>
-          <p>To instantiate our controller for testing, we'll need to inject the<strong> $controller</strong> service and<strong> $rootScope</strong> service.</p>
+          <p>To instantiate our controller for testing, we'll need to inject the<strong> $controller</strong> service.</p>
         </section>
         <section>
-          <p>The inject function is going to inject<strong> $rootScope</strong> and the<strong> $controller</strong> services that we need to build an instance of our controller.</p><br>
+          <p>The inject function is going to inject the<strong> $controller</strong> services that we need to build an instance of our controller.</p><br>
           <pre><code class="js" data-trim>
   inject(
-    function($rootScope, $controller) {
+    function($controller) {
     
     }
   );
@@ -278,32 +275,17 @@ beforeEach(
 </pre>
         </section>
         <section>
-          <p>Now, we're going to create a new scope from the root scope that we'll supply to our controller.</p><br>
-          <pre><code class="js" data-trim>
-inject(
-  function($rootScope, $controller) {
-    scope = $rootScope.$new();
-  }
-);
-
-</code>
-</pre>
-        </section>
-        <section>
           <p>Then, we'll use the<strong> $controller</strong> service to instantiate our controller and supply the dependencies it needs.</p><br>
           <pre><code class="js" data-trim>
-controller('MainCtrl', function($scope) {
+controller('MainCtrl', function() {
 
 });
 
 </code></pre>
           <pre><code class="js" data-trim>
 inject(
-  function($rootScope, $controller) {
-    scope = $rootScope.$new();
-    controller = $controller("MainCtrl", {
-      $scope: scope
-    });
+  function($controller) {
+    controller = $controller('MainCtrl');
   }
 )
 
@@ -311,19 +293,33 @@ inject(
 </pre>
         </section>
         <section>
+          <p>Note that if you're not using the<strong> controller as</strong> syntax, you'll have to inject<strong> $rootScope</strong> and use it to create a new scope object to set on your controller.<br></p>
+          <pre><code class="js" data-trim>
+inject(
+  function($rootScope, $controller) {
+    scope = $rootScope.$new();
+    controller = $controller('MainCtrl', {
+      $scope: scope
+    });
+  }
+);
+
+</code>
+</pre>
+        </section>
+        <section>
           <p>If we needed to supply additional mock dependencies, we could do that here as well.</p><br>
           <pre><code class="js" data-trim>
-controller('MainCtrl', function($scope, person) {
-  $scope.person = person;
+controller('MainCtrl', function(person) {
+  var vm = this;
+  vm.person = person;
 });
 
 </code></pre>
           <pre><code class="js" data-trim>
 inject(
-  function($rootScope, $controller) {
-    scope = $rootScope.$new();
-    controller = $controller("MainCtrl", {
-      $scope: scope,
+  function($controller) {
+    controller = $controller('MainCtrl', {
       person: [{id: 1, name:'Cyril'}]
     });
   }
@@ -344,8 +340,8 @@ it('should be able to instantiate the controller', function () {
   expect(controller).to.be.ok;
 });
 
-it('should have person on scope', function () {
-  expect(scope.person).to.be.ok;
+it('should have person as a variable on the controller', function () {
+  expect(controller.person).to.be.ok;
 });
 
 </code>

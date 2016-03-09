@@ -78,7 +78,7 @@ include ../includes/mixins
   section
     pre.
       <code class="js" data-trim>
-      describe("Some feature", function() {
+      describe('Some feature', function() {
 
       });
 
@@ -103,7 +103,7 @@ include ../includes/mixins
   section
     pre.
       <code class="js" data-trim>
-      describe("Some feature", function() {
+      describe('Some feature', function() {
         it('should behave in a certain way', function() {
 
         });
@@ -117,11 +117,11 @@ include ../includes/mixins
   section
     pre.
       <code class="js" data-trim>
-      describe("Some feature", function() {
+      describe('Some feature', function() {
         it('should behave in a certain way', function() {
 
         });
-        describe("component", function() {
+        describe('component', function() {
           it('should do what we expect', function() {
 
           });
@@ -163,7 +163,7 @@ include ../includes/mixins
   section
     pre.
       <code class="js" data-trim>
-      describe("Some feature", function() {
+      describe('Some feature', function() {
         it('should behave in a certain way', function() {
           expect(true).to.equal(true);
           expect({}).to.be.ok; // Ok checks if the actual is defined
@@ -245,11 +245,8 @@ include ../includes/mixins
 
       beforeEach(
         inject(
-          function($rootScope, $controller) {
-            scope = $rootScope.$new();
-            controller = $controller("MainCtrl", {
-              $scope: scope
-            });
+          function($controller) {
+            controller = $controller('MainCtrl');
           }
         )
       );
@@ -264,37 +261,20 @@ include ../includes/mixins
   section
     p To instantiate our controller for testing, we'll need to inject the
       strong  $controller
-      |  service and
-      strong  $rootScope
       |  service.
 
   section
-    p The inject function is going to inject
-      strong  $rootScope
-      |  and the
+    p The inject function is going to inject the
       strong  $controller
       |  services that we need to build an instance of our controller.
     br
     pre.
       <code class="js" data-trim>
         inject(
-          function($rootScope, $controller) {
+          function($controller) {
 
           }
         );
-
-      </code>
-
-  section
-    p Now, we're going to create a new scope from the root scope that we'll supply to our controller.
-    br
-    pre.
-      <code class="js" data-trim>
-      inject(
-        function($rootScope, $controller) {
-          scope = $rootScope.$new();
-        }
-      );
 
       </code>
 
@@ -305,7 +285,7 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      controller('MainCtrl', function($scope) {
+      controller('MainCtrl', function() {
 
       });
 
@@ -313,13 +293,30 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       inject(
+        function($controller) {
+          controller = $controller('MainCtrl');
+        }
+      )
+
+      </code>
+
+  section
+    p Note that if you're not using the
+      strong  controller as
+      |  syntax, you'll have to inject
+      strong  $rootScope
+      |  and use it to create a new scope object to set on your controller.
+      br
+    pre.
+      <code class="js" data-trim>
+      inject(
         function($rootScope, $controller) {
           scope = $rootScope.$new();
-          controller = $controller("MainCtrl", {
+          controller = $controller('MainCtrl', {
             $scope: scope
           });
         }
-      )
+      );
 
       </code>
 
@@ -328,18 +325,17 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
-      controller('MainCtrl', function($scope, person) {
-        $scope.person = person;
+      controller('MainCtrl', function(person) {
+        var vm = this;
+        vm.person = person;
       });
 
       </code>
     pre.
       <code class="js" data-trim>
       inject(
-        function($rootScope, $controller) {
-          scope = $rootScope.$new();
-          controller = $controller("MainCtrl", {
-            $scope: scope,
+        function($controller) {
+          controller = $controller('MainCtrl', {
             person: [{id: 1, name:'Cyril'}]
           });
         }
@@ -360,8 +356,8 @@ include ../includes/mixins
         expect(controller).to.be.ok;
       });
 
-      it('should have person on scope', function () {
-        expect(scope.person).to.be.ok;
+      it('should have person as a variable on the controller', function () {
+        expect(controller.person).to.be.ok;
       });
 
       </code>

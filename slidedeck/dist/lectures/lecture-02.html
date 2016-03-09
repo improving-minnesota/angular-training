@@ -423,6 +423,73 @@ angular.module('app.controllers', [])
           <p>This demonstrates how changes on scope are reflected in the view once the DOM has been compiled and linked by Angular.</p>
         </section>
         <section>
+          <h1>controller as</h1>
+        </section>
+        <section>
+          <p>Although we've demonstrated setting up controllers with the <strong>ngController </strong>directive, and using <strong>$scope</strong>, there is a second (and preferred) method of declaring controllers.</p>
+        </section>
+        <section>
+          <p>This is commonly known as <strong>controller as </strong>syntax.</p>
+        </section>
+        <section>
+          <p>When we first declared a controller without using <strong>controller as</strong>, it looked like this:</p>
+        </section>
+        <section>
+          <p>Controller</p>
+          <pre><code class="js" data-trim>
+angular.module('app.controllers', [])
+  .controller('TimeController',
+    function($scope, $interval) {
+      // Set the value of $scope.time to 'now' every 10 ms
+      $interval(function() {
+        $scope.time = new Date();
+      }, 10);
+    }
+  );
+  
+</code></pre>
+          <p>Template</p>
+          <pre><code class="html" data-trim>
+&lt;div ng-controller="TimeController"&gt;
+  &lt;p&gt;{{time}}&lt;/p&gt;
+&lt;/div&gt;
+
+</code>
+</pre>
+        </section>
+        <section>
+          <p>Now, note the changes in the controller and the template when we use the <strong>controller as </strong>syntax: </p>
+        </section>
+        <section>
+          <p>Controller</p>
+          <pre><code class="js" data-trim>
+angular.module('app.controllers', [])
+  .controller('TimeController',
+    function($interval) {
+      var vm = this;
+      // Set the value of vm.time to 'now' every 10 ms
+      $interval(function() {
+        vm.time = new Date();
+      }, 10);
+    }
+  );
+  
+</code></pre>
+          <pre><code class="html" data-trim>
+&lt;div ng-controller="TimeController as timeCtrl"&gt;
+  &lt;p&gt;{{timeCtrl.time}}&lt;/p&gt;
+&lt;/div&gt;
+
+</code>   
+</pre>
+        </section>
+        <section id="example3" ng-controller="TimeControllerAs as timeCtrl">
+          <h2 style="font-family: monospace;">{{timeCtrl.time}}       </h2>
+        </section>
+        <section>
+          <p>We'll be using the <strong>controller as </strong>syntax in all of the labs you'll be working on later.</p>
+        </section>
+        <section>
           <h1>Bootstrapping</h1>
         </section>
         <section>
@@ -464,10 +531,20 @@ angular.module('app.controllers', [])
                   $scope.time = new Date();
                 }, 10);
               }
+            ])
+            .controller('TimeControllerAs', [
+              '$interval',
+              function($interval) {
+                var vm = this;
+                $interval(function() {
+                  vm.time = new Date();
+                }, 10);
+              }
             ]);
             
           angular.bootstrap(document.getElementById("example1"), ['lecture02']);
           angular.bootstrap(document.getElementById("example2"), ['lecture02']);
+          angular.bootstrap(document.getElementById("example3"), ['lecture02']);
         </script>
       </div>
     </div>

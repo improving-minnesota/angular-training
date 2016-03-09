@@ -15,7 +15,7 @@
     "lesshat": "~2.0.15",
     "font-awesome": "4.3.0",
     "highlight.js": "components/highlightjs",
-    "angular": "~1.2.14",
-    "angular-animate": "~1.2.14"
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0"
   }
 }

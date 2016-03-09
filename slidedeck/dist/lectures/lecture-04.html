@@ -135,7 +135,8 @@ angular.module('app', [])
     $routeProvider
       .when('/projects', {
          templateUrl: 'assets/templates/app/projects/index.html',
-         controller: 'ProjectCtrl'
+         controller: 'ProjectCtrl',
+         controllerAs: 'projectCtrl'
       });
   });
   
@@ -150,11 +151,13 @@ angular.module('app', [])
     $routeProvider
       .when('/projects', {
          templateUrl: 'assets/templates/app/projects/index.html',
-         controller: 'ProjectCtrl'
+         controller: 'ProjectCtrl',
+         controllerAs: 'projectCtrl'
       })
       .when('/employees', {
          templateUrl: 'assets/templates/app/employees/index.html',
-         controller: 'EmployeeCtrl'
+         controller: 'EmployeeCtrl',
+         controllerAs: 'employeeCtrl'
       });
   });
   
@@ -172,7 +175,8 @@ angular.module('app', [])
     $routeProvider
       .when('/projects', {
          templateUrl: 'assets/templates/app/projects/index.html',
-         controller: 'ProjectCtrl'
+         controller: 'ProjectCtrl',
+         controllerAs: 'projectCtrl'
       })
       .otherwise({
          redirectTo: '/projects'
@@ -242,7 +246,7 @@ angular.module('app', [])
         <section>
           <pre><code class="js" data-trim>
 angular.module('app', [])
-  .controller('EmployeeCtrl', function($scope, $resource) {
+  .controller('EmployeeCtrl', function($resource) {
     var Employee = $resource(
       '/employees/:employeeId',
       {employeeId:'@id'}
@@ -265,6 +269,8 @@ var Employee = $resource('/employees/:employeeId');
         <section>
           <p>The second argument specifies how<strong> $resource</strong> should substitute those URL variables with the options passed in.</p><br>
           <pre><code class="js" data-trim>
+var vm = this;
+
 var Employee = $resource(
   '/employees/:employeeId',
   {employeeId:'@id'}
@@ -280,7 +286,7 @@ var Employee = $resource(
           <p>Now that we've defined our resource, we can use the Employee resource class to get an instance of an employee.</p><br>
           <div class="text-center">
             <pre><code class="js" data-trim>
-$scope.employee = Employee.get({id: 23});
+vm.employee = Employee.get({id: 23});
 
 </code></pre>
           </div>
@@ -301,13 +307,13 @@ $scope.employee = Employee.get({id: 23});
         <section>
           <p>Once we have a populated instance of the employee resource, we can change its data and call actions on it.</p><br>
           <pre><code class="js" data-trim>
-$scope.employee = Employee.get({id: 23}, function() {
-  $scope.employee.name = 'Lana';
-  $scope.employee.$save();
+vm.employee = Employee.get({id: 23}, function() {
+  vm.employee.name = 'Lana';
+  vm.employee.$save();
 });
 
 </code></pre>
-          <p>What will the HTTP request look like for<strong> $scope.employee.$save()</strong>?</p>
+          <p>What will the HTTP request look like for<strong> vm.employee.$save()</strong>?</p>
         </section>
         <section>
           <p><strong>POST /employees/23</strong></p>
@@ -388,7 +394,7 @@ $scope.employee = Employee.get({id: 23}, function() {
 describe('a controller that uses $http', function() {
   it('should be able to make a network request', function () {
     $httpBackend.expect('GET', '/users');
-    scope.getUsers();
+    controller.getUsers();
     $httpBackend.flush();
   });
 });
@@ -402,7 +408,7 @@ describe('a controller that uses $http', function() {
 describe('a controller that uses $http', function() {
   it('should be able to handle errors', function () {
     $httpBackend.expect('GET', '/users').respond(500);
-    scope.getUsers();
+    controller.getUsers();
     $httpBackend.flush();
     // expectations for handling errors
   });
@@ -415,11 +421,11 @@ describe('a controller that uses $http', function() {
           <p>Also, we can provide data to send back in our mock responses to our network requests.</p><br>
           <pre><code class="js" data-trim>
 describe('a controller that uses $http', function() {
-  it('should put the users on scope', function () {
+  it('should put the users on the controller', function () {
     $httpBackend.expect('GET', '/users').respond(200, [{id:5}]);
-    scope.getUsers();
+    controller.getUsers();
     $httpBackend.flush();
-    expect(scope.users[0].id).to.equal(5);
+    expect(controller.users[0].id).to.equal(5);
   });
 });
 
