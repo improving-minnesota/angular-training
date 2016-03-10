@@ -372,7 +372,8 @@ state: sinon.stub($state)
 - Around line #61, replace the `TODO` with:
 
 ```javascript
-$state: spies.state
+$state: spies.state,
+$stateParams: $stateParams
 ```
 
 - Test the detail transition by replacing the `TODO` near line #90 with:
