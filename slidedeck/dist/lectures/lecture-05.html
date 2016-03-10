@@ -41,74 +41,6 @@
           <h2>Solution</h2>
         </section>
         <section>
-          <h1>Controller</h1>
-          <h2>Inheritance</h2>
-        </section>
-        <section>
-          <p>It's common to attach controllers at different levels of the DOM hierarchy.</p>
-        </section>
-        <section>
-          <p>Since the<strong> ng-controller</strong> directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.</p>
-        </section>
-        <section>
-          <p>The<strong> $scope</strong> that each controller receives will have access to properties and methods defined by controllers higher up the hierarchy.</p>
-        </section>
-        <section>
-          <pre><code class="html" data-trim>
-&lt;div ng-controller="ParentController" &gt;
-  &lt;p&gt;{{property}}&lt;/p&gt;
-  &lt;div ng-controller="ChildController" &gt;
-    &lt;p&gt;{{property}}&lt;/p&gt;
-    &lt;div ng-controller="GrandChildController" &gt;
-      &lt;p&gt;{{property}}&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-</code></pre>
-          <pre><code class="js" data-trim>
-angular.module('app.controllers', [])
-  .controller('ParentController',function($scope) {
-    $scope.property = 'one';
-  });
-  .controller('ChildController',function($scope) {
-  
-  });
-  .controller('GrandChildController',function($scope) {
-    $scope.property = 'two';
-  });
-  
-</code></pre>
-          <p>What would the value of property be for each controller?</p>
-        </section>
-        <section>
-          <pre><code class="html" data-trim>
-&lt;div ng-controller="ParentController" &gt;
-  &lt;p&gt;one&lt;/p&gt;
-  &lt;div ng-controller="ChildController" &gt;
-    &lt;p&gt;one&lt;/p&gt;
-    &lt;div ng-controller="GrandChildController" &gt;
-      &lt;p&gt;two&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-</code>
-</pre>
-        </section>
-        <section>
-          <p>This behavior is very useful in applications with complex user interfaces.</p>
-        </section>
-        <section>
-          <p>We can use parent scopes and controllers as a means to communicate between child scopes and controllers.</p>
-        </section>
-        <section>
-          <p>Unfortunately, the URL routing service provided by Angular doesn't allow for this complex view design and controller inheritance.</p>
-        </section>
-        <section>
-          <p>This is where the community, specifically the AngularUI team, has stepped in to provide a better solution.</p>
-        </section>
-        <section>
           <h1>UI Router</h1>
         </section>
         <section>
@@ -224,7 +156,8 @@ $stateProvider
   .state('app', {
     url: '/app',
     templateUrl: 'assets/app/index.html',
-    controller: 'AppCtrl'
+    controller: 'AppCtrl',
+    controllerAs: 'appCtrl'
   });
   
 </code>
@@ -243,7 +176,8 @@ $stateProvider
   .state('app', {
     url: '/app',
     templateUrl: 'assets/app/index.html',
-    controller: 'AppCtrl'
+    controller: 'AppCtrl',
+    controllerAs: 'appCtrl'
   });
   
 </code>
@@ -262,7 +196,8 @@ $stateProvider
   .state('app', {
     url: '/app/:myParameter',
     templateUrl: 'assets/app/index.html',
-    controller: 'AppCtrl'
+    controller: 'AppCtrl',
+    controllerAs: 'appCtrl'
   });
   
 </code>
@@ -272,8 +207,9 @@ $stateProvider
           <p>These parameters can be injected into the controller using the<strong> $stateParams</strong> service.</p><br>
           <pre><code class="js" data-trim>
 controller('AppCtrl',
-  function($scope, $stateParams) {
-    $scope.myParameter = $stateParams.myParameter;
+  function($stateParams) {
+    var vm = this;
+    vm.myParameter = $stateParams.myParameter;
   }
 );
 
@@ -313,6 +249,7 @@ $stateProvider
     url: '/app',
     templateUrl: 'assets/app/index.html',
     controller: 'AppCtrl',
+    controllerAs: 'appCtrl',
     data : {
       title : 'My Application'
     }
@@ -325,8 +262,9 @@ $stateProvider
           <p>The<strong> $state</strong> object is specific to the state that instantiated the controller.</p><br>
           <pre><code class="js" data-trim>
 controller('AppCtrl',
-  function($scope, $state) {
-    $scope.pageTitle = $state.data.title;
+  function($state) {
+    var vm = this;
+    vm.pageTitle = $state.data.title;
   }
 );
 
@@ -360,6 +298,7 @@ $stateProvider
     url: '/app',
     templateUrl: 'assets/app/index.html',
     controller: 'AppCtrl',
+    controllerAs: 'appCtrl',
     resolve: {
       projects: function (data) {
         return data.list('projects');
@@ -371,8 +310,9 @@ $stateProvider
 </pre>
           <pre><code class="js" data-trim>
 controller('AppCtrl',
-  function($scope, $state, projects) {
-    $scope.projects = projects;
+  function($state, projects) {
+    var vm = this;
+    vm.projects = projects;
   }
 );
 
@@ -390,6 +330,7 @@ $stateProvider
     url: '/app',
     templateUrl: 'assets/app/index.html',
     controller: 'AppCtrl',
+    controllerAs: 'appCtrl',
     resolve: {
       authenticatedUser: authProvider.requireAuthenticatedUser
     }
@@ -467,72 +408,6 @@ angular.module('app.employees', [])
 </pre>
         </section>
         <section>
-          <h3>State Inheritance</h3>
-        </section>
-        <section>
-          <p>When the application is in a particular state, all of its ancestor states are implicitly active as well.</p>
-        </section>
-        <section>
-          <p>Let's go over what child states inherit from their parent state.</p>
-        </section>
-        <section>
-          <h4>Scope</h4>
-        </section>
-        <section>
-          <p>Given the app state and AppCtrl</p><br>
-          <pre><code class="js" data-trim>
-angular.module('app', ['app.projects'])
-  .config(function($stateProvider) {
-      $stateProvider
-        .state('app', {
-          controller: 'AppCtrl'
-        });
-  });
-  
-</code>
-</pre>
-          <pre><code class="js" data-trim>
-controller('AppCtrl', function($scope) {
-  $scope.myProperty = "My Property";
-});
-
-</code>
-</pre>
-        </section>
-        <section>
-          <p>Then, given the</p><strong> app.projects</strong> state and ProjectsCtrl<br>
-          <pre><code class="js" data-trim>
-angular.module('app.projects', [])
-  .config(function($stateProvider) {
-      $stateProvider
-        .state('app.projects', {
-          controller: 'ProjectCtrl'
-        });
-  });
-  
-</code>
-</pre>
-          <pre><code class="js" data-trim>
-controller('ProjectCtrl', function($scope) {
-  console.log($scope.myProperty);
-});
-
-</code>
-</pre>
-        </section>
-        <section>
-          <p>"My Property" will be printed out to the console when the<strong> app.projects</strong> state is active because it is inherited from the parent state.</p>
-        </section>
-        <section>
-          <p>Where does scope inheritance happen?  In the state configuration or the view?</p>
-        </section>
-        <section>
-          <p>Inheritance of scope properties has nothing to do with the nesting of your states.</p>
-        </section>
-        <section>
-          <p>Inheritance of scope properties has everything to do with the nesting of your views (templates).</p>
-        </section>
-        <section>
           <h4>Views</h4>
         </section>
         <section>
@@ -585,9 +460,18 @@ controller('ProjectCtrl', function($scope) {
         <section>
           <p>Child states inherit a parent state's resolved dependencies.</p><br>
           <pre><code class="js" data-trim>
+controller('ProjectsDetailCtrl', function(projects) {
+  // Here we can inject projects because it was resolved
+  // in the parent state.
+});
+
+</code>
+</pre>
+          <pre><code class="js" data-trim>
 $stateProvider
   .state('app.projects', {
     controller: 'ProjectsCtrl',
+    controllerAs: 'projectsCtrl',
     resolve: {
       projects: function (data) {
         return data.get('projects');
@@ -596,16 +480,9 @@ $stateProvider
   })
     .state('app.projects.detail', {
       controller: 'ProjectsDetailCtrl',
+      controllerAs: 'projectsDetailCtrl',
     });
     
-</code>
-</pre>
-          <pre><code class="js" data-trim>
-controller('ProjectsDetailCtrl', function(projects) {
-  // Here we can inject projects because it was resolved
-  // in the parent state.
-});
-
 </code>
 </pre>
         </section>
@@ -616,11 +493,12 @@ controller('ProjectsDetailCtrl', function(projects) {
           <p>Child states inherit a parent state's data properties.</p>
         </section>
         <section>
-          <p>What will the value of<strong> $scope.title</strong> and<strong> $scope.section</strong> be in ProjectDetailCtrl?</p>
+          <p>What will the value of<strong> vm.title</strong> and<strong> vm.section</strong> be in ProjectDetailCtrl?</p>
           <pre><code class="js" data-trim>
 $stateProvider
   .state('app.projects', {
     controller: 'ProjectsCtrl',
+    controllerAs: 'projectsCtrl',
     data: {
       title: 'Projects',
       section: 'Projects'
@@ -628,6 +506,7 @@ $stateProvider
   })
     .state('app.projects.detail', {
       controller: 'ProjectsDetailCtrl',
+      controllerAs: 'projectsDetailCtrl'
       data: {
         title: 'Project Detail',
       }
@@ -636,17 +515,18 @@ $stateProvider
 </code>
 </pre>
           <pre><code class="js" data-trim>
-controller('ProjectsDetailCtrl', function($scope, $state) {
-  $scope.title = $state.current.data.title;
-  $scope.section = $state.current.data.section;
+controller('ProjectsDetailCtrl', function($state) {
+  var vm = this;
+  vm.title = $state.current.data.title;
+  vm.section = $state.current.data.section;
 });
 
 </code>
 </pre>
         </section>
         <section>
-          <p><strong> $scope.title</strong> would be "Project Detail"</p>
-          <p><strong> $scope.section</strong> would be "Projects"</p>
+          <p><strong> vm.title</strong> would be "Project Detail"</p>
+          <p><strong> vm.section</strong> would be "Projects"</p>
           <p>Even though data is inherited, we can still override parts of that data in child states.</p>
         </section>
         <section>
@@ -664,11 +544,13 @@ controller('ProjectsDetailCtrl', function($scope, $state) {
 $stateProvider
   .state('app.projects', {
     url: '/projects'
-    controller: 'ProjectsCtrl'
+    controller: 'ProjectsCtrl',
+    controllerAs: 'projectsCtrl'
   })
     .state('app.projects.detail', {
       url: '/:projectId',
-      controller: 'ProjectsDetailCtrl'
+      controller: 'ProjectsDetailCtrl',
+      controllerAs: 'projectsDetailCtrl'
     });
     
 </code>
@@ -712,15 +594,18 @@ $stateProvider
     abstract: true,
     url: '/projects',
     controller: 'ProjectsCtrl',
+    controllerAs: 'projectsCtrl',
     template: '&lt;div ui-view&gt;&lt;/div&gt;'
   })
     .state('app.projects.list', {
       url: '/list',
-      controller: 'ProjectsListCtrl'
+      controller: 'ProjectsListCtrl',
+      controllerAs: 'projectsListCtrl'
     })
     .state('app.projects.detail', {
       url: '/detail',
-      controller: 'ProjectsDetailCtrl'
+      controller: 'ProjectsDetailCtrl',
+      controllerAs: 'projectsDetailCtrl'
     });
     
 </code>
@@ -746,10 +631,12 @@ $stateProvider
     views : {
       'navbar' : {
         controller: 'NavCtrl',
+        controllerAs: 'navCtrl',
         templateUrl: 'assets/templates/app/navbar.html'
       },
       'content' : {
         controller: 'AppCtrl',
+        controllerAs: 'appCtrl',
         templateUrl: 'assets/templates/app/index.html'
       }
     }
@@ -908,10 +795,8 @@ spies = {
           <p>Now, when we instantiate our controller for testing, we'll make sure that we inject our stub in the<strong> $state</strong> service.</p><br>
           <pre><code class="js" data-trim>
 beforeEach(function() {
-  $scope = $rootScope.$new();
-  controller = $controller("MyCtrl", {
-    $scope: $scope,
-    $state: spies.state,
+  controller = $controller('MyCtrl', {
+    $state: spies.state
   });
 });
 
@@ -923,7 +808,7 @@ beforeEach(function() {
           <pre><code class="js" data-trim>
 describe('MyCtrl', function () {
   it('should transition to another state', function () {
-    $scope.goToAnotherState();
+    controller.goToAnotherState();
     expect(spies.state.go).to.have.been.calledWith('app.another.state');
   });
 });
