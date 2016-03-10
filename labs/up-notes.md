@@ -56,17 +56,12 @@ export PATH="${PATH}:/c/Users/<username>/AppData/Roaming/npm"
 
 ## Installing Chrome Driver Manually
 
-Since the firewall blocks downloading executables or zips, you'll have to manually copy the chromedriver executable from the share drive.
+Since the proxy blocks downloading executables or zips, you'll have to do some basic authentication in order to bypass.
 
-```bash
+To rectify:
 
-# Move in to the project folder
-cd angular-timesheet
+1. Open up Internet Explorer
+1. Visit any URL
+1. Re-run the command specified in [lab-11][lab-11]
 
-# Make a selenium folder inside the protractor node_module folder
-mkdir ./node_modules/protractor/selenium
-
-# Copy the Windows 7 Chrome Driver from the network drive to the selenium folder
-cp /g/All/Training/Angular/chromedriver.exe node_modules/protractor/selenium/.
-
-```
+[lab-11]: lab-11-protractor.md#install-chromewebdriver
