@@ -9,80 +9,6 @@ include ../includes/mixins
     h2 Solution
 
   section
-    h1 Controller
-    h2 Inheritance
-
-  section
-    p It's common to attach controllers at different levels of the DOM hierarchy.
-
-  section
-    p Since the
-      strong  ng-controller
-      |  directive creates a new child scope, we get a hierarchy of scopes that inherit from each other.
-
-  section
-    p The
-      strong  $scope
-      |  that each controller receives will have access to properties and methods defined by controllers higher up the hierarchy.
-
-  section
-    pre.
-      <code class="html" data-trim>
-      &lt;div ng-controller="ParentController" &gt;
-        &lt;p&gt;{{property}}&lt;/p&gt;
-        &lt;div ng-controller="ChildController" &gt;
-          &lt;p&gt;{{property}}&lt;/p&gt;
-          &lt;div ng-controller="GrandChildController" &gt;
-            &lt;p&gt;{{property}}&lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      </code>
-    pre.
-      <code class="js" data-trim>
-      angular.module('app.controllers', [])
-        .controller('ParentController',function($scope) {
-          $scope.property = 'one';
-        });
-        .controller('ChildController',function($scope) {
-
-        });
-        .controller('GrandChildController',function($scope) {
-          $scope.property = 'two';
-        });
-
-      </code>
-    p What would the value of property be for each controller?
-
-  section
-    pre.
-      <code class="html" data-trim>
-      &lt;div ng-controller="ParentController" &gt;
-        &lt;p&gt;one&lt;/p&gt;
-        &lt;div ng-controller="ChildController" &gt;
-          &lt;p&gt;one&lt;/p&gt;
-          &lt;div ng-controller="GrandChildController" &gt;
-            &lt;p&gt;two&lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      </code>
-
-  section
-    p This behavior is very useful in applications with complex user interfaces.
-
-  section
-    p We can use parent scopes and controllers as a means to communicate between child scopes and controllers.
-
-  section
-    p Unfortunately, the URL routing service provided by Angular doesn't allow for this complex view design and controller inheritance.
-
-  section
-    p This is where the community, specifically the AngularUI team, has stepped in to provide a better solution.
-
-  section
     h1 UI Router
 
   section
@@ -218,7 +144,8 @@ include ../includes/mixins
         .state('app', {
           url: '/app',
           templateUrl: 'assets/app/index.html',
-          controller: 'AppCtrl'
+          controller: 'AppCtrl',
+          controllerAs: 'appCtrl'
         });
 
       </code>
@@ -238,7 +165,8 @@ include ../includes/mixins
         .state('app', {
           url: '/app',
           templateUrl: 'assets/app/index.html',
-          controller: 'AppCtrl'
+          controller: 'AppCtrl',
+          controllerAs: 'appCtrl'
         });
 
       </code>
@@ -261,7 +189,8 @@ include ../includes/mixins
         .state('app', {
           url: '/app/:myParameter',
           templateUrl: 'assets/app/index.html',
-          controller: 'AppCtrl'
+          controller: 'AppCtrl',
+          controllerAs: 'appCtrl'
         });
 
       </code>
@@ -274,8 +203,9 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       controller('AppCtrl',
-        function($scope, $stateParams) {
-          $scope.myParameter = $stateParams.myParameter;
+        function($stateParams) {
+          var vm = this;
+          vm.myParameter = $stateParams.myParameter;
         }
       );
 
@@ -318,6 +248,7 @@ include ../includes/mixins
           url: '/app',
           templateUrl: 'assets/app/index.html',
           controller: 'AppCtrl',
+          controllerAs: 'appCtrl',
           data : {
             title : 'My Application'
           }
@@ -333,8 +264,9 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       controller('AppCtrl',
-        function($scope, $state) {
-          $scope.pageTitle = $state.data.title;
+        function($state) {
+          var vm = this;
+          vm.pageTitle = $state.data.title;
         }
       );
 
@@ -376,6 +308,7 @@ include ../includes/mixins
           url: '/app',
           templateUrl: 'assets/app/index.html',
           controller: 'AppCtrl',
+          controllerAs: 'appCtrl',
           resolve: {
             projects: function (data) {
               return data.list('projects');
@@ -388,8 +321,9 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       controller('AppCtrl',
-        function($scope, $state, projects) {
-          $scope.projects = projects;
+        function($state, projects) {
+          var vm = this;
+          vm.projects = projects;
         }
       );
 
@@ -408,6 +342,7 @@ include ../includes/mixins
           url: '/app',
           templateUrl: 'assets/app/index.html',
           controller: 'AppCtrl',
+          controllerAs: 'appCtrl',
           resolve: {
             authenticatedUser: authProvider.requireAuthenticatedUser
           }
@@ -492,80 +427,6 @@ include ../includes/mixins
       </code>
 
   section
-    h3 State Inheritance
-
-  section
-    p When the application is in a particular state, all of its ancestor states are implicitly active as well.
-
-  section
-    p Let's go over what child states inherit from their parent state.
-
-  section
-    h4 Scope
-
-  section
-    p Given the app state and AppCtrl
-    br
-    pre.
-      <code class="js" data-trim>
-      angular.module('app', ['app.projects'])
-        .config(function($stateProvider) {
-            $stateProvider
-              .state('app', {
-                controller: 'AppCtrl'
-              });
-        });
-
-      </code>
-
-    pre.
-      <code class="js" data-trim>
-      controller('AppCtrl', function($scope) {
-        $scope.myProperty = "My Property";
-      });
-
-      </code>
-
-  section
-    p Then, given the
-    strong  app.projects
-    |  state and ProjectsCtrl
-    br
-    pre.
-      <code class="js" data-trim>
-      angular.module('app.projects', [])
-        .config(function($stateProvider) {
-            $stateProvider
-              .state('app.projects', {
-                controller: 'ProjectCtrl'
-              });
-        });
-
-      </code>
-
-    pre.
-      <code class="js" data-trim>
-      controller('ProjectCtrl', function($scope) {
-        console.log($scope.myProperty);
-      });
-
-      </code>
-
-  section
-    p "My Property" will be printed out to the console when the
-      strong  app.projects
-      |  state is active because it is inherited from the parent state.
-
-  section
-    p Where does scope inheritance happen?  In the state configuration or the view?
-
-  section
-    p Inheritance of scope properties has nothing to do with the nesting of your states.
-
-  section
-    p Inheritance of scope properties has everything to do with the nesting of your views (templates).
-
-  section
     h4 Views
 
   section
@@ -627,9 +488,19 @@ include ../includes/mixins
     br
     pre.
       <code class="js" data-trim>
+      controller('ProjectsDetailCtrl', function(projects) {
+        // Here we can inject projects because it was resolved
+        // in the parent state.
+      });
+
+      </code>
+
+    pre.
+      <code class="js" data-trim>
       $stateProvider
         .state('app.projects', {
           controller: 'ProjectsCtrl',
+          controllerAs: 'projectsCtrl',
           resolve: {
             projects: function (data) {
               return data.get('projects');
@@ -638,16 +509,8 @@ include ../includes/mixins
         })
           .state('app.projects.detail', {
             controller: 'ProjectsDetailCtrl',
+            controllerAs: 'projectsDetailCtrl',
           });
-
-      </code>
-
-    pre.
-      <code class="js" data-trim>
-      controller('ProjectsDetailCtrl', function(projects) {
-        // Here we can inject projects because it was resolved
-        // in the parent state.
-      });
 
       </code>
 
@@ -659,15 +522,16 @@ include ../includes/mixins
 
   section
     p What will the value of
-      strong  $scope.title
+      strong  vm.title
       |  and
-      strong  $scope.section
+      strong  vm.section
       |  be in ProjectDetailCtrl?
     pre.
       <code class="js" data-trim>
       $stateProvider
         .state('app.projects', {
           controller: 'ProjectsCtrl',
+          controllerAs: 'projectsCtrl',
           data: {
             title: 'Projects',
             section: 'Projects'
@@ -675,6 +539,7 @@ include ../includes/mixins
         })
           .state('app.projects.detail', {
             controller: 'ProjectsDetailCtrl',
+            controllerAs: 'projectsDetailCtrl'
             data: {
               title: 'Project Detail',
             }
@@ -684,19 +549,20 @@ include ../includes/mixins
 
     pre.
       <code class="js" data-trim>
-      controller('ProjectsDetailCtrl', function($scope, $state) {
-        $scope.title = $state.current.data.title;
-        $scope.section = $state.current.data.section;
+      controller('ProjectsDetailCtrl', function($state) {
+        var vm = this;
+        vm.title = $state.current.data.title;
+        vm.section = $state.current.data.section;
       });
 
       </code>
 
   section
     p
-      strong  $scope.title
+      strong  vm.title
       |  would be "Project Detail"
     p
-      strong  $scope.section
+      strong  vm.section
       |  would be "Projects"
     p Even though data is inherited, we can still override parts of that data in child states.
 
@@ -719,11 +585,13 @@ include ../includes/mixins
       $stateProvider
         .state('app.projects', {
           url: '/projects'
-          controller: 'ProjectsCtrl'
+          controller: 'ProjectsCtrl',
+          controllerAs: 'projectsCtrl'
         })
           .state('app.projects.detail', {
             url: '/:projectId',
-            controller: 'ProjectsDetailCtrl'
+            controller: 'ProjectsDetailCtrl',
+            controllerAs: 'projectsDetailCtrl'
           });
 
       </code>
@@ -778,15 +646,18 @@ include ../includes/mixins
           abstract: true,
           url: '/projects',
           controller: 'ProjectsCtrl',
+          controllerAs: 'projectsCtrl',
           template: '&lt;div ui-view&gt;&lt;/div&gt;'
         })
           .state('app.projects.list', {
             url: '/list',
-            controller: 'ProjectsListCtrl'
+            controller: 'ProjectsListCtrl',
+            controllerAs: 'projectsListCtrl'
           })
           .state('app.projects.detail', {
             url: '/detail',
-            controller: 'ProjectsDetailCtrl'
+            controller: 'ProjectsDetailCtrl',
+            controllerAs: 'projectsDetailCtrl'
           });
 
       </code>
@@ -819,10 +690,12 @@ include ../includes/mixins
           views : {
             'navbar' : {
               controller: 'NavCtrl',
+              controllerAs: 'navCtrl',
               templateUrl: 'assets/templates/app/navbar.html'
             },
             'content' : {
               controller: 'AppCtrl',
+              controllerAs: 'appCtrl',
               templateUrl: 'assets/templates/app/index.html'
             }
           }
@@ -1018,10 +891,8 @@ include ../includes/mixins
     pre.
       <code class="js" data-trim>
       beforeEach(function() {
-        $scope = $rootScope.$new();
-        controller = $controller("MyCtrl", {
-          $scope: $scope,
-          $state: spies.state,
+        controller = $controller('MyCtrl', {
+          $state: spies.state
         });
       });
 
@@ -1034,7 +905,7 @@ include ../includes/mixins
       <code class="js" data-trim>
       describe('MyCtrl', function () {
         it('should transition to another state', function () {
-          $scope.goToAnotherState();
+          controller.goToAnotherState();
           expect(spies.state.go).to.have.been.calledWith('app.another.state');
         });
       });
