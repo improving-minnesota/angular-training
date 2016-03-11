@@ -173,12 +173,12 @@ include ../includes/mixins
 
     p The "filter" and "orderBy" filters are provided by AngularJS.
 
-  section(id="example2", ng-controller="Lecture9Controller")
+  section(id="example2", ng-controller="Lecture9Controller as lecture9Controller")
     p Filtering arrays in action
     br
     input.form-control(ng-model="myFilter")
     br
-    div(ng-repeat="isisEmployee in isisEmpCtrl.isisEmployees | filter:myFilter | orderBy:'name'") {{isisEmployee.name}}
+    div(ng-repeat="isisEmployee in lecture9Controller.isisEmployees | filter:myFilter | orderBy:'name'") {{isisEmployee.name}}
 
   section
     h1 Unit Testing
