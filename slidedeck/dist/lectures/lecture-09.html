@@ -186,10 +186,10 @@ angular.module('date.filters', [ ])
 </pre>
           <p>The "filter" and "orderBy" filters are provided by AngularJS.</p>
         </section>
-        <section id="example2" ng-controller="Lecture9Controller">
+        <section id="example2" ng-controller="Lecture9Controller as lecture9Controller">
           <p>Filtering arrays in action</p><br>
           <input ng-model="myFilter" class="form-control"><br>
-          <div ng-repeat="isisEmployee in isisEmpCtrl.isisEmployees | filter:myFilter | orderBy:'name'">{{isisEmployee.name}}</div>
+          <div ng-repeat="isisEmployee in lecture9Controller.isisEmployees | filter:myFilter | orderBy:'name'">{{isisEmployee.name}}</div>
         </section>
         <section>
           <h1>Unit Testing</h1>
