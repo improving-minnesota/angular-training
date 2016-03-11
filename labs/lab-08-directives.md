@@ -200,6 +200,7 @@ data.page('employees', query)
 
 
 ```javascript
+angular.module('timesheet.directives', [])
 .directive('tszFormSectionHeader', function () {
   return {
     replace: true,
