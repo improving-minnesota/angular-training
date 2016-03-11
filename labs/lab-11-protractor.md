@@ -360,7 +360,7 @@ grunt protractor:debug
 * Open the Chrome window that Protractor is driving, open the dev tools' console and type:
 
 ```
-window.clientSideScripts.findByModel('employee.username');
+window.clientSideScripts.findByModel('employeeFormCtrl.employee.username');
 ```
 
 * Pretty neat, huh?
