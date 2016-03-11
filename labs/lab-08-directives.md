@@ -503,7 +503,8 @@ describe('progress bar > 100%', function() {
 </div>
 ```
 - You probably noticed that your teammates have already implemented the `hoursWorked()` and `hoursRequired()` functions for you in the controller.
-- To see what these functions do, open the `controllers.js` in src/app/timesheets and check it out.
+- To see what these functions do, open the `controllers.js` in src/app/timesheets and check it out. 
+- Make sure to inject `timesheet.directives` as a dependency into the controller near the TODO on line #2.
 
 - Now you're ready to refresh the page, navigate to the timesheet view, and see your handywork in action!!
 - Try deleting/restoring timeunits and see what happens!! Only dynamic awesomeness!! No big deal!!
