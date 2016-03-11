@@ -458,7 +458,7 @@ include ../includes/mixins
     p The '&' binding is very useful for supplying callbacks to directives.
 
   section
-    p The last type of binding is the '@', or
+    p The '@', or
       strong  attribute value or expression
       |  binding.
 
@@ -504,6 +504,12 @@ include ../includes/mixins
       &lt;/div&gt;
 
       </code>
+
+  section
+    p The newest type of binding is the '<', or
+    strong  one-way
+    |  binding. This binding will allow a directive to pass data from the parent that will not reflect
+    | a change in the parent scope if the value is modified by the directive.
 
   section
     h3 Transclude
@@ -993,6 +999,243 @@ include ../includes/mixins
         });
       });
 
+      </code>
+
+  section
+    h1 Components
+
+  section
+    p Beginning in Angular 1.5, a
+      strong  component
+      |  is a special directive that uses a simpler configuration than a normal directive.
+
+  section
+    p  A
+      strong  component
+      |  is instantiated on a module, just like a directive.
+      | The first argument is the name of the component, and the second is the component's configuration object.
+
+
+  section
+    p This is slightly different (and more simple) than the configuration required for a directive. Notice the differences:
+    p Directive
+    pre.
+      <code data-trim>
+      angular.module('app.directives', [])
+      .directive('missionImpossible', function() {
+        return {
+          //...
+        };
+      });
+
+      </code>
+
+    p Component
+    pre.
+      <code data-trim>
+      angular.module('app.components', [])
+      .component('missionImpossible', {});
+
+      </code>
+
+  section
+    p So when would we use a component vs. using a directive?
+
+  section
+    p You can use a component when:
+    ul
+      li.
+        You do not need to manipulate DOM or add event listeners or watches
+      li.
+        You do not want to use a directive by declaring it in a DOM attribute or CSS class (components can ONLY be elements)
+      li.
+        You do not need advanced directive functionality, like priority
+
+  section
+    p This is due to the simplifying changes that the Angular team has made to make it easier to create custom directives,
+    | and also to prepare developers for transition to Angular 2.
+
+  section
+    p We'll go over a few of these changes.
+
+  section
+    h3 Controllers
+
+  section
+    p Controllers inside a component are declared in a similar to those in directives; however, components will give a default value of
+      strong  $ctrl
+      |  if no explicit controllerAs or "Controller as ctrl" syntax is used.
+
+  section
+    pre.
+      <code data-trim>
+        ...
+        controller: function() {}
+        ...
+      </code>
+
+  section
+    h3 Scope
+
+  section
+    p Earlier, we learned that directives can inherit scope from its parent or it can create an isolate scope.
+
+  section
+    p In contrast, components have isolate scope by default.
+
+  section
+    p This is to enforce the idea that components should only control their own view and data.
+
+  section
+    p So how do we map data from the directive's parent to the isolate scope?
+
+  section
+    p We can use the
+      strong  bindings
+      |  option to map the data. Any declared bindings are automatically bound to the component's controller.
+
+  section
+    p All of the bindings that we can use on a directive are available, but we should be mindful about how that data is mapped.
+
+  section
+    p Inputs to a component should be mapped with '@' and '<' so that changes to these items will not be realized in the parent scope.
+
+  section
+    pre.
+      <code data-trim>
+      ...
+      bindings: {
+        agent: '<',
+        mission: '<',
+        message: '@'
+      }
+      ...
+      </code>
+  section
+    p If data needs to be modified inside a component, it should be modified via passing callback functions, which are bound
+    | with the '&', or function binding.
+
+  section
+    pre.
+      <code data-trim>
+      ...
+      bindings: {
+        accept: '&',
+        selfDestruct: '&'
+      }
+      ...
+      </code>
+    pre.
+      <code class="html" data-trim>
+      &lt;button
+        ng-click="$ctrl.accept($ctrl.agent, $ctrl.mission)"&gt;Accept&lt;/button&gt;
+      </code>
+
+  section
+    h3 Templates
+
+  section
+    p Templates can now be defined as a function that can have
+      strong  $element
+      |  and
+      strong  $attrs
+      | injected into it.
+
+  section
+    p This function needs to return a string representing the HTML.
+
+  section
+    pre.
+      <code data-trim>
+      ...
+      template: function($element, $attrs) {
+        return [
+          '&lt;div&gt;',
+            '&lt;p&gt;Message: {{$ctrl.message}}&lt;/p&gt;',
+            '&lt;button ',
+              'ng-click="$ctrl.accept($ctrl.agent, $ctrl.mission)"&gt;Accept&lt;/button&gt;',
+            '&lt;button ',
+              'ng-click="$ctrl.selfDestruct($ctrl.mission)"&gt;Decline&lt;/button&gt;',
+          '&lt;/div&gt;'
+        ].join('');
+      }
+      </code>
+
+  section
+    p Again, however, we'll most likely use the
+      strong  templateUrl
+      |  property to link to a separate HTML file.
+
+  section
+    h3 Putting it all together
+
+  section
+    pre.
+      <code data-trim>
+      angular.module('app.components')
+        .component('missionImpossible', {
+          bindings: {
+            agent: '<',
+            mission: '<',
+            message: '@',
+            accept: '&',
+            selfDestruct: '&'
+          },
+          controller: function() {},
+          templateUrl: 'assets/templates/components/mi/mi.html'
+        });
+      </code>
+
+  section
+    h1 Unit Testing
+
+  section
+    p Components have a special service called
+      strong  $componentController
+      |  that can be injected to aid in testing components.
+
+  section
+    pre.
+      <code data-trim>
+      beforeEach(module(
+        'app.directives',
+        'assets/templates/directives/my-cool-directive.html'
+      ));
+      beforeEach(inject(function($rootScope, _$componentController_) {
+        $scope = $rootScope.$new();
+        $componentController = _$componentController_;
+      });
+      beforeEach(
+        spies = {
+          accept: sinon.spy(),
+          selfDestruct: sinon.spy(),
+        }
+      );
+
+      </code>
+
+  section
+    p The
+      strong  $componentController
+      |  can then be used to instantiate our component and pass data in.
+
+  section
+    pre.
+      <code data-trim>
+        var component = $componentController('missionImpossible',
+          {$scope: $scope},
+          {
+            agent: {
+              name: 'Sterling Archer'
+            },
+            mission: {
+              name: 'Save the World'
+            },
+            message: 'URGENT',
+            accept: spies.accept,
+            selfDestruct: spies.selfDestruct
+          }
+        );
       </code>
 
   section
